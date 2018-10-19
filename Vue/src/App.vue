@@ -59,7 +59,6 @@ import login from './components/login.vue'
 import register from './components/register.vue'
 import register1 from './components/register1.vue'
 
-
 export default {
   name: 'App',
   components: {about,pastyear,rules,contact,navigation,videohub,login,register,register1},
@@ -71,14 +70,24 @@ export default {
       this.$router.push('/')
     },
     checkIfIsLogged () {
-      let token = this.$localStorage.get('access_token')
+
       if (token) {
         return true
       } else {
         return false
       }
     }
-  }
+  },
+    created: function () {
+      /*
+        let token = this.$localStorage.get('access_token')
+        if (token) {
+
+        } else {
+            return false
+        }
+       */
+    }
 }
 </script>
 

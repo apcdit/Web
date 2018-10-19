@@ -13,12 +13,14 @@
       <b-button @click="login()">Submit</b-button>
     </center>
   </b-container>
+    <b-button @click="logout()">Submit</b-button>
   </div>
 </template>
 
 
 <script>
 import axios from "axios"
+import {store} from "../store";
 
 export default{
   name:'login',
@@ -29,7 +31,8 @@ export default{
     }
   },
   methods:{
-    login: function () {
+      login: function () {
+
         var data = {
             email: this.email,
             password: this.password
@@ -38,8 +41,12 @@ export default{
             .post('api/login',data)
             .then(response=>{
                 console.log(response.data);
-            });
-    }
+                this.$localstorage.setItem('access_token', response.data['token'])
+            })
+    },
+      logout: function () {
+          this.$localStorage.remove('access_token')
+      }
   }
 }
 </script>

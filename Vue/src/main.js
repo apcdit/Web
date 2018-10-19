@@ -6,7 +6,6 @@ import router from './router'
 
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'jquery'
-
 import BootstrapVue from 'bootstrap-vue'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 

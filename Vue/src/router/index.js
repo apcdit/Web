@@ -28,5 +28,6 @@ export default new Router({
     {path:'/register',name:'register',component:register},
     {path:'/',name:'homepage',component:homepage},
     {path:'/timer',name:'timer',component:timer},
-  ]
+  ],
+    mode: 'history'
 })
