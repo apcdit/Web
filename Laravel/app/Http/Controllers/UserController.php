@@ -1,0 +1,40 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\uniDetails;
+use Illuminate\Http\Request;
+use App\User;
+
+class UserController extends Controller
+{
+    public function updateDetails(Request $request){
+
+        $uniDetails = uniDetails::where('uniNameCN', $request->uniNameCN)->get(); //returns a collection
+        //0 because update method requires object, not collection
+        $uniDetails[0]->update($request->all());
+
+        return response(uniDetails::where('uniNameCN', $request->uniNameCN)->get(),200);
+    }
+
+    public function createDetails(Request $request){
+        $uni = uniDetails::create([
+            'uniNameCN' => request('uniNameCN'),
+            'debateQues1' => null,
+            'debateQues2' => null,
+            'debateQues3' => null,
+            'simTimeStart' => null,
+            'simTimeEnd' => null,
+            'simTimeDiff' => null,
+            'offTimeStart' => null,
+            'offTimeEnd' => null,
+            'offTimeDiff' => null,
+            'drawn' => 0,
+            'qualified' => 0
+        ]);
+
+        return response()->json($uni,200);
+    }
+
+
+}
