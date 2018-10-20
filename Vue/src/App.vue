@@ -79,6 +79,7 @@ export default {
     }
   },
     created: function () {
+      
       /*
         let token = this.$localStorage.get('access_token')
         if (token) {
