@@ -51,9 +51,9 @@ class AuthController extends Controller
 
             $uni = uniDetails::create([
                 'uniNameCN' => request('uniNameCN'),
-                'debateQues1' => null,
-                'debateQues2' => null,
-                'debateQues3' => null,
+                'debateQues1' => request('debateQues1'),
+                'debateQues2' => request('debateQues2'),
+                'debateQues3' => request('debateQues3'),
                 'simTimeStart' => null,
                 'simTimeEnd' => null,
                 'simTimeDiff' => null,
