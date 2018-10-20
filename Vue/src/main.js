@@ -5,10 +5,14 @@ import App from './App'
 import router from './router'
 
 import 'bootstrap/dist/css/bootstrap.min.css'
+import zh_CN from 'vee-validate/dist/locale/zh_CN'
 import 'jquery'
 import BootstrapVue from 'bootstrap-vue'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
+import VeeValidate, { Validator } from 'vee-validate';
 
+Vue.use(VeeValidate);
+Validator.localize('zh_CN',zh_CN);
 Vue.use(BootstrapVue);
 Vue.use(require('vue-moment'));
 
