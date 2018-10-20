@@ -41,7 +41,7 @@ export default{
             .post('api/login',data)
             .then(response=>{
                 console.log(response.data);
-                this.$localstorage.setItem('access_token', response.data['token'])
+
             })
     },
       logout: function () {
