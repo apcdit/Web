@@ -14,16 +14,22 @@ class WarController extends Controller
 
         $users = User::where('region', request('region'))->get(); //get the collection that has the same region
 
+        //user input needs to be in the format that strtotime can understand, e.g. "2018/10/22 13:59:59" in SGT time
+        $offTimeStart = strtotime(request('offTimeStart').' '.'Asia/Singapore');
+        $offTimeEnd = strtotime(request('offTimeEnd').' '.'Asia/Singapore');
+
         if(count($users) > 0){ //check if there's user in the region
             for($i = 0; $i < count($users); $i++){ //if yes set all the user in that region to same time
                 $uniDetails = $users[$i]->uniDetails;
                 $uniDetails->update([
-                    'offTimeStart' => request('offTimeStart'),
-                    'offTimeEnd' => request('offTimeEnd'),
+                    'offTimeStart' => $offTimeStart,
+                    'offTimeEnd' => $offTimeEnd,
                 ]);
             }
             return response()->json([
                 'message' => 'Official Start time is updated to '.request('offTimeStart'),
+                'offTimeStart' => $offTimeStart,
+                'offTimeEnd' => $offTimeEnd,
                 'status' => 200
             ]);
         }else{
@@ -37,18 +43,25 @@ class WarController extends Controller
     //for simulation
     public function setSimTime(){
 
+        
         $users = User::where('region', request('region'))->get(); //get the collection that has the same region
+
+        //strtotime normally converts to epoch in UTC timezone, by using 'Asia/Singapore' it converts it to GMT+8 
+        $simTimeStart = strtotime(request('simTimeStart').' '.'Asia/Singapore');
+        $simTimeEnd = strtotime(request('simTimeEnd').' '.'Asia/Singapore');
 
         if(count($users) > 0){
             for($i = 0; $i < count($users); $i++){
                 $uniDetails = $users[$i]->uniDetails;
                 $uniDetails->update([
-                    'simTimeStart' => request('simTimeStart'),
-                    'simTimeEnd' => request('simTimeEnd'),
+                    'simTimeStart' => $simTimeStart*1000,
+                    'simTimeEnd' => $simTimeEnd,
                 ]);
             }
             return response()->json([
-                'message' => 'Simulate Start time is updated to '.request('offTimeStart'),
+                'message' => 'Simulate Start time is updated to '.request('simTimeStart'),
+                'simTimeStart' => $simTimeStart,
+                'simTimeEnd' => $simTimeEnd,
                 'status' => 200
             ]);
         }else{
@@ -59,14 +72,12 @@ class WarController extends Controller
         }
     }
 
-    //am i calculating all of them at once? or should I just calculate one
     private function  calSimTimeDiff($uniNameCN){
 
         $uniDetails = uniDetails::where('uniNameCN', $uniNameCN)->first();
 
         if($uniDetails->simTimeStart !== null && $uniDetails->simTimePress !== null){
-            $simTimeDiff = $uniDetails->simTimePress-($uniDetails->simTimeStart)*1000;
-            //$simTimeDiff = date("Y-m-d H:i:s", $simTimeDiff);
+            $simTimeDiff = $uniDetails->simTimePress-($uniDetails->simTimeStart);
             $uniDetails->update([
                 'simTimeDiff' => $simTimeDiff  //units in milliseconds
             ]);
@@ -83,14 +94,16 @@ class WarController extends Controller
             if($uniDetails != null && request('pressed') === 1){
                 $uniDetails->update([
                     'simTimePress' => $pressTime,
-                    'drawn' => 1 //set player to drawn
+                    //'drawn' => 1 //set player to drawn but commented bcoz this is for simulation only
                 ]);
                 $this->calSimTimeDiff($uniNameCN);
 
                 return response()->json([
                     'message' => "Simulate press time is recorded!",
                     'status' => "200",
-                    'time' => $pressTime
+                    'time' => date("Y-m-d H:i:s", microtime(true)),
+                    'epoch' => $pressTime,
+                    'converted' => strtotime(date("Y-m-d H:i:s", microtime(true)))
                 ]);
             }else{
                 return response()->json([
@@ -107,6 +120,7 @@ class WarController extends Controller
 
     }
 
+    //show all the timediff for a certain region
     public function getSimTimeDiff(){
 
         $region = auth()->user()->region;
