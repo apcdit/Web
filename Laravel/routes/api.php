@@ -15,8 +15,8 @@ use App\uniDetails;
 */
 
 //routing for admin
-Route::middleware('auth:api', 'admin')->group(function(){
 
+Route::group(['middleware' => ['auth:api', 'admin']],function(){
     Route::get('/admin', function(){
         return response()->json([
             'message' => "Hello ".auth()->user()->uniNameCN
