@@ -14,7 +14,6 @@ class WarController extends Controller
 
         $users = User::where('region', request('region'))->get(); //get the collection that has the same region
 
-        //user input needs to be in the format that strtotime can understand, e.g. "2018/10/22 13:59:59" in SGT time
         $offTimeStart = strtotime(request('offTimeStart').' '.'Asia/Singapore');
         $offTimeEnd = strtotime(request('offTimeEnd').' '.'Asia/Singapore');
 
@@ -157,6 +156,18 @@ class WarController extends Controller
 
     public function decideQualified(){ //decide who wins
 
+        $region = request('region');
+
+        //check with yanjin how many teams are there for each region
+        switch($region){
+            case "Singapore":    
+            case "Hong Kong":
+            case "Malaysia":
+            case "China":
+            case "Macao":
+            case "Taiwan":
+            case "Australia":
+        }
 
     }
 }
