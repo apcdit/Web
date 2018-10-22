@@ -19,7 +19,7 @@ class Admin
         if(Auth::check() && Auth::user()->isAdmin()){
             return $next($request);
         }else{
-            return redirect('/user');
+            return redirect('api/user');
         }
     }
 }
