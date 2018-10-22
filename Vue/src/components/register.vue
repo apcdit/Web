@@ -7,6 +7,8 @@
       <form class="needs-validation" novalidate id='myForm'>
         <label>区域</label>
         <b-form-select v-validate="'required'" name="region" vv-data-name="区域" v-model="region" :options="options" class="mb-3" />
+        <h6 v-show="errors.has('region')" class="alert-empty">{{ errors.first('region')}}</h6>
+
 
         <label>大学名称(中）</label>
         <b-form-input v-validate="'required'" name="uniNameCN" data-vv-as="大学名字" :class="{'has-error': errors.has('uniNameCN')}" v-model="uniNameCN" type="text" placeholder="输入大学名称" style="width:30%" ></b-form-input>
@@ -58,7 +60,7 @@
         <input  type="checkbox" id="checkbox" v-model="checked">
         <label for="checkbox"></label>
 
-        <b-button :disabled="!checked" @click="submitForm">Submit</b-button>
+        <b-button :disabled="isDisabled" @click="submitForm">Submit</b-button>
     </form>
       </div>
       
@@ -101,6 +103,11 @@
       ]
 
   }},
+    computed:{
+        isDisabled(){
+            return (this.region === null || this.checked === false);
+        }
+    },
 
     methods:{
         submitForm(){
