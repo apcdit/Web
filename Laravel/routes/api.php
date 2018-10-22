@@ -14,22 +14,16 @@ use App\uniDetails;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
+//routing for admin
+Route::middleware('auth:api', 'admin')->group(function(){
 
-    return response()->json([
-        'user' => $request->user(),
-        'uniDetails' => $request->user()->where('uniNameCN',$request->user()->uniNameCN)->first()->uniDetails
-    ]);
-});
+    Route::get('/admin', function(){
+        return response()->json([
+            'message' => "Hello ".auth()->user()->uniNameCN
+        ]);
+    });
 
-Route::middleware('auth:api')->group(function () {
-    Route::post('logout', 'AuthController@logout');
-    Route::put('editUser', 'UserController@updateDetails');
     Route::put('time/simulation/set', 'WarController@setSimTime');
-    //Route::get('time/simulation/get/{uniNameCN}', 'WarController@getSimTimeDiff');
-    Route::get('time/simulation/get', 'WarController@getSimTimeDiff');
-    Route::put('time/simulation/store', 'WarController@storeSimTimePress');
-
     //update a certain post
     Route::put('post/{id}', 'PostsController@update');
 
@@ -38,6 +32,24 @@ Route::middleware('auth:api')->group(function () {
 
     //store a new post
     Route::post('post', 'PostsController@store');
+});
+
+//routing for user
+Route::middleware('auth:api')->group(function () {
+
+    Route::get('/user', function (Request $request) {
+
+        return response()->json([
+            'user' => auth()->user(),
+            'uniDetails' => auth()->user()->where('uniNameCN',auth()->user()->uniNameCN)->first()->uniDetails
+        ]);
+    });
+
+    Route::post('logout', 'AuthController@logout');
+    Route::put('editUser', 'UserController@updateDetails');
+    //Route::get('time/simulation/get/{uniNameCN}', 'WarController@getSimTimeDiff');
+    Route::get('time/simulation/get', 'WarController@getSimTimeDiff');
+    Route::put('time/simulation/store', 'WarController@storeSimTimePress');
 });
 
 
