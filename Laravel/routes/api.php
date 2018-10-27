@@ -62,6 +62,8 @@ Route::get('post/{id}', 'PostsController@show');
 //login
 Route::post('login', 'AuthController@doLogin');
 
+Route::get('posts/latest','PostsController@showLatest');
+
 //register user with User and initialise uniDetails at the same time!! not uniDetails
 Route::post('register','AuthController@createUser');
 

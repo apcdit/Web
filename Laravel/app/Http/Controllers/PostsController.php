@@ -69,6 +69,11 @@ class PostsController extends Controller
         return response(Posts::find($id),200);
     }
 
+    public function showLatest(){
+        $posts = Posts::orderBy('created_at','desc')->take(3)->get();
+        return response($posts);
+    }
+
     /**
      * Remove the specified resource from storage.
      *
