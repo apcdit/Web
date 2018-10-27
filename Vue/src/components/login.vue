@@ -37,12 +37,21 @@ export default{
             email: this.email,
             password: this.password
         }
+
         axios
             .post('api/login',data)
             .then(response=>{
                 console.log(response.data);
-
-            })
+                if(response.data.message === "Wrong credentials"){
+                    alert("邮件或密码不正确!")
+                }else if(response.data.status === 200){
+                    if(response.data.admin){
+                      this.$router.push('/admin_dashboard')
+                    }else{
+                      this.$router.push('/user_dashboard')
+                    }
+                }
+           })
     },
       logout: function () {
           this.$localStorage.remove('access_token')
