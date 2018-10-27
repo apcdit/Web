@@ -92,7 +92,7 @@ class AuthController extends Controller
 
     function doLogin(Request $request)
     {
-
+        //receive username or email as param
         $user = User::where('email',$request->input('username',$request->input('email')))->first();
 
         if(!$user){
@@ -128,7 +128,10 @@ class AuthController extends Controller
         $response = app()->handle($request);
 
         if ($response->getStatusCode() != 200) {
-            return $response;
+            return response()->json([
+                'response' => $response,
+                'message' => "Wrong credentials"
+            ]);
         }
 
         $data = json_decode($response->getContent());
@@ -137,6 +140,7 @@ class AuthController extends Controller
         return response()->json([
             'token' => $data->access_token,
             'user' => $user,
+            'admin' => $user->admin,
             'status' => 200,
         ]);
     }
