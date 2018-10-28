@@ -3,6 +3,9 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import Vuex from 'vuex'
+import store from '../src/store.js'
+
 
 import 'bootstrap/dist/css/bootstrap.min.css'
 import zh_CN from 'vee-validate/dist/locale/zh_CN'
@@ -21,7 +24,7 @@ Vue.config.productionTip = false
 
 /* eslint-disable no-new */
 new Vue({
-  el: '#app',
+  el: '#app',store,
   router: router,
   components: { App },
   template: '<App/>'})

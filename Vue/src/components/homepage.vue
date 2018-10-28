@@ -33,7 +33,24 @@
       <div class="jumbotron shadow sidebar">
         <div class="time"><iframe src="http://free.timeanddate.com/clock/i6gm3rp7/n236/tlsg/fs22/ftbi/tt0/th1/ta1" frameborder="0" width="487" height="28"></iframe></div>
         <b-tabs>
-          <b-tab title="最新消息"></b-tab>
+          <b-tab title="最新消息">
+            <br>
+            <ul class="pagination-list">
+              <li v-for="post in posts">
+                  <div class="col-xs-4">
+                      <a class="" href="#">
+                          <img v-bind:src="post.postPic" width="200px" height="150px">
+                          <span>{{post.postTitle}}</span>
+                      </a>
+                  </div>
+                  <div class="col-xs-8">
+                      <h6 style="margin:0;color:#747474;float:right">发布于{{post.created_at}}</h6>
+                      <br>
+                  </div>
+                  <hr>
+              </li>
+            </ul>
+          </b-tab>
           <b-tab title="最新赛况"></b-tab>
           <b-tab title="对垒表"></b-tab>
           <b-tab title="辩题"></b-tab>
@@ -53,14 +70,39 @@
 </template>
 
 <script>
+
+import axios from 'axios';
+
 export default
 {
   name:'homepage',
-  data(){return{
-    videos:['https://www.youtube.com/embed/U4v2W_V9Fk0',]}
+  data(){
+    return{
+      videos:['https://www.youtube.com/embed/U4v2W_V9Fk0'],
+      posts: '',
+      user: ''
     }
+  },
+  created(){
+      this.fetchPosts()
+  },
+  methods:{
+    fetchPosts(){
+        axios
+          .get('api/posts/latest')
+          .then(response=>{
+            this.posts = response.data;
+            //console.log(localStorage.getItem('user'))
+          })
+    },
+   
+  }
 
 }
 </script>
 
-<style></style>
+<style scoped>
+    .pagination-list{
+        padding-bottom: 25px
+    }
+</style>

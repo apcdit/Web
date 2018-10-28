@@ -20,10 +20,11 @@
         <b-navbar-brand href="/"><img src="http://i.imgur.com/zRtdcqV.png"></b-navbar-brand>
         <b-nav-item router-link to='/videohub'>视频库</b-nav-item>
         <b-nav-item router-link to='/contact'>联络我们</b-nav-item>
-        <b-nav-item router-link to='/login' v-if="!isLogged">Login</b-nav-item>
+        <b-nav-item router-link to='/login' v-if="!isLoggedIn">Login</b-nav-item>
         <b-nav-item-dropdown text="大学资料"  v-else>
-          <b-nav-item to='profile'>Profile</b-nav-item>
-          <b-nav-item> Logout </b-nav-item>
+          <b-nav-item to='user_dashboard'>{{authUser.uniNameCN}}</b-nav-item>
+          <b-nav-item to='lottery'>电子抽签</b-nav-item>
+          <b-nav-item @click="logout()"> 登出 </b-nav-item>
         </b-nav-item-dropdown>
       </b-navbar-nav>
     </b-collapse>
@@ -58,37 +59,26 @@ import videohub from './components/videohub.vue'
 import login from './components/login.vue'
 import register from './components/register.vue'
 import register1 from './components/register1.vue'
+import lottery from './components/lottery.vue'
 
 export default {
   name: 'App',
-  components: {about,pastyear,rules,contact,navigation,videohub,login,register,register1},
-  data(){return{isLogged :false,}},
-  methods: {
-    logout () {
-      this.$localStorage.remove('access_token')
-      this.isLogged = this.checkIfIsLogged()
-      this.$router.push('/')
+  components: {about,pastyear,rules,contact,navigation,videohub,login,register,register1,lottery},
+  computed : {
+      isLoggedIn : function(){ return this.$store.getters.isLoggedIn},
+      authUser: function(){ if(this.$store.getters.authUser) return JSON.parse(this.$store.getters.authUser);}
     },
-    checkIfIsLogged () {
-
-      if (token) {
-        return true
-      } else {
-        return false
-      }
-    }
+  methods: {
+    logout: function () {
+        this.$store.dispatch('logout')
+        .then(() => {
+          this.$router.push('login')
+        })
+      },
+    // showUser: function(){
+    //   console.log(JSON.parse(this.$store.getters.authUser))
+    // }
   },
-    created: function () {
-      
-      /*
-        let token = this.$localStorage.get('access_token')
-        if (token) {
-
-        } else {
-            return false
-        }
-       */
-    }
 }
 </script>
 

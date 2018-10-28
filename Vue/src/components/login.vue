@@ -10,17 +10,16 @@
       <b-col sm="9"><b-form-input v-model="password" style="width:50%"></b-form-input></b-col>
     </b-row>
     <center>
-      <b-button @click="login()">Submit</b-button>
+      <b-button @click="login()">login</b-button>
     </center>
   </b-container>
-    <b-button @click="logout()">Submit</b-button>
+    <b-button @click="logout()">logout</b-button>
   </div>
 </template>
 
 
 <script>
 import axios from "axios"
-import {store} from "../store";
 
 export default{
   name:'login',
@@ -31,31 +30,14 @@ export default{
     }
   },
   methods:{
-      login: function () {
-
-        var data = {
-            email: this.email,
-            password: this.password
-        }
-
-        axios
-            .post('api/login',data)
-            .then(response=>{
-                console.log(response.data);
-                if(response.data.message === "Wrong credentials"){
-                    alert("邮件或密码不正确!")
-                }else if(response.data.status === 200){
-                    if(response.data.admin){
-                      this.$router.push('/admin_dashboard')
-                    }else{
-                      this.$router.push('/user_dashboard')
-                    }
-                }
-           })
-    },
-      logout: function () {
-          this.$localStorage.remove('access_token')
-      }
+    
+    login: function () {
+        let email = this.email 
+        let password = this.password
+        this.$store.dispatch('login', { email, password })
+       .then(this.$router.push('/'))
+       .catch(err => console.log(err))
+      },
   }
 }
 </script>

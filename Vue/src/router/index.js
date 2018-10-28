@@ -10,6 +10,7 @@ import login from '@/components/login'
 import register from '@/components/register'
 import homepage from '@/components/homepage'
 import timer from '@/components/timer'
+import lottery from '@/components/lottery'
 
 Vue.use(Router)
 
@@ -28,6 +29,7 @@ export default new Router({
     {path:'/register',name:'register',component:register},
     {path:'/',name:'homepage',component:homepage},
     {path:'/timer',name:'timer',component:timer},
+    {path:'/lottery', name:'lottery', component:lottery}
   ],
     mode: 'history'
 })
