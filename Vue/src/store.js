@@ -35,15 +35,16 @@ export default new Vuex.Store({
           .then(resp => {
             const token = resp.data.token
             const user = resp.data.user
-            localStorage.setItem('token', token)
-            localStorage.setItem('user',JSON.stringify(user))
-            axios.defaults.headers.common['Authorization'] = token
+            localStorage.setItem('token', token) //store the token
+            localStorage.setItem('user',JSON.stringify(user)) //store the user in stringified json
+            axios.defaults.headers.common['Authorization'] = token //set the token header
             commit('auth_success', token, user)
             resolve(resp)
           })
           .catch(err => {
             commit('auth_error')
             localStorage.removeItem('token')
+            localStorage.removeItem('user')
             reject(err)
           })
         })
@@ -51,10 +52,15 @@ export default new Vuex.Store({
     logout({commit}){
         return new Promise((resolve, reject) => {
           commit('logout')
-          localStorage.removeItem('token')
-          localStorage.removeItem('user')
-          delete axios.defaults.headers.common['Authorization']
-          resolve()
+          //console.log(axios.defaults.headers.common['Authorization'])
+          axios({url: 'api/logout',headers: {Authorization: "Bearer " + axios.defaults.headers.common['Authorization']}, method: 'POST'})
+          .then(resp => {
+            //console.log(resp.data.message)
+            localStorage.removeItem('token')
+            localStorage.removeItem('user')
+            delete axios.defaults.headers.common['Authorization']
+            resolve()
+          }) //may need to connect to backend
         })
       },
   },

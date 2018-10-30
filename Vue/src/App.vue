@@ -22,7 +22,8 @@
         <b-nav-item router-link to='/contact'>联络我们</b-nav-item>
         <b-nav-item router-link to='/login' v-if="!isLoggedIn">Login</b-nav-item>
         <b-nav-item-dropdown text="大学资料"  v-else>
-          <b-nav-item to='user_dashboard'>{{authUser.uniNameCN}}</b-nav-item>
+          <b-nav-item to='user_dashboard' v-if="!authUser">大学资料</b-nav-item>
+          <b-nav-item to='user_dashboard' v-else>{{authUser.uniNameCN}}</b-nav-item>
           <b-nav-item to='lottery'>电子抽签</b-nav-item>
           <b-nav-item @click="logout()"> 登出 </b-nav-item>
         </b-nav-item-dropdown>
@@ -64,9 +65,14 @@ import lottery from './components/lottery.vue'
 export default {
   name: 'App',
   components: {about,pastyear,rules,contact,navigation,videohub,login,register,register1,lottery},
+  data(){
+    return{
+      logged : false
+    }
+  },
   computed : {
-      isLoggedIn : function(){ return this.$store.getters.isLoggedIn},
-      authUser: function(){ if(this.$store.getters.authUser) return JSON.parse(this.$store.getters.authUser);}
+      isLoggedIn : function(){ this.logged=this.$store.getters.isLoggedIn; return this.$store.getters.isLoggedIn},
+      authUser: function(){ if(this.logged && this.$store.getters.authUser) return JSON.parse(this.$store.getters.authUser);}
     },
   methods: {
     logout: function () {
