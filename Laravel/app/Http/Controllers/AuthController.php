@@ -141,6 +141,7 @@ class AuthController extends Controller
             'token' => $data->access_token,
             'user' => $user,
             'admin' => $user->admin,
+            'uniDetails' => $user->uniDetails,
             'status' => 200,
         ]);
     }
