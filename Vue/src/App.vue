@@ -72,7 +72,9 @@ export default {
   },
   computed : {
       isLoggedIn : function(){ this.logged=this.$store.getters.isLoggedIn; return this.$store.getters.isLoggedIn},
-      authUser: function(){ if(this.logged && this.$store.getters.authUser) return JSON.parse(this.$store.getters.authUser);}
+      authUser: function(){ if(this.logged && this.$store.getters.authUser) return JSON.parse(this.$store.getters.authUser);},
+      status: function(){ return (this.$store.getters.authStatus) ;},
+
     },
   methods: {
     logout: function () {
