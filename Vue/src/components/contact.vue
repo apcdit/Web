@@ -11,20 +11,29 @@
         <div class="row">
             <div class="col-md-4">
                 <center>
-                    <a href="https://www.facebook.com/NTUCSapchinesedebate/" target="_blank"><i class="facebook fa fa-facebook fa-5x" aria-hidden="true"></i></a>
-                    <h3>面子书</h3>
+                    <a href="https://www.facebook.com/NTUCSapchinesedebate/" target="_blank">
+                      <i class="facebook fa fa-facebook fa-5x" aria-hidden="true"></i>
+                      <h1>Facebook</h1>
+                    </a>
+
                 </center>
             </div>
             <div class="col-md-4">
                 <center>
-                    <a href="https://www.instagram.com/apchinesedebate/" target="_blank"><i class="insta fa fa-instagram fa-5x" aria-hidden="true"></i></a>
-                    <h3>Instagram</h3>
+                    <a href="https://www.instagram.com/apchinesedebate/" target="_blank">
+                      <i class="insta fa fa-instagram fa-5x" aria-hidden="true"></i>
+                      <h1>Instagram</h1>
+                    </a>
+
                 </center>
             </div>
             <div class="col-md-4">
                 <center>
-                    <a href="http://weibo.com/p/1005055398940329" target="_blank"><i class="weibo fa fa-weibo fa-5x" aria-hidden="true"></i></a>
-                    <h3>微博</h3>
+                    <a href="http://weibo.com/p/1005055398940329" target="_blank">
+                      <i class="weibo fa fa-weibo fa-5x" aria-hidden="true"></i>
+                      <h1>Weibo</h1>
+                    </a>
+
                 </center>
             </div>
             <div id="email" class="col-md-12">
