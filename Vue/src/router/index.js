@@ -30,6 +30,5 @@ export default new Router({
     {path:'/',name:'homepage',component:homepage},
     {path:'/timer',name:'timer',component:timer},
     {path:'/lottery', name:'lottery', component:lottery}
-  ],
-    mode: 'history'
+  ]
 })
