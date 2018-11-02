@@ -20,6 +20,21 @@ class AuthController extends Controller
         return view('register.create');
     }
 
+    function upload(Request $request){
+        if(!$request->hasFile('file')){
+            return response()->json(['message'=>"file not found"]);
+        }
+
+        $file = $request->file('file');
+        if(!$file->isValid()) {
+            return response()->json(['message'=>"invalid file type"]);
+        }
+
+        $path = public_path().'/意愿书/'.$request->get('uniNameCN').'/uploads/';
+        $file->move($path, $file->getClientOriginalName() );
+        return response()->json(compact('path'));
+    }
+
     function createUser(Request $request){
 
         $user = null;
@@ -93,15 +108,53 @@ class AuthController extends Controller
     function doLogin(Request $request)
     {
         //receive username or email as param
-        $user = User::where('email',$request->input('username',$request->input('email')))->first();
+        
+            $user = User::where('email',$request->input('username',$request->input('email')))->first();
+        
 
-        if(!$user){
+            if($user == null){
+                return response()->json([
+                    'message' => 'Wrong email or password',
+                    'status' => 422
+                ]);
+            }
+
+
+            $client = DB::table('oauth_clients')
+            ->where('password_client', true)
+            ->first();
+
+            //params for oauth api call
+            $data = [
+                'grant_type' => 'password',
+                'client_id' => $client->id,
+                'client_secret' => $client->secret,
+                'username' => $user->email,
+                'password' => request('password'),
+            ];
+
+            //internal api call
+            $request = Request::create('/oauth/token', 'POST', $data);
+
+            $response = app()->handle($request);
+
+            if ($response->getStatusCode() != 200) {
+                return response()->json([
+                    'response' => $response,
+                    'message' => "Wrong credentials"
+                ]);
+            }
+
+            $data = json_decode($response->getContent());
+
+
             return response()->json([
-                'message' => 'Wrong email or password',
-                'status' => 422
-            ], 422);
-        }
-
+                'token' => $data->access_token,
+                'user' => $user,
+                'admin' => $user->admin,
+                'uniDetails' => $user->uniDetails,
+                'status' => 200,
+            ]);
 //        if($user->password != Hash::make(request('password'))){
 //        return response()->json([
 //            'message' => 'Wrong email or password',
@@ -109,41 +162,7 @@ class AuthController extends Controller
 //        ], 422);
 //    }
 
-        $client = DB::table('oauth_clients')
-            ->where('password_client', true)
-            ->first();
-
-        //params for oauth api call
-        $data = [
-            'grant_type' => 'password',
-            'client_id' => $client->id,
-            'client_secret' => $client->secret,
-            'username' => $user->email,
-            'password' => request('password'),
-        ];
-
-        //internal api call
-        $request = Request::create('/oauth/token', 'POST', $data);
-
-        $response = app()->handle($request);
-
-        if ($response->getStatusCode() != 200) {
-            return response()->json([
-                'response' => $response,
-                'message' => "Wrong credentials"
-            ]);
-        }
-
-        $data = json_decode($response->getContent());
-
-
-        return response()->json([
-            'token' => $data->access_token,
-            'user' => $user,
-            'admin' => $user->admin,
-            'uniDetails' => $user->uniDetails,
-            'status' => 200,
-        ]);
+        
     }
 
     function logout(){

@@ -68,5 +68,5 @@ Route::get('posts/latest','PostsController@showLatest');
 //register user with User and initialise uniDetails at the same time!! not uniDetails
 Route::post('register','AuthController@createUser');
 
-
+Route::post('uploadFile', 'AuthController@upload');
 

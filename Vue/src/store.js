@@ -1,10 +1,9 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
-import Router from 'vue-router'
+import router from './router'
 
 Vue.use(Vuex)
-Vue.use(Router)
 
 export default new Vuex.Store({
   state: {
@@ -33,10 +32,15 @@ export default new Vuex.Store({
     login({commit}, user){
         return new Promise((resolve, reject) => {
           commit('auth_request')
+
           axios({url: 'api/login', data: user, method: 'POST' })
           .then(resp => {
+            const status = resp.data.status
+            const token = resp.data.token
+            const user = resp.data.user
             if(resp.data.status !== 200){
               alert("电子邮件或密码输入错误！")
+              router.push('login')
             }else{
               const token = resp.data.token
               const user = resp.data.user
@@ -45,6 +49,7 @@ export default new Vuex.Store({
               localStorage.setItem('user',JSON.stringify(user)) //store the user in stringified json
               axios.defaults.headers.common['Authorization'] = token //set the token header
               commit('auth_success', token, user)
+              router.push('/')
               resolve(resp)
             }      
           })
