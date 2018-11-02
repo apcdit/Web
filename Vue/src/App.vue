@@ -51,6 +51,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 import about from './components/about.vue'
 import pastyear from './components/pastyear.vue'
 import rules from './components/rules.vue'
@@ -67,7 +68,9 @@ export default {
   components: {about,pastyear,rules,contact,navigation,videohub,login,register,register1,lottery},
   data(){
     return{
-      logged : false
+      logged : false,
+      user: {},
+      uniDetails: {},
     }
   },
   computed : {
@@ -75,6 +78,9 @@ export default {
       authUser: function(){ if(this.logged && this.$store.getters.authUser) return JSON.parse(this.$store.getters.authUser);},
       status: function(){ return (this.$store.getters.authStatus) ;},
     },
+  updated() {
+    //this.showUser();
+  },
   methods: {
     logout: function () {
         this.$store.dispatch('logout')
@@ -83,8 +89,14 @@ export default {
         })
       },
     // showUser: function(){
-    //   console.log(JSON.parse(this.$store.getters.authUser))
-    // }
+    //   axios
+    //     .get('api/user',{headers: { Authorization: "Bearer " + localStorage.getItem('token')}})
+    //     .then(resp=>{
+    //       this.user = resp.data.user
+    //       this.uniDetails = resp.data.uniDetails
+    //     })
+    // },
+
   },
 }
 </script>

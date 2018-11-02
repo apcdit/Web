@@ -4,7 +4,7 @@
   <h1 style="text-align:center">模拟电子抽签系统</h1>
   <hr>
   <div class="row">
-
+    <div class="col-md-12" style="text-align:center"><h2>{{user.uniNameCN}}</h2></div>
     <div class="col-md-4" style="text-align:center;padding:1em 0;">
         <h3><a style="text-decoration:none;">新加坡</a><span style="color:gray;"><br />本地时间</span></h3>
         <iframe src="http://free.timeanddate.com/clock/i5h4olht/n236/tlcn8/fn6/fs16/tt0/tm3/th1/ta1/tb4" frameborder="0" width="144" height="45"></iframe>
@@ -13,7 +13,7 @@
     <div class="col-md-4" style="text-align:center;padding:1em 0;">
       <h3>
         <a style="text-decoration:none;">当地时间</a>
-        <span style="color:gray;"><br/>地区：{{authUser.region}}</span></h3>
+        <span style="color:gray;"><br/>地区：{{user.region}}</span></h3>
       </h3>
     </div>
 
@@ -54,7 +54,9 @@ export default
   data(){
     return{
       pressed: 0,
-      simTimeStart: 0
+      simTimeStart: 0,
+      user: {},
+      uniDetails: {},
     }
   },
   computed: {
@@ -65,6 +67,7 @@ export default
   },
   created(){
     this.startTime();
+    this.showUser();
   },
   methods:{
     recordTime:function(){
@@ -95,6 +98,14 @@ export default
           if(resp.data.status == 200){
               this.simTimeStart = resp.data.simTimeStart;
           }
+        })
+    },
+    showUser: function(){
+      axios
+        .get('api/user',{headers: { Authorization: "Bearer " + localStorage.getItem('token')}})
+        .then(resp=>{
+          this.user = resp.data.user
+          this.uniDetails = resp.data.uniDetails
         })
     },
   }

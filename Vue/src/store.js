@@ -1,23 +1,25 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
+import Router from 'vue-router'
 
 Vue.use(Vuex)
+Vue.use(Router)
 
 export default new Vuex.Store({
   state: {
     status: '',
     token: localStorage.getItem('token')? localStorage.getItem('token') : null,
-    user : localStorage.getItem('user')
+    user : localStorage.getItem('user')? localStorage.getItem('user'): {}
   },
   mutations: {
     auth_request(state){
       state.status = 'loading'
     },
-    auth_success(state, token, user){
+    auth_success(state, token, users){
       state.status = 'success'
       state.token = token
-      state.user = user
+      Vue.set(state, 'user', users)
     },
     auth_error(state){
       state.status = 'error'
