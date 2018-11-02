@@ -32,7 +32,7 @@
     </b-navbar>
   </div>
 </div>
-  <router-view></router-view>
+  <transition name="fade"><router-view></router-view></transition>
 <footer>
   <div class="col-md-8">
      <img src="http://i.imgur.com/90YSaaO.png" alt="第八届亚太大专华语辩论公开赛" class="site_logo">
@@ -74,7 +74,6 @@ export default {
       isLoggedIn : function(){ this.logged=this.$store.getters.isLoggedIn; return this.$store.getters.isLoggedIn},
       authUser: function(){ if(this.logged && this.$store.getters.authUser) return JSON.parse(this.$store.getters.authUser);},
       status: function(){ return (this.$store.getters.authStatus) ;},
-
     },
   methods: {
     logout: function () {
@@ -91,6 +90,18 @@ export default {
 </script>
 
 <style>
+.fade-enter-active, .fade-leave-active {
+  transition-property: opacity;
+  transition-duration: .50s;
+}
+
+.fade-enter-active {
+  transition-delay: .50s;
+}
+
+.fade-enter, .fade-leave-active {
+  opacity: 0
+}
 
 .navbar-nav {
     float:none;

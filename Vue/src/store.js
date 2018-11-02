@@ -7,7 +7,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     status: '',
-    token: localStorage.getItem('token'),
+    token: localStorage.getItem('token')? localStorage.getItem('token') : null,
     user : localStorage.getItem('user')
   },
   mutations: {
@@ -33,15 +33,18 @@ export default new Vuex.Store({
           commit('auth_request')
           axios({url: 'api/login', data: user, method: 'POST' })
           .then(resp => {
-            const token = resp.data.token
-            const user = resp.data.user
-            //console.log(user)
-            localStorage.setItem('token', token) //store the token
-            localStorage.setItem('user',JSON.stringify(user)) //store the user in stringified json
-            axios.defaults.headers.common['Authorization'] = token //set the token header
-            //console.log(axios.defaults.headers.common['Authorization'])
-            commit('auth_success', token, user)
-            resolve(resp)
+            if(resp.data.status !== 200){
+              alert("电子邮件或密码输入错误！")
+            }else{
+              const token = resp.data.token
+              const user = resp.data.user
+              //console.log(user)
+              localStorage.setItem('token', token) //store the token
+              localStorage.setItem('user',JSON.stringify(user)) //store the user in stringified json
+              axios.defaults.headers.common['Authorization'] = token //set the token header
+              commit('auth_success', token, user)
+              resolve(resp)
+            }      
           })
           .catch(err => {
             commit('auth_error')

@@ -5,7 +5,7 @@ import App from './App'
 import router from './router'
 import Vuex from 'vuex'
 import store from '../src/store.js'
-
+import axios from 'axios'
 
 import 'bootstrap/dist/css/bootstrap.min.css'
 import zh_CN from 'vee-validate/dist/locale/zh_CN'
@@ -18,13 +18,20 @@ Vue.use(VeeValidate);
 Validator.localize('zh_CN',zh_CN);
 Vue.use(BootstrapVue);
 Vue.use(require('vue-moment'));
+//Vue.use(axios);
 
 
 Vue.config.productionTip = false
+const token = localStorage.getItem('token')
 
+if (token) {
+  axios.defaults.headers.common['Authorization'] = token
+}
 /* eslint-disable no-new */
 new Vue({
   el: '#app',store,
   router: router,
   components: { App },
-  template: '<App/>'})
+  template: '<App/>',
+})
+

@@ -119,6 +119,17 @@ class WarController extends Controller
 
     }
 
+    public function getSimStartTime(){
+        $simTimeStart = auth()->user()->uniDetails->simTimeStart;
+        $simTimeStart = date("Y-m-d H:i:s", $simTimeStart/1000).' '.'Asia/Singapore';
+
+        if($simTimeStart != null){
+            return response()->json([
+                'status' => 200,
+                'simTimeStart' => $simTimeStart,
+            ]);
+        }
+    }
     //show all the timediff for a certain region
     public function getSimTimeDiff(){
 

@@ -50,6 +50,7 @@ Route::middleware('auth:api')->group(function () {
     //Route::get('time/simulation/get/{uniNameCN}', 'WarController@getSimTimeDiff');
     Route::get('time/simulation/get', 'WarController@getSimTimeDiff');
     Route::put('time/simulation/store', 'WarController@storeSimTimePress');
+    Route::get('time/simulation/start', 'WarController@getSimStartTime');
 });
 
 

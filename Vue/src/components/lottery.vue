@@ -1,7 +1,7 @@
 <template>
 <div class="container">
   <br>
-  <h1 style="text-align:center">电子抽签系统</h1>
+  <h1 style="text-align:center">模拟电子抽签系统</h1>
   <hr>
   <div class="row">
 
@@ -19,6 +19,7 @@
 
     <div class="col-md-4" style="text-align:center;padding:1em 0;">
       <h3><a style="text-decoration:none;">系统开放时间</a><span style="color:gray;"><br />(新加坡时间)</span></h3>
+      <h6>{{simTimeStart}}</h6>
     </div>
 
     <br>
@@ -30,11 +31,9 @@
             <h3>请点击下方的按钮进行电子报名。</h3>
             <p>系统开放后，只需点击下方按钮即可完成电子报名程序。</p>
             <br>
-            <form id="recordtime" method="post" action="php/time.php">
-              <a href="php/time.php" class="btn btn-primary btn-block " id="button"type="submit" form="recordtime" value="Submit" target="_blank">报名</a>
-            </form>
+              <button v-on:click="recordTime" class="btn btn-primary btn-block " id="register">报名</button>
             <br>
-            <a href="private.php" class="btn btn-lg">个人主页</a>
+            <a href="apchinesedebate.com/user_dashboard" class="btn btn-lg">个人主页</a>
           </center>
         </div>
       </div>
@@ -44,20 +43,65 @@
 </div>
 </template>
 <script>
+import axios from 'axios';
+
 export default
 {
   name:'lottery',
   created () {
     setInterval(() => this.now = new Date, 1000 * 60)
   },
+  data(){
+    return{
+      pressed: 0,
+      simTimeStart: 0
+    }
+  },
   computed: {
     now () {
       return new Date
     },
-    authUser: function(){ if(this.$store.getters.authUser) return JSON.parse(this.$store.getters.authUser);}
+    authUser: function(){ if(this.$store.getters.authUser) return JSON.parse(this.$store.getters.authUser);},
+  },
+  created(){
+    this.startTime();
+  },
+  methods:{
+    recordTime:function(){
+      const data = { 'pressed' : 1} //pressed here is to notify backend that user pressed the button
+      try{
+        axios
+          .put('api/time/simulation/store', data, {
+            headers: { Authorization: "Bearer " + localStorage.getItem('token')}
+          })
+          .then(resp=>{
+            if(resp.data.status == 200){
+              //console.log(resp.data)
+              alert("时间已成功记录！")
+            }else if(resp.data.status == 304){ alert("只能报名一次！")}
+          })
+      }catch(e){console.log(e)
+      }
+    },
+    startTime: function(){
+      axios
+        .get('api/time/simulation/start',{
+          headers:{
+              Authorization: "Bearer " + localStorage.getItem('token')
+          }
+        })
+        .then(resp=>{
+          //console.log(resp.data)
+          if(resp.data.status == 200){
+              this.simTimeStart = resp.data.simTimeStart;
+          }
+        })
+    },
   }
 }
 </script>
 <style scoped>
-  
+  .register{
+    background-color: darkred
+  }
 </style>
