@@ -20,7 +20,7 @@
         <b-navbar-brand href="/"><img src="http://i.imgur.com/zRtdcqV.png"></b-navbar-brand>
         <b-nav-item router-link to='/videohub'>视频库</b-nav-item>
         <b-nav-item router-link to='/contact'>联络我们</b-nav-item>
-        <b-nav-item router-link to='/login' v-if="!isLoggedIn">Login</b-nav-item>
+        <b-nav-item router-link to='/login' v-if="!isLoggedIn">登陆</b-nav-item>
         <b-nav-item-dropdown text="大学资料"  v-else>
           <b-nav-item to='user_dashboard' v-if="!authUser">大学资料</b-nav-item>
           <b-nav-item to='user_dashboard' v-else>{{authUser.uniNameCN}}</b-nav-item>
@@ -78,8 +78,11 @@ export default {
       authUser: function(){ if(this.logged && this.$store.getters.authUser) return JSON.parse(this.$store.getters.authUser);},
       status: function(){ return (this.$store.getters.authStatus) ;},
     },
-  updated() {
+  mounted() {
     //this.showUser();
+    if(this.logged){
+      this.$forceUpdate()
+    }
   },
   methods: {
     logout: function () {

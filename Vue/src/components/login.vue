@@ -14,9 +14,9 @@
                 </label>
             </div>
             <button class="btn btn-lg btn-primary btn-block btn-signin">Sign in</button>
-        </form><!-- /form -->
+        </div><!-- /form -->
 
-    </div><!-- /card-container -->
+    </form><!-- /card-container -->
 </div><!-- /container -->
 </template>
 

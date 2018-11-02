@@ -1,5 +1,6 @@
 <template>
 <div>
+    <div class="container">
 <b-tabs>
   <b-tab title="2017 第八届" active>
     <b-tabs>
@@ -1313,7 +1314,7 @@
 
 </b-tabs>
 </div>
-
+</div>
 </template>
 <script>
 
@@ -1322,4 +1323,18 @@ export default{
 name:'pastyear',
 }
 </script>
-<style></style>
+<style scoped>
+    .container{background-color: #F7F7F7;
+        padding: 20px 25px 30px;
+        margin: 0 auto 25px;
+        margin-top: 50px;
+        /* shadows and rounded borders */
+        -moz-border-radius: 20px;
+        -webkit-border-radius: 20px;
+        border-radius: 20px;
+        -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+        -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+        box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+        width:100%;}
+    ul{list-style:square;}
+</style>
