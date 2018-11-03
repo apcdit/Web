@@ -49,7 +49,8 @@ export default new Vuex.Store({
               localStorage.setItem('user',JSON.stringify(user)) //store the user in stringified json
               axios.defaults.headers.common['Authorization'] = token //set the token header
               commit('auth_success', token, user)
-              window.location.href = 'http://www.apchinesedebate.com/#/';
+              //window.location.href = 'http://www.apchinesedebate.com/#/';
+              router.push('/');
               resolve(resp)
             }      
           })
