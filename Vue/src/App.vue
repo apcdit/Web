@@ -78,12 +78,12 @@ export default {
       authUser: function(){ if(this.logged && this.$store.getters.authUser) return JSON.parse(this.$store.getters.authUser);},
       status: function(){ return (this.$store.getters.authStatus) ;},
     },
-  mounted() {
-    //this.showUser();
-    if(this.logged){
-      this.$forceUpdate()
-    }
-  },
+  // mounted() {
+  //   //this.showUser();
+  //   if(this.logged){
+  //     this.$forceUpdate()
+  //   }
+  // },
   methods: {
     logout: function () {
         this.$store.dispatch('logout')
@@ -91,6 +91,7 @@ export default {
           this.$router.push('login')
         })
       },
+    
     // showUser: function(){
     //   axios
     //     .get('api/user',{headers: { Authorization: "Bearer " + localStorage.getItem('token')}})

@@ -15,21 +15,22 @@ import store from '../../src/store.js'
 
 Vue.use(Router)
 
-// const ifNotAuthenticated = (to, from, next) => {
-//   if (!store.getters.isLoggedIn) {
-//     next()
-//     return
-//   }
-//   next('/')
-// }
+//check if not then route to other place
+const ifNotAuthenticated = (to, from, next) => {
+  if (!store.getters.isLoggedIn) {
+    next()
+    return
+  }
+  next('/')
+}
 
-// const ifAuthenticated = (to, from, next) => {
-//   if (store.getters.isLoggedIn) {
-//     next()
-//     return
-//   }
-//   next('/login')
-// }
+const ifAuthenticated = (to, from, next) => {
+  if (store.getters.isLoggedIn) {
+    next()
+    return
+  }
+  next('/login')
+}
 
 export default new Router({
   routes: [
@@ -40,10 +41,10 @@ export default new Router({
     {path:'/videohub',name:'videohub',component:videohub},
     {path:'/navigation',name:'navigation',component:navigation},
     {path:'/about',name:'about',component:about},
-    {path:'/login',name:'login',component:login},
-    {path:'/register',name:'register',component:register},
+    {path:'/login',name:'login',component:login, beforeEnter: ifNotAuthenticated},
+    {path:'/register',name:'register',component:register, beforeEnter: ifNotAuthenticated},
     {path:'/',name:'homepage',component:homepage},
     {path:'/timer',name:'timer',component:timer},
-    {path:'/lottery', name:'lottery', component:lottery}
+    {path:'/lottery', name:'lottery', component:lottery, beforeEnter: ifAuthenticated}
   ]
 })
