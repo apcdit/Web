@@ -4,7 +4,7 @@
   <h1 style="text-align:center">模拟电子抽签系统</h1>
   <hr>
   <div class="row">
-    <div class="col-md-12" style="text-align:center"><h2>{{user.uniNameCN}}</h2></div>
+    <div class="col-md-12" style="text-align:center; color:darkred;"><h2>{{user.uniNameCN}}</h2></div>
     <div class="col-md-4" style="text-align:center;padding:1em 0;">
         <h3><a style="text-decoration:none;">新加坡</a><span style="color:gray;"><br />本地时间</span></h3>
         <iframe src="http://free.timeanddate.com/clock/i5h4olht/n236/tlcn8/fn6/fs16/tt0/tm3/th1/ta1/tb4" frameborder="0" width="144" height="45"></iframe>
@@ -13,7 +13,7 @@
     <div class="col-md-4" style="text-align:center;padding:1em 0;">
       <h3>
         <a style="text-decoration:none;">当地时间</a>
-        <span style="color:gray;"><br/>地区：{{user.region}}</span></h3>
+        <span style="color:gray;"><br/>地区：{{user.region}}</span>
       </h3>
     </div>
 
@@ -97,6 +97,7 @@ export default
           //console.log(resp.data)
           if(resp.data.status == 200){
               this.simTimeStart = resp.data.simTimeStart;
+
           }
         })
     },
@@ -106,6 +107,16 @@ export default
         .then(resp=>{
           this.user = resp.data.user
           this.uniDetails = resp.data.uniDetails
+          switch(this.user.region){
+            case "Malaysia": this.user.region = "马来西亚"; break;
+            case "Singapore": this.user.region = "新加坡"; break;
+            case "China": this.user.region = "中国"; break;
+            case "Hong Kong": this.user.region = "香港"; break;
+            case "Macau": this.user.region = "澳门"; break;
+            case "Taiwan": this.user.region = "台湾"; break;
+            case "Australia": this.user.region = "澳洲"; break;
+            default: break;
+          }
         })
     },
   }

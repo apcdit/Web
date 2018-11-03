@@ -5,7 +5,7 @@
   <b-tab title="2017 第八届" active>
     <b-tabs>
         <b-tab title="对垒表与赛果">
-           <img src="https://i.imgur.com/3d55v6M.jpg?1" title="第八届亚太辩论赛对垒表" width="70%"/></a>
+           <img src="https://i.imgur.com/3d55v6M.jpg?1" title="第八届亚太辩论赛对垒表" width="70%"/>
         </b-tab>
         <b-tab title="最佳辩手">
           <h3>总决赛最佳辩手为新加坡国立大学王肇麟</h3>
