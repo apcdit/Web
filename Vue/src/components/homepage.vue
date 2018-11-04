@@ -6,7 +6,7 @@
                     <ul class="list-group shadow">
                         <li class="list-group-item">
                             <h4 style="color:#9A2A1F;">活动详情</h4>
-                            <h5><i class="fa fa-calendar-o" aria-hidden="true"></i> 2019年7月12日至7月16日</h5>
+                            <h5><i class="fa fa-calendar-o" aria-hidden="true"></i> 2019年7月9日至7月15日</h5>
                             <h5><i class="fa fa-map-marker" aria-hidden="true"></i> 新加坡南洋理工大学 </h5>
                             <h5><i class="fa fa-clock-o" aria-hidden="true"></i> 9:00am – 6:00pm </h5>
                             <a  class="btn" href="https://entuedu-my.sharepoint.com/:b:/g/personal/e180063_e_ntu_edu_sg/EdS_rb-Dd9pMpWSDdmyLmCIB8EGVZVCfHvtSIPzZ9FixqQ?e=zaf8B" target="_blank">参赛意愿书</a>
