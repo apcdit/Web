@@ -41,7 +41,7 @@
             <br>
               <button v-on:click="recordTime" class="btn btn-primary btn-block " id="register" :disabled="drawn==1">报名</button>
             <br>
-            <a href="apchinesedebate.com/user_dashboard" class="btn btn-lg">个人主页</a>
+            <button @click="$router.push('user')" class="btn btn-lg">个人主页</button>
           </center>
         </div>
       </div>
