@@ -60,7 +60,7 @@
                             </b-tab>
                             <b-tab title="最新赛况"></b-tab>
                             <b-tab title="对垒表"></b-tab>
-                            <b-tab title="参赛意愿书"><p  style=" margin: 12px auto 6px auto; font-family: Helvetica,Arial,Sans-serif; font-style: normal; font-variant: normal; font-weight: normal; font-size: 14px; line-height: normal; font-size-adjust: none; font-stretch: normal; -x-system-font: none; display: block;">   <a title="View Registration Form on Scribd" href="https://www.scribd.com/document/392328494/Registration-Form#from_embed"  style="text-decoration: underline;" >Registration Form</a> by <a title="View chinesedebate's profile on Scribd" href="https://www.scribd.com/user/336291034/chinesedebate#from_embed"  style="text-decoration: underline;" >chinesedebate</a> on Scribd</p><iframe class="scribd_iframe_embed" title="Registration Form" src="https://www.scribd.com/embeds/392328494/content?start_page=1&view_mode=scroll&access_key=key-zeRDklw0wGKczBdChOYM&show_recommendations=true" data-auto-height="false" data-aspect-ratio="0.7080062794348508" scrolling="yes" id="doc_6434" width="100%" height="400px" frameborder="0"></iframe></b-tab>
+                            
                         </b-tabs>
                     </div>
                 </div>
