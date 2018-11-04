@@ -9,8 +9,8 @@
         </div>
 
         <br>
-        <a v-b-toggle.collapseA class="expandB1" @click = "expandA" v-if="!expandedA"><h2>第七届亚太辩⬇</h2></a>
-        <a v-b-toggle.collapseA class="expandB1" @click = "collapseA" v-else><h2>第七届亚太辩⬆</h2></a>
+        <a v-b-toggle.collapseA class="expandB1" @click = "expandA" v-if="!expandedA"><h2>+  第七届亚太辩</h2></a>
+        <a v-b-toggle.collapseA class="expandB1" @click = "collapseA" v-else><h2>-  第七届亚太辩</h2></a>
         <!-- elements to collapse -->
         <b-collapse id="collapseA" class="mt-2">
         <b-card>
@@ -28,8 +28,8 @@
 
         <hr>
 
-        <a v-b-toggle.collapseB @click = "expand" class="expandB1" v-if="!expanded"><h2>第六届亚太辩⬇</h2></a>
-        <a v-b-toggle.collapseB @click = "collapse" class="expandB1" v-else><h2>第六届亚太辩⬆</h2></a>
+        <a v-b-toggle.collapseB @click = "expand" class="expandB1" v-if="!expanded"><h2>+  第六届亚太辩</h2></a>
+        <a v-b-toggle.collapseB @click = "collapse" class="expandB1" v-else><h2>-  第六届亚太辩</h2></a>
         <!-- elements to collapse -->
         <b-collapse id="collapseB" class="mt-2">
         <b-card>

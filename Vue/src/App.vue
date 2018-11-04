@@ -17,14 +17,16 @@
           <b-dropdown-item href="#">最新赛况</b-dropdown-item>
           <b-dropdown-item href="#">赛程</b-dropdown-item>
         </b-nav-item-dropdown>
-        <b-navbar-brand href="/"><img src="http://i.imgur.com/zRtdcqV.png"></b-navbar-brand>
+        <b-navbar-brand href="/"><img src="http://i.imgur.com/90YSaaO.png"></b-navbar-brand>
         <b-nav-item router-link to='/videohub'>视频库</b-nav-item>
         <b-nav-item router-link to='/contact'>联络我们</b-nav-item>
-        <b-nav-item router-link to='/login' v-if="!isLoggedIn">登陆</b-nav-item>
+        <b-nav-item router-link to='/login' v-if="!isLoggedIn"><img src="https://i.imgur.com/h5GY79C.png"></b-nav-item>
         <b-nav-item-dropdown text="大学资料"  v-else>
-          <b-nav-item to='user_dashboard' v-if="!authUser">大学资料</b-nav-item>
-          <b-nav-item to='user_dashboard' v-else>{{authUser.uniNameCN}}</b-nav-item>
+          <b-nav-item to='user' v-if="!user">大学资料</b-nav-item>
+          <b-nav-item to='user' v-else>{{user.uniNameCN}}</b-nav-item>
           <b-nav-item to='lottery'>电子抽签</b-nav-item>
+          <b-nav-item to='simlottery'>模拟电子抽签</b-nav-item>
+          <b-nav-item to='result'>电子抽签结果</b-nav-item>
           <b-nav-item @click="logout()"> 登出 </b-nav-item>
         </b-nav-item-dropdown>
       </b-navbar-nav>
@@ -62,10 +64,13 @@ import login from './components/login.vue'
 import register from './components/register.vue'
 import register1 from './components/register1.vue'
 import lottery from './components/lottery.vue'
+import simlottery from './components/simlottery.vue'
+import result from './components/result.vue'
+import user from './components/user.vue'
 
 export default {
   name: 'App',
-  components: {about,pastyear,rules,contact,navigation,videohub,login,register,register1,lottery},
+  components: {about,pastyear,rules,contact,navigation,videohub,login,register,register1,lottery,simlottery,result,user},
   data(){
     return{
       logged : false,
@@ -75,15 +80,18 @@ export default {
   },
   computed : {
       isLoggedIn : function(){ this.logged=this.$store.getters.isLoggedIn; return this.$store.getters.isLoggedIn},
-      authUser: function(){ if(this.logged && this.$store.getters.authUser) return JSON.parse(this.$store.getters.authUser);},
+      //authUser: function(){ if(this.logged && this.$store.getters.authUser) return JSON.parse(this.$store.getters.authUser);},
       status: function(){ return (this.$store.getters.authStatus) ;},
     },
-  // mounted() {
-  //   //this.showUser();
-  //   if(this.logged){
-  //     this.$forceUpdate()
-  //   }
-  // },
+  created() {
+    this.showUser();
+  },
+  updated() {
+    this.showUser();
+    // if(this.logged){
+    //   this.$forceUpdate()
+    // }
+  },
   methods: {
     logout: function () {
         this.$store.dispatch('logout')
@@ -92,14 +100,14 @@ export default {
         })
       },
     
-    // showUser: function(){
-    //   axios
-    //     .get('api/user',{headers: { Authorization: "Bearer " + localStorage.getItem('token')}})
-    //     .then(resp=>{
-    //       this.user = resp.data.user
-    //       this.uniDetails = resp.data.uniDetails
-    //     })
-    // },
+    showUser: function(){
+      axios
+        .get('api/user',{headers: { Authorization: "Bearer " + localStorage.getItem('token')}})
+        .then(resp=>{
+          this.user = resp.data.user
+          this.uniDetails = resp.data.uniDetails
+        })
+    },
 
   },
 }

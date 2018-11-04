@@ -12,6 +12,9 @@ import homepage from '@/components/homepage'
 import timer from '@/components/timer'
 import lottery from '@/components/lottery'
 import store from '../../src/store.js'
+import simlottery from '@/components/simlottery'
+import result from '@/components/result'
+import user from '@/components/user'
 
 Vue.use(Router)
 
@@ -45,6 +48,9 @@ export default new Router({
     {path:'/register',name:'register',component:register, beforeEnter: ifNotAuthenticated},
     {path:'/',name:'homepage',component:homepage},
     {path:'/timer',name:'timer',component:timer},
-    {path:'/lottery', name:'lottery', component:lottery, beforeEnter: ifAuthenticated}
+    {path:'/lottery', name:'lottery', component:lottery, beforeEnter: ifAuthenticated},
+    {path:'/simlottery', name:'simlottery', component:simlottery, beforeEnter: ifAuthenticated},
+    {path:'/result', name:'result', component:result, beforeEnter: ifAuthenticated},
+    {path:'/user', name:'user', component:user, beforeEnter: ifAuthenticated}
   ]
 })

@@ -43,15 +43,15 @@ class WarController extends Controller
     public function setSimTime(){
 
         
-        $users = User::where('region', request('region'))->get(); //get the collection that has the same region
-
+        //$users = User::where('region', request('region'))->get(); //get the collection that has the same region
+        $user = auth()->user();
         //strtotime normally converts to epoch in UTC timezone, by using 'Asia/Singapore' it converts it to GMT+8 
         $simTimeStart = strtotime(request('simTimeStart').' '.'Asia/Singapore');
         $simTimeEnd = strtotime(request('simTimeEnd').' '.'Asia/Singapore');
 
-        if(count($users) > 0){
-            for($i = 0; $i < count($users); $i++){
-                $uniDetails = $users[$i]->uniDetails;
+        if(count($user) > 0){
+            for($i = 0; $i < count($user); $i++){
+                $uniDetails = $user[$i]->uniDetails;
                 $uniDetails->update([
                     'simTimeStart' => $simTimeStart*1000,
                     'simTimeEnd' => $simTimeEnd,
@@ -71,6 +71,18 @@ class WarController extends Controller
         }
     }
 
+    private function  calOffTimeDiff($uniNameCN){
+
+        $uniDetails = uniDetails::where('uniNameCN', $uniNameCN)->first();
+
+        if($uniDetails->offTimeStart !== null && $uniDetails->offTimePress !== null){
+            $simTimeDiff = $uniDetails->offTimePress-($uniDetails->offTimeStart);
+            $uniDetails->update([
+                'offTimeDiff' => $offTimeDiff  //units in milliseconds
+            ]);
+        }
+    }
+
     private function  calSimTimeDiff($uniNameCN){
 
         $uniDetails = uniDetails::where('uniNameCN', $uniNameCN)->first();
@@ -86,28 +98,39 @@ class WarController extends Controller
     public function storeSimTimePress(){
 
         if(auth()->user()->uniDetails->drawn !== 1){ //if player hasn't drawn yet then save it into database
+
             $uniDetails = auth()->user()->uniDetails;
             $pressTime = microtime(true)*1000; //record the user press time in
             $uniNameCN = $uniDetails->uniNameCN;
+            $simTimeStart = $uniDetails->simTimeStart;
+            $simTimeEnd = $uniDetails->simTimeEnd;
+            //$timeNow = request('timeNow');
 
-            if($uniDetails != null && request('pressed') === 1){
-                $uniDetails->update([
-                    'simTimePress' => $pressTime,
-                    //'drawn' => 1 //set player to drawn but commented bcoz this is for simulation only
-                ]);
-                $this->calSimTimeDiff($uniNameCN);
+            if($pressTime >= $simTimeStart && $pressTime < $simTimeEnd){
+                if($uniDetails != null && request('pressed') === 1){
+                    $uniDetails->update([
+                        'simTimePress' => $pressTime,
+                        //'drawn' => 1 //set player to drawn but commented bcoz this is for simulation only
+                    ]);
+                    $this->calSimTimeDiff($uniNameCN);
 
-                return response()->json([
-                    'message' => "Simulate press time is recorded!",
-                    'status' => "200",
-                    'time' => date("Y-m-d H:i:s", microtime(true)),
-                    'epoch' => $pressTime,
-                    'converted' => strtotime(date("Y-m-d H:i:s", microtime(true)))
-                ]);
+                    return response()->json([
+                        'message' => "Simulate press time is recorded!",
+                        'status' => "200",
+                        'time' => date("Y-m-d H:i:s", microtime(true)),
+                        'epoch' => $pressTime,
+                        'converted' => strtotime(date("Y-m-d H:i:s", microtime(true)))
+                    ]);
+                }else{
+                    return response()->json([
+                        'message' => 'Uni details not found, fail!',
+                        'status' => '404'
+                    ]);
+                }
             }else{
                 return response()->json([
-                    'message' => 'Uni details not found, fail!',
-                    'status' => '404'
+                    'message' => '还没到报名时间！',
+                    'status' => 201
                 ]);
             }
         }else{
@@ -116,20 +139,91 @@ class WarController extends Controller
                 'status' => '304'
             ]);
         }
+    }
 
+    public function storeOffTimePress(){
+
+        if(auth()->user()->uniDetails->drawn !== 1){ //if player hasn't drawn yet then save it into database
+
+            $uniDetails = auth()->user()->uniDetails;
+            $pressTime = microtime(true)*1000; //record the user press time in
+            $uniNameCN = $uniDetails->uniNameCN;
+            $offTimeStart = $uniDetails->offTimeStart;
+            $offTimeEnd = $uniDetails->offTimeEnd;
+            //$timeNow = request('timeNow');
+
+            if($pressTime >= $offTimeStart && $pressTime < $offTimeEnd){
+                if($uniDetails != null && request('pressed') === 1){
+                    $uniDetails->update([
+                        'offTimePress' => $pressTime,
+                        'drawn' => 1 //set player to drawn but commented bcoz this is for simulation only
+                    ]);
+                    $this->calOffTimeDiff($uniNameCN);
+
+                    return response()->json([
+                        'message' => "Official press time is recorded!",
+                        'status' => "200",
+                        'time' => date("Y-m-d H:i:s", microtime(true)),
+                        'epoch' => $pressTime,
+                        'converted' => strtotime(date("Y-m-d H:i:s", microtime(true)))
+                    ]);
+                }else{
+                    return response()->json([
+                        'message' => 'Uni details not found, fail!',
+                        'status' => '404'
+                    ]);
+                }
+            }else{
+                return response()->json([
+                    'message' => '还没到报名时间！',
+                    'status' => 201
+                ]);
+            }
+        }else{
+            return response()->json([
+                'message' => 'The player has already drawn!',
+                'status' => '304'
+            ]);
+        }
     }
 
     public function getSimStartTime(){
         $simTimeStart = auth()->user()->uniDetails->simTimeStart;
-        $simTimeStart = date("Y-m-d H:i:s", $simTimeStart/1000).' '.'Asia/Singapore';
+        date_default_timezone_set("Asia/Singapore");
+        $simTimeStart1 = date("Y-m-d H:i:s", $simTimeStart/1000)." SGT";
 
         if($simTimeStart != null){
             return response()->json([
                 'status' => 200,
-                'simTimeStart' => $simTimeStart,
+                'simTimeStart' => $simTimeStart1,
+                'simTimeStart2' => $simTimeStart
             ]);
         }
     }
+
+    public function getOffStartTime(){
+        $offTimeStart = auth()->user()->uniDetails->offTimeStart;
+        date_default_timezone_set("Asia/Singapore");
+        $offTimeStart1 = date("Y-m-d H:i:s", $offTimeStart/1000)." SGT";
+
+        if($offTimeStart != null){
+            return response()->json([
+                'status' => 200,
+                'offTimeStart' => $offTimeStart1,
+                'offTimeStart2' => $offTimeStart
+            ]);
+        }
+    }
+
+    public function getDraw(){
+        $drawn = auth()->user()->uniDetails->drawn;
+
+        return response()->json([
+            'status' => 200,
+            'drawn' => $drawn
+        ]);
+    }
+
     //show all the timediff for a certain region
     public function getSimTimeDiff(){
 
@@ -158,6 +252,40 @@ class WarController extends Controller
         for($k = 0 ; $k < count($array); $k++){
             $timeDiff = $array[$k]["simTimeDiff"];
             $array[$k]["simTimeDiff"] = $timeDiff/1000; //to get the time in second
+        }
+
+        return response()->json([
+            'data' => $array,
+        ]);
+    }
+
+    public function getOffTimeDiff(){
+
+        $region = auth()->user()->region;
+
+        $array = [];
+
+        $uniNameCNs = User::where('region',$region)->pluck('uniNameCN');
+
+        //get all the uni details with only the 3 details
+        $filteredDetails = uniDetails::get()->map(function($b){
+            return collect($b->toArray())
+                ->only(['uniNameCN', 'offTimeDiff', 'qualified'])
+                ->all();
+        });
+
+        //filter with the region i want
+        for($i = 0; $i < count($uniNameCNs); $i++){
+            for($j = 0; $j < count($filteredDetails); $j++){
+                if($uniNameCNs[$i] === $filteredDetails[$j]["uniNameCN"]){
+                    array_push($array, $filteredDetails[$j]);
+                }
+            }
+        }
+
+        for($k = 0 ; $k < count($array); $k++){
+            $timeDiff = $array[$k]["offTimeDiff"];
+            $array[$k]["offTimeDiff"] = $timeDiff/1000; //to get the time in second
         }
 
         return response()->json([

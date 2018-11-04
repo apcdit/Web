@@ -10,9 +10,20 @@ class UserController extends Controller
 {
     public function updateDetails(Request $request){
 
-        $uniDetails = uniDetails::where('uniNameCN', $request->uniNameCN)->get(); //returns a collection
+        $user = User::where('uniNameCN', $request->uni_name_cn)->first();
+        $uniDetails = uniDetails::where('uniNameCN', $request->uni_name_en)->first(); //returns a collection
         //0 because update method requires object, not collection
-        $uniDetails[0]->update($request->all());
+        $user->update([
+            'address' => request('address'),
+            'email' => request('email'),
+            'contactNumber' => request('phone')
+        ]);
+
+        $uniDetails->update([
+            'debateQues1' => request('debateQues1'),
+            'debateQues2' => request('debateQues2'),
+            'debateQues3' => request('debateQues3'),
+        ]);
 
         return response(uniDetails::where('uniNameCN', $request->uniNameCN)->get(),200);
     }

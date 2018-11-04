@@ -1,7 +1,7 @@
 <template>
 <div class="container">
   <br>
-  <h1 style="text-align:center">电子抽签系统</h1>
+  <h1 style="text-align:center">模拟电子抽签系统</h1>
   <hr>
   <div class="row">
     <div class="col-md-12" style="text-align:center; color:darkred;"><h2>{{user.uniNameCN}}</h2></div>
@@ -26,8 +26,9 @@
     </div>
 
     <div class="col-md-4" style="text-align:center;padding:1em 0;">
-      <h3><a style="text-decoration:none;">系统开放时间</a><span style="color:gray;"><br />(新加坡时间)</span></h3>
-      <h6>{{offTimeStart}}</h6>
+      <h3><a style="text-decoration:none;">模拟系统开放时间</a><span style="color:gray;"><br />(新加坡时间)</span></h3>
+      <input placeholder="输入开始时间">
+      <h6>{{simTimeStart}}</h6>
     </div>
 
     <br>
@@ -39,7 +40,7 @@
             <h3>请点击下方的按钮进行电子报名。</h3>
             <p>系统开放后，只需点击下方按钮即可完成电子报名程序。</p>
             <br>
-              <button v-on:click="recordTime" class="btn btn-primary btn-block " id="register" :disabled="drawn==1">报名</button>
+              <button v-on:click="recordTime" class="btn btn-primary btn-block " id="register">报名</button>
             <br>
             <a href="apchinesedebate.com/user_dashboard" class="btn btn-lg">个人主页</a>
           </center>
@@ -55,14 +56,14 @@ import axios from 'axios';
 
 export default
 {
-  name:'lottery',
+  name:'simlottery',
   created () {
     setInterval(() => this.now = new Date, 1000 * 60)
   },
   data(){
     return{
       pressed: 0,
-      offTimeStart: 0,
+      simTimeStart: 0,
       user: {},
       uniDetails: {},
       drawn: 1,
@@ -88,7 +89,7 @@ export default
       const data = { 'pressed' : 1} //pressed here is to notify backend that user pressed the button
       try{
         axios
-          .put('api/time/official/store', data, {
+          .put('api/time/simulation/store', data, {
             headers: { Authorization: "Bearer " + localStorage.getItem('token')}
           })
           .then(resp=>{
@@ -103,7 +104,7 @@ export default
     },
     startTime: function(){
       axios
-        .get('api/time/official/start',{
+        .get('api/time/simulation/start',{
           headers:{
               Authorization: "Bearer " + localStorage.getItem('token')
           }
@@ -111,8 +112,8 @@ export default
         .then(resp=>{
           //console.log(resp.data)
           if(resp.data.status == 200){
-              this.offTimeStart = resp.data.offTimeStart;
-              this.startTime = resp.data.offTimeStart1;
+              this.simTimeStart = resp.data.simTimeStart;
+              this.startTime = resp.data.simTimeStart1;
           }
         })
     },
@@ -144,7 +145,6 @@ export default
         })
         .then(resp=>{
             this.drawn = resp.data.drawn
-            console.log(this.drawn);
         })       
     },
   },

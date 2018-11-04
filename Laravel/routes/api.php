@@ -45,12 +45,19 @@ Route::middleware('auth:api')->group(function () {
         ]);
     });
 
+
     Route::post('logout', 'AuthController@logout');
     Route::put('editUser', 'UserController@updateDetails');
     //Route::get('time/simulation/get/{uniNameCN}', 'WarController@getSimTimeDiff');
     Route::get('time/simulation/get', 'WarController@getSimTimeDiff');
     Route::put('time/simulation/store', 'WarController@storeSimTimePress');
     Route::get('time/simulation/start', 'WarController@getSimStartTime');
+    //Route::get('time/simulation/getDraw', 'WarController@getDraw');
+
+    Route::get('time/official/get', 'WarController@getOffTimeDiff');
+    Route::put('time/official/store', 'WarController@storeOffTimePress');
+    Route::get('time/official/start', 'WarController@getOffStartTime');
+    Route::get('time/official/getDraw', 'WarController@getDraw');
 });
 
 
