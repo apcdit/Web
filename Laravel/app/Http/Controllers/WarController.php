@@ -76,7 +76,7 @@ class WarController extends Controller
         $uniDetails = uniDetails::where('uniNameCN', $uniNameCN)->first();
 
         if($uniDetails->offTimeStart !== null && $uniDetails->offTimePress !== null){
-            $simTimeDiff = $uniDetails->offTimePress-($uniDetails->offTimeStart);
+            $offTimeDiff = $uniDetails->offTimePress-($uniDetails->offTimeStart);
             $uniDetails->update([
                 'offTimeDiff' => $offTimeDiff  //units in milliseconds
             ]);
