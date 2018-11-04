@@ -25,7 +25,7 @@
           <b-nav-item to='user' v-if="!user">大学资料</b-nav-item>
           <b-nav-item to='user' v-else>{{user.uniNameCN}}</b-nav-item>
           <b-nav-item to='lottery'>电子抽签</b-nav-item>
-          <b-nav-item to='simlottery'>模拟电子抽签</b-nav-item>
+          <b-nav-item to='simlottery' v-if="false">模拟电子抽签</b-nav-item>
           <b-nav-item to='result'>电子抽签结果</b-nav-item>
           <b-nav-item @click="logout()"> 登出 </b-nav-item>
         </b-nav-item-dropdown>

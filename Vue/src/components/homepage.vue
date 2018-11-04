@@ -15,7 +15,7 @@
             </ul>
         <ul class="list-group shadow">
           <li class="list-group-item">
-               <h4 style="color:#9A2A1F;">最新视频<a href="news.php" class="btn" style="float:right;">查看更多</a></h4>
+               <h4 style="color:#9A2A1F;">最新视频<a href="#" class="btn" style="float:right;">查看更多</a></h4>
               <div class="row" style="padding:1%;">
                   <iframe src="https://www.youtube.com/embed/U4v2W_V9Fk0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
               </div>
