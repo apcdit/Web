@@ -11,7 +11,7 @@ class UserController extends Controller
     public function updateDetails(Request $request){
 
         $user = User::where('uniNameCN', $request->uni_name_cn)->first();
-        $uniDetails = uniDetails::where('uniNameCN', $request->uni_name_en)->first(); //returns a collection
+        $uniDetails = uniDetails::where('uniNameCN', $request->uni_name_cn)->first(); //returns a collection
         //0 because update method requires object, not collection
         $user->update([
             'address' => request('address'),

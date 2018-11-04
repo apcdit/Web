@@ -68,7 +68,7 @@
  </div>
  <hr/>
  <center>
- <h1>参赛队伍</h1>
+ <h1></h1>
 
 </center>
  <hr/>

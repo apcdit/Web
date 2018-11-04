@@ -8,7 +8,7 @@
       <b-navbar-nav>
         <b-nav-item-dropdown text="关于我们" right >
           <b-dropdown-item router-link to='/about'>赛会简介</b-dropdown-item>
-          <b-dropdown-item router-link to='/rules'>参赛事宜</b-dropdown-item>
+          <b-dropdown-item router-link to='/rules' v-if="false">参赛事宜</b-dropdown-item>
           <b-dropdown-item router-link to='/pastyear'>历届赛况</b-dropdown-item>
           <b-dropdown-item href="/#">筹委介绍</b-dropdown-item>
         </b-nav-item-dropdown>
