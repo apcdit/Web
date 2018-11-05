@@ -5,43 +5,43 @@
             <br>
             <center><h1>账号注册</h1></center>
             <form class="needs-validation" novalidate id="myForm" enctype="multipart/form-data">
-                <h4>区域</h4>
+                <h4>区域<span style="color:darkred">*</span></h4>
                 <b-form-select v-model="region" :options="options" class="mb-3" />
-                <h4>大学名称</h4>
+                <h4>大学名称<span style="color:darkred">*</span></h4>
                 <div class="row">
                     <div class="col-md">
-                        <input v-model="uniNameCN" type="text" placeholder="输入大学名称(中)"  class="form-control" required>
+                        <input v-model="uniNameCN" type="text" placeholder="输入大学名称(中) 例：新加坡南洋理工大学"  class="form-control" required>
                     </div>
                     <div class="col-md">
-                        <input v-model="uniNameEN" type="text" placeholder="输入大学名称(英)" class="form-control" required >
+                        <input v-model="uniNameEN" type="text" placeholder="输入大学名称(英) 例：Nanyang Technological University Singapore" class="form-control" required >
                     </div>
                 </div>
                 <br>
-                <h4>负责人姓名</h4>
+                <h4>负责人姓名<span style="color:darkred">*</span></h4>
                 <div class="row">
                     <div class="col-md">
-                        <input v-model="name_cn" type="text" placeholder="负责人姓名（华语）"  class="form-control" required>
+                        <input v-model="name_cn" type="text" placeholder="负责人姓名（中）"  class="form-control" required>
                     </div>
                     <div class="col-md">
-                        <input v-model="name_en" type="text" placeholder="负责人姓名（英语）"   class="form-control" required >
+                        <input v-model="name_en" type="text" placeholder="负责人姓名（英）"   class="form-control" required >
                     </div>
                 </div>
                 <br>
 
                 <div class="row">
                     <div class="col-md">
-                        <h4>负责人联络号码</h4>
-                        <input v-model="phone" type="text" placeholder="负责人联络号码"  class="form-control" required>
+                        <h4>负责人联络号码<span style="color:darkred">*</span></h4>
+                        <input v-model="phone" type="text" placeholder="负责人联络号码 例：+6512345678"  class="form-control" required>
                     </div>
                     <div class="col-md">
-                        <h4>电子邮件</h4>
+                        <h4>负责人电子邮件<span style="color:darkred">*</span></h4>
                         <input v-model="email" type="email" placeholder="电子邮件" class="form-control" required>
                     </div>
                 </div>
                 <br>
 
                 <div class="row">
-                    <div class="col-md"><h4>密码</h4></div><div class="w-100"></div>
+                    <div class="col-md"><h4>密码<span style="color:darkred">*</span></h4></div><div class="w-100"></div>
                     <div class="col-md">
                         <input v-model="password" type="password" placeholder="密码" class="form-control" required>
                     </div>
@@ -52,28 +52,29 @@
 
                 <br>
 
-                <h4>地址</h4>
+                <h4>地址<span style="color:darkred">*</span></h4>
                 <b-form-textarea v-model="address" placeholder="地址" :rows="3" :max-rows="6" required> </b-form-textarea>
                 <br>
-                <h4>辩题</h4>
+                <h4>辩题<span style="color:darkred">*</span></h4>
                 <input v-model="title_1" type="text" placeholder="辩题一（哲学）" style="width:50%" class="form-control" required>
                 <br>
                 <input v-model="title_2" type="text" placeholder="辩题二（政策）" style="width:50%" class="form-control" required>
                 <br>
                 <input v-model="title_3" type="text" placeholder="辩题三（自由发挥）" style="width:50%" class="form-control"  required>
                 <br>
-                <label>提交意愿书:</label>
-                <input type="file" id="file" ref="file" v-on:change="handleFileUpload()" required/>
-                <div class="mt-3">Selected file: {{file && file.name}}</div>
-                <label></label>
+                <h4>提交意愿书(PDF格式):<span style="color:darkred">*</span></h4>
+                <input type="file" id="file" ref="file" v-on:change="handleFileUpload()" class="btn btn-default" required/>
+                <h6 class="mt-3">上传文件: {{file && file.name}}</h6>
+                <!-- <label></label>
                 <b-form-checkbox  id="checkbox1"
                                   v-model="status"
                                   value="true"
                                   unchecked-value="false"
                                   required>
                     I accept the terms and use condition
-                </b-form-checkbox>
-                <b-button @click="submitForm">Submit</b-button>
+                </b-form-checkbox> -->
+                <br>
+                <b-button @click="submitForm" class="btnRegister">注册账号</b-button>
             </form>
         </div>
 
@@ -113,9 +114,9 @@
                 {value:'Australia',text:'澳洲'}
             ]
         }},
-        computed:{
+        updated:{
             isDisabled(){
-                return (this.region === null || this.checked === false);
+                return (this.region === null || title_1 === null || title_2 === null || title_3 === null);
             }
         },
         methods:{
@@ -141,43 +142,42 @@
                     })
             },
             submitForm(){
-                this.$validator.validateAll().then(res=>{
-                    let data={
-                        uniNameCN: this.uniNameCN,
-                        uniNameEN: this.uniNameEN,
-                        email: this.email,
-                        nameCn: this.name_cn,
-                        nameEn: this.name_en,
-                        address: this.address,
-                        password: this.password,
-                        contactNumber: this.phone,
-                        region: this.region,
-                        debateQues1: this.title_1,
-                        debateQues2: this.title_2,
-                        debateQues3: this.title_3,
-                    };
-                    if(res){
-                        //if user filled in all the information
 
-                        axios
-                            .post('api/register',data)
-                            .then(response=>{
-                                this.info = response.data;
-                                //console.log(this.info);
-                                if(this.info.message === "Duplicate Entry!"){
-                                    alert("账号已存在！");
-                                }else if(this.info.message === "Successfully registered!"){
-                                    this.uploadFile();
-                                    //console.log(this.file)
-                                    alert("成功注册账号！");
-                                    this.$router.push('/')
-                                    //document.getElementById("myForm").reset();
-                                }
-                            });
-                    }else{
-                        alert("请填上所有资料！")
-                    }
-                })
+                if(this.uniNameCN === '' || this.uniNameEN === '' || this.email === '' || this.name_cn === '' || this.name_en === '' || this.address === '' || this.password === '' || this.phone === ''|| this.region === null || this.title_1 === '' || this.title_2 === '' || this.title_3 === ''){
+                    alert('请填上所有资料！')
+                }else{
+                    let data={
+                            uniNameCN: this.uniNameCN,
+                            uniNameEN: this.uniNameEN,
+                            email: this.email,
+                            nameCn: this.name_cn,
+                            nameEn: this.name_en,
+                            address: this.address,
+                            password: this.password,
+                            contactNumber: this.phone,
+                            region: this.region,
+                            debateQues1: this.title_1,
+                            debateQues2: this.title_2,
+                            debateQues3: this.title_3,
+                        };
+                            //if user filled in all the information
+
+                            axios
+                                .post('api/register',data)
+                                .then(response=>{
+                                    this.info = response.data;
+                                    //console.log(this.info);
+                                    if(this.info.message === "Duplicate Entry!"){
+                                        alert("账号已存在！");
+                                    }else if(this.info.message === "Successfully registered!"){
+                                        this.uploadFile();
+                                        //console.log(this.file)
+                                        alert("成功注册账号！");
+                                        this.$router.push('/')
+                                        //document.getElementById("myForm").reset();
+                                    }
+                                });
+                }
             },
         }
     }
@@ -191,5 +191,14 @@
     }
     span{
         display: inline
+    }
+    .btnRegister{
+        width: 25%;
+        border-radius: 10px;
+        padding: 10px;
+    }
+    .btnRegister:hover{
+        background-color: darkred;
+        color: white;
     }
 </style>

@@ -39,7 +39,7 @@
             </div>
         </div>
         <transition name="fade"><router-view style="margin-top:150px;"></router-view></transition>
-        <b-navbar sticky="bottom">
+        <b-navbar>
             <div class="col-md-8">
 
                 <h6 class="copyright"> NTU APICDT All Rights Reserved &copy 2018 </h6>
