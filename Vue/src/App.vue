@@ -24,7 +24,7 @@
                         </b-navbar-nav>
 
                         <b-navbar-nav class="ml-auto">
-                            <b-nav-item router-link to='/login' v-if="!isLoggedIn"><img src="https://i.imgur.com/h5GY79C.png"></b-nav-item>
+                            <!-- <b-nav-item router-link to='/login' v-if="!isLoggedIn"><img src="https://i.imgur.com/h5GY79C.png"></b-nav-item> -->
                             <b-nav-item-dropdown text="大学资料"  v-else >
                                 <b-nav-item to='user' v-if="!user">大学资料</b-nav-item>
                                 <b-nav-item to='user' v-else>{{user.uniNameCN}}</b-nav-item>
@@ -88,7 +88,7 @@
             status: function(){ return (this.$store.getters.authStatus) ;},
         },
         created() {
-            this.showUser();
+                this.showUser();
         },
         updated() {
             this.showUser();
