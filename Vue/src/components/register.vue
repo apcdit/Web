@@ -46,7 +46,7 @@
                         <input v-model="password" type="password" placeholder="密码" class="form-control" required>
                     </div>
                     <div class="col">
-                        <input type="password" placeholder="确认密码" class="form-control" required>
+                        <input type="password" v-model="password_confirmation" placeholder="确认密码" class="form-control" required>
                     </div>
                 </div>
 
@@ -145,6 +145,10 @@
 
                 if(this.uniNameCN === '' || this.uniNameEN === '' || this.email === '' || this.name_cn === '' || this.name_en === '' || this.address === '' || this.password === '' || this.phone === ''|| this.region === null || this.title_1 === '' || this.title_2 === '' || this.title_3 === ''){
                     alert('请填上所有资料！')
+                }else if(this.password !== this.password_confirmation){
+                    alert("密码不匹配!")
+                }else if(this.password.length < 8){
+                    alert("密码过短！（最少8个）")
                 }else{
                     let data={
                             uniNameCN: this.uniNameCN,
