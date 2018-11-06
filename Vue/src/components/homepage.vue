@@ -8,11 +8,14 @@
                             <h4 style="color:#9A2A1F;">活动详情</h4>
                             <h5><i class="fa fa-calendar-o" aria-hidden="true"></i> 2019年7月9日至7月15日</h5>
                             <h5><i class="fa fa-map-marker" aria-hidden="true"></i> 新加坡南洋理工大学 </h5>
-                            <h5><i class="fa fa-clock-o" aria-hidden="true"></i> 9:00am – 6:00pm </h5>
-                            <a  class="btn" href="https://entuedu-my.sharepoint.com/:b:/g/personal/e180063_e_ntu_edu_sg/EdS_rb-Dd9pMpWSDdmyLmCIB8EGVZVCfHvtSIPzZ9FixqQ?e=zaf8B" target="_blank">参赛意愿书</a>
-                            <a class="btn " href="#">领取总决赛门票</a>
+                            <h5><i class="fa fa-clock-o" aria-hidden="true"></i> 9:00am – 6:00pm </h5><hr>
+                            <h4 style="color:#9A2A1F;">参赛意愿书</h4>
+                            <a  class="btn" href="https://entuedu-my.sharepoint.com/:b:/g/personal/e180063_e_ntu_edu_sg/EdS_rb-Dd9pMpWSDdmyLmCIB8EGVZVCfHvtSIPzZ9FixqQ?e=zaf8B" target="_blank">OneDrive</a>
+                            <a class="btn" href="https://pan.baidu.com/s/1TL56Tlr8C1FSlHJ4qCzuKA" target="_blank">百度云盘</a>
+                            <a class="btn " href="#" v-if="false">领取总决赛门票</a>
                         </li>
                     </ul>
+                    <br>
                     <ul class="list-group shadow">
                         <li class="list-group-item">
                             <h4 style="color:#9A2A1F;">最新视频<a href="#" class="btn" style="float:right;">查看更多</a></h4>
@@ -23,12 +26,11 @@
                         </li>
                     </ul>
                 </div>
-                <div class="col-md-8">
-                    <div class="jumbotron shadow sidebar">
-                        <b-tabs>
-                            <b-tab title="最新消息">
+                <div class="col-md-8 " id="latestPosts">
+                    <div class="container">
+                            <h4 style="color:darkred; "><strong>最新</strong>消息</h4>
                                 <br>
-                                <ul class="pagination-list">
+                                <ul>
                                     <li v-for="post in posts">
                                         <div class="col-xs-4">
                                             <a class="" href="#" style="text-decoration: none;color:black;">
@@ -57,11 +59,10 @@
                                         <hr>
                                     </li>
                                 </ul>
-                            </b-tab>
-                            <b-tab title="最新赛况"></b-tab>
-                            <b-tab title="对垒表"></b-tab>
                             
-                        </b-tabs>
+                            <b-tab title="最新赛况" v-if="false"></b-tab>
+                            <b-tab title="对垒表" v-if="false"></b-tab>
+
                     </div>
                 </div>
             </div>
@@ -123,4 +124,8 @@
         border-style:none;
     }
     .pagination-list{color:black;}
+    #latestPosts{
+        background-color: white;
+        border-style: hidden;
+    }
 </style>

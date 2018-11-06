@@ -1,7 +1,8 @@
 <template>
     <div id="app">
-        <div>
+        <div >
             <div>
+
                 <b-navbar type="light" variant="white" toggleable fixed="top" style="opacity: 60%">
                     <b-navbar-brand href="/"><img src="http://i.imgur.com/90YSaaO.png"></b-navbar-brand>
                     <b-navbar-toggle target="nav_dropdown_collapse"></b-navbar-toggle>
@@ -39,18 +40,23 @@
             </div>
         </div>
         <transition name="fade"><router-view style="margin-top:150px;"></router-view></transition>
-        <b-navbar>
-            <div class="col-md-8">
 
-                <h6 class="copyright"> NTU APICDT All Rights Reserved &copy 2018 </h6>
+            <div class="row" style="padding:5%;width:100%">
+
+            <div class="col-md-8">
+                <h6 style="text-align: center" > NTU APICDT All Rights Reserved &copy 2018 </h6>
             </div>
-            <div class="col-md-4" id="social-logo">
-                <a href="http://www.apchinesedebate.com/contactus.php" target="_blank"><i class="fa fa-envelope-square fa-2x" aria-hidden="true"></i></a>
-                <a href="http://weibo.com/p/1005055398940329" target="_blank"><i class="fa fa-weibo fa-2x" aria-hidden="true"></i></a>
-                <a href="https://www.instagram.com/apchinesedebate/" target="_blank"><i class="fa fa-instagram fa-2x" aria-hidden="true"></i></a>
-                <a href="https://www.facebook.com/NTUCSapchinesedebate/" target="_blank"><i class="fa fa-facebook-square fa-2x" aria-hidden="true"></i></a>
+            <div class="col-md-4">
+                <span><strong>联络我们<tab></tab></strong></span>
+                <a href="http://weibo.com/p/1005055398940329" target="_blank"><img src="http://cdn.onlinewebfonts.com/svg/img_164924.png" width="50px" height="50px"></a>
+                <a href="https://www.instagram.com/apchinesedebate/" target="_blank"><img src="http://pluspng.com/img-png/instagram-png-instagram-png-file-512.png" width="50px" height="50px"></a>
+                <a href="https://www.facebook.com/NTUCSapchinesedebate/" target="_blank"><img src="http://www.iconarchive.com/download/i97515/sicons/basic-round-social/facebook.ico" width="50px" height="50px"></a>
+                </div>
             </div>
-        </b-navbar>
+            </div>
+
+
+
     </div>
 
 
@@ -80,6 +86,7 @@
                 logged : false,
                 user: {},
                 uniDetails: {},
+
             }
         },
         computed : {
@@ -88,7 +95,7 @@
             status: function(){ return (this.$store.getters.authStatus) ;},
         },
         created() {
-                this.showUser();
+            this.showUser();
         },
         updated() {
             this.showUser();
@@ -143,5 +150,6 @@
         float:none;
     }
     ul{list-style:none;}
+
 
 </style>
