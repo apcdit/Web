@@ -21,8 +21,8 @@ class WarController extends Controller
             for($i = 0; $i < count($users); $i++){ //if yes set all the user in that region to same time
                 $uniDetails = $users[$i]->uniDetails;
                 $uniDetails->update([
-                    'offTimeStart' => $offTimeStart,
-                    'offTimeEnd' => $offTimeEnd,
+                    'offTimeStart' => $offTimeStart*1000,
+                    'offTimeEnd' => $offTimeEnd*1000,
                 ]);
             }
             return response()->json([
@@ -39,6 +39,19 @@ class WarController extends Controller
         }
     }
 
+    public function reset(){
+        $region = request('region');
+        $user = User::where('region', $region)->get();
+        for($i = 0; $i < count($user); $i++){
+            $user[$i]->uniDetails->update([
+                'offTimePress' => 999999999999999,
+                'drawn' => 0
+            ]);
+        }
+        return response()->json([
+            'message' => 'Users with the region '.$region.' is resetted'
+        ]);
+    }
     //for simulation
     public function setSimTime(){
 

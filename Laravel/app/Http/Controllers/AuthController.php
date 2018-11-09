@@ -75,7 +75,8 @@ class AuthController extends Controller
                 'offTimeStart' => null,
                 'offTimeEnd' => null,
                 'offTimeDiff' => null,
-                'drawn' => 0,
+                'offTimePress' => 9999999999999,
+                'drawn' => 0,     
                 'qualified' => 0
             ]);
         }catch(\Exception $exception){ //this part is to catch uniDetails error

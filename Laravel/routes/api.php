@@ -24,6 +24,9 @@ Route::group(['middleware' => ['auth:api', 'admin']],function(){
     });
 
     Route::put('time/simulation/set', 'WarController@setSimTime');
+    Route::put('time/official/set', 'WarController@setOffTime');
+    Route::put('time/official/reset', 'WarController@reset');
+    
     //update a certain post
     Route::put('post/{id}', 'PostsController@update');
 
@@ -58,6 +61,7 @@ Route::middleware('auth:api')->group(function () {
     Route::put('time/official/store', 'WarController@storeOffTimePress');
     Route::get('time/official/start', 'WarController@getOffStartTime');
     Route::get('time/official/getDraw', 'WarController@getDraw');
+    
 });
 
 Route::group([    
