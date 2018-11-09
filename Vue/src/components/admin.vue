@@ -48,7 +48,9 @@ export default {
                 'offTimeStart' : this.offTimeStart,
                 'offTimeEnd': this.offTimeEnd,
             }
-
+            if(this.selected == ''){
+                alert("Region is not selected");
+            }
             axios
                 .put('api/time/official/set', data,{
                     headers :{

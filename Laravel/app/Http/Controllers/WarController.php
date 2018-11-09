@@ -16,9 +16,12 @@ class WarController extends Controller
 
         $users = User::where('region', request('region'))->get(); //get the collection that has the same region
 
-        $offTimeStart = strtotime(request('offTimeStart').' '.'Asia/Singapore')*1000;
-        $offTimeEnd = strtotime(request('offTimeEnd').' '.'Asia/Singapore')*1000;
+        $offTimeStart = doubleval(strtotime(request('offTimeStart').' '.'Asia/Singapore'))*1000;
+        $offTimeEnd = doubleval(strtotime(request('offTimeEnd').' '.'Asia/Singapore'))*1000;
 
+        // $offTimeEnd = microtime(true)*1000;
+        // $offTimeStart = microtime(true)*1000;
+        
         if(count($users) > 0){ //check if there's user in the region
             for($i = 0; $i < count($users); $i++){ //if yes set all the user in that region to same time
                 //$uniDetails = $users[$i]->uniDetails;
@@ -27,7 +30,7 @@ class WarController extends Controller
                 //     'offTimeStart' => $offTimeStart,
                 //     'offTimeEnd' => $offTimeEnd,
                 // ]);
-                DB::table('uniDetails')
+                DB::table('uni_details')
                     ->where('uniNameCN', $uniNameCN)
                     ->update([
                         'offTimeStart' => $offTimeStart,
@@ -53,7 +56,7 @@ class WarController extends Controller
         $user = User::where('region', $region)->get();
         for($i = 0; $i < count($user); $i++){
             $user[$i]->uniDetails->update([
-                'offTimePress' => 999999999999999,
+                'offTimePress' => doubleval(999999999999999),
                 'drawn' => 0
             ]);
         }
