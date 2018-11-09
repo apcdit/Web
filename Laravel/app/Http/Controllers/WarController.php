@@ -321,6 +321,7 @@ class WarController extends Controller
 
         return response()->json([
             'data' => $array,
+            'region' => $region
         ]);
     }
 
