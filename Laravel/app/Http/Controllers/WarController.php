@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\uniDetails;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+
 
 class WarController extends Controller
 {
@@ -19,11 +21,18 @@ class WarController extends Controller
 
         if(count($users) > 0){ //check if there's user in the region
             for($i = 0; $i < count($users); $i++){ //if yes set all the user in that region to same time
-                $uniDetails = $users[$i]->uniDetails;
-                $uniDetails->update([
-                    'offTimeStart' => $offTimeStart,
-                    'offTimeEnd' => $offTimeEnd,
-                ]);
+                //$uniDetails = $users[$i]->uniDetails;
+                $uniNameCN = $users[$i]->uniNameCN;
+                // $uniDetails->update([
+                //     'offTimeStart' => $offTimeStart,
+                //     'offTimeEnd' => $offTimeEnd,
+                // ]);
+                DB::table('uniDetails')
+                    ->where('uniNameCN', $uniNameCN)
+                    ->update([
+                        'offTimeStart' => $offTimeStart,
+                        'offTimeEnd' =>$offTimeEnd
+                    ]);
             }
             return response()->json([
                 'message' => 'Official Start time is updated to '.request('offTimeStart'),
