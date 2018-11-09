@@ -14,21 +14,21 @@ class WarController extends Controller
 
         $users = User::where('region', request('region'))->get(); //get the collection that has the same region
 
-        $offTimeStart = strtotime(request('offTimeStart').' '.'Asia/Singapore');
-        $offTimeEnd = strtotime(request('offTimeEnd').' '.'Asia/Singapore');
+        $offTimeStart = strtotime(request('offTimeStart').' '.'Asia/Singapore')*1000;
+        $offTimeEnd = strtotime(request('offTimeEnd').' '.'Asia/Singapore')*1000;
 
         if(count($users) > 0){ //check if there's user in the region
             for($i = 0; $i < count($users); $i++){ //if yes set all the user in that region to same time
                 $uniDetails = $users[$i]->uniDetails;
                 $uniDetails->update([
-                    'offTimeStart' => $offTimeStart*1000,
-                    'offTimeEnd' => $offTimeEnd*1000,
+                    'offTimeStart' => $offTimeStart,
+                    'offTimeEnd' => $offTimeEnd,
                 ]);
             }
             return response()->json([
                 'message' => 'Official Start time is updated to '.request('offTimeStart'),
-                'offTimeStart' => $offTimeStart*1000,
-                'offTimeEnd' => $offTimeEnd*1000,
+                'offTimeStart' => $offTimeStart,
+                'offTimeEnd' => $offTimeEnd,
                 'status' => 200
             ]);
         }else{
