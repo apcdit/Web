@@ -21,8 +21,8 @@ class WarController extends Controller
             for($i = 0; $i < count($users); $i++){ //if yes set all the user in that region to same time
                 $uniDetails = $users[$i]->uniDetails;
                 $uniDetails->update([
-                    'offTimeStart' => 5,
-                    'offTimeEnd' => 5,
+                    'offTimeStart' => $offTimeStart,
+                    'offTimeEnd' => $offTimeEnd,
                 ]);
             }
             return response()->json([
