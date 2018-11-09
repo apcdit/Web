@@ -27,8 +27,8 @@ class WarController extends Controller
             }
             return response()->json([
                 'message' => 'Official Start time is updated to '.request('offTimeStart'),
-                'offTimeStart' => $offTimeStart,
-                'offTimeEnd' => $offTimeEnd,
+                'offTimeStart' => $offTimeStart*1000,
+                'offTimeEnd' => $offTimeEnd*1000,
                 'status' => 200
             ]);
         }else{
