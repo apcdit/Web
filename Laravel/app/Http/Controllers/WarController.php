@@ -235,7 +235,7 @@ class WarController extends Controller
     public function getOffStartTime(){
         $offTimeStart = auth()->user()->uniDetails->offTimeStart;
         date_default_timezone_set("Asia/Singapore");
-        $offTimeStart1 = date("Y-m-d H:i:s", $offTimeStart/1000)." SGT";
+        $offTimeStart1 = date("d/m/Y H:i:s", $offTimeStart/1000)." SGT";
 
         if($offTimeStart != null){
             return response()->json([
