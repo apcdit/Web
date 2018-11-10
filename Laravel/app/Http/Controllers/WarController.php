@@ -58,7 +58,7 @@ class WarController extends Controller
             $user[$i]->uniDetails->update([
                 'offTimePress' => doubleval(999999999999999),
                 'drawn' => 0,
-                'offTimeDiff' => doubleval(0)
+                'offTimeDiff' => doubleval(999999999999999)
             ]);
         }
         return response()->json([
