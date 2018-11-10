@@ -68,6 +68,7 @@ export default
       uniDetails: {},
       drawn: 1,
       epochTime: 0,
+      counter:0,
       //startTime: 0,
     }
   },
@@ -97,7 +98,8 @@ export default
         if((current - this.epochTime*1000) <= 30000000){
           //console.log((Date.now()+28800)*1000);
           alert("还未到时间");
-        }else{
+        }else if(this.counter == 0){
+          ++this.counter;
           var timeDiff = (current-this.epochTime*1000)/1000 - 30000;
           console.log("Time diff: " + timeDiff);
           const data = { 'pressed' : 1, 'timeDiff':timeDiff}
