@@ -222,8 +222,15 @@ class WarController extends Controller
     public function storeOffTimePress(){
         if(auth()->user()->uniDetails->drawn !== 1){
             $uniDetails = auth()->user()->uniDetails;
+            $offTimeDiff = $uniDetails->offTimeDiff;
             $timeDiff = request('timeDiff');
             $uniNameCN = $uniDetails->uniNameCN;
+            
+            if($timeDiff > $offTimeDiff){
+                return response()->json([
+                    'message' => "time recorded already"
+                ]);
+            }
             if($uniDetails != null && request('pressed') == 1){
                 $uniDetails->update([
                         'offTimeDiff' => $timeDiff,
