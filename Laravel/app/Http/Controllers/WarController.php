@@ -57,7 +57,8 @@ class WarController extends Controller
         for($i = 0; $i < count($user); $i++){
             $user[$i]->uniDetails->update([
                 'offTimePress' => doubleval(999999999999999),
-                'drawn' => 0
+                'drawn' => 0,
+                'offTimeDiff' => doubleval(0)
             ]);
         }
         return response()->json([
