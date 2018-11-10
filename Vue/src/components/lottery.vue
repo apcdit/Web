@@ -85,6 +85,7 @@ export default
   created(){
     this.startTime();
     this.showUser();
+    this.$forceUpdate();
   },
   methods:{
     recordTime:function(){
@@ -95,14 +96,15 @@ export default
         //this.epochTime = this.epochTime*1000;
         console.log("epoch start time: " + this.epochTime*1000);
         console.log("Time diff" + (current - this.epochTime*1000));
+        var timeDiff = (current-this.epochTime*1000)/1000 - 30000;
         if((current - this.epochTime*1000) <= 30000000){
           //console.log((Date.now()+28800)*1000);
           alert("还未到时间");
-        }else if(this.counter == 0){
+        }else if(this.counter == 0 && timeDiff >= 0){
           ++this.counter;
-          var timeDiff = (current-this.epochTime*1000)/1000 - 30000;
           console.log("Time diff: " + timeDiff);
           const data = { 'pressed' : 1, 'timeDiff':timeDiff}
+          console.log("SENT!");
           axios
           .put('api/time/official/store', data, {
             headers: { Authorization: "Bearer " + localStorage.getItem('token')}

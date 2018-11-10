@@ -231,6 +231,7 @@ class WarController extends Controller
                     'message' => "time recorded already"
                 ]);
             }
+            
             if($uniDetails != null && request('pressed') == 1){
                 $uniDetails->update([
                         'offTimeDiff' => $timeDiff,
