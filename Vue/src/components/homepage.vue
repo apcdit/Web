@@ -10,8 +10,8 @@
                             <h5><i class="fa fa-map-marker" aria-hidden="true"></i> 新加坡南洋理工大学 </h5>
                             <h5><i class="fa fa-clock-o" aria-hidden="true"></i> 9:00am – 6:00pm </h5><hr>
                             <h4 style="color:#9A2A1F;">参赛意愿书</h4>
-                            <a  class="btn" href="https://entuedu-my.sharepoint.com/:b:/g/personal/e180063_e_ntu_edu_sg/EdS_rb-Dd9pMpWSDdmyLmCIB8EGVZVCfHvtSIPzZ9FixqQ?e=zaf8B" target="_blank">OneDrive</a>
-                            <a class="btn" href="https://pan.baidu.com/s/1TL56Tlr8C1FSlHJ4qCzuKA" target="_blank">百度云盘</a>
+                            <a  class="btn" href="https://entuedu-my.sharepoint.com/:f:/g/personal/e180063_e_ntu_edu_sg/EjMVXaF8Om9GrD-KbTNiChYBb3fbYe8jeJJe9fClj857sg?e=BicxIo" target="_blank">OneDrive</a>
+                            <a class="btn" href="https://pan.baidu.com/s/1x6gQf8Md9lzU4xJiiAnjUQ" target="_blank">百度云盘</a>
                             <a class="btn " href="#" v-if="false">领取总决赛门票</a>
                         </li>
                     </ul>

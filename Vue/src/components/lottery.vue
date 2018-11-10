@@ -85,7 +85,6 @@ export default
   created(){
     this.startTime();
     this.showUser();
-    this.$forceUpdate();
   },
   methods:{
     recordTime:function(){
