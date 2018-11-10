@@ -87,14 +87,20 @@ export default
   },
   methods:{
     recordTime:function(){
-      const data = { 'pressed' : 1} //pressed here is to notify backend that user pressed the button
+       //pressed here is to notify backend that user pressed the button
       try{
-        //console.log((Date.now()+28800)*1000);
-        //console.log(this.epochTime);
-        if((Date.now()+28800)*1000 < this.epochTime*1000){
+        var current = (Date.now()+28800)*1000;
+        console.log("current epoch: "+current);
+        //this.epochTime = this.epochTime*1000;
+        console.log("epoch start time: " + this.epochTime*1000);
+        console.log("Time diff" + (current - this.epochTime*1000));
+        if((current - this.epochTime*1000) <= 30000000){
           //console.log((Date.now()+28800)*1000);
           alert("还未到时间");
         }else{
+          var timeDiff = (current-this.epochTime*1000)/1000 - 30000;
+          console.log("Time diff: " + timeDiff);
+          const data = { 'pressed' : 1, 'timeDiff':timeDiff}
           axios
           .put('api/time/official/store', data, {
             headers: { Authorization: "Bearer " + localStorage.getItem('token')}
