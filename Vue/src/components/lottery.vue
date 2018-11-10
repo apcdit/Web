@@ -67,6 +67,7 @@ export default
       user: {},
       uniDetails: {},
       drawn: 1,
+      epochTime: 0,
       //startTime: 0,
     }
   },
@@ -88,7 +89,13 @@ export default
     recordTime:function(){
       const data = { 'pressed' : 1} //pressed here is to notify backend that user pressed the button
       try{
-        axios
+        //console.log((Date.now()+28800)*1000);
+        //console.log(this.epochTime);
+        if((Date.now()+28800)*1000 < this.epochTime*1000){
+          //console.log((Date.now()+28800)*1000);
+          alert("还未到时间");
+        }else{
+          axios
           .put('api/time/official/store', data, {
             headers: { Authorization: "Bearer " + localStorage.getItem('token')}
           })
@@ -97,9 +104,11 @@ export default
               //console.log(resp.data)
               alert("时间已成功记录！")
               this.$router.push('result')
-            }else if(resp.data.status == 304){ alert("只能报名一次！")
-            }else if(resp.data.status == 201){ alert("还未到时间！")}
+            }//else if(resp.data.status == 304){ alert("只能报名一次！")
+            //}else if(resp.data.status == 201){ alert("还未到时间！")}
           })
+        }
+        
       }catch(e){console.log(e)
       }
     },
@@ -114,7 +123,7 @@ export default
           //console.log(resp.data)
           if(resp.data.status == 200){
               this.offTimeStart = resp.data.offTimeStart;
-              this.startTime = resp.data.offTimeStart1;
+              this.epochTime = resp.data.offTimeStart2;
           }
         })
     },

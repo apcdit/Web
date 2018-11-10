@@ -241,8 +241,8 @@ class WarController extends Controller
         if($offTimeStart != null){
             return response()->json([
                 'status' => 200,
-                'offTimeStart' => $offTimeStart1,
-                'offTimeStart2' => $offTimeStart
+                'offTimeStart' => $offTimeStart1, //proper timezone
+                'offTimeStart2' => $offTimeStart //epoch
             ]);
         }
     }
