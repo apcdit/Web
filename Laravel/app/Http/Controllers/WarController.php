@@ -359,7 +359,7 @@ class WarController extends Controller
 
         for($k = 0 ; $k < count($array); $k++){
             $timeDiff = $array[$k]["offTimeDiff"];
-            $array[$k]["offTimeDiff"] = $timeDiff/1000; //to get the time in second
+            $array[$k]["offTimeDiff"] = $timeDiff; //get the time in microsecond// /1000; //to get the time in second
         }
 
         return response()->json([

@@ -47,33 +47,43 @@ function response($data) {
 }
 
 $post_data = json_decode(file_get_contents('php://input'), true);
+
 if(isset($post_data['token_mystery'])){
   $token = $post_data['token_mystery'];
   
-  $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+  $conn = new PDO("mysql:host=$servername;dbname=$dbname;charset=utf8", $username, $password);
   $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     
   // Check user existance
+  
   $stmt = $conn->prepare("SELECT * FROM users WHERE password = ?");
   if($stmt->execute(array($token))){
     $user = $stmt->fetch();
-
+    
     if($user['drawn'] !== 1){
       // Get UniDetails 
       $uniDetails = $conn->prepare("SELECT * FROM uni_details WHERE uniNameCN = ?");
       $uniDetails->execute(array($user['uniNameCN']));
       $uniDetails = $uniDetails->fetch();
-
       // Set some variables
       $simTimeStart = $uniDetails['simTimeStart'];
       $simTimeEnd = $uniDetails['simTimeEnd'];
-      $offTimeStart = $uniDetails['offTimeStart'];
-      $offTimeEnd = $uniDetails['offTimeEnd'];
-      $pressTime = microtime(true)*1000;
-
+      $offTimeStart = $uniDetails['offTimeStart']*1000; //db is millisecond, convert to microsecond
+      $offTimeEnd = $uniDetails['offTimeEnd']*1000;
+      $pressedTime = $uniDetails['offTimePress']*1000;
+      $pressTime = microtime(true)*1000000; //microsecond
+      
+        
       // Check time range
+      if($pressTime > $pressedTime){
+          response([
+              'message' => "Drawn",
+              'status' => '304'
+              ]);
+      }
       if($pressTime >= $offTimeStart && $pressTime < $offTimeEnd){
-        $updateTime = $conn->prepare("UPDATE users SET offTimePress=?, offTimeDiff = ?, drawn = 1 WHERE  uniNameCN = ?");
+        $updateTime = $conn->prepare("UPDATE uni_details SET offTimePress=?, offTimeDiff = ?, drawn = 1 WHERE  uniNameCN = ?");
+        
         if($updateTime->execute(array($pressTime, $pressTime - $offTimeStart, $user['uniNameCN']))){
           response([
             'message' => "Simulate press time is recorded!",
@@ -86,6 +96,9 @@ if(isset($post_data['token_mystery'])){
       } else {
         response([
           'message' => '还没到报名时间！',
+          'offTimeStart' => $offTimeStart,
+          'offTimeEnd' => $offTimeEnd,
+          'user' => $user,
           'status' => 201
         ]);
       }
