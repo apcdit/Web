@@ -177,17 +177,19 @@ class WarController extends Controller
             $uniNameCN = $uniDetails->uniNameCN;
             $offTimeStart = $uniDetails->offTimeStart;
             $offTimeEnd = $uniDetails->offTimeEnd;
-            $pressedTime = $uniDetails->offTimePress; //will be 999999999999 in the first press
+            $timeDiffed = $uniDetails->offTimeDiff; //will be 999999999999 in the first press
+            $timeDiff = $pressTime - $offTimeStart; //incoming new time
             //$timeNow = request('timeNow');
 
-            if($pressTime > $pressedTime){ //first try must be smaller than 9999999999
+            if($timeDiff > $timeDiffed){ //first try must be smaller than 9999999999
                 return response()->json([
                     'message' => '已经按过了!'
                 ]);
             }
+            
             if($pressTime >= $offTimeStart && $pressTime < $offTimeEnd){
                 if($uniDetails != null && request('pressed') === 1){
-                    $uniDetails->offTimeDiff = $pressTime - $offTimeStart;
+                    $uniDetails->offTimeDiff = $timeDiff;
                     $uniDetails->drawn = 1;
                     $uniDetails->save();
                     // $uniDetails->update([

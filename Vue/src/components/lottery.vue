@@ -120,8 +120,11 @@ export default
         
       //   }catch(e){console.log(e)
       // }
-      const data = { 'pressed' : 1} //pressed here is to notify backend that user pressed the button
+      
         try{
+          var current = (Date.now()+28800)*1000;
+          if((current - this.epochTime*1000) >= 30000000){
+            const data = { 'pressed' : 1} //pressed here is to notify backend that user pressed the button
             axios
                 .put('api/time/official/store', data, {
                     headers: { Authorization: "Bearer " + localStorage.getItem('token')}
@@ -130,9 +133,14 @@ export default
                     if(resp.data.status == 200){
                         //console.log(resp.data)
                         alert("时间已成功记录！")
+                        this.$router.push('result');
                     }else if(resp.data.status == 304){ alert("只能报名一次！")
                     }else if(resp.data.status == 201){ alert("还未到时间！")}
                 })
+          }else{
+             alert("还未到时间！");
+          }
+          
         }catch(e){console.log(e)
         }
     },
@@ -146,8 +154,8 @@ export default
         .then(resp=>{
           //console.log(resp.data)
           if(resp.data.status == 200){
-              this.offTimeStart = resp.data.offTimeStart;
-              this.epochTime = resp.data.offTimeStart2;
+              this.offTimeStart = resp.data.offTimeStart; //formatted time
+              this.epochTime = resp.data.offTimeStart2; //epoch time
           }
         })
     },
