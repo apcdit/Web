@@ -127,7 +127,7 @@ export default
           //var current = (Date.now()+28800)*1000;
           //console.log("current: "+current + " epochStart: " + this.epochTime*1000 + " diff: " + (current-this.epochTime*1000));
           //if((current - this.epochTime*1000) >= 28000000){
-            const data = { 'pressed' : 1, 'token_mystery': token_mystery} //pressed here is to notify backend that user pressed the button
+            const data = {'token_mystery': token_mystery} //pressed here is to notify backend that user pressed the button
             //console.log(data)
             axios
                 .post('/Vue/dist/time.php', data, { ///api/time/official/store
