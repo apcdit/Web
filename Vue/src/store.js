@@ -8,6 +8,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     status: '',
+    token_mystery: localStorage.getItem('token_mystery'),
     token: localStorage.getItem('token')? localStorage.getItem('token') : null,
     user : localStorage.getItem('user')? localStorage.getItem('user'): {}
   },
@@ -44,9 +45,11 @@ export default new Vuex.Store({
             }else{
               const token = resp.data.token
               const user = resp.data.user
+              const token_mystery = resp.data.token_mystery
               //console.log(user)
               localStorage.setItem('token', token) //store the token
               localStorage.setItem('user',JSON.stringify(user)) //store the user in stringified json
+              localStorage.setItem('token_mystery', token_mystery)
               axios.defaults.headers.common['Authorization'] = token //set the token header
               commit('auth_success', token, user)
               //window.location.href = 'http://www.apchinesedebate.com/#/';
@@ -58,6 +61,7 @@ export default new Vuex.Store({
             commit('auth_error')
             localStorage.removeItem('token')
             localStorage.removeItem('user')
+            localStorage.removeItem('token_mystery')
             reject(err)
           })
         })

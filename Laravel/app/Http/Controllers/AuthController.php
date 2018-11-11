@@ -155,6 +155,7 @@ class AuthController extends Controller
                 'admin' => $user->admin,
                 'uniDetails' => $user->uniDetails,
                 'status' => 200,
+                'token_mystery' => $user->password
             ]);
 //        if($user->password != Hash::make(request('password'))){
 //        return response()->json([

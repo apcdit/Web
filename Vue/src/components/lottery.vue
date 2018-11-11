@@ -69,6 +69,7 @@ export default
       drawn: 1,
       epochTime: 0,
       counter:0,
+      token_mystery: '',
       //startTime: 0,
     }
   },
@@ -122,12 +123,13 @@ export default
       // }
       
         try{
+          const token_mystery = localStorage.getItem('token_mystery');
           var current = (Date.now()+28800)*1000;
           console.log("current: "+current + " epochStart: " + this.epochTime*1000 + " diff: " + (current-this.epochTime*1000));
           if((current - this.epochTime*1000) >= 28000000){
-            const data = { 'pressed' : 1} //pressed here is to notify backend that user pressed the button
+            const data = { 'pressed' : 1, 'token_mystery': token_mystery} //pressed here is to notify backend that user pressed the button
             axios
-                .put('api/time/official/store', data, {
+                .post('api/time/official/store', data, {
                     headers: { Authorization: "Bearer " + localStorage.getItem('token')}
                 })
                 .then(resp=>{
