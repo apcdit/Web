@@ -129,11 +129,7 @@ export default
           //if((current - this.epochTime*1000) >= 28000000){
             const data = { 'pressed' : 1, 'token_mystery': token_mystery} //pressed here is to notify backend that user pressed the button
             axios
-<<<<<<< HEAD
                 .post('/time.php', data, { ///api/time/official/store
-=======
-                .post('Vue/dist/time.php', data, { ///api/time/official/store
->>>>>>> ab6c05fcb6a759e6c7b77daea339a6bfb40ec44d
                     headers: { Authorization: "Bearer " + localStorage.getItem('token')}
                 })
                 .then(resp=>{
