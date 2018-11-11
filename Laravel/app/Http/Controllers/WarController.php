@@ -56,9 +56,9 @@ class WarController extends Controller
         $user = User::where('region', $region)->get();
         for($i = 0; $i < count($user); $i++){
             $user[$i]->uniDetails->update([
-                'offTimePress' => doubleval(999999999999999),
+                'offTimePress' => doubleval(999999999999999999),
                 'drawn' => 0,
-                'offTimeDiff' => doubleval(999999999999999)
+                'offTimeDiff' => doubleval(999999999999999999)
             ]);
         }
         return response()->json([

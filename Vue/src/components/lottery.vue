@@ -27,7 +27,7 @@
     </div>
 
     <div class="col-md-4" style="text-align:center;padding:1em 0;">
-      <h3><a style="text-decoration:none;">系统开放时间</a><span style="color:gray;"><br />(新加坡时间)</span></h3>
+      <h3><a style="text-decoration:none;color:darkred">系统开放时间</a><span style="color:gray;"><br />(新加坡时间)</span></h3>
       <h6>{{offTimeStart}}</h6>
     </div>
 
