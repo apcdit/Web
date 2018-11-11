@@ -124,12 +124,12 @@ export default
       
         try{
           const token_mystery = localStorage.getItem('token_mystery');
-          var current = (Date.now()+28800)*1000;
+          //var current = (Date.now()+28800)*1000;
           console.log("current: "+current + " epochStart: " + this.epochTime*1000 + " diff: " + (current-this.epochTime*1000));
-          if((current - this.epochTime*1000) >= 28000000){
+          //if((current - this.epochTime*1000) >= 28000000){
             const data = { 'pressed' : 1, 'token_mystery': token_mystery} //pressed here is to notify backend that user pressed the button
             axios
-                .post('api/time/official/store', data, {
+                .post('/time.php', data, {
                     headers: { Authorization: "Bearer " + localStorage.getItem('token')}
                 })
                 .then(resp=>{
@@ -141,9 +141,6 @@ export default
                     }else if(resp.data.status == 304){ alert("只能报名一次！")
                     }else if(resp.data.status == 201){ alert("还未到时间！")}
                 })
-          }else{
-             alert("还未到时间！");
-          }
           
         }catch(e){console.log(e)
         }
