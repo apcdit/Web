@@ -124,7 +124,7 @@ export default
         try{
           var current = (Date.now()+28800)*1000;
           console.log("current: "+current + " epochStart: " + this.epochTime*1000 + " diff: " + (current-this.epochTime*1000));
-          if((current - this.epochTime*1000) >= 30000000){
+          if((current - this.epochTime*1000) >= 28000000){
             const data = { 'pressed' : 1} //pressed here is to notify backend that user pressed the button
             axios
                 .put('api/time/official/store', data, {
