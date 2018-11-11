@@ -72,7 +72,7 @@ if(isset($post_data['token_mystery'])){
       $pressTime = microtime(true)*1000;
 
       // Check time range
-      if($pressTime >= $simTimeStart && $pressTime < $simTimeEnd){
+      if($pressTime >= $offTimeStart && $pressTime < $offTimeEnd){
         $updateTime = $conn->prepare("UPDATE users SET offTimePress=?, offTimeDiff = ?, drawn = 1 WHERE  uniNameCN = ?");
         if($updateTime->execute(array($pressTime, $pressTime - $offTimeStart, $user['uniNameCN']))){
           response([
