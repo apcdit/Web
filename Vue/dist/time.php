@@ -68,9 +68,9 @@ if(isset($post_data['token_mystery'])){
       // Set some variables
       $simTimeStart = $uniDetails['simTimeStart'];
       $simTimeEnd = $uniDetails['simTimeEnd'];
-      $offTimeStart = $uniDetails['offTimeStart']*1000; //db is millisecond, convert to microsecond
-      $offTimeEnd = $uniDetails['offTimeEnd']*1000;
-      $pressedTime = $uniDetails['offTimePress']*1000;
+      $offTimeStart = $uniDetails['offTimeStart']; //db is millisecond, convert to microsecond
+      $offTimeEnd = $uniDetails['offTimeEnd'];
+      $pressedTime = $uniDetails['offTimePress'];
       $pressTime = microtime(true)*1000000; //microsecond
       
         

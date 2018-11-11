@@ -49,8 +49,10 @@
                         //console.log(resp.data)
                         this.results = resp.data.data;
                         for(var i = 0; i < this.results.length; i++){
-                            if(this.results[i].offTimeDiff == 999999999999.999){
+                            if(this.results[i].offTimeDiff == 999999999999999999){
                                 this.results[i].offTimeDiff = "还未报名";
+                            }else{
+                                this.results[i].offTimeDiff = this.results[i].offTimeDiff/1000000 //show time in second from micro
                             }
                         }
                         
