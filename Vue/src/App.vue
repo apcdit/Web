@@ -97,12 +97,12 @@
         created() {
             this.showUser();
         },
-        updated() {
-            this.showUser();
+        //updated() {
+            //this.showUser();
             // if(this.logged){
             //   this.$forceUpdate()
             // }
-        },
+        //},
         methods: {
             logout: function () {
                 this.$store.dispatch('logout')
