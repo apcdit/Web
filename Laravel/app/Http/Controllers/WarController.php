@@ -167,93 +167,97 @@ class WarController extends Controller
         }
     }
 
-    // public function storeOffTimePress(){
 
-    //     if(auth()->user()->uniDetails->drawn !== 1){ //if player hasn't drawn yet then save it into database
+    public function storeOffTimePress(){ //backend
 
-    //         $uniDetails = auth()->user()->uniDetails;
-    //         $pressTime = microtime(true)*1000; //record the user press time in
-    //         $uniNameCN = $uniDetails->uniNameCN;
-    //         $offTimeStart = $uniDetails->offTimeStart;
-    //         $offTimeEnd = $uniDetails->offTimeEnd;
-    //         $pressedTime = $uniDetails->offTimePress; //will be 999999999999 in the first press
-    //         //$timeNow = request('timeNow');
+        if(auth()->user()->uniDetails->drawn !== 1){ //if player hasn't drawn yet then save it into database
 
-    //         if($pressTime > $pressedTime){ //first try must be smaller than 9999999999
-    //             return response()->json([
-    //                 'message' => '已经按过了!'
-    //             ]);
-    //         }
-    //         if($pressTime >= $offTimeStart && $pressTime < $offTimeEnd){
-    //             if($uniDetails != null && request('pressed') === 1){
-    //                 $uniDetails->update([
-    //                     'offTimePress' => $pressTime,
-    //                     'drawn' => 1 //set player to drawn but commented bcoz this is for simulation only
-    //                 ]);
-    //                 $this->calOffTimeDiff($uniNameCN);
-
-    //                 return response()->json([
-    //                     'message' => "Official press time is recorded!",
-    //                     'status' => "200",
-    //                     'time' => date("Y-m-d H:i:s", microtime(true)),
-    //                     'epoch' => $pressTime,
-    //                     'converted' => strtotime(date("Y-m-d H:i:s", microtime(true)))
-    //                 ]);
-    //             }else{
-    //                 return response()->json([
-    //                     'message' => 'Uni details not found, fail!',
-    //                     'status' => '404'
-    //                 ]);
-    //             }
-    //         }else{
-    //             return response()->json([
-    //                 'message' => '还没到报名时间！',
-    //                 'status' => 201
-    //             ]);
-    //         }
-    //     }else{
-    //         return response()->json([
-    //             'message' => 'The player has already drawn!',
-    //             'status' => '304'
-    //         ]);
-    //     }
-    // }
-
-    public function storeOffTimePress(){
-        if(auth()->user()->uniDetails->drawn !== 1){
             $uniDetails = auth()->user()->uniDetails;
-            $offTimeDiff = $uniDetails->offTimeDiff;
-            $timeDiff = request('timeDiff');
+            $pressTime = microtime(true)*1000; //record the user press time in
             $uniNameCN = $uniDetails->uniNameCN;
-            
-            if($timeDiff > $offTimeDiff){
+            $offTimeStart = $uniDetails->offTimeStart;
+            $offTimeEnd = $uniDetails->offTimeEnd;
+            $pressedTime = $uniDetails->offTimePress; //will be 999999999999 in the first press
+            //$timeNow = request('timeNow');
+
+            if($pressTime > $pressedTime){ //first try must be smaller than 9999999999
                 return response()->json([
-                    'message' => "time recorded already"
+                    'message' => '已经按过了!'
                 ]);
             }
-            
-            if($uniDetails != null && request('pressed') == 1){
-                $uniDetails->update([
-                        'offTimeDiff' => $timeDiff,
-                        'drawn' => 1 //set player to drawn but commented bcoz this is for simulation only
-                    ]);
+            if($pressTime >= $offTimeStart && $pressTime < $offTimeEnd){
+                if($uniDetails != null && request('pressed') === 1){
+                    $uniDetails->offTimeDiff = $pressTime - $offTimeStart;
+                    $uniDetails->drawn = 1;
+                    $uniDetails->save();
+                    // $uniDetails->update([
+                    //     'offTimePress' => $pressTime,
+                    //     'drawn' => 1 //set player to drawn but commented bcoz this is for simulation only
+                    // ]);
+                    //$this->calOffTimeDiff($uniNameCN);
+
                     return response()->json([
                         'message' => "Official press time is recorded!",
                         'status' => "200",
+                        'time' => date("Y-m-d H:i:s", microtime(true)),
+                        'epoch' => $pressTime,
+                        'converted' => strtotime(date("Y-m-d H:i:s", microtime(true)))
                     ]);
+                }else{
+                    return response()->json([
+                        'message' => 'Uni details not found, fail!',
+                        'status' => '404'
+                    ]);
+                }
             }else{
                 return response()->json([
-                    'message' => "not found",
-                    'status' => "304"
+                    'message' => '还没到报名时间！',
+                    'status' => 201
                 ]);
             }
         }else{
             return response()->json([
-                'message' => "Drawn",
-                'status' => "401"
+                'message' => 'The player has already drawn!',
+                'status' => '304'
             ]);
         }
     }
+
+    // public function storeOffTimePress(){ //frontend
+    //     if(auth()->user()->uniDetails->drawn !== 1){
+    //         $uniDetails = auth()->user()->uniDetails;
+    //         $offTimeDiff = $uniDetails->offTimeDiff;
+    //         $timeDiff = request('timeDiff');
+    //         $uniNameCN = $uniDetails->uniNameCN;
+            
+    //         if($timeDiff > $offTimeDiff){
+    //             return response()->json([
+    //                 'message' => "time recorded already"
+    //             ]);
+    //         }
+            
+    //         if($uniDetails != null && request('pressed') == 1){
+    //             $uniDetails->update([
+    //                     'offTimeDiff' => $timeDiff,
+    //                     'drawn' => 1 //set player to drawn but commented bcoz this is for simulation only
+    //                 ]);
+    //                 return response()->json([
+    //                     'message' => "Official press time is recorded!",
+    //                     'status' => "200",
+    //                 ]);
+    //         }else{
+    //             return response()->json([
+    //                 'message' => "not found",
+    //                 'status' => "304"
+    //             ]);
+    //         }
+    //     }else{
+    //         return response()->json([
+    //             'message' => "Drawn",
+    //             'status' => "401"
+    //         ]);
+    //     }
+    // }
 
     public function getSimStartTime(){
         $simTimeStart = auth()->user()->uniDetails->simTimeStart;
