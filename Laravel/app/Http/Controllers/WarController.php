@@ -16,8 +16,8 @@ class WarController extends Controller
 
         $users = User::where('region', request('region'))->get(); //get the collection that has the same region
 
-        $offTimeStart = doubleval(strtotime(request('offTimeStart').' '.'Asia/Singapore'))*1000000000;
-        $offTimeEnd = doubleval(strtotime(request('offTimeEnd').' '.'Asia/Singapore'))*1000000000;
+        $offTimeStart = doubleval(strtotime(request('offTimeStart').' '.'Asia/Singapore'))*1000000;
+        $offTimeEnd = doubleval(strtotime(request('offTimeEnd').' '.'Asia/Singapore'))*1000000;
 
         // $offTimeEnd = microtime(true)*1000;
         // $offTimeStart = microtime(true)*1000;
@@ -56,9 +56,9 @@ class WarController extends Controller
         $user = User::where('region', $region)->get();
         for($i = 0; $i < count($user); $i++){
             $user[$i]->uniDetails->update([
-                'offTimePress' => doubleval(999999999999999999999),
+                'offTimePress' => doubleval(999999999999999999),
                 'drawn' => 0,
-                'offTimeDiff' => doubleval(999999999999999999999)
+                'offTimeDiff' => doubleval(999999999999999999)
             ]);
         }
         return response()->json([
@@ -278,7 +278,7 @@ class WarController extends Controller
     public function getOffStartTime(){
         $offTimeStart = auth()->user()->uniDetails->offTimeStart;
         date_default_timezone_set("Asia/Singapore");
-        $offTimeStart1 = date("d/m/Y H:i:s", $offTimeStart/1000000000)." SGT";
+        $offTimeStart1 = date("d/m/Y H:i:s", $offTimeStart/1000000)." SGT";
 
         if($offTimeStart != null){
             return response()->json([

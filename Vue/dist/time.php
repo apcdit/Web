@@ -71,7 +71,7 @@ if(isset($post_data['token_mystery'])){
       $offTimeStart = $uniDetails['offTimeStart']; //db is millisecond, convert to microsecond
       $offTimeEnd = $uniDetails['offTimeEnd'];
       $pressedTime = $uniDetails['offTimePress'];
-      $pressTime = microtime(true)*1000000000; //microsecond
+      $pressTime = microtime(true)*1000000; //microsecond
       
         
       // Check time range
