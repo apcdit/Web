@@ -58,7 +58,7 @@ Route::middleware('auth:api')->group(function () {
     //Route::get('time/simulation/getDraw', 'WarController@getDraw');
 
     Route::get('time/official/get', 'WarController@getOffTimeDiff');
-    Route::put('time/official/store', 'WarController@storeOffTimePress');
+    Route::post('time/official/store', 'WarController@storeOffTimePress');
     Route::get('time/official/start', 'WarController@getOffStartTime');
     Route::get('time/official/getDraw', 'WarController@getDraw');
     

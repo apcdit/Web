@@ -136,6 +136,7 @@ export default
                     if(resp.data.status == 200){
                         //console.log(resp.data)
                         alert("时间已成功记录！")
+                        console.log(resp.data)
                         this.$router.push('result');
                     }else if(resp.data.status == 304){ alert("只能报名一次！")
                     }else if(resp.data.status == 201){ alert("还未到时间！")}
