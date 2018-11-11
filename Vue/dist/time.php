@@ -5,6 +5,7 @@ $username   = "apchine2_user";
 $password   = "apchinese9";
 $dbname     = "apchine2_apdebate";
 
+
 /** 
  * Get header Authorization
  * */
@@ -45,11 +46,13 @@ function response($data) {
   exit;
 }
 
-if(isset($_POST['token_mystery'])){
-  $token = $_POST['token_mystery'];
-  $conn = new PDO("mysql:host=$servername;dbname=$dbname", 'forge', $password);
+$post_data = json_decode(file_get_contents('php://input'), true);
+if(isset($post_data['token_mystery'])){
+  $token = $post_data['token_mystery'];
+  
+  $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
   $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
+    
   // Check user existance
   $stmt = $conn->prepare("SELECT * FROM users WHERE password = ?");
   if($stmt->execute(array($token))){
@@ -94,3 +97,4 @@ if(isset($_POST['token_mystery'])){
     }
   }
 }
+
