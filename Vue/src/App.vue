@@ -1,9 +1,9 @@
 <template>
     <div id="app">
-        <div >
+        <div style="height:100px;">
             <div>
 
-                <b-navbar type="light" variant="white" toggleable fixed="top" style="opacity: 60%">
+                <b-navbar type="dark" variant="dark" toggleable fixed="top" style="opacity:0.9">
                     <b-navbar-brand href="/"><img src="http://i.imgur.com/90YSaaO.png"></b-navbar-brand>
                     <b-navbar-toggle target="nav_dropdown_collapse"></b-navbar-toggle>
                     <b-collapse is-nav id="nav_dropdown_collapse">
@@ -27,19 +27,19 @@
                         <b-navbar-nav class="ml-auto">
                             <b-nav-item router-link to='/login' v-if="false"><img src="https://i.imgur.com/h5GY79C.png"></b-nav-item>
                             <b-nav-item-dropdown text="大学资料"  v-if="isLoggedIn" >
-                                <b-nav-item to='user' v-if="!user">大学资料</b-nav-item>
-                                <b-nav-item to='user' v-else>{{user.uniNameCN}}</b-nav-item>
-                                <b-nav-item to='lottery'>电子抽签</b-nav-item>
-                                <b-nav-item to='simlottery' v-if="false">模拟电子抽签</b-nav-item>
-                                <b-nav-item to='result'>电子抽签结果</b-nav-item>
-                                <b-nav-item @click="logout()"> 登出 </b-nav-item>
+                                <b-dropdown-item to='user' v-if="!user">大学资料</b-dropdown-item>
+                                <b-dropdown-item to='user' v-else>{{user.uniNameCN}}</b-dropdown-item>
+                                <b-dropdown-item to='lottery'>电子抽签</b-dropdown-item>
+                                <b-dropdown-item to='simlottery' v-if="false">模拟电子抽签</b-dropdown-item>
+                                <b-dropdown-item to='result'>电子抽签结果</b-dropdown-item>
+                                <b-dropdown-item @click="logout()"> 登出 </b-dropdown-item>
                             </b-nav-item-dropdown>
                         </b-navbar-nav>
                     </b-collapse>
                 </b-navbar>
             </div>
         </div>
-        <transition name="fade"><router-view style="margin-top:150px;"></router-view></transition>
+        <transition name="fade"><router-view style="margin-top:150px;" ></router-view></transition>
 
             <div class="row" style="padding:5%;width:100%">
 
@@ -97,12 +97,12 @@
         created() {
             this.showUser();
         },
-        //updated() {
-            //this.showUser();
-            // if(this.logged){
-            //   this.$forceUpdate()
-            // }
-        //},
+        // updated() {
+        //     this.showUser();
+        //     // if(this.logged){
+        //     //   this.$forceUpdate()
+        //     // }
+        // },
         methods: {
             logout: function () {
                 this.$store.dispatch('logout')
@@ -150,6 +150,12 @@
         float:none;
     }
     ul{list-style:none;}
+    #app{top: 100%;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-image: url("https://i.imgur.com/OJeI3TO.jpg");}
 
 
 </style>

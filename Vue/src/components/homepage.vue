@@ -3,7 +3,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-4">
-                    <ul class="list-group shadow">
+                    <ul class="list-group shadow" style="opacity:0.9">
                         <li class="list-group-item">
                             <h4 style="color:#9A2A1F;">活动详情</h4>
                             <h5><i class="fa fa-calendar-o" aria-hidden="true"></i> 2019年7月9日至7月15日</h5>
@@ -19,43 +19,41 @@
                     <ul class="list-group shadow">
                         <li class="list-group-item">
                             <h4 style="color:#9A2A1F;">最新视频<a href="#" class="btn" style="float:right;">查看更多</a></h4>
-                            <div class="row" style="padding:1%;">
-                                <iframe src="https://www.youtube.com/embed/U4v2W_V9Fk0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                            <div class="row" style="padding:1%; width:100%">
+                                <iframe src="https://www.youtube.com/embed/U4v2W_V9Fk0" frameborder="0" allow="autoplay; encrypted-media" width="100%"allowfullscreen></iframe>
                             </div>
 
                         </li>
                     </ul>
                 </div>
-                <div class="col-md-8 " id="latestPosts">
+                <div class="col-md-8 " id="latestPosts" style="opacity:0.85;padding-top:1%">
                     <div class="container">
-                            <h4 style="color:darkred; "><strong>最新</strong>消息</h4>
-                                <br>
-                                <ul>
-                                    <li v-for="post in posts">
-                                        <div class="col-xs-4">
-                                            <a class="" href="#" style="text-decoration: none;color:black;">
+                        <h4 style="color:darkred; "><strong>最新</strong>消息</h4>
+                        <br>
+                        <ul>
+                            <li v-for="post in posts">
+                                <div class="col-xs-4">
+                                    <a class="" href="#" style="text-decoration: none;color:black;">
+                                        <div class="row">
+                                            <div class="col-sm-4"><img v-bind:src="post.postPic" width="180px" height="150px"></div>
+
+                                            <div class="col-sm-8">
                                                 <div class="row">
-                                                    <div class="col-sm-4"><img v-bind:src="post.postPic" width="180px" height="150px"></div>
-
-                                                    <div class="col-sm-8">
-                                                        <div class="row">
-                                                            <h2 style="color:#9A2A1F;">{{post.postTitle}}</h2>
-                                                        </div>
-                                                        <div class="row">
-                                                            <p style="15px">{{post.postDec}}</p>
-                                                        </div>
-
-                                                        <div class="row">
-                                                            <p style="9px;color:darkgrey;">发布于{{post.created_at}}</p>
-                                                        </div>
-
-
-                                                    </div>
+                                                    <h2 style="color:#9A2A1F;">{{post.postTitle}}</h2>
                                                 </div>
-                                            </a>
+                                                <div class="row">
+                                                    <p style="15px">{{post.postDec}}</p>
+                                                </div>
+
+                                                <div class="row">
+                                                    <p style="9px;color:darkgrey;">发布于{{post.created_at}}</p>
+                                                </div>
+
+
+                                            </div>
                                         </div>
-
-
+                                    </a>
+                                </div>
                                         <hr>
                                     </li>
                                 </ul>
@@ -112,7 +110,7 @@
     .pagination-list{
         padding-bottom: 25px
     }
-    .container{margin-top:1%;}
+    .container{margin-top:1%;width:80%;}
     .btn{
         background-color: #9A2A1F;
         color: white;
@@ -127,5 +125,19 @@
     #latestPosts{
         background-color: white;
         border-style: hidden;
+        /* shadows and rounded borders */
+        -moz-border-radius: 20px;
+        -webkit-border-radius: 20px;
+        border-radius: 20px;
+        -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+        -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+        box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
     }
+    .list-group shadow{/* shadows and rounded borders */
+        -moz-border-radius: 40px;
+        -webkit-border-radius: 40px;
+        border-radius: 40px;
+        -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+        -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+        box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);}
 </style>
