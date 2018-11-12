@@ -1,5 +1,5 @@
 <template>
-<div class="container">
+<div class="container" style="background-color:white">
   <br>
   <h1 style="text-align:center">电子抽签系统</h1>
   <hr>
