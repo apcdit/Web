@@ -3,25 +3,25 @@
         <div style="height:100px;">
             <div>
 
-                <b-navbar type="dark" variant="dark" toggleable fixed="top" style="opacity:0.9">
+                <b-navbar type="light" variant="grey" toggleable fixed="top" style="opacity:1">
                     <b-navbar-brand href="/"><img src="http://i.imgur.com/90YSaaO.png"></b-navbar-brand>
                     <b-navbar-toggle target="nav_dropdown_collapse"></b-navbar-toggle>
                     <b-collapse is-nav id="nav_dropdown_collapse">
                         <b-navbar-nav>
-                            <b-nav-item-dropdown text="关于我们" right >
+                            <b-nav-item-dropdown style="font-size: 1.25em; font-weight:bold;" text="关于我们" right >
                                 <b-dropdown-item router-link to='/about'>赛会简介</b-dropdown-item>
                                 <b-dropdown-item router-link to='/rules' v-if="false">参赛事宜</b-dropdown-item>
                                 <b-dropdown-item router-link to='/pastyear'>历届赛况</b-dropdown-item>
                                 <b-dropdown-item href="/#">筹委介绍</b-dropdown-item>
                             </b-nav-item-dropdown>
-                            <b-nav-item-dropdown text="活动详情" right >
+                            <b-nav-item-dropdown style="font-size: 1.25em; font-weight:bold;" text="活动详情" right >
                                 <b-dropdown-item href="#">最新消息</b-dropdown-item>
                                 <b-dropdown-item href="#">最新赛况</b-dropdown-item>
                                 <b-dropdown-item href="#">赛程</b-dropdown-item>
                             </b-nav-item-dropdown>
 
-                            <b-nav-item router-link to='/videohub'>视频库</b-nav-item>
-                            <b-nav-item router-link to='/contact'>联络我们</b-nav-item>
+                            <b-nav-item style="font-size: 1.25em; font-weight:bold;" router-link to='/videohub'>视频库</b-nav-item>
+                            <b-nav-item router-link to='/contact' style="font-size: 1.25em; font-weight:bold;">联络我们</b-nav-item>
                         </b-navbar-nav>
 
                         <b-navbar-nav class="ml-auto">
@@ -39,7 +39,7 @@
                 </b-navbar>
             </div>
         </div>
-        <transition name="fade"><router-view style="margin-top:150px;" ></router-view></transition>
+        <transition name="fade"><router-view style="margin-top:2%;" ></router-view></transition>
 
             <div class="row" style="padding:5%;width:100%">
 
@@ -47,10 +47,10 @@
                 <h6 style="text-align: center" > NTU APICDT All Rights Reserved &copy 2018 </h6>
             </div>
             <div class="col-md-4">
-                <span><strong>联络我们<tab></tab></strong></span>
-                <a href="http://weibo.com/p/1005055398940329" target="_blank"><img src="http://cdn.onlinewebfonts.com/svg/img_164924.png" width="50px" height="50px"></a>
-                <a href="https://www.instagram.com/apchinesedebate/" target="_blank"><img src="http://pluspng.com/img-png/instagram-png-instagram-png-file-512.png" width="50px" height="50px"></a>
-                <a href="https://www.facebook.com/NTUCSapchinesedebate/" target="_blank"><img src="http://www.iconarchive.com/download/i97515/sicons/basic-round-social/facebook.ico" width="50px" height="50px"></a>
+                <div><strong>联络我们</strong></div>
+                <a href="http://weibo.com/p/1005055398940329" target="_blank"><img style="position:relative" src="http://cdn.onlinewebfonts.com/svg/img_164924.png" width="11%" height="60%"></a>
+                <a href="https://www.instagram.com/apchinesedebate/" target="_blank"><img src="http://pluspng.com/img-png/instagram-png-instagram-png-file-512.png" width="12%" height="68%"></a>
+                <a href="https://www.facebook.com/NTUCSapchinesedebate/" target="_blank"><img src="https://i.imgur.com/0rBWRj7.png" width="11%" height="60%"></a>
                 </div>
             </div>
             </div>
@@ -155,7 +155,7 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: 100% 100%;
-    background-image: url("https://i.imgur.com/OJeI3TO.jpg");}
+    background-image: url("https://i.imgur.com/mDsqWbu.jpg");}
 
 
 </style>

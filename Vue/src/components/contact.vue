@@ -9,33 +9,6 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-4" style="width:100%">
-                <center>
-                    <a href="https://www.facebook.com/NTUCSapchinesedebate/" target="_blank">
-                      <img src="https://image.freepik.com/free-icon/facebook-letter-logo_318-40258.jpg" style="width:100%;height:250px;" >
-
-                    </a>
-
-                </center>
-            </div>
-            <div class="col-md-4" style="width=100%">
-                <center>
-                    <a href="https://www.instagram.com/apchinesedebate/" target="_blank">
-                        <img src="http://discologyreno.com/wp-content/uploads/2018/03/instagram-icon.png"  style="width:100%;height:250px;">
-
-                    </a>
-
-                </center>
-            </div>
-            <div class="col-md-4" style="width=100%">
-                <center>
-                    <a href="http://weibo.com/p/1005055398940329" target="_blank">
-                      <img src="https://png2.kisspng.com/20180714/asr/kisspng-links-concept-company-limited-sina-weibo-sina-corp-weather-cock-5b49dc7c5b7b20.0146888215315672283747.png"  style="width:100%;height:250px;">
-
-                    </a>
-
-                </center>
-            </div>
             <div id="email" class="col-md-12">
             	 <center>
                     <a href="" class="email"><i class="fa fa-envelope fa-5x" aria-hidden="true"></i></a>
