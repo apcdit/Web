@@ -25,6 +25,7 @@
                         </b-navbar-nav>
 
                         <b-navbar-nav class="ml-auto">
+                            <b-nav-item router-link to='/register' style="font-size: 1.25em; font-weight:bold;">账号注册</b-nav-item>
                             <b-nav-item router-link to='/login' v-if="false"><img src="https://i.imgur.com/h5GY79C.png"></b-nav-item>
                             <b-nav-item-dropdown text="大学资料"  v-if="isLoggedIn" >
                                 <b-dropdown-item to='user' v-if="!user">大学资料</b-dropdown-item>
