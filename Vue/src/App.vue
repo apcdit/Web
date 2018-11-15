@@ -42,7 +42,7 @@
         </div>
         <transition name="fade"><router-view style="margin-top:2%;" ></router-view></transition>
 
-            <div class="row" style="padding:5%;width:100%">
+         <div class="row" style="padding:5%;width:100%">
 
             <div class="col-md-8">
                 <h6 style="text-align: center" > NTU APICDT All Rights Reserved &copy 2018 </h6>
@@ -56,9 +56,8 @@
             </div>
             </div>
 
-
-
     </div>
+
 
 
 </template>

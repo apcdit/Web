@@ -142,14 +142,17 @@
                     })
             },
             submitForm(){
-
+                
                 if(this.uniNameCN === '' || this.uniNameEN === '' || this.email === '' || this.name_cn === '' || this.name_en === '' || this.address === '' || this.password === '' || this.phone === ''|| this.region === null || this.title_1 === '' || this.title_2 === '' || this.title_3 === ''){
                     alert('请填上所有资料！')
                 }else if(this.password !== this.password_confirmation){
                     alert("密码不匹配!")
                 }else if(this.password.length < 8){
                     alert("密码过短！（最少8个）")
-                }else{
+                }else if(this.file == ''){
+                    alert("请附上意愿书！")
+                }
+                else{
                     let data={
                             uniNameCN: this.uniNameCN,
                             uniNameEN: this.uniNameEN,
