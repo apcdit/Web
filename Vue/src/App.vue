@@ -3,7 +3,7 @@
         <div style="height:100px;">
             <div>
 
-                <b-navbar type="light" variant="grey" toggleable fixed="top" style="opacity:1">
+                <b-navbar type="light" variant="lightgrey" toggleable fixed="top" style="opacity:1">
                     <b-navbar-brand href="/"><img src="http://i.imgur.com/90YSaaO.png"></b-navbar-brand>
                     <b-navbar-toggle target="nav_dropdown_collapse"></b-navbar-toggle>
                     <b-collapse is-nav id="nav_dropdown_collapse">
@@ -155,7 +155,8 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: 100% 100%;
-    background-image: url("https://i.imgur.com/mDsqWbu.jpg");}
+    /* background-image: url("https://i.imgur.com/mDsqWbu.jpg") */
+    ;}
 
 
 </style>
