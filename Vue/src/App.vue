@@ -95,9 +95,6 @@
             status: function(){ return (this.$store.getters.authStatus) ;},
             update: function(){ return JSON.parse(localStorage.getItem('user'))}
         },
-        created() {
-            //this.showUser();
-        },
         methods: {
             logout: function () {
                 this.$store.dispatch('logout')
@@ -123,6 +120,9 @@
 </script>
 
 <style>
+
+    @import url('https://fonts.googleapis.com/css?family=Noto+Sans+SC');
+
     .fade-enter-active, .fade-leave-active {
         transition-property: opacity;
         transition-duration: .50s;
@@ -156,6 +156,7 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: 100% 100%;
+    font-family: 'Noto Sans SC', sans-serif;
     /* background-image: url("https://i.imgur.com/mDsqWbu.jpg") */
     ;}
 

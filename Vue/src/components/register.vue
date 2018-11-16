@@ -114,14 +114,11 @@
                 {value:'Australia',text:'澳洲'}
             ]
         }},
-        updated:{
-            isDisabled(){
-                return (this.region === null || title_1 === null || title_2 === null || title_3 === null);
-            }
-        },
+       
         methods:{
             handleFileUpload(){
                 this.file = this.$refs.file.files[0]; //choose the file
+                //console.log(this.file);
             },
             uploadFile(){ //upload the file with submit form
                 let formData = new FormData();
@@ -149,7 +146,7 @@
                     alert("密码不匹配!")
                 }else if(this.password.length < 8){
                     alert("密码过短！（最少8个）")
-                }else if(this.file == ''){
+                }else if(this.file === '' || typeof this.file === 'undefined'){
                     alert("请附上意愿书！")
                 }
                 else{
