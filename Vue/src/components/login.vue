@@ -6,14 +6,10 @@
         <p id="profile-name" class="profile-name-card"></p>
         <div class="form-signin">
             <span id="reauth-email" class="reauth-email"></span>
-            <input type="email" id="inputEmail" v-model="email" class="form-control" placeholder="Email address" required autofocus>
-            <input type="password" id="inputPassword" v-model="password" class="form-control" placeholder="Password" required>
-            <div id="remember" class="checkbox">
-                <label>
-                    <input type="checkbox" value="remember-me"> Remember me
-                </label>
-            </div>
-            <button class="btn btn-lg btn-primary btn-block btn-signin">Sign in</button>
+            <input type="email" id="inputEmail" v-model="email" class="form-control" placeholder="电子邮件" required autofocus>
+            <input type="password" id="inputPassword" v-model="password" class="form-control" placeholder="输入密码" required>
+           
+            <button class="btn btn-lg btn-primary btn-block btn-signin">登陆</button>
         </div><!-- /form -->
 
     </form><!-- /card-container -->
@@ -37,7 +33,7 @@ export default{
         let email = this.email
         let password = this.password
         this.$store.dispatch('login', { email, password })
-        .then(this.$router.push('/'))
+        //.then(this.$router.push('/'))
        .catch(err => console.log(err))
       },
   }

@@ -74,8 +74,8 @@ class AuthController extends Controller
                 'simTimeDiff' => null,
                 'offTimeStart' => null,
                 'offTimeEnd' => null,
-                'offTimeDiff' => null,
-                'offTimePress' => 9999999999999,
+                'offTimeDiff' => doubleval(999999999999999999),
+                'offTimePress' => doubleval(999999999999999999),
                 'drawn' => 0,     
                 'qualified' => 0
             ]);

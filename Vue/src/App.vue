@@ -3,7 +3,7 @@
         <div style="height:100px;">
             <div>
 
-                <b-navbar type="light" variant="lightgrey" toggleable fixed="top" style="opacity:1">
+                <b-navbar type="light" class="main-nav" variant="white" toggleable fixed="top" style="opacity:1">
                     <b-navbar-brand href="/"><img src="http://i.imgur.com/90YSaaO.png"></b-navbar-brand>
                     <b-navbar-toggle target="nav_dropdown_collapse"></b-navbar-toggle>
                     <b-collapse is-nav id="nav_dropdown_collapse">
@@ -27,9 +27,9 @@
                         <b-navbar-nav class="ml-auto">
                             <b-nav-item router-link to='/register' style="font-size: 1.25em; font-weight:bold;">账号注册</b-nav-item>
                             <b-nav-item router-link to='/login' v-if="false"><img src="https://i.imgur.com/h5GY79C.png"></b-nav-item>
-                            <b-nav-item-dropdown text="大学资料"  v-if="isLoggedIn" >
-                                <b-dropdown-item to='user' v-if="!user">大学资料</b-dropdown-item>
-                                <b-dropdown-item to='user' v-else>{{user.uniNameCN}}</b-dropdown-item>
+                            <b-nav-item-dropdown style="font-size: 1.25em; font-weight:bold;" text="大学资料"  v-if="isLoggedIn" >
+                                <b-dropdown-item to='user' v-if="!update">个人主页</b-dropdown-item>
+                                <b-dropdown-item to='user' v-else>{{update.uniNameCN}}</b-dropdown-item>
                                 <b-dropdown-item to='lottery'>电子抽签</b-dropdown-item>
                                 <b-dropdown-item to='simlottery' v-if="false">模拟电子抽签</b-dropdown-item>
                                 <b-dropdown-item to='result'>电子抽签结果</b-dropdown-item>
@@ -84,7 +84,7 @@
         data(){
             return{
                 logged : false,
-                user: {},
+                user: JSON.parse(localStorage.getItem('user')),
                 uniDetails: {},
 
             }
@@ -93,16 +93,11 @@
             isLoggedIn : function(){ this.logged=this.$store.getters.isLoggedIn; return this.$store.getters.isLoggedIn},
             //authUser: function(){ if(this.logged && this.$store.getters.authUser) return JSON.parse(this.$store.getters.authUser);},
             status: function(){ return (this.$store.getters.authStatus) ;},
+            update: function(){ return JSON.parse(localStorage.getItem('user'))}
         },
         created() {
-            this.showUser();
+            //this.showUser();
         },
-        // updated() {
-        //     this.showUser();
-        //     // if(this.logged){
-        //     //   this.$forceUpdate()
-        //     // }
-        // },
         methods: {
             logout: function () {
                 this.$store.dispatch('logout')
@@ -117,6 +112,9 @@
                     .then(resp=>{
                         this.user = resp.data.user
                         this.uniDetails = resp.data.uniDetails
+                    })
+                    .catch(er=>{
+                        
                     })
             },
 
@@ -134,6 +132,9 @@
         transition-delay: .50s;
     }
 
+    .main-nav{
+        border-bottom:0.03px solid lightgray;
+    }
     .fade-enter, .fade-leave-active {
         opacity: 0
     }

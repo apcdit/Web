@@ -23,35 +23,35 @@ Vue.use(Router)
 const ifNotAuthenticated = (to, from, next) => {
   if (!store.getters.isLoggedIn) {
     next()
-    return
+  }else{
+    next('/')
   }
-  next('/')
 }
 
 const ifAuthenticated = (to, from, next) => {
   if (store.getters.isLoggedIn) {
-    next()
-    return
+    switch(to.meta.permission){
+      case 'admin': 
+          if(JSON.parse(store.getters.authUser).admin == 1){
+            next();
+          }else{
+            next('/')
+          }
+          break;
+      case 'user':
+          next();
+          break;
+    }
+  }else{
+    next('/login')
   }
-  next('/login')
 }
 
-// const ifAdmin = (to,from,next)=>{
-//   console.log(store.getters.authUser.admin)
-//   if(store.getters.authUser.admin){
-//     next()
-//     return
-//   }
-//   next('/')
-// }
+/*to being the route we are navigating to, 
+from being the route we are navigating from, 
+and next being the method we use to navigate to the next route
+*/
 
-// const ifNotAdmin = (to, from,next)=>{
-//   if(!store.getters.authUser.admin){
-//     next()
-//     return
-//   }
-//   next('/lottery')
-// }
 
 export default new Router({
   routes: [
@@ -61,15 +61,65 @@ export default new Router({
     {path:'/rules',name:'rules',component:rules},
     {path:'/videohub',name:'videohub',component:videohub},
     {path:'/navigation',name:'navigation',component:navigation},
-    {path:'/about',name:'about',component:about},
-    {path:'/login',name:'login',component:login, beforeEnter: ifNotAuthenticated},
-    {path:'/register',name:'register',component:register, beforeEnter: ifNotAuthenticated},
-    {path:'/',name:'homepage',component:homepage},
+    {
+      path:'/login',
+      name:'login',
+      component:login, 
+      beforeEnter: ifNotAuthenticated
+    },
+    {
+      path:'/register',
+      name:'register',
+      component:register, 
+      beforeEnter: ifNotAuthenticated
+    },
+    {
+      path:'/',
+      name:'homepage',
+      component:homepage
+    },
     {path:'/timer',name:'timer',component:timer},
-    {path:'/lottery', name:'lottery', component:lottery, beforeEnter: ifAuthenticated},
-    {path:'/simlottery', name:'simlottery', component:simlottery, beforeEnter: ifAuthenticated},
-    {path:'/result', name:'result', component:result, beforeEnter: ifAuthenticated},
-    {path:'/user', name:'user', component:user, beforeEnter: ifAuthenticated},
-    {path:'/setTime', name:'admin', component:admin, beforeEnter: ifAuthenticated}
+    {
+      path:'/lottery', 
+      name:'lottery', 
+      component:lottery, 
+      beforeEnter: ifAuthenticated,
+      meta:{
+        permission: 'user'
+      }
+    },
+    {
+      path:'/simlottery', 
+      name:'simlottery', 
+      component:simlottery, 
+      beforeEnter: ifAuthenticated
+    },
+    {
+      path:'/result', 
+      name:'result', 
+      component:result, 
+      beforeEnter: ifAuthenticated,
+      meta:{
+        permission: 'user'
+      }
+    },
+    {
+      path:'/user', 
+      name:'user', 
+      component:user, 
+      beforeEnter: ifAuthenticated,
+      meta:{
+        permission: 'user'
+      }
+    },
+    {
+      path:'/admin', 
+      name:'admin', 
+      component:admin, 
+      beforeEnter: ifAuthenticated,
+      meta:{
+        permission: 'admin'
+      }
+    }
   ]
 })

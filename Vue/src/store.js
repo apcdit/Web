@@ -53,7 +53,7 @@ export default new Vuex.Store({
               axios.defaults.headers.common['Authorization'] = token //set the token header
               commit('auth_success', token, user)
               //window.location.href = 'http://www.apchinesedebate.com/#/';
-              //router.push('/');
+              router.push('/');
               resolve(resp)
             }      
           })
