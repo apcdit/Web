@@ -5,7 +5,7 @@
             <div class="content">
                 <h1>大学资料</h1><hr>
             <form>
-                <div class="row"><input class="unchangable" type="text" placeholder=region v-model="region" disabled></div><br>
+                <div class="row"><span><strong>区域</strong>：</span><input class="unchangable" type="text" placeholder=region v-model="region" disabled></div><br>
                 <div class="row"><span><strong>大学名称</strong>：</span><input  class="unchangable" ref="uni_name_cn1" :value="uni_name_cn" disabled></div><br>
                 <div class="row"><span><strong>大学名称：</strong></span><input  class="unchangable" ref="uni_name_en1" :value="uni_name_en" disabled></div><br>
 
@@ -80,6 +80,16 @@
                             this.email=resp.data.user.email
 
                             this.region=resp.data.user.region
+                            switch(this.user.region){
+                                case "Malaysia": this.region = "马来西亚"; break;
+                                case "Singapore": this.region = "新加坡"; break;
+                                case "China": this.region = "中国大陆"; break;
+                                case "Hong Kong": this.region = "香港"; break;
+                                case "Macau": this.region = "澳门"; break;
+                                case "Taiwan": this.region = "台湾"; break;
+                                case "Australia": this.region = "澳大利亚"; break;
+                                default: break;
+                            }
                             this.debateQues1=resp.data.uniDetails.debateQues1
                             this.debateQues2=resp.data.uniDetails.debateQues2
                             this.debateQues3=resp.data.uniDetails.debateQues3

@@ -107,7 +107,7 @@
                 { value: null, text: '选择区域' },
                 { value: 'Singapore', text: '新加坡' },
                 { value: 'Malaysia', text: '马来西亚' },
-                { value: 'China', text: '中国' },
+                { value: 'China', text: '中国大陆' },
                 { value: 'Hong Kong', text: '香港'},
                 {value:'Macao',text:'澳门'},
                 {value:'Taiwan',text:'台湾'},
