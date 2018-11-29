@@ -160,14 +160,7 @@ class AuthController extends Controller
                 'status' => 200,
                 'token_mystery' => $user->password
             ]);
-//        if($user->password != Hash::make(request('password'))){
-//        return response()->json([
-//            'message' => 'Wrong email or password',
-//            'status' => 422
-//        ], 422);
-//    }
 
-        
     }
 
     function logout(){
