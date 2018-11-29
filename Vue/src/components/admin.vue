@@ -15,16 +15,18 @@
                     <option>Admin</option>
                 </select>
                 <h4>Start Time (2018-10-21 10:55:00 24 HOURS FORMAT)</h4>
-                <input v-model="offTimeStart">
+                <input v-model="offTimeStart" placeholder="input start time">
                 <h4>End Time</h4>
-                <input v-model="offTimeEnd">
+                <input v-model="offTimeEnd" placeholder="input end time">
 
                 <button @click="setTime">Submit</button>
             </div>
             <div class="col-md-6">
-                <h4>Click the below button to reset users to drawn = 0 and presstime to infinity</h4>
-                <h4>Remember to select the region before you reset :)</h4>
-                <button @click="reset"><h3>Reset</h3></button>
+                <div class="container">
+                    <h4>Click the below button to reset users to drawn = 0 and presstime to infinity</h4>
+                    <h4>Remember to select the region before you reset :)</h4>
+                    <button @click="reset"><h3>Reset</h3></button>
+                </div>
             </div>
         </div>
     </div>    
@@ -58,7 +60,7 @@ export default {
                     }
                 })
                 .then(response=>{
-                    console.log(response.data);
+                    alert(response.data);
                 })
         },
         reset(){
@@ -75,7 +77,7 @@ export default {
                     }
                 })
                 .then(response=>{
-                    console.log(response.data);
+                    alert(response.data);
                 })
         }
     }

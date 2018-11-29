@@ -21,7 +21,7 @@
 
                     <button @click="save" v-else-if="isEditing" class="btn btn-primary  ">Save</button>
 
-                    <button v-if="isEditing" @click="isEditing = false" class="btn btn-primary">Cancel</button>
+                    <button v-if="isEditing" @click.prevent="isEditing = false" class="btn btn-primary">Cancel</button>
 
 
                     <br>
