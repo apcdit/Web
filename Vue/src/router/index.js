@@ -9,13 +9,12 @@ import navigation from '@/components/navigation'
 import login from '@/components/login'
 import register from '@/components/register'
 import homepage from '@/components/homepage'
-import timer from '@/components/timer'
 import lottery from '@/components/lottery'
 import store from '../../src/store.js'
-import simlottery from '@/components/simlottery'
 import result from '@/components/result'
 import user from '@/components/user'
 import admin from '@/components/admin'
+import resetpw from '@/components/resetpw'
 
 Vue.use(Router)
 
@@ -61,6 +60,7 @@ export default new Router({
     {path:'/rules',name:'rules',component:rules},
     {path:'/videohub',name:'videohub',component:videohub},
     {path:'/navigation',name:'navigation',component:navigation},
+    {path:'/resetpw', name:'resetpw', component:resetpw},
     {
       path:'/login',
       name:'login',
@@ -78,7 +78,6 @@ export default new Router({
       name:'homepage',
       component:homepage
     },
-    {path:'/timer',name:'timer',component:timer},
     {
       path:'/lottery', 
       name:'lottery', 
@@ -87,12 +86,6 @@ export default new Router({
       meta:{
         permission: 'user'
       }
-    },
-    {
-      path:'/simlottery', 
-      name:'simlottery', 
-      component:simlottery, 
-      beforeEnter: ifAuthenticated
     },
     {
       path:'/result', 

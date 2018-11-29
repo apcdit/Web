@@ -197,7 +197,7 @@
         display: inline
     }
     .btnRegister{
-        width: 25%;
+        width: 35%;
         border-radius: 10px;
         padding: 10px;
     }

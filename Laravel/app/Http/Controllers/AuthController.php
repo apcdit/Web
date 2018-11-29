@@ -21,6 +21,8 @@ class AuthController extends Controller
     }
 
     function upload(Request $request){
+        
+        
         if(!$request->hasFile('file')){
             return response()->json(['message'=>"file not found"]);
         }
@@ -31,7 +33,8 @@ class AuthController extends Controller
         }
 
         $path = public_path().'/意愿书/'.$request->get('uniNameCN').'/uploads/';
-        $file->move($path, $file->getClientOriginalName() );
+        $final = $file->getClientOriginalName();
+        $file->move($path, $final);
         return response()->json(compact('path'));
     }
 

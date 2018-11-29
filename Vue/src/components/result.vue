@@ -63,7 +63,7 @@
                             case 'Hong Kong': this.region = "香港"; break;
                             case 'Macau': this.region = "澳门"; break;
                             case 'China': this.region = "中国"; break;
-                            case 'Australia': this.region = "澳洲"; break;
+                            case 'Australia': this.region = "澳大利亚"; break;
                             case 'Taiwan': this.region = "台湾"; break;
                             default: break;
                         }

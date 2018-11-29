@@ -16,12 +16,12 @@
                 <div class="row"> <span><strong>辩题2：</strong></span><input type="text" ref="debate_Ques2" :value="debateQues2" :disabled="!isEditing" :class="{view:!isEditing,changing:isEditing}"></div><br>
                 <div class="row"><span><strong>辩题3：</strong></span><input type="text" ref="debate_Ques3" :value="debateQues3" :disabled="!isEditing" :class="{view:!isEditing,changing:isEditing}"></div><br>
 
-                    <button @click="isEditing = !isEditing" v-if="!isEditing" class="btn btn-primary">Edit</button>
+                    <button @click.prevent="isEditing = !isEditing" v-if="!isEditing" class="btn btn-primary">Edit</button>
 
 
-                             <button @click="save" v-else-if="isEditing" class="btn btn-primary  ">Save</button>
+                    <button @click="save" v-else-if="isEditing" class="btn btn-primary  ">Save</button>
 
-                             <button v-if="isEditing" @click="isEditing = false" class="btn btn-primary  ">Cancel</button>
+                    <button v-if="isEditing" @click="isEditing = false" class="btn btn-primary">Cancel</button>
 
 
                     <br>

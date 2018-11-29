@@ -33,13 +33,13 @@
                         <ul>
                             <li v-for="post in posts">
                                 <div class="col-xs-4">
-                                    <a class="" href="#" style="text-decoration: none;color:black;">
+                                    <span class="" href="#" style="text-decoration: none;color:black;">
                                         <div class="row">
                                             <div class="col-sm-4"><img v-bind:src="post.postPic" width="180px" height="150px"></div>
 
                                             <div class="col-sm-8">
                                                 <div class="row">
-                                                    <h2 style="color:#9A2A1F;">{{post.postTitle}}</h2>
+                                                    <a href=""><h2 style="color:#9A2A1F;">{{post.postTitle}}</h2></a>
                                                 </div>
                                                 <div class="row">
                                                     <p style="15px">{{post.postDec}}</p>
@@ -52,7 +52,7 @@
 
                                             </div>
                                         </div>
-                                    </a>
+                                    </span>
                                 </div>
                                         <hr>
                                     </li>

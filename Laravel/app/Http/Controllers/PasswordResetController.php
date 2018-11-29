@@ -67,6 +67,7 @@ class PasswordResetController extends Controller
                 'message' => 'This password reset token is invalid.'
             ], 404);
         }
+
         return response()->json($passwordReset);
     }
      /**
@@ -81,11 +82,12 @@ class PasswordResetController extends Controller
      */
     public function reset(Request $request)
     {
-        $request->validate([
+        $this->validate(request(),[
             'email' => 'required|string|email',
             'password' => 'required|string',
             'token' => 'required|string'
         ]);
+
         $passwordReset = PasswordReset::where([ //check if email and token matches
             ['token', $request->token],
             ['email', $request->email]

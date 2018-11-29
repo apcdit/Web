@@ -25,14 +25,13 @@
                         </b-navbar-nav>
 
                         <b-navbar-nav class="ml-auto">
-                            <b-nav-item router-link to='/register' style="font-size: 1.25em; font-weight:bold;">账号注册</b-nav-item>
+                            <b-nav-item router-link to='/register' v-if="!isLoggedIn" style="font-size: 1.25em; font-weight:bold;">账号注册</b-nav-item>
                             <b-nav-item router-link to='/login' v-if="false"><img src="https://i.imgur.com/h5GY79C.png"></b-nav-item>
                             <b-nav-item-dropdown style="font-size: 1.25em; font-weight:bold;" text="大学资料"  v-if="isLoggedIn" >
                                 <b-dropdown-item to='user' v-if="!update">个人主页</b-dropdown-item>
                                 <b-dropdown-item to='user' v-else>{{update.uniNameCN}}</b-dropdown-item>
-                                <b-dropdown-item to='lottery'>电子抽签</b-dropdown-item>
-                                <b-dropdown-item to='simlottery' v-if="false">模拟电子抽签</b-dropdown-item>
-                                <b-dropdown-item to='result'>电子抽签结果</b-dropdown-item>
+                                <b-dropdown-item to='lottery' v-if="false">电子抽签</b-dropdown-item>
+                                <b-dropdown-item to='result' v-if="false">电子抽签结果</b-dropdown-item>
                                 <b-dropdown-item @click="logout()"> 登出 </b-dropdown-item>
                             </b-nav-item-dropdown>
                         </b-navbar-nav>
@@ -77,10 +76,11 @@
     import simlottery from './components/simlottery.vue'
     import result from './components/result.vue'
     import user from './components/user.vue'
+    import resetpw from './components/resetpw.vue'
 
     export default {
         name: 'App',
-        components: {about,pastyear,rules,contact,navigation,videohub,login,register,register1,lottery,simlottery,result,user},
+        components: {about,pastyear,rules,contact,navigation,videohub,login,register,register1,lottery,simlottery,result,user,resetpw},
         data(){
             return{
                 logged : false,

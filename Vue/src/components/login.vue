@@ -10,6 +10,7 @@
             <input type="password" id="inputPassword" v-model="password" class="form-control" placeholder="输入密码" required>
            
             <button class="btn btn-lg btn-primary btn-block btn-signin">登陆</button>
+
         </div><!-- /form -->
 
     </form><!-- /card-container -->
@@ -24,7 +25,8 @@ export default{
   data(){
     return {
       email: "",
-      password: ""
+      password: "",
+      loading: false,
     }
   },
   methods:{
@@ -33,6 +35,7 @@ export default{
         let email = this.email
         let password = this.password
         this.$store.dispatch('login', { email, password })
+        this.loading = true
         //.then(this.$router.push('/'))
        .catch(err => console.log(err))
       },

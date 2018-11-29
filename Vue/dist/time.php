@@ -81,31 +81,35 @@ if(isset($post_data['token_mystery'])){
               'status' => '304'
               ]);
       }
-      if($pressTime >= $offTimeStart && $pressTime < $offTimeEnd){
-        $updateTime = $conn->prepare("UPDATE uni_details SET offTimePress=?, offTimeDiff = ?, drawn = 1 WHERE  uniNameCN = ?");
+      if($pressTime >= $offTimeStart){
+        if($pressTime < $offTimeEnd){
+          $updateTime = $conn->prepare("UPDATE uni_details SET offTimePress=?, offTimeDiff = ?, drawn = 1 WHERE  uniNameCN = ?");
         
-        if($updateTime->execute(array($pressTime, $pressTime - $offTimeStart, $user['uniNameCN']))){
-          response([
-            'message' => "Simulate press time is recorded!",
-            'status' => 200,
-            'time' => date("Y-m-d H:i:s", microtime(true)),
-            'epoch' => $pressTime,
-            'converted' => strtotime(date("Y-m-d H:i:s", microtime(true)))
-          ]);
-        }
+          if($updateTime->execute(array($pressTime, $pressTime - $offTimeStart, $user['uniNameCN']))){
+            response([
+              'message' => "Simulate press time is recorded!",
+              'status' => 200,
+              'time' => date("Y-m-d H:i:s", microtime(true)),
+              'epoch' => $pressTime,
+              'converted' => strtotime(date("Y-m-d H:i:s", microtime(true)))
+            ]);
+          }
+        }else{
+            response([
+              'message' => '报名已经结束了！',
+            ]);
+        }   
       } else {
         response([
           'message' => '还没到报名时间！',
           'offTimeStart' => $offTimeStart,
           'offTimeEnd' => $offTimeEnd,
           'user' => $user,
-          'status' => 201
         ]);
       }
     } else {
       response([
-        'message' => 'The player has already drawn!',
-        'status' => 304
+        'message' => '队伍已报名！',
       ]);
     }
   }
