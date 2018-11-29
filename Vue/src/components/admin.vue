@@ -60,7 +60,7 @@ export default {
                     }
                 })
                 .then(response=>{
-                    alert(response.data);
+                    alert(response.data.message);
                 })
         },
         reset(){
@@ -77,7 +77,7 @@ export default {
                     }
                 })
                 .then(response=>{
-                    alert(response.data);
+                    alert("Reset successfully!");
                 })
         }
     }
