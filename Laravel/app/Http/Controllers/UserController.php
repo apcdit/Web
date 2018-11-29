@@ -47,5 +47,10 @@ class UserController extends Controller
         return response()->json($uni,200);
     }
 
+    public function getUsers(Request $request){
+        
+        $user = User::where('region', $request->region)->get();
 
+        return response()->json($user);
+    }
 }

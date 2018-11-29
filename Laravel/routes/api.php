@@ -23,6 +23,7 @@ Route::group(['middleware' => ['auth:api', 'admin']],function(){
         ]);
     });
 
+    Route::get('user/all', 'UserController@getUsers');
     Route::put('time/simulation/set', 'WarController@setSimTime');
     Route::put('time/official/set', 'WarController@setOffTime');
     Route::put('time/official/reset', 'WarController@reset');

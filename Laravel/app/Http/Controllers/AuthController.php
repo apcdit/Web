@@ -64,6 +64,7 @@ class AuthController extends Controller
                 'address' => request('address'),
                 'password' => bcrypt(request('password')),
                 'email' => request('email'),
+                'remember_token' => 0,
                 'contactNumber' => request('contactNumber')
             ]);
 

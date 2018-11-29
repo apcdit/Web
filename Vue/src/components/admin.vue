@@ -1,34 +1,91 @@
 <template>
     <div class="container">
-        <div class="row">
-            <div class="col-md-6">
-                <label>Region</label>
-                <select v-model="selected">
-                    <option disabled value="">Region</option>
-                    <option>Singapore</option>
-                    <option>Malaysia</option>
-                    <option>China</option>
-                    <option>Hong Kong</option>
-                    <option>Macau</option>
-                    <option>Taiwan</option>
-                    <option>Australia</option>
-                    <option>Admin</option>
-                </select>
-                <h4>Start Time (2018-10-21 10:55:00 24 HOURS FORMAT)</h4>
-                <input v-model="offTimeStart" placeholder="input start time">
-                <h4>End Time</h4>
-                <input v-model="offTimeEnd" placeholder="input end time">
+        <h1><strong>管理者</strong></h1>
+        <hr>            
 
-                <button @click="setTime">Submit</button>
+            <b-card>
+                <b-tabs pills card vertical>
+                    <b-tab title="设置时间" active>
+                    <label>区域</label>
+                        <select v-model="selected">
+                            <option disabled value="">Region</option>
+                            <option>Singapore</option>
+                            <option>Malaysia</option>
+                            <option>China</option>
+                            <option>Hong Kong</option>
+                            <option>Macau</option>
+                            <option>Taiwan</option>
+                            <option>Australia</option>
+                            <option>Admin</option>
+                        </select>
+                        <br>
+                        <div>
+                            <h4>开始时间 (2018-10-21 10:55:00 24 HOURS FORMAT)</h4>
+                            <input v-model="offTimeStart" placeholder="输入开始时间">
+                            <h4>截止时间</h4>
+                            <input v-model="offTimeEnd" placeholder="输入截止时间">
+                            <button @click="setTime" class="btn btn-primary">设置时间</button>
+                        </div>
+                    </b-tab>
+
+                    <b-tab title="重置时间">
+                        <h3 style="color:red"><strong>请勿随意点击此按钮</strong></h3>
+                        <label>区域</label>
+                        <select v-model="selected">
+                            <option disabled value="">Region</option>
+                            <option>Singapore</option>
+                            <option>Malaysia</option>
+                            <option>China</option>
+                            <option>Hong Kong</option>
+                            <option>Macau</option>
+                            <option>Taiwan</option>
+                            <option>Australia</option>
+                            <option>Admin</option>
+                        </select>
+                        <br>
+                        <div>
+                            <h4>重置所有时间</h4>
+                            <button @click="reset" class="btn btn-danger"><h3>Reset</h3></button>
+                        </div>
+                    </b-tab>
+
+                    <b-tab title="发布帖文">
+                        <div>
+                            
+                        </div>
+                    </b-tab>
+
+                    <b-tab title="查询大学">
+                        <div>
+                            <label>区域</label>
+                            <select v-model="selected">
+                                <option disabled value="">Region</option>
+                                <option>Singapore</option>
+                                <option>Malaysia</option>
+                                <option>China</option>
+                                <option>Hong Kong</option>
+                                <option>Macau</option>
+                                <option>Taiwan</option>
+                                <option>Australia</option>
+                                <option>Admin</option>
+                            </select>
+                            <br>
+                            <button @click="getUsers">显示该地区大学</button>
+                            <!-- <ol>
+                                <li v-for="user in users">
+                                    {{user.uniNameCN}}
+                                </li>
+                            </ol> -->
+                            
+                        </div>
+                    </b-tab>
+
+                </b-tabs>
+            </b-card>
+            <br>
+            <div class="container" style="margin:auto;border-radius: 2px;box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);background:white;padding:0.1% 5% 3% 5%;border-radius: 25px;background-color: #F7F7F7;">
+                <b-table hover :items="users" :fields="fields"><b-table>
             </div>
-            <div class="col-md-6">
-                <div class="container">
-                    <h4>Click the below button to reset users to drawn = 0 and presstime to infinity</h4>
-                    <h4>Remember to select the region before you reset :)</h4>
-                    <button @click="reset"><h3>Reset</h3></button>
-                </div>
-            </div>
-        </div>
     </div>    
 </template>
 
@@ -41,6 +98,8 @@ export default {
             selected:'',
             offTimeStart:'',
             offTimeEnd:'',
+            users: {},
+            fields: ['id', 'uniNameCN', 'uniNameEN', 'region', 'nameEn', 'nameCn', 'address', 'contactNumber', 'email'],
         }
     },
     methods:{
@@ -52,6 +111,7 @@ export default {
             }
             if(this.selected == ''){
                 alert("Region is not selected");
+                return;
             }
             axios
                 .put('api/time/official/set', data,{
@@ -66,6 +126,7 @@ export default {
         reset(){
             if(this.selected == ''){
                 alert("Region is not selected");
+                return;
             }
             const data={
                 'region': this.selected
@@ -78,6 +139,27 @@ export default {
                 })
                 .then(response=>{
                     alert("Reset successfully!");
+                })
+        },
+        getUsers(){
+            if(this.selected == ''){
+                alert("Region is not selected");
+                return;
+            }
+            // const data={
+            //     'region': this.selected
+            // }
+            axios
+                .get('api/user/all',{
+                    params:{
+                        region: this.selected
+                    },
+                    headers:{
+                        Authorization: 'Bearer ' + localStorage.getItem('token')
+                    }
+                })
+                .then(response=>{
+                    this.users = response.data;
                 })
         }
     }
