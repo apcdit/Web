@@ -37,7 +37,6 @@ export default{
         this.$store.dispatch('login', { email, password })
         this.loading = true
         //.then(this.$router.push('/'))
-       .then(window.location.href = 'http://www.apchinesedebate.com/#/')
        .catch(err => console.log(err))
       },
   }
