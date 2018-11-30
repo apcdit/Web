@@ -31,7 +31,7 @@ const ifAuthenticated = (to, from, next) => {
   if (store.getters.isLoggedIn) {
     switch(to.meta.permission){
       case 'admin': 
-          if(JSON.parse(store.getters.authUser).admin == 1){
+          if(JSON.parse(localStorage.getItem('user')).admin == 1){
             next();
           }else{
             next('/')
