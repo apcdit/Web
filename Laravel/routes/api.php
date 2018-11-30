@@ -28,7 +28,7 @@ Route::group(['middleware' => ['auth:api', 'admin']],function(){
     Route::put('time/simulation/set', 'WarController@setSimTime');
     Route::put('time/official/set', 'WarController@setOffTime');
     Route::put('time/official/reset', 'WarController@reset');
-    
+    Route::get('question/all', 'UserController@getDebateQuestions');
     //update a certain post
     Route::put('post/{id}', 'PostsController@update');
 

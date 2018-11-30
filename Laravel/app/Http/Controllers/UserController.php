@@ -55,5 +55,11 @@ class UserController extends Controller
         return response()->json($user);
     }
 
-    
+    public function getDebateQuestions(){
+        $uniDetails = uniDetails::where('id', '>=', 109)->get([
+            'uniNameCN', 'debateQues1', 'debateQues2', 'debateQues3'
+            ]);
+        
+        return response()->json($uniDetails);
+    }
 }
