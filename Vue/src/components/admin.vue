@@ -75,7 +75,7 @@
                                 <option>Admin</option>
                             </select>
                             <br>
-                            <button @click="getUsers">显示该地区大学</button>
+                            <button @click="getUsers" class="btn btn-default">显示该地区大学</button>
                         </div>
                     </b-tab>
 
@@ -83,8 +83,7 @@
             </b-card>
             <br>
             <div class="container" style="margin:auto;border-radius: 2px;box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);background:white;padding:0.1% 5% 3% 5%;border-radius: 25px;background-color: #F7F7F7;">
-                <b-table hover :items="users" :fields="fields"></b-table>
-                
+                <b-table hover :items="users" :fields="fields"><b-table>
             </div>
     </div>    
 </template>
@@ -99,7 +98,6 @@ export default {
             offTimeStart:'',
             offTimeEnd:'',
             users: {},
-            showTime: false,
             times: {},
             fields: ['id', 'uniNameCN', 'uniNameEN', 'region', 'nameEn', 'nameCn', 'address', 'contactNumber', 'email'],
         }
@@ -114,10 +112,11 @@ export default {
                 'offTimeStart' : this.offTimeStart,
                 'offTimeEnd': this.offTimeEnd,
             }
-            if(this.selected == ''){
+            if(this.selected === ''){
                 alert("Region is not selected");
-                return;
+                return true;
             }
+
             axios
                 .put('api/time/official/set', data,{
                     headers :{
@@ -129,9 +128,9 @@ export default {
                 })
         },
         reset(){
-            if(this.selected == ''){
+            if(this.selected === ''){
                 alert("Region is not selected");
-                return;
+                return true;
             }
             const data={
                 'region': this.selected
@@ -147,9 +146,9 @@ export default {
                 })
         },
         getUsers(){
-            if(this.selected == ''){
+            if(this.selected === ''){
                 alert("Region is not selected");
-                return;
+                return true;
             }
             // const data={
             //     'region': this.selected
@@ -165,6 +164,7 @@ export default {
                 })
                 .then(response=>{
                     this.users = response.data;
+                    console.log(this.users);
                 })
         },
         getTime(){
