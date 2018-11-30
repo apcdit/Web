@@ -1,81 +1,68 @@
 <template>
 
     <div>
+        
         <div class="container">
             <div class="content">
-                <b-tabs>
-                    <b-tab title="大学资料" active>
-                        <br>
-                        <form>
+                <b-progress :max="max" striped :animated="animate" class="mb-2" height="3.5rem">
+                <b-progress-bar :value="value" variant="success"  animated >
+                    <strong><span style="color:white;font-size: 18px;">注册成功</span></strong>
+                </b-progress-bar>
 
+                <b-progress-bar :value="value" variant="secondary" animated v-if="book==0">
+                    <strong><span style="color:white;font-size: 18px;">意愿书</span></strong>
+                </b-progress-bar>
+                <b-progress-bar :value="value" variant="success" animated v-if="book==1" >
+                    <strong><span style="color:white;font-size: 18px;">意愿书</span></strong>
+                </b-progress-bar>
+
+                <b-progress-bar :value="value" animated  variant="secondary" v-if="drawn==0">
+                    <strong> <span style="color:white;font-size: 18px;">电子抽签</span></strong>
+                </b-progress-bar>
+                <b-progress-bar :value="value" animated  variant="success" v-if="drawn==1">
+                    <strong> <span style="color:white;font-size: 18px;">电子抽签</span></strong>
+                </b-progress-bar>
+
+                <b-progress-bar :value="value"  animated variant="secondary" v-if="qualified==0">
+                    <strong><span style="color:white;font-size: 18px;">报名成功</span></strong>
+                </b-progress-bar>
+                <b-progress-bar :value="value"  animated variant="success" v-if="qualified==1">
+                    <strong><span style="color:white;font-size: 18px;">报名成功</span></strong>
+                </b-progress-bar>
+            </b-progress>
+            <h6>*意愿书会在报名后24小时内批准</h6>
+            <br>
+                <b-tabs card vertical>
+                    <b-tab title="大学资料" active>
+                        <form>
                             <div class="row">
                                 <div class="col-sm-8">
-                                    <div class="row"><span><strong>区域</strong>：</span><input class="unchangable" type="text" placeholder=region v-model="region" disabled>
+                                    <div>
+                                        <label><strong>区域</strong></label>
+                                        <br>
+                                        <input class="unchangable" type="text" placeholder=region v-model="region" disabled>
                                     </div><br>
-                                    <div class="row"><span><strong>大学名称</strong>：</span><input  class="unchangable" ref="uni_name_cn1" :value="uni_name_cn" disabled></div><br>
-                                    <div class="row"><span><strong>大学名称：</strong></span><input  class="unchangable" ref="uni_name_en1" :value="uni_name_en" disabled></div><br>
+                                    <div><label><strong>大学名称(中)</strong></label><br><input  class="unchangable" ref="uni_name_cn1" :value="uni_name_cn" disabled></div><br>
+                                    <div><label><strong>大学名称(英)</strong></label><br><input  class="unchangable" ref="uni_name_en1" :value="uni_name_en" disabled></div><br>
 
-                                    <div class="row"><span><strong>联络电话：</strong></span><input type="text" ref="phone1" :value="phone" :disabled="!isEditing" :class="{view:!isEditing,changing:isEditing}"></div><br>
-                                    <div class="row"><span><strong>电子邮件：</strong></span><input type="email" ref="email1" :value="email" :disabled="!isEditing" :class="{view:!isEditing,changing:isEditing}"></div><br>
-                                    <div class="row"><span><strong>地址：</strong></span><textarea  ref="address1" :value="address" :disabled="!isEditing" :class="{view:!isEditing,changing:isEditing}"></textarea></div><br>
+                                    <div><label><strong>联络电话</strong></label><br><input type="text" ref="phone1" :value="phone" :disabled="!isEditing" :class="{view:!isEditing,changing:isEditing}"></div><br>
+                                    <div><label><strong>电子邮件</strong></label><br><input type="email" ref="email1" :value="email" :disabled="!isEditing" :class="{view:!isEditing,changing:isEditing}"></div><br>
+                                    <div><label><strong>地址</strong></label><br><textarea  ref="address1" :value="address" :disabled="!isEditing" :class="{view:!isEditing,changing:isEditing}"></textarea></div><br>
                                 </div>
                                 <div class="col-sm-4">
-                                    <div class="row"><span><strong>辩题1：</strong></span><input class="unchangable" type="text" ref="debate_Ques1" :value="debateQues1" disabled></div><br>
-                                    <div class="row"> <span><strong>辩题2：</strong></span><input class="unchangable" type="text" ref="debate_Ques2" :value="debateQues2" disabled></div><br>
-                                    <div class="row"><span><strong>辩题3：</strong></span><input class="unchangable" type="text" ref="debate_Ques3" :value="debateQues3" disabled></div><br>
+                                    <div><label><strong>辩题1</strong></label><br><input class="unchangable" type="text" ref="debate_Ques1" :value="debateQues1" disabled></div><br>
+                                    <div><label><strong>辩题2</strong></label><br><input class="unchangable" type="text" ref="debate_Ques2" :value="debateQues2" disabled></div><br>
+                                    <div><label><strong>辩题3</strong></label><br><input class="unchangable" type="text" ref="debate_Ques3" :value="debateQues3" disabled></div><br>
                                 </div>
                             </div>
-                            <br>
                             <div class="row">
-                                <button v-if="!isEditing" @click.prevent="isEditing = !isEditing"  class="btn btn-primary">Edit</button>
-
-
-                                <button @click.prevent="save" v-else-if="isEditing" class="btn btn-primary  ">Save</button><span>&nbsp&nbsp</span>
-
-                                <button v-if="isEditing" @click.prevent="isEditing = false" class="btn btn-primary  ">Cancel</button>
+                                <button v-if="!isEditing" @click.prevent="isEditing = !isEditing"  class="btn-edit1"><strong>编辑</strong></button>
+                                <button @click.prevent="save" v-else-if="isEditing" class="btn-edit"><strong>保持更改</strong></button><span>&nbsp&nbsp</span>
+                                <button v-if="isEditing" @click.prevent="isEditing = false" class="btn-edit"><strong>取消更改</strong></button>
                             </div>
-
-
                         </form>
                     </b-tab>
-                    <b-tab title="进程">
-                        <br>
-                        <div>
-                            <h2>进度表</h2><br><br>
-                            <b-progress :max="max" striped :animated="animate" class="mb-2" height="3.5rem">
-                                <b-progress-bar :value="value" variant="success"  animated >
-                                    <strong><span style="color:white;font-size: 18px;">注册成功</span></strong>
-                                </b-progress-bar>
-
-                                <b-progress-bar :value="value" variant="secondary" animated v-if="book==0">
-                                    <strong><span style="color:white;font-size: 18px;">意愿书</span></strong>
-                                </b-progress-bar>
-                                <b-progress-bar :value="value" variant="success" animated v-if="book==1" >
-                                    <strong><span style="color:white;font-size: 18px;">意愿书</span></strong>
-                                </b-progress-bar>
-
-                                <b-progress-bar :value="value" animated  variant="secondary" v-if="drawn==0">
-                                    <strong> <span style="color:white;font-size: 18px;">电子抽签</span></strong>
-                                </b-progress-bar>
-                                <b-progress-bar :value="value" animated  variant="success" v-if="drawn==1">
-                                    <strong> <span style="color:white;font-size: 18px;">电子抽签</span></strong>
-                                </b-progress-bar>
-
-                                <b-progress-bar :value="value"  animated variant="secondary" v-if="qualified==0">
-                                    <strong><span style="color:white;font-size: 18px;">报名成功</span></strong>
-                                </b-progress-bar>
-                                <b-progress-bar :value="value"  animated variant="success" v-if="qualified==1">
-                                    <strong><span style="color:white;font-size: 18px;">报名成功</span></strong>
-                                </b-progress-bar>
-
-                            </b-progress>
-                        </div>
-
-
-
-                        <p><span style="color:red;">*</span>24小时内将会审核意愿书是否通过</p>
-                    </b-tab>
-
+                   
                     <b-tab title="意愿书" v-if="book==0">
                         <br>
                         <input type="file" id="file" ref="file" v-on:change="handleFileUpload()" class="btn btn-default" required/>
@@ -155,7 +142,7 @@
                         }
                     })
                     .then(resp=>{
-                        console.log(resp.data);
+                        //console.log(resp.data);
                         this.user = resp.data.user
                         this.uni_name_cn=resp.data.user.uniNameCN
                         this.uni_name_en=resp.data.user.uniNameEN
@@ -163,7 +150,7 @@
                         this.phone=resp.data.user.contactNumber
                         this.email=resp.data.user.email
                         this.book=resp.data.user.remember_token
-                        console.log(this.book);
+                        //console.log(this.book);
                         this.region=resp.data.user.region
                         this.drawn=resp.data.uniDetails.drawn
                         this.qualified=resp.data.uniDetails.qualified
@@ -267,7 +254,34 @@
         width:70%;
         color:lightslategrey;}
     .content{width:80%;margin:auto;}
-
-
+    .btn-edit{
+        border-style:solid;
+        border-color: darkred;
+        color:white;
+        background-color: darkred;
+        padding-left: 5%;
+        padding-right: 5%;
+        padding-top: 1%;
+        padding-bottom:1%;
+        margin: auto;
+         -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+        -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+        box-sizing: border-box;         /* Opera/IE 8+ */
+    }
+    .btn-edit1{
+        border-style:solid;
+        border-color: darkred;
+        color:white;
+        background-color: darkred;
+        margin: auto;
+        padding-left:10%;
+        padding-right:10%;
+        padding-top: 1%;
+        padding-bottom:1%;
+        width: 50%;
+        -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+        -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+        box-sizing: border-box;         /* Opera/IE 8+ */
+    }
 
 </style>
