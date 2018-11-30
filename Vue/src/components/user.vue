@@ -144,6 +144,7 @@
                             case "Macau": this.region = "澳门"; break;
                             case "Taiwan": this.region = "台湾"; break;
                             case "Australia": this.region = "澳大利亚"; break;
+                            case "Others": this.region="其他地区"; break;
                             default: break;
                         }
                         this.debateQues1=resp.data.uniDetails.debateQues1

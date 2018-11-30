@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\DB;
 
 class WarController extends Controller
 {
-    //
+
     //param = region, offStartTime, offEndTime, offPressTime
     public function setOffTime(){
 
@@ -229,6 +229,29 @@ class WarController extends Controller
         }
     }
 
+    public function getAllTime(){
+        $region = ['Malaysia', 'Singapore', 'Australia', 'China', 'Taiwan', 'Hong Kong', 'Macau', 'Others','Admin'];
+        $times = [];
+        for($i = 0 ; $i < count($region); $i++){
+            $array = $this->getStartTime($region[$i]);
+            array_push($times, $array);
+        }
+
+        return response()->json($times);
+    }
+
+    public function getStartTime(String $region){
+        $user = User::where('region', $region)->first();
+        if($user === null){
+            return array($region,0, 0);
+        }
+        date_default_timezone_set("Asia/Singapore");
+        $offTimeStart = date("Y-m-d H:i:s", $user->uniDetails->offTimeStart/1000000);
+        $offTimeEnd = date("Y-m-d H:i:s",$user->uniDetails->offTimeEnd/1000000);
+
+        $array = array($region, $offTimeStart,$offTimeEnd);
+        return $array;
+    }
 
     public function getOffStartTime(){
         $offTimeStart = auth()->user()->uniDetails->offTimeStart;

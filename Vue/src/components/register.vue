@@ -111,7 +111,8 @@
                 { value: 'Hong Kong', text: '香港'},
                 {value:'Macao',text:'澳门'},
                 {value:'Taiwan',text:'台湾'},
-                {value:'Australia',text:'澳洲'}
+                {value:'Australia',text:'澳洲'},
+                {value:'Others', text:'其他地区'}
             ]
         }},
        
@@ -180,8 +181,8 @@
                                     }else if(this.info.message === "Successfully registered!"){
                                         this.uploadFile();
                                         //console.log(this.file)
-                                        alert("成功注册账号！");
-                                        this.$router.push('/')
+                                        //alert("成功注册账号！");
+                                        this.$router.push('notifysuccess')
                                         //document.getElementById("myForm").reset();
                                     }
                                 });

@@ -15,6 +15,7 @@ import result from '@/components/result'
 import user from '@/components/user'
 import admin from '@/components/admin'
 import resetpw from '@/components/resetpw'
+import notifysuccess from '@/components/notifysuccess'
 
 Vue.use(Router)
 
@@ -61,6 +62,7 @@ export default new Router({
     {path:'/videohub',name:'videohub',component:videohub},
     {path:'/navigation',name:'navigation',component:navigation},
     {path:'/resetpw', name:'resetpw', component:resetpw},
+    {path:'/notifysuccess', name:'notifysuccess', component:notifysuccess},
     {
       path:'/login',
       name:'login',

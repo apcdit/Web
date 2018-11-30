@@ -78,10 +78,12 @@
     import user from './components/user.vue'
     import resetpw from './components/resetpw.vue'
     import admin from './components/admin.vue'
+    import notifysuccess from './components/notifysuccess.vue'
+
 
     export default {
         name: 'App',
-        components: {admin,about,pastyear,rules,contact,navigation,videohub,login,register,register1,lottery,simlottery,result,user,resetpw},
+        components: {admin,about,pastyear,rules,contact,navigation,videohub,login,register,register1,lottery,simlottery,result,user,resetpw,notifysuccess},
         data(){
             return{
                 logged : false,

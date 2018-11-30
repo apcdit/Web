@@ -8,6 +8,7 @@ use App\User;
 
 class UserController extends Controller
 {
+
     public function updateDetails(Request $request){
 
         $user = User::where('uniNameCN', $request->uni_name_cn)->first();
@@ -53,4 +54,6 @@ class UserController extends Controller
 
         return response()->json($user);
     }
+
+    
 }

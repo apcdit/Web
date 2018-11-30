@@ -1,8 +1,9 @@
 <template>
     <div class="container">
         <h1><strong>管理者</strong></h1>
-        <hr>            
-
+       
+        
+        <hr>           
             <b-card>
                 <b-tabs pills card vertical>
                     <b-tab title="设置时间" active>
@@ -25,6 +26,10 @@
                             <h4>截止时间</h4>
                             <input v-model="offTimeEnd" placeholder="输入截止时间">
                             <button @click="setTime" class="btn btn-primary">设置时间</button>
+                             <button @click="getTime">get time</button>
+                             <ul >
+                                <li v-for="index in 8" :key="index">{{times[index]}}</li>
+                            </ul>
                         </div>
                     </b-tab>
 
@@ -71,12 +76,6 @@
                             </select>
                             <br>
                             <button @click="getUsers">显示该地区大学</button>
-                            <!-- <ol>
-                                <li v-for="user in users">
-                                    {{user.uniNameCN}}
-                                </li>
-                            </ol> -->
-                            
                         </div>
                     </b-tab>
 
@@ -84,7 +83,8 @@
             </b-card>
             <br>
             <div class="container" style="margin:auto;border-radius: 2px;box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);background:white;padding:0.1% 5% 3% 5%;border-radius: 25px;background-color: #F7F7F7;">
-                <b-table hover :items="users" :fields="fields"><b-table>
+                <b-table hover :items="users" :fields="fields"></b-table>
+                
             </div>
     </div>    
 </template>
@@ -99,9 +99,14 @@ export default {
             offTimeStart:'',
             offTimeEnd:'',
             users: {},
+            showTime: false,
+            times: {},
             fields: ['id', 'uniNameCN', 'uniNameEN', 'region', 'nameEn', 'nameCn', 'address', 'contactNumber', 'email'],
         }
     },
+    // mounted(){
+    //     this.getTime();
+    // },
     methods:{
         setTime(){
             const data = {
@@ -160,6 +165,18 @@ export default {
                 })
                 .then(response=>{
                     this.users = response.data;
+                })
+        },
+        getTime(){
+
+            axios
+                .get('api/time/all',{
+                    headers:{
+                        Authorization: "Bearer " + localStorage.getItem('token')
+                    }
+                })
+                .then(response=>{
+                    this.times = response.data;
                 })
         }
     }
