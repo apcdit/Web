@@ -109,7 +109,7 @@
                 { value: 'Malaysia', text: '马来西亚' },
                 { value: 'China', text: '中国大陆' },
                 { value: 'Hong Kong', text: '香港'},
-                {value:'Macao',text:'澳门'},
+                {value:'Macau',text:'澳门'},
                 {value:'Taiwan',text:'台湾'},
                 {value:'Australia',text:'澳洲'},
                 {value:'Others', text:'其他地区'}

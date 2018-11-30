@@ -75,7 +75,7 @@
                                 <option>Admin</option>
                             </select>
                             <br>
-                            <button @click="getUsers" class="btn btn-default">显示该地区大学</button>
+                            <button @click="getUsers" v-on:click="pressed=true" class="btn btn-primary">显示该地区大学</button>
                         </div>
                     </b-tab>
 
@@ -83,6 +83,7 @@
             </b-card>
             <br>
             <div class="container" style="margin:auto;border-radius: 2px;box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);background:white;padding:0.1% 5% 3% 5%;border-radius: 25px;background-color: #F7F7F7;">
+                <h3 v-if="pressed">报名队伍数量: {{numParticipants}} </h3>
                 <b-table hover :items="users" :fields="fields"><b-table>
             </div>
     </div>    
@@ -98,6 +99,8 @@ export default {
             offTimeStart:'',
             offTimeEnd:'',
             users: {},
+            pressed: false,
+            numParticipants: 0,
             times: {},
             fields: ['id', 'uniNameCN', 'uniNameEN', 'region', 'nameEn', 'nameCn', 'address', 'contactNumber', 'email'],
         }
@@ -164,7 +167,7 @@ export default {
                 })
                 .then(response=>{
                     this.users = response.data;
-                    console.log(this.users);
+                    this.numParticipants = this.users.length;
                 })
         },
         getTime(){
