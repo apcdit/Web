@@ -27,19 +27,20 @@
                     </ul>
                 </div>
                 <div class="col-md-8 " id="latestPosts" style="opacity:0.85;padding-top:1%">
-                    <div class="container">
-                        <h4 style="color:darkred; "><strong>最新</strong>消息</h4>
+                    <div class="container1">
+                        <h2 style="color:darkred; ">最新消息</h2>
                         <br>
                         <ul>
                             <li v-for="post in posts">
-                                <div class="col-xs-4">
+                                <div class="col-sm">
                                     <span class="" href="#" style="text-decoration: none;color:black;">
-                                        <div class="row">
-                                            <div class="col-sm-4"><img v-bind:src="post.postPic" width="180px" height="150px"></div>
+                                        <div class="row" style="width:100%">
+                                            <div class="col-sm-4" style="width:100%"><img v-bind:src="post.postPic" width="150px" height="150px"></div>
 
-                                            <div class="col-sm-8">
+                                            <div class="col-sm-8" style="width:100%">
                                                 <div class="row">
-                                                    <a href=""><h2 style="color:#9A2A1F;">{{post.postTitle}}</h2></a>
+                                                    <router-link :to="{ name: 'post', params: { id: post.id}}">
+                                                        <h2 style="color:#9A2A1F;">{{post.postTitle}}</h2></router-link>
                                                 </div>
                                                 <div class="row">
                                                     <p style="15px">{{post.postDec}}</p>
@@ -54,22 +55,27 @@
                                         </div>
                                     </span>
                                 </div>
-                                        <hr>
-                                    </li>
-                                </ul>
-                            
-                            <b-tab title="最新赛况" v-if="false"></b-tab>
-                            <b-tab title="对垒表" v-if="false"></b-tab>
+                                <hr>
+                            </li>
+                        </ul>
+
+                        <b-tab title="最新赛况" v-if="false"></b-tab>
+                        <b-tab title="对垒表" v-if="false"></b-tab>
 
                     </div>
                 </div>
             </div>
         </div>
         <hr/>
-        <center>
-            <h1 v-if="false">参赛队伍</h1>
 
-        </center>
+            <!-- <h1 style="text-align:center;color:#9A2A1F">报名队伍</h1>
+        <br/>
+        <div class="grid" >
+            <div class="cell" v-for="n in uni">{{n.uniNameCN}}</div>
+
+        </div> -->
+
+
         <hr/>
     </div>
 </template>
@@ -85,11 +91,13 @@
             return{
                 videos:['https://www.youtube.com/embed/U4v2W_V9Fk0'],
                 posts: '',
-                user: ''
+                user: '',
+                uni:[],
             }
         },
         created(){
             this.fetchPosts()
+            //this.fetchUni()
         },
         methods:{
             fetchPosts(){
@@ -100,6 +108,14 @@
                         //console.log(localStorage.getItem('user'))
                     })
             },
+            // fetchUni(){
+            //     axios
+            //         .get('api/uniName/all')
+            //         .then(response=>{
+            //             this.uni=response.data;
+            //             console.log(this.uni);
+            //         })
+            // }
 
         }
 
@@ -110,7 +126,8 @@
     .pagination-list{
         padding-bottom: 25px
     }
-    .container{margin-top:1%;width:80%;}
+    .container{margin-top:1%;width:100%;}
+    .container1{width:100%;}
     .btn{
         background-color: #9A2A1F;
         color: white;
@@ -140,4 +157,21 @@
         -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
         -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
         box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);}
+
+    .grid {
+        display: grid;
+        grid-gap: 10px;
+        grid-template-columns: repeat(3, 1fr);
+        width:90%;
+        margin:auto;
+    }
+    .cell{
+        padding: 10px;
+        background-color: #9D0000;
+        color:#F9F9F6;
+        text-align:center;
+        border-radius: 25px;
+    }
+
+
 </style>

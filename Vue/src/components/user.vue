@@ -2,7 +2,7 @@
 
     <div>
         
-        <div class="container">
+        <div class="container col-xs-6">
             <div class="content">
                 <b-progress :max="max" striped :animated="animate" class="mb-2" height="3.5rem">
                 <b-progress-bar :value="value" variant="success"  animated >

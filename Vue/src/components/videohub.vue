@@ -82,7 +82,7 @@
        }
    }
 </script>
-<style>
+<style scoped>
     .expandB1{
         border: none;
         padding: 0;

@@ -29,11 +29,12 @@
                             <div>
                             <h4>截止时间</h4>
                             <input v-model="offTimeEnd" placeholder="输入截止时间">
+                            <br>
                             </div>
                             <button @click="setTime" class="btn btn-primary">设置时间</button>
                             <button @click="getTime" class="btn btn-primary">get time</button>
                              <ul >
-                                <li v-for="index in 8" :key="index">{{times[index]}}</li>
+                                <li v-for="index in 8" :key="index">{{times[index][0]}}</li>
                             </ul>
                         </div>
                         </div>

@@ -52,7 +52,7 @@ export default new Vuex.Store({
               localStorage.setItem('token_mystery', token_mystery)
               axios.defaults.headers.common['Authorization'] = token //set the token header
               commit('auth_success', token, user)
-              router.push('/');
+              router.push('/user');
               resolve(resp)
             }      
           })

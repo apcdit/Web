@@ -15,7 +15,7 @@
                                 <b-dropdown-item href="/#">筹委介绍</b-dropdown-item>
                             </b-nav-item-dropdown>
                             <b-nav-item-dropdown style="font-size: 1.25em; font-weight:bold;" text="活动详情" right >
-                                <b-dropdown-item href="#">最新消息</b-dropdown-item>
+                                <b-dropdown-item href="#/latestNews">最新消息</b-dropdown-item>
                                 <b-dropdown-item href="#">最新赛况</b-dropdown-item>
                                 <b-dropdown-item href="#">赛程</b-dropdown-item>
                             </b-nav-item-dropdown>
@@ -79,11 +79,14 @@
     import resetpw from './components/resetpw.vue'
     import admin from './components/admin.vue'
     import notifysuccess from './components/notifysuccess.vue'
-
+    import latestNews from './components/latestNews.vue'
+    import post from './components/post.vue'
 
     export default {
         name: 'App',
-        components: {admin,about,pastyear,rules,contact,navigation,videohub,login,register,register1,lottery,simlottery,result,user,resetpw,notifysuccess},
+        components: {admin,about,pastyear,rules,contact,
+                    navigation,videohub,login,register,register1,lottery,
+                    simlottery,result,user,resetpw,notifysuccess,latestNews,post,},
         data(){
             return{
                 logged : false,
