@@ -33,9 +33,9 @@
                             </div>
                             <button @click="setTime" class="btn btn-primary">设置时间</button>
                             <button @click="getTime" class="btn btn-primary">get time</button>
-                             <ul >
+                             <!-- <ul >
                                 <li v-for="index in 8" :key="index">{{times[index][0]}}</li>
-                            </ul>
+                            </ul> -->
                         </div>
                         </div>
                     </b-tab>

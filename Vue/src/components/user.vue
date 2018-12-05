@@ -56,9 +56,9 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <button v-if="!isEditing" @click.prevent="isEditing = !isEditing"  class="btn-edit1"><strong>编辑</strong></button>
-                                <button @click.prevent="save" v-else-if="isEditing" class="btn-edit"><strong>保持更改</strong></button><span>&nbsp&nbsp</span>
-                                <button v-if="isEditing" @click.prevent="isEditing = false" class="btn-edit"><strong>取消更改</strong></button>
+                                <button v-if="!isEditing" @click.prevent="isEditing = !isEditing"  class="btn btn-edit1"><strong>编辑</strong></button>
+                                <button @click.prevent="save" v-else-if="isEditing" class="btn btn-edit"><strong>保持更改</strong></button><span>&nbsp&nbsp</span>
+                                <button v-if="isEditing" @click.prevent="isEditing = false" class="btn btn-edit"><strong>取消更改</strong></button>
                             </div>
                         </form>
                     </b-tab>
