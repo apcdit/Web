@@ -32,7 +32,7 @@
                                 <b-dropdown-item to='user' v-else>{{update.uniNameCN}}</b-dropdown-item>
                                 <b-dropdown-item to='admin' v-if="update.admin">Admin Dashboard</b-dropdown-item>
                                 <b-dropdown-item to='lottery' v-if="false">电子抽签</b-dropdown-item>
-                                <b-dropdown-item to='result' v-if="false">电子抽签结果</b-dropdown-item>
+                                <b-dropdown-item to='result' v-if="drawn">电子抽签结果</b-dropdown-item>
                                 <b-dropdown-item @click="logout()"> 登出 </b-dropdown-item>
                             </b-nav-item-dropdown>
                         </b-navbar-nav>
@@ -93,14 +93,16 @@
                 logged : false,
                 user: JSON.parse(localStorage.getItem('user')),
                 uniDetails: {},
-
+                drawn: '',
             }
         },
         computed : {
             isLoggedIn : function(){ this.logged=this.$store.getters.isLoggedIn; return this.$store.getters.isLoggedIn},
             //authUser: function(){ if(this.logged && this.$store.getters.authUser) return JSON.parse(this.$store.getters.authUser);},
-            status: function(){ return (this.$store.getters.authStatus) ;},
-            update: function(){ return JSON.parse(localStorage.getItem('user'))}
+            update: function(){ return JSON.parse(localStorage.getItem('user'))},
+        },
+        created() {
+            this.showUser();
         },
         methods: {
             logout: function () {
@@ -110,17 +112,21 @@
                     })
             },
 
-            // showUser: function(){
-            //     axios
-            //         .get('api/user',{headers: { Authorization: "Bearer " + localStorage.getItem('token')}})
-            //         .then(resp=>{
-            //             this.user = resp.data.user
-            //             this.uniDetails = resp.data.uniDetails
-            //         })
-            //         .catch(er=>{
-                        
-            //         })
-            // },
+            showUser: function(){
+                if(localStorage.getItem('token') == null){
+                    return true;
+                }
+                axios
+                    .get('api/user',{headers: { Authorization: "Bearer " + localStorage.getItem('token')}})
+                    .then(resp=>{
+                        this.user = resp.data.user
+                        this.uniDetails = resp.data.uniDetails
+                        this.drawn = this.uniDetails.drawn
+                    })
+                    .catch(er=>{
+                        //console.log("damn");
+                    })
+            },
 
         },
     }

@@ -6,7 +6,7 @@
         <img v-bind:src="posts.postPic" width="180px" height="150px">
         <h1>{{posts.postTitle}}</h1>
         <span style="color:grey;font-size:9px;">{{posts.created_at}}</span>
-        <p>{{posts.postDec}}</p>
+        <p>{{posts.postContent}}</p>
         <router-link to='/latestNews'><button >返回最新消息</button></router-link>
     </div>
         </div>
@@ -32,10 +32,13 @@
                 // 取到路由带过来的参数
                 var routerParams = this.$route.params.id
                 // 将数据放在当前组件的数据内
-                if(routerParams===undefined){this.id=localStorage.id;}
-                else{
-                this.id = routerParams
-                console.log(this.id);localStorage.id=this.id;console.log(localStorage.id);}
+                // if(routerParams===undefined){this.id=localStorage.id;}
+                // else{
+                // this.id = routerParams
+                // console.log(this.id);localStorage.id=this.id;console.log(localStorage.id);}
+                if(routerParams !== undefined){
+                    this.id = routerParams;
+                }
             },
             getPost(){
 

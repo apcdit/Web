@@ -5,6 +5,10 @@ import router from './router'
 
 Vue.use(Vuex)
 
+/* TODO
+  - need to solve the issue where user tries to logout when token expired
+*/
+
 export default new Vuex.Store({
   state: {
     status: '',
@@ -76,7 +80,7 @@ export default new Vuex.Store({
             localStorage.removeItem('user')
             delete axios.defaults.headers.common['Authorization']
             resolve()
-          }) //may need to connect to backend
+          }) 
         })
       },
   },

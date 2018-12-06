@@ -64,9 +64,18 @@ export default new Router({
     {path:'/videohub',name:'videohub',component:videohub},
     {path:'/navigation',name:'navigation',component:navigation},
     {path:'/resetpw', name:'resetpw', component:resetpw},
-    {path:'/notifysuccess', name:'notifysuccess', component:notifysuccess},
     {path:'/latestNews', name:'latestNews', component:latestNews},
-    {path:'/post', name:'post', component:post},
+    {
+      path:'/post/:id', 
+      name:'post', 
+      component:post
+    },
+    {
+      path:'/notifysuccess', 
+      name:'notifysuccess', 
+      component:notifysuccess
+      
+    },
     {
       path:'/login',
       name:'login',
