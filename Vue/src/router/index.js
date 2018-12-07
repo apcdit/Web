@@ -18,6 +18,7 @@ import resetpw from '@/components/resetpw'
 import notifysuccess from '@/components/notifysuccess'
 import latestNews from '@/components/latestNews'
 import post from '@/components/post'
+import home from '@/components/home'
 
 Vue.use(Router)
 
@@ -65,6 +66,7 @@ export default new Router({
     {path:'/navigation',name:'navigation',component:navigation},
     {path:'/resetpw', name:'resetpw', component:resetpw},
     {path:'/latestNews', name:'latestNews', component:latestNews},
+    {path:'/home', name:'home', component:home},
     {
       path:'/post/:id', 
       name:'post', 

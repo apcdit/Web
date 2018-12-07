@@ -2,7 +2,7 @@
 
     <div>
         
-        <div class="container col-xs-6">
+        <div class="container">
             <div class="content">
                 <b-progress :max="max" striped :animated="animate" class="mb-2" height="3.5rem">
                 <b-progress-bar :value="value" variant="success"  animated >
@@ -253,7 +253,10 @@
         box-sizing: border-box;
         width:70%;
         color:lightslategrey;}
-    .content{width:80%;margin:auto;}
+    .content{
+        width:80%;
+        margin:auto;
+    }
     .btn-edit{
         border-style:solid;
         border-color: darkred;

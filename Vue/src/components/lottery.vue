@@ -64,16 +64,12 @@ export default
       user: {},
       uniDetails: {},
       drawn: 1,
-      epochTime: 0,
       counter:0,
       token_mystery: '',
       //startTime: 0,
     }
   },
   computed: {
-    now () {
-      return new Date
-    },
     authUser: function(){ if(this.$store.getters.authUser) return JSON.parse(this.$store.getters.authUser);},
   },
   mounted(){
@@ -93,6 +89,9 @@ export default
           //if((current - this.epochTime*1000) >= 28000000){
             const data = {'token_mystery': token_mystery} //pressed here is to notify backend that user pressed the button
             //console.log(data)
+            if(this.counter != 0){
+              return true;
+            }
             axios
                 .post('/Vue/dist/time.php', data, { ///api/time/official/store
                     headers: { Authorization: "Bearer " + localStorage.getItem('token')}
@@ -100,11 +99,11 @@ export default
                 .then(resp=>{
                     if(resp.data.status == 200){
                         //console.log(resp.data)
+                        ++this.counter;
                         alert("时间已成功记录！")
                         this.$router.push('result');
                     }else{
-
-                      alert(resp.data.message);
+                      return;
                     }
                 })
           

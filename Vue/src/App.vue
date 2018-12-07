@@ -30,7 +30,7 @@
                             <b-nav-item-dropdown style="font-size: 1.25em; font-weight:bold;" text="大学资料"  v-if="isLoggedIn" >
                                 <b-dropdown-item to='user' v-if="!update">个人主页</b-dropdown-item>
                                 <b-dropdown-item to='user' v-else>{{update.uniNameCN}}</b-dropdown-item>
-                                <b-dropdown-item to='admin' v-if="update.admin">Admin Dashboard</b-dropdown-item>
+                                <b-dropdown-item to='admin' v-if="admin">Admin Dashboard</b-dropdown-item>
                                 <b-dropdown-item to='lottery' v-if="false">电子抽签</b-dropdown-item>
                                 <b-dropdown-item to='result' v-if="drawn">电子抽签结果</b-dropdown-item>
                                 <b-dropdown-item @click="logout()"> 登出 </b-dropdown-item>
@@ -82,23 +82,25 @@
     import notifysuccess from './components/notifysuccess.vue'
     import latestNews from './components/latestNews.vue'
     import post from './components/post.vue'
+    import home from './components/home.vue'
 
     export default {
         name: 'App',
         components: {admin,about,pastyear,rules,contact,
                     navigation,videohub,login,register,register1,lottery,
-                    simlottery,result,user,resetpw,notifysuccess,latestNews,post,},
+                    simlottery,result,user,resetpw,notifysuccess,latestNews,post,home,},
         data(){
             return{
                 logged : false,
                 user: JSON.parse(localStorage.getItem('user')),
                 uniDetails: {},
-                drawn: '',
+                drawn: false,
+                admin: false,
+                uniNameCN: '',
             }
         },
         computed : {
             isLoggedIn : function(){ this.logged=this.$store.getters.isLoggedIn; return this.$store.getters.isLoggedIn},
-            //authUser: function(){ if(this.logged && this.$store.getters.authUser) return JSON.parse(this.$store.getters.authUser);},
             update: function(){ return JSON.parse(localStorage.getItem('user'))},
         },
         created() {
@@ -113,15 +115,17 @@
             },
 
             showUser: function(){
-                if(localStorage.getItem('token') == null){
-                    return true;
-                }
+                // if(localStorage.getItem('token') == null){
+                //     return true;
+                // }
                 axios
                     .get('api/user',{headers: { Authorization: "Bearer " + localStorage.getItem('token')}})
                     .then(resp=>{
                         this.user = resp.data.user
+                        this.uniNameCN = resp.data.user.uniNameCN
                         this.uniDetails = resp.data.uniDetails
                         this.drawn = this.uniDetails.drawn
+                        this.admin = this.user.admin
                     })
                     .catch(er=>{
                         //console.log("damn");

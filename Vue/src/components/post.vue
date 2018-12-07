@@ -6,7 +6,7 @@
         <img v-bind:src="posts.postPic" width="180px" height="150px">
         <h1>{{posts.postTitle}}</h1>
         <span style="color:grey;font-size:9px;">{{posts.created_at}}</span>
-        <p>{{posts.postContent}}</p>
+        <p v-html="posts.postContent">{{posts.postContent}}</p>
         <router-link to='/latestNews'><button >返回最新消息</button></router-link>
     </div>
         </div>

@@ -94,14 +94,22 @@
                 </b-tabs>
             </b-card>
             <br>
-            <div class="container" style="margin:auto;border-radius: 2px;box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);background:white;padding:0.1% 5% 3% 5%;border-radius: 25px;background-color: #F7F7F7;">
+            <div v-if="pressed1 || pressed" class="container" style="margin:auto;border-radius: 2px;box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);background:white;padding:0.1% 5% 3% 5%;border-radius: 25px;background-color: #F7F7F7;">
                 <div v-if="pressed1">
+                    <br>
                     <h3>辩题</h3>
-                    <b-table hover stacked :items="questions" :fields="fieldsQ"><b-table> 
+                    <b-table hover stacked :items="questions" :fields="fieldsQ"></b-table> 
                 </div>
-                <div v-if="pressed">
-                    <h3>报名队伍数量: {{numParticipants}} </h3>
-                    <b-table hover :items="users" :fields="fields"><b-table>
+                <div>
+                    <div v-if="pressed && numParticipants !== 0">
+                        <br>
+                        <h3>报名队伍数量: {{numParticipants}} </h3>
+                        <b-table hover :items="users" :fields="fields"></b-table>
+                    </div>
+                    <div v-if="numParticipants === 0">
+                        <br>
+                        <h3>次区域暂时没有报名队伍</h3>
+                    </div>
                 </div>
             </div>
     </div>    
@@ -116,7 +124,7 @@ export default {
             selected:'',
             offTimeStart:'',
             offTimeEnd:'',
-            users: {},
+            users: '',
             pressed: false,
             pressed1: false,
             numParticipants: 0,
