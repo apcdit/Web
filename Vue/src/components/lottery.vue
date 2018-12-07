@@ -89,21 +89,26 @@ export default
           //if((current - this.epochTime*1000) >= 28000000){
             const data = {'token_mystery': token_mystery} //pressed here is to notify backend that user pressed the button
             //console.log(data)
-            if(this.counter != 0){
-              return true;
-            }
+            
             axios
                 .post('/Vue/dist/time.php', data, { ///api/time/official/store
                     headers: { Authorization: "Bearer " + localStorage.getItem('token')}
                 })
                 .then(resp=>{
-                    if(resp.data.status == 200){
+                    if(resp.data.status == 200 && this.counter === 0){
                         //console.log(resp.data)
                         ++this.counter;
                         alert("时间已成功记录！")
                         this.$router.push('result');
                     }else{
-                      return;
+                      if(this.counter === 1){
+                        ++counter;
+                        alert("已经报名了！");
+                      }else if(this.counter === 0){
+                        alert(resp.data.message) //haven't reached the time yet
+                      }else{
+                        return true; //prevent additional alert window
+                      }
                     }
                 })
           
