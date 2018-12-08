@@ -8,10 +8,11 @@
             <span id="reauth-email" class="reauth-email"></span>
             <input type="email" id="inputEmail" v-model="email" class="form-control" placeholder="电子邮件" required autofocus>
             <input type="password" id="inputPassword" v-model="password" class="form-control" placeholder="输入密码" required>
-           
-            <button class="btn btn-lg btn-primary btn-block btn-signin">登陆</button>
-
+            <a href='/#/resetpw'>忘记密码?</a>
         </div><!-- /form -->
+        <div class="form-group">
+            <button class="btn btn-lg btn-primary btn-block btn-signin">登陆</button>
+        </div>
 
     </form><!-- /card-container -->
 </div><!-- /container -->

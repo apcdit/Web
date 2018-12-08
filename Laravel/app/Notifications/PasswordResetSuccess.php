@@ -41,9 +41,8 @@ class PasswordResetSuccess extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-            ->line('成功更换密码！')
-            ->line('请将密码记好，勿忘记！')
-            ->line('谢谢！🙏');
+            ->line('已成功更换密码！')
+            ->line('谢谢!');
     }
 
     /**

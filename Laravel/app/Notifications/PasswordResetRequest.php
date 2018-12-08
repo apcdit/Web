@@ -41,12 +41,12 @@ class PasswordResetRequest extends Notification
      */
     public function toMail($notifiable)
     {
-        $url = url('/api/password/find/'.$this->token);
         
         return (new MailMessage)
             ->line('你收到了这封邮件是因为你要求重置密码')
-            ->action('重制密码', url($url))
-            ->line('如果你并未要求重制密码，请无视这封邮件');
+            ->line('验证码: '.$this->token)
+            ->line('如果你并未要求重置密码，请无视这封邮件.')
+            ->markdown('mail.markdown.message');
     }
 
     /**

@@ -19,6 +19,7 @@ import notifysuccess from '@/components/notifysuccess'
 import latestNews from '@/components/latestNews'
 import post from '@/components/post'
 import home from '@/components/home'
+import resetpw1 from '@/components/resetpw1'
 
 Vue.use(Router)
 
@@ -64,9 +65,18 @@ export default new Router({
     {path:'/rules',name:'rules',component:rules},
     {path:'/videohub',name:'videohub',component:videohub},
     {path:'/navigation',name:'navigation',component:navigation},
-    {path:'/resetpw', name:'resetpw', component:resetpw},
     {path:'/latestNews', name:'latestNews', component:latestNews},
     {path:'/home', name:'home', component:home},
+    {
+      path:'/resetpw/token', 
+      name:'resetpw1', 
+      component:resetpw1
+    },
+    {
+      path:'/resetpw', 
+      name:'resetpw', 
+      component:resetpw,
+    },
     {
       path:'/post/:id', 
       name:'post', 

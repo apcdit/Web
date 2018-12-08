@@ -1,9 +1,9 @@
 <?php
 
 $servername = "localhost";
-$username   = "apcn";
-$password   = "abc123456";
-$dbname     = "apchinese";
+$username   = "apchine2_user";
+$password   = "apchinese9";
+$dbname     = "apchine2_apdebate";
 
 
 /** 

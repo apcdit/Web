@@ -33,7 +33,7 @@ class PasswordResetController extends Controller
             ['email' => $user->email],
             [
                 'email' => $user->email,
-                'token' => str_random(60)
+                'token' => str_random(6)
              ]
         );
         if ($user && $passwordReset)
@@ -109,6 +109,8 @@ class PasswordResetController extends Controller
         $user->save();
         $passwordReset->delete();
         $user->notify(new PasswordResetSuccess($passwordReset));
-        return response()->json($user);
+        return response()->json([
+            'message' => 'Password has been resetted!'
+        ]);
     }
 }
