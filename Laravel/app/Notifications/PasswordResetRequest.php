@@ -45,8 +45,7 @@ class PasswordResetRequest extends Notification
         return (new MailMessage)
             ->line('你收到了这封邮件是因为你要求重置密码')
             ->line('验证码: '.$this->token)
-            ->line('如果你并未要求重置密码，请无视这封邮件.')
-            ->markdown('mail.markdown.message');
+            ->line('如果你并未要求重置密码，请无视这封邮件.');
     }
 
     /**
