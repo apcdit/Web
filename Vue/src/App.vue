@@ -29,7 +29,7 @@
                             <b-nav-item router-link to='/login' v-if="false"><img src="https://i.imgur.com/h5GY79C.png"></b-nav-item>
                             <b-nav-item-dropdown style="font-size: 1.25em; font-weight:bold;" text="大学资料"  v-if="isLoggedIn" >
                                 <b-dropdown-item to='user' v-if="!update">个人主页</b-dropdown-item>
-                                <b-dropdown-item to='user' v-else>{{uniNameCN}}</b-dropdown-item>
+                                <b-dropdown-item to='user' v-else>{{user.uniNameCN}}</b-dropdown-item>
                                 <b-dropdown-item to='admin' v-if="admin">Admin Dashboard</b-dropdown-item>
                                 <b-dropdown-item to='lottery' v-if="true">电子抽签</b-dropdown-item>
                                 <b-dropdown-item to='result' v-if="drawn">电子抽签结果</b-dropdown-item>
@@ -97,7 +97,7 @@
                 uniDetails: {},
                 drawn: update.drawn,
                 admin: update.admin,
-                uniNameCN: '',
+                uniNameCN: update.uniNameCN,
             }
         },
         computed : {
