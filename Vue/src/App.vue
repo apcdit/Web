@@ -105,7 +105,7 @@
             update: function(){ return JSON.parse(localStorage.getItem('user'))},
         },
         created() {
-            this.showUser();
+            //this.showUser();
         },
         methods: {
             logout: function () {
