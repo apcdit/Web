@@ -97,7 +97,7 @@
                 uniDetails: {},
                 drawn: update.drawn,
                 admin: update.admin,
-                uniNameCN: update.uniNameCN,
+                uniNameCN: user.uniNameCN,
             }
         },
         computed : {
