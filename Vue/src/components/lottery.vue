@@ -40,7 +40,7 @@
             <h3>请点击下方的按钮进行电子报名。</h3>
             <p>系统开放后，只需点击下方按钮即可完成电子报名程序。</p>
             <br>
-              <button v-on:click="recordTime" class="btn btn-primary btn-block " id="register" :disabled="drawn==1">报名</button>
+              <button v-on:click="recordTime" class="btn btn-primary btn-block " id="register">报名</button>
             <br>
             <button @click="$router.push('user')" class="btn btn-lg">个人主页</button>
           </center>
@@ -70,10 +70,10 @@ export default
     }
   },
   computed: {
-    authUser: function(){ if(this.$store.getters.authUser) return JSON.parse(this.$store.getters.authUser);},
+    //authUser: function(){ if(this.$store.getters.authUser) return JSON.parse(this.$store.getters.authUser);},
   },
   mounted(){
-    this.getDrawn();
+    //this.getDrawn();
     
   },
   created(){
@@ -95,21 +95,27 @@ export default
                     headers: { Authorization: "Bearer " + localStorage.getItem('token')}
                 })
                 .then(resp=>{
-                    if(resp.data.status == 200 && this.counter === 0){
-                        //console.log(resp.data)
-                        ++this.counter;
-                        alert("时间已成功记录！")
-                        this.$router.push('result');
+                    if(resp.data.status == 200){
+                      alert("时间已成功记录");
+                      this.$router.push('result');
                     }else{
-                      if(this.counter === 1){
-                        ++counter;
-                        alert("已经报名了！");
-                      }else if(this.counter === 0){
-                        alert(resp.data.message) //haven't reached the time yet
-                      }else{
-                        return true; //prevent additional alert window
-                      }
+                      alert(resp.data.message);
                     }
+                    // if(resp.data.status == 200 && this.counter === 0){
+                    //     //console.log(resp.data)
+                    //     ++this.counter;
+                    //     alert("时间已成功记录！")
+                    //     this.$router.push('result');
+                    // }else{
+                    //   if(this.counter === 1){
+                    //     ++counter;
+                    //     alert("已经报名了！");
+                    //   }else if(this.counter === 0){
+                    //     alert(resp.data.message) //haven't reached the time yet
+                    //   }else{
+                    //     return true; //prevent additional alert window
+                    //   }
+                    // }
                 })
           
         }catch(e){console.log(e)

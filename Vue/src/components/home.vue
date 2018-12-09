@@ -1,6 +1,7 @@
 <template>
     <body>
-        <div class="bg"></div>
+        <div class="bg"><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br></div>
+        
     </body>
 </template>
 
@@ -15,7 +16,7 @@ export default {
 
 <style scoped>
     .bg{
-        background-image: url("https://i.imgur.com/JJE9YiY.jpg");
+        background-image: url("https://i.imgur.com/7MJgWRy.jpg");
         /* Full height */
         height: 100%; 
         /* Center and scale the image nicely */

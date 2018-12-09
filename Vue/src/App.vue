@@ -189,7 +189,7 @@
     background-repeat: no-repeat;
     background-size: 100% 100%;
     font-family: 'Noto Sans SC', sans-serif;
-    /* background-image: url("https://i.imgur.com/mDsqWbu.jpg") */
+    /* background-image: url("https://i.imgur.com/7MJgWRy.jpg") */
     ;}
 
 
