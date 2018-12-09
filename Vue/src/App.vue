@@ -32,7 +32,7 @@
                                 <b-dropdown-item to='user' v-else>{{update.uniNameCN}}</b-dropdown-item>
                                 <b-dropdown-item to='admin' v-if="update.admin">Admin Dashboard</b-dropdown-item>
                                 <b-dropdown-item to='lottery' v-if="true">电子抽签</b-dropdown-item>
-                                <b-dropdown-item to='result' v-if="drawn">电子抽签结果</b-dropdown-item>
+                                <b-dropdown-item to='result' v-if="drawn==1">电子抽签结果</b-dropdown-item>
                                 <b-dropdown-item @click="logout()"> 登出 </b-dropdown-item>
                             </b-nav-item-dropdown>
                         </b-navbar-nav>
@@ -107,6 +107,9 @@
         created() {
             this.showUser();
         },
+        mounted() {
+            this.getDrawn();
+        },
         methods: {
             logout: function () {
                 this.$store.dispatch('logout')
@@ -125,13 +128,24 @@
                         this.user = resp.data.user
                         this.uniNameCN = resp.data.user.uniNameCN
                         this.uniDetails = resp.data.uniDetails
-                        this.drawn = this.uniDetails.drawn
                         this.admin = this.user.admin
                     })
                     .catch(er=>{
                         //console.log("damn");
                     })
             },
+            getDrawn: function(){
+                axios
+                    .get('api/time/official/getDraw',{
+                    headers:{
+                        Authorization: "Bearer " + localStorage.getItem('token')
+                    }
+                    })
+                    .then(resp=>{
+                        this.drawn = resp.data.drawn
+                        //console.log(this.drawn);
+                    })       
+                },
 
         },
     }
