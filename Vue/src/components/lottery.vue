@@ -82,6 +82,10 @@ export default
   },
   methods:{
     recordTime:function(){
+        if(this.counter !== 0){
+          alert("已经报名了！请等待成绩！");
+          return true;
+        }
         try{
           const token_mystery = localStorage.getItem('token_mystery');
           //var current = (Date.now()+28800)*1000;
@@ -95,7 +99,7 @@ export default
                     headers: { Authorization: "Bearer " + localStorage.getItem('token')}
                 })
                 .then(resp=>{
-                    if(resp.data.status == 200 && this.counter === 0){
+                    if(resp.data.status == 200){
                         //console.log(resp.data)
                         ++this.counter;
                         alert("时间已成功记录！")
