@@ -70,7 +70,7 @@ export default
     }
   },
   computed: {
-    //authUser: function(){ if(this.$store.getters.authUser) return JSON.parse(this.$store.getters.authUser);},
+    authUser: function(){ if(this.$store.getters.authUser) return JSON.parse(this.$store.getters.authUser);},
   },
   mounted(){
     //this.getDrawn();
@@ -95,27 +95,21 @@ export default
                     headers: { Authorization: "Bearer " + localStorage.getItem('token')}
                 })
                 .then(resp=>{
-                    if(resp.data.status == 200){
-                      alert("时间已成功记录");
-                      this.$router.push('result');
+                    if(resp.data.status == 200 && this.counter === 0){
+                        //console.log(resp.data)
+                        ++this.counter;
+                        alert("时间已成功记录！")
+                        this.$router.push('result');
                     }else{
-                      alert(resp.data.message);
+                      if(this.counter === 1){
+                        ++counter;
+                        alert("已经报名了！");
+                      }else if(this.counter === 0){
+                        alert(resp.data.message) //haven't reached the time yet
+                      }else{
+                        return true; //prevent additional alert window
+                      }
                     }
-                    // if(resp.data.status == 200 && this.counter === 0){
-                    //     //console.log(resp.data)
-                    //     ++this.counter;
-                    //     alert("时间已成功记录！")
-                    //     this.$router.push('result');
-                    // }else{
-                    //   if(this.counter === 1){
-                    //     ++counter;
-                    //     alert("已经报名了！");
-                    //   }else if(this.counter === 0){
-                    //     alert(resp.data.message) //haven't reached the time yet
-                    //   }else{
-                    //     return true; //prevent additional alert window
-                    //   }
-                    // }
                 })
           
         }catch(e){console.log(e)
