@@ -104,8 +104,8 @@
             isLoggedIn : function(){ this.logged=this.$store.getters.isLoggedIn; return this.$store.getters.isLoggedIn},
             update: function(){ return JSON.parse(localStorage.getItem('user'))}
         },
-        created() {
-            //this.showUser();
+        mounted() {
+            this.showUser();
         },
         methods: {
             logout: function () {
