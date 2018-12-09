@@ -30,7 +30,7 @@
                             <b-nav-item-dropdown style="font-size: 1.25em; font-weight:bold;" text="大学资料"  v-if="isLoggedIn" >
                                 <b-dropdown-item to='user' v-if="!update">个人主页</b-dropdown-item>
                                 <b-dropdown-item to='user' v-else>{{update.uniNameCN}}</b-dropdown-item>
-                                <b-dropdown-item to='admin' v-if="admin">Admin Dashboard</b-dropdown-item>
+                                <b-dropdown-item to='admin' v-if="update.admin">Admin Dashboard</b-dropdown-item>
                                 <b-dropdown-item to='lottery' v-if="true">电子抽签</b-dropdown-item>
                                 <b-dropdown-item to='result' v-if="drawn">电子抽签结果</b-dropdown-item>
                                 <b-dropdown-item @click="logout()"> 登出 </b-dropdown-item>
@@ -95,8 +95,8 @@
                 logged : false,
                 user: JSON.parse(localStorage.getItem('user')),
                 uniDetails: {},
-                drawn: user.drawn,
-                admin: user.admin,
+                drawn: false,
+                admin: false,
 
             }
         },
@@ -104,7 +104,7 @@
             isLoggedIn : function(){ this.logged=this.$store.getters.isLoggedIn; return this.$store.getters.isLoggedIn},
             update: function(){ return JSON.parse(localStorage.getItem('user'))}
         },
-        mounted() {
+        created() {
             this.showUser();
         },
         methods: {
