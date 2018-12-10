@@ -257,12 +257,14 @@ class WarController extends Controller
         $offTimeStart = auth()->user()->uniDetails->offTimeStart;
         date_default_timezone_set("Asia/Singapore");
         $offTimeStart1 = date("d/m/Y H:i:s", $offTimeStart/1000000)." SGT";
+        $offTimeEnd = auth()->user()->uniDetails->offTimeEnd;
+        $offTimeEnd = date("d/m/Y H:i:s", $offTimeEnd/1000000)." SGT";
 
         if($offTimeStart != null){
             return response()->json([
                 'status' => 200,
                 'offTimeStart' => $offTimeStart1, //proper timezone
-                'offTimeStart2' => $offTimeStart //epoch
+                'offTimeEnd' => $offTimeEnd,
             ]);
         }
     }

@@ -28,7 +28,7 @@
 
     <div class="col-md-4" style="text-align:center;padding:1em 0;">
       <h3><a style="text-decoration:none;color:darkred">系统开放时间</a><span style="color:gray;"><br />(新加坡时间)</span></h3>
-      <h6>{{offTimeStart}}</h6>
+      <h6>{{offTimeStart}} ~ {{offTimeEnd}}</h6>
     </div>
 
     <br>
@@ -66,7 +66,7 @@ export default
       drawn: 1,
       counter:0,
       token_mystery: '',
-      //startTime: 0,
+      offTimeEnd: 0,
     }
   },
   computed: {
@@ -84,11 +84,7 @@ export default
     recordTime:function(){
         try{
           const token_mystery = localStorage.getItem('token_mystery');
-          //var current = (Date.now()+28800)*1000;
-          //console.log("current: "+current + " epochStart: " + this.epochTime*1000 + " diff: " + (current-this.epochTime*1000));
-          //if((current - this.epochTime*1000) >= 28000000){
             const data = {'token_mystery': token_mystery} //pressed here is to notify backend that user pressed the button
-            //console.log(data)
             
             axios
                 .post('/Vue/dist/time.php', data, { ///api/time/official/store
@@ -119,7 +115,7 @@ export default
           //console.log(resp.data)
           if(resp.data.status == 200){
               this.offTimeStart = resp.data.offTimeStart; //formatted time
-              this.epochTime = resp.data.offTimeStart2; //epoch time
+              this.offTimeEnd = resp.data.offTimeEnd;
           }
         })
     },
