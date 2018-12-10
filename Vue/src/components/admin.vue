@@ -33,6 +33,8 @@
                             </div>
                             <button @click="setTime" class="btn btn-primary">设置时间</button>
                             <button @click="getTime" class="btn btn-primary">get time</button>
+                            <button @click="cache" class="btn btn-primary">cache</button>
+                            <button @click="optimize" class="btn btn-primary">optimize</button>
                              <!-- <ul >
                                 <li v-for="index in 8" :key="index">{{times[index][0]}}</li>
                             </ul> -->
@@ -261,6 +263,28 @@ export default {
                 })
                 .then(response=>{
                     this.questions = response.data;
+                })
+        },
+        cache(){
+            axios
+                .get('api/config-cache',{
+                    headers:{
+                        Authorization: "Bearer " +localStorage.getItem('token')
+                    }
+                })
+                .then(response=>{
+                    alert(response.data.message);
+                })
+        },
+        optimize(){
+            axios
+                .get('api/optimize',{
+                    headers:{
+                        Authorization: "Bearer " + localStorage.getItem('token')
+                    }
+                })
+                .then(response =>{
+                    alert(response.data.message);
                 })
         }
     }

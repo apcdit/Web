@@ -23,6 +23,19 @@ Route::group(['middleware' => ['auth:api', 'admin']],function(){
         ]);
     });
 
+    Route::get('/optimize', function(){
+        $exitCode = Artisan::call('optimize');
+        return response()->json([
+            'message' => "optimized!"
+        ]);
+    });
+    Route::get('/config-cache', function(){
+        $exitCode = Artisan::call('config:cache');
+        return response()->json([
+            'message' => "config cached!"
+        ]);
+    });
+    
     Route::get('time/all', 'WarController@getAllTime');
     Route::get('user/all', 'UserController@getUsers');
     Route::put('time/simulation/set', 'WarController@setSimTime');
