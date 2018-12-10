@@ -153,7 +153,7 @@
 
 <style>
 
-    @import url('https://fonts.googleapis.com/css?family=Noto+Sans+SC');
+    /* @import url('https://fonts.googleapis.com/css?family=Noto+Sans+SC'); */
 
     .fade-enter-active, .fade-leave-active {
         transition-property: opacity;
