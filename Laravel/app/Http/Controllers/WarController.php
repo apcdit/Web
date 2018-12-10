@@ -167,64 +167,45 @@ class WarController extends Controller
 
 
     public function storeOffTimePress(){ //backend
-
-        if(auth()->user()->uniDetails->drawn !== 1){ //if player hasn't drawn yet then save it into database
-
-            $uniDetails = auth()->user()->uniDetails;
-            $pressTime = microtime(true)*1000; //record the user press time in
-            $uniNameCN = $uniDetails->uniNameCN;
-            $offTimeStart = $uniDetails->offTimeStart;
-            $offTimeEnd = $uniDetails->offTimeEnd;
-            $timeDiffed = $uniDetails->offTimeDiff; //will be 999999999999 in the first press
-            $timeDiff = $pressTime - $offTimeStart; //incoming new time
-            //$timeNow = request('timeNow');
-
-            if($timeDiff > $timeDiffed){ //first try must be smaller than 9999999999
+        $user = auth()->user();
+        $uniDetails = $user->uniDetails;
+        if($uniDetails->drawn == 0){
+            switch($user->region){
+                case "Singapore": $offTimeStart = 1544434200000000; $offTimeEnd = 1544445000000000; break;
+                case "Malaysia": $offTimeStart = 1544345460000000; $offTimeEnd = 1544345520000000; break;
+                case "Australia": $offTimeStart = 1544345460000000; $offTimeEnd = 1544345520000000; break;
+                case "China": $offTimeStart = 1544345460000000; $offTimeEnd = 1544345520000000; break;
+                case "Hong Kong": $offTimeStart = 1544345460000000; $offTimeEnd = 1544345520000000; break;
+                case "Taiwan": $offTimeStart = 1544345460000000; $offTimeEnd = 1544345520000000; break;
+                case "Macau": $offTimeStart = 1544345460000000; $offTimeEnd = 1544345520000000; break;
+                case "Others": $offTimeStart = 1544345460000000; $offTimeEnd = 1544345520000000; break;
+                case "Admin": $offTimeStart = 1544345460000000; $offTimeEnd = 1544345520000000; break;
+                default: $offTimeStart = 1544345460000000; $offTimeEnd = 1544345520000000; break;
+              };
+            $pressTime = microtime(true)*1000000;
+            $timeDiff = $pressTime - $offTimeStart;  
+            if($timeDiff < 0){ //haven't started
                 return response()->json([
-                    'message' => '已经按过了!'
+                    'message' => "系统还未开放！"
                 ]);
-            }
-            
-            if($pressTime >= $offTimeStart){
-                if($pressTime < $offTimeEnd){
-                    if($uniDetails != null && request('pressed') === 1){
-                        $uniDetails->offTimeDiff = $timeDiff;
-                        $uniDetails->drawn = 1;
-                        $uniDetails->save();
-                        // $uniDetails->update([
-                        //     'offTimePress' => $pressTime,
-                        //     'drawn' => 1 //set player to drawn but commented bcoz this is for simulation only
-                        // ]);
-                        //$this->calOffTimeDiff($uniNameCN);
-    
-                        return response()->json([
-                            'message' => "Official press time is recorded!",
-                            'status' => "200",
-                            'time' => date("Y-m-d H:i:s", microtime(true)),
-                            'epoch' => $pressTime,
-                            'converted' => strtotime(date("Y-m-d H:i:s", microtime(true)))
-                        ]);
-                    }else{
-                        return response()->json([
-                            'message' => 'Uni details not found, fail!',
-                            'status' => '404'
-                        ]);
-                    }
-                }else{
-                    return response()->json([
-                        'message' => '报名已截止！'
-                    ]);
-                }      
-            }else{
+            }else if($timeDiff > 10800000000){
                 return response()->json([
-                    'message' => '还没到报名时间！',
-                    'status' => 201
+                    'message' => "报名已经结束了！"
+                ]);
+            }else{
+                $uniDetails->update([
+                    'offTimePress' => $pressTime,
+                    'offTimeDiff' => $timeDiff,
+                    'drawn' => 1
+                ]);
+
+                return response()->json([
+                    'message' => "成功报名！稍后即可查询成绩！"
                 ]);
             }
         }else{
             return response()->json([
-                'message' => 'The player has already drawn!',
-                'status' => '304'
+                'message' => '队伍已经报名了！'
             ]);
         }
     }
