@@ -1,10 +1,13 @@
 <?php
 
 $servername = "localhost";
-$username   = "apcn";
-$password   = "abc123456";
-$dbname     = "apchinese";
-
+$username   = "apchine2_user";
+$password   = "apchinese9";
+$dbname     = "apchine2_apdebate";
+// $servername = "localhost";
+// $username   = "apcn";
+// $password   = "abc123456";
+// $dbname     = "apchinese";
 
 /** 
  * Get header Authorization
@@ -39,6 +42,24 @@ function getBearerToken() {
   return null;
 }
 
+function microinterval($microtime, $starttime){
+  //Difference in time period in microseconds
+  $difference = $microtime - $starttime;
+  if ($difference < 0){
+      // deny code in production
+      echo '<script>alert("您不被允许使用此系统：系统未开启");window.close();</script>';
+      die("Invalid time");
+  }
+  else if ($difference > 10800000000){
+      // deny code in production
+      echo '<script>alert("您不被允许使用此系统：报名时间结束，系统已关闭");window.close();</script>';
+      die("Invalid time");
+  }
+  else{
+      return $difference;
+  }
+}
+
 function response($data) {
   header('Content-Type: application/json');
   header("HTTP/1.1 200 OK");
@@ -60,58 +81,96 @@ if(isset($post_data['token_mystery'])){
   if($stmt->execute(array($token))){
     $user = $stmt->fetch();
     
-    if($user['drawn'] !== 1){
-      // Get UniDetails 
-      $uniDetails = $conn->prepare("SELECT * FROM uni_details WHERE uniNameCN = ?");
-      $uniDetails->execute(array($user['uniNameCN']));
-      $uniDetails = $uniDetails->fetch();
+    if($user['drawn'] === 0){
+      
       // Set some variables
-      $simTimeStart = $uniDetails['simTimeStart'];
-      $simTimeEnd = $uniDetails['simTimeEnd'];
-      $offTimeStart = $uniDetails['offTimeStart']; //db is millisecond, convert to microsecond
-      $offTimeEnd = $uniDetails['offTimeEnd'];
-      $pressedTime = $uniDetails['offTimePress'];
+      switch($user['region']){
+        case "Singapore": $offTimeStart = 1544405700000000; $offTimeEnd = 1544416500000000; break;
+        case "Malaysia": $offTimeStart = 1544345460000000; $offTimeEnd = 1544345520000000; break;
+        case "Australia": $offTimeStart = 1544345460000000; $offTimeEnd = 1544345520000000; break;
+        case "China": $offTimeStart = 1544345460000000; $offTimeEnd = 1544345520000000; break;
+        case "Hong Kong": $offTimeStart = 1544345460000000; $offTimeEnd = 1544345520000000; break;
+        case "Taiwan": $offTimeStart = 1544345460000000; $offTimeEnd = 1544345520000000; break;
+        case "Macau": $offTimeStart = 1544345460000000; $offTimeEnd = 1544345520000000; break;
+        case "Others": $offTimeStart = 1544345460000000; $offTimeEnd = 1544345520000000; break;
+        case "Admin": $offTimeStart = 1544345460000000; $offTimeEnd = 1544345520000000; break;
+        default: $offTimeStart = 1544345460000000; $offTimeEnd = 1544345520000000; break;
+      };
+
+      
+      // $offTimeStart = $uniDetails['offTimeStart']; 
+      // $offTimeEnd = $uniDetails['offTimeEnd'];
+      // $pressedTime = $uniDetails['offTimePress'];
       $pressTime = microtime(true)*1000000; //microsecond
       
-        
-      // Check time range
-      if($pressTime > $pressedTime){
-          response([
-              'message' => "Drawn",
-              'status' => '304'
-              ]);
-      }
-      if($pressTime >= $offTimeStart){
-        if($pressTime < $offTimeEnd){
-          $updateTime = $conn->prepare("UPDATE uni_details SET offTimePress=?, offTimeDiff = ?, drawn = 1 WHERE  uniNameCN = ?");
-        
-          if($updateTime->execute(array($pressTime, $pressTime - $offTimeStart, $user['uniNameCN']))){
-            response([
-              'message' => "Simulate press time is recorded!",
-              'status' => 200,
-              'time' => date("Y-m-d H:i:s", microtime(true)),
-              'epoch' => $pressTime,
-              'converted' => strtotime(date("Y-m-d H:i:s", microtime(true)))
-            ]);
-          }
-        }else{
-            response([
-              'message' => '报名已经结束了！',
-            ]);
-        }   
-      } else {
+      $difference = $pressTime - $offTimeStart;
+      
+      if($difference < 0){ //before start time
         response([
-          'message' => '还没到报名时间！',
-          'offTimeStart' => $offTimeStart,
-          'offTimeEnd' => $offTimeEnd,
-          'user' => $user,
+          'message' => "还未到报名时间!"
         ]);
+      }else if($difference > 10800000000){ //after end time
+        response([
+          'message' => "报名已经结束了!"
+        ]);
+      }else{ //between the 3 hours interval
+        // Get UniDetails 
+        $uniDetails = $conn->prepare("SELECT * FROM uni_details WHERE uniNameCN = ?");
+        $uniDetails->execute(array($user['uniNameCN']));
+        $uniDetails = $uniDetails->fetch();
+        $pressedTime = $uniDetails['offTimePress'];
+        // Check time range
+        if($pressTime > $pressedTime){
+            response([
+                'message' => "队伍已经报名了！请等待成绩！",
+                'status' => '304'
+                ]);
+        }
+        $updateTime = $conn->prepare("UPDATE uni_details SET offTimePress=?, offTimeDiff = ?, drawn = 1 WHERE  uniNameCN = ?");
+        if($updateTime->execute(array($pressTime, $pressTime - $offTimeStart, $user['uniNameCN']))){
+          response([
+            'message' => "Official press time is recorded!",
+            'status' => 200,
+            'time' => date("Y-m-d H:i:s", microtime(true)),
+            'epoch' => $pressTime,
+            'converted' => strtotime(date("Y-m-d H:i:s", microtime(true)))
+          ]);
+        }
       }
-    } else {
-      response([
-        'message' => '队伍已报名！',
-      ]);
-    }
+    //     if($pressTime < $offTimeEnd){
+    //       $updateTime = $conn->prepare("UPDATE uni_details SET offTimePress=?, offTimeDiff = ?, drawn = 1 WHERE  uniNameCN = ?");
+        
+    //       if($updateTime->execute(array($pressTime, $pressTime - $offTimeStart, $user['uniNameCN']))){
+    //         response([
+    //           'message' => "Simulate press time is recorded!",
+    //           'status' => 200,
+    //           'time' => date("Y-m-d H:i:s", microtime(true)),
+    //           'epoch' => $pressTime,
+    //           'converted' => strtotime(date("Y-m-d H:i:s", microtime(true)))
+    //         ]);
+    //       }
+    //     }else{
+    //         response([
+    //           'message' => '报名已经结束了！',
+    //         ]);
+    //     }   
+    //   } else {
+    //     response([
+    //       'message' => '还没到报名时间！',
+    //       'offTimeStart' => $offTimeStart,
+    //       'offTimeEnd' => $offTimeEnd,
+    //       'user' => $user,
+    //     ]);
+    //   }
+    // } else {
+    //   response([
+    //     'message' => '队伍已报名！',
+    //   ]);
+    // }
+  }else{
+    response([
+      'message' => "队伍已经报名了!"
+    ]);
   }
 }
-
+}

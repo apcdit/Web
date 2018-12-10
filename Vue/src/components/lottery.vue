@@ -40,7 +40,7 @@
             <h3>请点击下方的按钮进行电子报名。</h3>
             <p>系统开放后，只需点击下方按钮即可完成电子报名程序。</p>
             <br>
-              <button v-on:click="recordTime" class="btn btn-primary btn-block " id="register">报名</button>
+              <button v-on:click="recordTime" :disabled="counter==1" class="btn btn-primary btn-block " id="register">报名</button>
             <br>
             <button @click="$router.push('user')" class="btn btn-lg">个人主页</button>
           </center>
@@ -82,10 +82,6 @@ export default
   },
   methods:{
     recordTime:function(){
-        if(this.counter !== 0){
-          alert("已经报名了！请等待成绩！");
-          return true;
-        }
         try{
           const token_mystery = localStorage.getItem('token_mystery');
           //var current = (Date.now()+28800)*1000;
@@ -102,17 +98,10 @@ export default
                     if(resp.data.status == 200){
                         //console.log(resp.data)
                         ++this.counter;
-                        alert("时间已成功记录！")
+                        alert(resp.data.message);
                         this.$router.push('result');
                     }else{
-                      if(this.counter === 1){
-                        ++counter;
-                        alert("已经报名了！");
-                      }else if(this.counter === 0){
-                        alert(resp.data.message) //haven't reached the time yet
-                      }else{
-                        return true; //prevent additional alert window
-                      }
+                        alert(resp.data.message);
                     }
                 })
           
@@ -139,6 +128,7 @@ export default
         .get('api/user',{headers: { Authorization: "Bearer " + localStorage.getItem('token')}})
         .then(resp=>{
           this.user = resp.data.user
+          this.drawn = this.user.drawn
           this.uniDetails = resp.data.uniDetails
           switch(this.user.region){
             case "Malaysia": this.user.region = "马来西亚"; break;
@@ -162,16 +152,9 @@ export default
         })
         .then(resp=>{
             this.drawn = resp.data.drawn
-            console.log(this.drawn);
         })       
     },
   },
-  // watch:{
-  //   currentTime: function(){
-  //     this.timeNow = new Data()
-  //     console.log(this.timeNow)
-  //   }
-  // }
 }
 </script>
 <style scoped>
