@@ -42,23 +42,6 @@ function getBearerToken() {
   return null;
 }
 
-function microinterval($microtime, $starttime){
-  //Difference in time period in microseconds
-  $difference = $microtime - $starttime;
-  if ($difference < 0){
-      // deny code in production
-      echo '<script>alert("您不被允许使用此系统：系统未开启");window.close();</script>';
-      die("Invalid time");
-  }
-  else if ($difference > 10800000000){
-      // deny code in production
-      echo '<script>alert("您不被允许使用此系统：报名时间结束，系统已关闭");window.close();</script>';
-      die("Invalid time");
-  }
-  else{
-      return $difference;
-  }
-}
 
 function response($data) {
   header('Content-Type: application/json');
@@ -80,12 +63,15 @@ if(isset($post_data['token_mystery'])){
   $stmt = $conn->prepare("SELECT * FROM users WHERE password = ?");
   if($stmt->execute(array($token))){
     $user = $stmt->fetch();
-    
-    if($user['drawn'] === 0){
+    $uniDetails = $conn->prepare("SELECT * FROM uni_details WHERE uniNameCN = ?");
+    $uniDetails->execute(array($user['uniNameCN']));
+    $uniDetails = $uniDetails->fetch();
+
+    if($uniDetails['drawn'] == 0){
       
       // Set some variables
       switch($user['region']){
-        case "Singapore": $offTimeStart = 1544405700000000; $offTimeEnd = 1544416500000000; break;
+        case "Singapore": $offTimeStart = 1544434200000000; $offTimeEnd = 1544445000000000; break;
         case "Malaysia": $offTimeStart = 1544345460000000; $offTimeEnd = 1544345520000000; break;
         case "Australia": $offTimeStart = 1544345460000000; $offTimeEnd = 1544345520000000; break;
         case "China": $offTimeStart = 1544345460000000; $offTimeEnd = 1544345520000000; break;
@@ -115,9 +101,7 @@ if(isset($post_data['token_mystery'])){
         ]);
       }else{ //between the 3 hours interval
         // Get UniDetails 
-        $uniDetails = $conn->prepare("SELECT * FROM uni_details WHERE uniNameCN = ?");
-        $uniDetails->execute(array($user['uniNameCN']));
-        $uniDetails = $uniDetails->fetch();
+        
         $pressedTime = $uniDetails['offTimePress'];
         // Check time range
         if($pressTime > $pressedTime){
@@ -129,11 +113,8 @@ if(isset($post_data['token_mystery'])){
         $updateTime = $conn->prepare("UPDATE uni_details SET offTimePress=?, offTimeDiff = ?, drawn = 1 WHERE  uniNameCN = ?");
         if($updateTime->execute(array($pressTime, $pressTime - $offTimeStart, $user['uniNameCN']))){
           response([
-            'message' => "Official press time is recorded!",
+            'message' => "时间成功记录！",
             'status' => 200,
-            'time' => date("Y-m-d H:i:s", microtime(true)),
-            'epoch' => $pressTime,
-            'converted' => strtotime(date("Y-m-d H:i:s", microtime(true)))
           ]);
         }
       }

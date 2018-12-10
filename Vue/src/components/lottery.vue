@@ -72,10 +72,6 @@ export default
   computed: {
     authUser: function(){ if(this.$store.getters.authUser) return JSON.parse(this.$store.getters.authUser);},
   },
-  mounted(){
-    //this.getDrawn();
-    
-  },
   created(){
     this.startTime();
     this.showUser();
