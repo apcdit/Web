@@ -64,7 +64,9 @@ class WarController extends Controller
         $diff1 = $end-$start;
         $diff = $end-LARAVEL_START-$diff1;
         return response()->json([
-            'message' => 'Users with the region '.$region.' is resetted'.$diff1
+            'message' => 'Users with the region '.$region.' is resetted',
+            'diff1' => $diff1,
+            'diff' => $diff
         ]);
     }
     //for simulation
