@@ -74,7 +74,7 @@ export default
   },
   created(){
     this.startTime();
-    //this.showUser();
+    this.showUser();
   },
   methods:{
     recordTime:function(){

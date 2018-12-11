@@ -137,7 +137,6 @@
                         this.uniDetails = resp.data.uniDetails
                         this.admin = this.user.admin
                         this.drawn = resp.data.uniDetails.drawn
-                        this.region = this.user.region
                     })
                     .catch(er=>{
                         //console.log("damn");
