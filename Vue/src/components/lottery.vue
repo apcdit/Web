@@ -103,8 +103,15 @@ export default
         }
     },
     startTime: function(){
+      const token_mystery = localStorage.getItem('token_mystery');
+      const region = JSON.parse(localStorage.getItem('user')).region;
       axios
-        .get('api/time/official/start',{
+        .get('/Vue/dist/start.php',{ //api/time/official/start
+          params:{
+                    'token_mystery': token_mystery,
+                    'region': region
+                }
+        },{
           headers:{
               Authorization: "Bearer " + localStorage.getItem('token')
           }
