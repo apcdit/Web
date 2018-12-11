@@ -1,13 +1,9 @@
 <?php
 
-$servername = "localhost";
-$username   = "apchine2_user";
-$password   = "apchinese9";
-$dbname     = "apchine2_apdebate";
-// $servername = "localhost";
-// $username   = "apcn";
-// $password   = "abc123456";
-// $dbname     = "apchinese";
+$servername = "%";
+$username   = "%";
+$password   = "%";
+$dbname     = "%";
 
 /** 
  * Get header Authorization
