@@ -274,33 +274,34 @@ class WarController extends Controller
 
         $region = auth()->user()->region;
 
-        $array = [];
+        //$array = [];
 
-        $uniNameCNs = User::where('region',$region)->pluck('uniNameCN');
+        // $uniNameCNs = User::where('region',$region)->pluck('uniNameCN');
 
-        //get all the uni details with only the 3 details
-        $filteredDetails = uniDetails::get()->map(function($b){
-            return collect($b->toArray())
-                ->only(['uniNameCN', 'offTimeDiff', 'qualified'])
-                ->all();
-        });
+        // //get all the uni details with only the 3 details
+        // $filteredDetails = uniDetails::get()->map(function($b){
+        //     return collect($b->toArray())
+        //         ->only(['uniNameCN', 'offTimeDiff', 'qualified'])
+        //         ->all();
+        // });
 
-        //filter with the region i want
-        for($i = 0; $i < count($uniNameCNs); $i++){
-            for($j = 0; $j < count($filteredDetails); $j++){
-                if($uniNameCNs[$i] === $filteredDetails[$j]["uniNameCN"]){
-                    array_push($array, $filteredDetails[$j]);
-                }
-            }
-        }
+        // //filter with the region i want
+        // for($i = 0; $i < count($uniNameCNs); $i++){
+        //     for($j = 0; $j < count($filteredDetails); $j++){
+        //         if($uniNameCNs[$i] === $filteredDetails[$j]["uniNameCN"]){
+        //             array_push($array, $filteredDetails[$j]);
+        //         }
+        //     }
+        // }
 
-        for($k = 0 ; $k < count($array); $k++){
-            $timeDiff = $array[$k]["offTimeDiff"];
-            $array[$k]["offTimeDiff"] = $timeDiff; //get the time in microsecond// /1000; //to get the time in second
-        }
+        // for($k = 0 ; $k < count($array); $k++){
+        //     $timeDiff = $array[$k]["offTimeDiff"];
+        //     $array[$k]["offTimeDiff"] = $timeDiff; //get the time in microsecond// /1000; //to get the time in second
+        // }
 
+        $uniDetails = uniDetails::where('region',$region)->get(['uniNameCN','offTimeDiff','qualified']);
         return response()->json([
-            'data' => $array,
+            'data' => $uniDetails,
             'region' => $region
         ]);
     }
