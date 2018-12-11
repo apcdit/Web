@@ -52,6 +52,7 @@ class WarController extends Controller
     public function reset(){
         $region = request('region');
         $user = User::where('region', $region)->with('uniDetails')->get();
+        $start = microtime(true);
         for($i = 0; $i < count($user); $i++){
             $user[$i]->uniDetails->update([
                 'offTimePress' => doubleval(999999999999999999),
@@ -59,8 +60,11 @@ class WarController extends Controller
                 'offTimeDiff' => doubleval(999999999999999999)
             ]);
         }
+        $end = microtime(true);
+        $diff1 = $end-$start;
+        $diff = $end-LARAVEL_START-$diff1;
         return response()->json([
-            'message' => 'Users with the region '.$region.' is resetted'
+            'message' => 'Users with the region '.$region.' is resetted'.$diff1
         ]);
     }
     //for simulation
