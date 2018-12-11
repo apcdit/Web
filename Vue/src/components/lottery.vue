@@ -40,7 +40,7 @@
             <h3>请点击下方的按钮进行电子报名。</h3>
             <p>系统开放后，只需点击下方按钮即可完成电子报名程序。</p>
             <br>
-              <button v-on:click="recordTime" :disabled="counter==1" class="btn btn-primary btn-block " id="register">报名</button>
+              <button v-on:click="recordTime" :disabled="counter===1" class="btn btn-primary btn-block " id="register">报名</button>
             <br>
             <button @click="$router.push('user')" class="btn btn-lg">个人主页</button>
           </center>

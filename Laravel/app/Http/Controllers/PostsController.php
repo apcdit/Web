@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 //use App\Http\Requests;
 use function MongoDB\BSON\toJSON;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Cache;
+
 
 class PostsController extends Controller
 {
@@ -75,7 +77,7 @@ class PostsController extends Controller
             $posts = Posts::orderBy('created_at','desc')->take(3)->get();
             return $posts;
         });
-        return response($posts);
+        return response(Cache::get('latestPosts'));
     }
 
     /**
