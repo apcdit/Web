@@ -32,7 +32,7 @@
                                 <b-dropdown-item to='user' v-else>{{update.uniNameCN}}</b-dropdown-item>
                                 <b-dropdown-item to='admin' v-if="update.admin">Admin Dashboard</b-dropdown-item>
                                 <b-dropdown-item to='lottery' v-if="true">电子抽签</b-dropdown-item>
-                                <b-dropdown-item to='result' v-if="true">电子抽签结果</b-dropdown-item>
+                                <b-dropdown-item to='result' v-if="drawn==1">电子抽签结果</b-dropdown-item>
                                 <b-dropdown-item @click="logout()"> 登出 </b-dropdown-item>
                             </b-nav-item-dropdown>
                         </b-navbar-nav>
