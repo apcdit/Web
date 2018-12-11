@@ -51,15 +51,20 @@ class WarController extends Controller
 
     public function reset(){
         $region = request('region');
-        $user = User::where('region', $region)->with('uniDetails')->get();
+        //$user = User::where('region', $region)->with('uniDetails')->get();
         $start = microtime(true);
-        for($i = 0; $i < count($user); $i++){
-            $user[$i]->uniDetails->update([
-                'offTimePress' => doubleval(999999999999999999),
-                'drawn' => 0,
-                'offTimeDiff' => doubleval(999999999999999999)
-            ]);
-        }
+        // for($i = 0; $i < count($user); $i++){
+        //     $user[$i]->uniDetails->update([
+        //         'offTimePress' => doubleval(999999999999999999),
+        //         'drawn' => 0,
+        //         'offTimeDiff' => doubleval(999999999999999999)
+        //     ]);
+        // }
+        uniDetails::where('region',$region)->update([
+            'offTimePress' => doubleval(999999999999999999),
+            'drawn' => 0,
+            'offTimeDiff' => doubleval(999999999999999999)
+        ]);
         $end = microtime(true);
         $diff1 = $end-$start;
         $diff = $end-LARAVEL_START-$diff1;

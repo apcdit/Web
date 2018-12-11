@@ -70,6 +70,7 @@ class AuthController extends Controller
 
             $uni = uniDetails::create([
                 'uniNameCN' => request('uniNameCN'),
+                'region' => request('region'),
                 'debateQues1' => request('debateQues1'),
                 'debateQues2' => request('debateQues2'),
                 'debateQues3' => request('debateQues3'),
@@ -90,7 +91,7 @@ class AuthController extends Controller
             }
             return response()->json([
                 'status' => 201,
-                'message' => "Duplicate Entry!"
+                'message' => "Duplicate Entry!".$exception
             ]);
         }
 
