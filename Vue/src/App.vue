@@ -119,11 +119,18 @@
             },
 
             showUser: function(){
-                // if(localStorage.getItem('token') == null){
-                //     return true;
-                // }
+                //api/user
+                const token_mystery = localStorage.getItem('token_mystery');
+                const uniNameCN = JSON.parse(localStorage.getItem('user')).uniNameCN;
+    
                 axios
-                    .get('api/user',{headers: { Authorization: "Bearer " + localStorage.getItem('token')}})
+                    .get('/Vue/dist/user.php',{
+                        params:{
+                            'token_mystery': token_mystery,
+                            'uniNameCN': uniNameCN
+                        }
+                    }
+                        ,{headers: { Authorization: "Bearer " + localStorage.getItem('token')}})
                     .then(resp=>{
                         this.user = resp.data.user
                         this.uniNameCN = resp.data.user.uniNameCN

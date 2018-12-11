@@ -118,9 +118,17 @@ export default
         })
     },
     showUser: function(){
+              const token_mystery = localStorage.getItem('token_mystery');
+              const uniNameCN = JSON.parse(localStorage.getItem('user')).uniNameCN;
+            
       axios
-        .get('api/user',{headers: { Authorization: "Bearer " + localStorage.getItem('token')}})
-        .then(resp=>{
+          .get('/Vue/dist/user.php',{
+                params:{
+                    'token_mystery': token_mystery,
+                    'uniNameCN': uniNameCN
+                }
+            },{headers: { Authorization: "Bearer " + localStorage.getItem('token')}})
+          .then(resp=>{
           this.user = resp.data.user
           this.drawn = this.user.drawn
           this.uniDetails = resp.data.uniDetails
