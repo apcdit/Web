@@ -107,9 +107,9 @@
         created() {
             this.showUser();
         },
-        mounted() {
-            this.getDrawn();
-        },
+        // mounted() {
+        //     this.getDrawn();
+        // },
         methods: {
             logout: function () {
                 this.$store.dispatch('logout')
@@ -129,6 +129,7 @@
                         this.uniNameCN = resp.data.user.uniNameCN
                         this.uniDetails = resp.data.uniDetails
                         this.admin = this.user.admin
+                        this.drawn = resp.data.uniDetails.drawm
                     })
                     .catch(er=>{
                         //console.log("damn");

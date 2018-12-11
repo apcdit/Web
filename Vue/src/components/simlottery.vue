@@ -77,12 +77,12 @@ export default
     authUser: function(){ if(this.$store.getters.authUser) return JSON.parse(this.$store.getters.authUser);},
   },
   mounted(){
-    this.getDrawn();
+    //this.getDrawn();
     
   },
   created(){
-    this.startTime();
-    this.showUser();
+    // this.startTime();
+    // this.showUser();
   },
   methods:{
     recordTime:function(){

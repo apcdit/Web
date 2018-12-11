@@ -70,7 +70,11 @@ class PostsController extends Controller
     }
 
     public function showLatest(){
-        $posts = Posts::orderBy('created_at','desc')->take(3)->get();
+        
+        Cache::remember('latestPosts', 60, function () {
+            $posts = Posts::orderBy('created_at','desc')->take(3)->get();
+            return $posts;
+        });
         return response($posts);
     }
 
