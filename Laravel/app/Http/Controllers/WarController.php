@@ -51,7 +51,7 @@ class WarController extends Controller
 
     public function reset(){
         $region = request('region');
-        $user = User::where('region', $region)->get();
+        $user = User::where('region', $region)->with('uniDetails')->get();
         for($i = 0; $i < count($user); $i++){
             $user[$i]->uniDetails->update([
                 'offTimePress' => doubleval(999999999999999999),
