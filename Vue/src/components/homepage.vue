@@ -5,7 +5,7 @@
                 <div class="col-md-4">
                     <ul class="list-group shadow" style="opacity:0.9">
                         <li class="list-group-item">
-                            <h4 style="color:#9A2A1F;">活动详情1</h4>
+                            <h4 style="color:#9A2A1F;">活动详情</h4>
                             <h5><i class="fa fa-calendar-o" aria-hidden="true"></i> 2019年7月10日至7月14日</h5>
                             <h5><i class="fa fa-map-marker" aria-hidden="true"></i> 新加坡南洋理工大学 </h5>
                             <h5><i class="fa fa-clock-o" aria-hidden="true"></i> 9:00am – 6:00pm </h5><hr>
