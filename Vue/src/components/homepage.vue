@@ -9,10 +9,17 @@
                             <h5><i class="fa fa-calendar-o" aria-hidden="true"></i> 2019年7月10日至7月14日</h5>
                             <h5><i class="fa fa-map-marker" aria-hidden="true"></i> 新加坡南洋理工大学 </h5>
                             <h5><i class="fa fa-clock-o" aria-hidden="true"></i> 9:00am – 6:00pm </h5><hr>
-                            <h4 style="color:#9A2A1F;">参赛意愿书</h4>
-                            <a  class="btn" href="https://entuedu-my.sharepoint.com/:f:/g/personal/e180063_e_ntu_edu_sg/EjMVXaF8Om9GrD-KbTNiChYBb3fbYe8jeJJe9fClj857sg?e=BicxIo" target="_blank">OneDrive</a>
-                            <a class="btn" href="https://pan.baidu.com/s/1x6gQf8Md9lzU4xJiiAnjUQ" target="_blank">百度云盘</a>
-                            <a class="btn " href="#" v-if="false">领取总决赛门票</a>
+                            <div>
+                                <h4 style="color:#9A2A1F;">参赛意愿书</h4>
+                                <a  class="btn" href="https://entuedu-my.sharepoint.com/:f:/g/personal/e180063_e_ntu_edu_sg/EjMVXaF8Om9GrD-KbTNiChYBb3fbYe8jeJJe9fClj857sg?e=BicxIo" target="_blank">OneDrive</a>
+                                <a class="btn" href="https://pan.baidu.com/s/1x6gQf8Md9lzU4xJiiAnjUQ" target="_blank">百度云盘</a>
+                            </div>
+                            <hr>
+                            <div>
+                                <h4 style="color:#9A2A1F;">比赛章程</h4>
+                                <a class="btn" href="https://entuedu-my.sharepoint.com/:f:/g/personal/tanj0238_e_ntu_edu_sg/EqNFd_nY03NNsQheQR2nqcUBMfH-4KYYJwlGmdHvboFD-A?e=apQnZQ" target="_blank">OneDrive</a>
+                                <a class="btn" href="https://pan.baidu.com/s/1nbNdHc9fY2xOFeRrQJxBLw" target="_blank">百度云盘</a>
+                            </div>
                         </li>
                     </ul>
                     <br>
@@ -20,7 +27,7 @@
                         <li class="list-group-item">
                             <h4 style="color:#9A2A1F;">最新视频<a href="#" class="btn" style="float:right;">查看更多</a></h4>
                             <div class="row" style="padding:1%; width:100%">
-                                <iframe src="https://www.youtube.com/embed/U4v2W_V9Fk0" frameborder="0" allow="autoplay; encrypted-media" width="100%"allowfullscreen></iframe>
+                                <iframe src="https://www.youtube.com/embed/U4v2W_V9Fk0" frameborder="0" allow="autoplay; encrypted-media" width="100%" allowfullscreen></iframe>
                             </div>
 
                         </li>
@@ -138,6 +145,9 @@
         cursor: pointer;
         border-style:none;
     }
+    .btn:hover{
+        background-color: rgb(107, 1, 1);
+    }
     .pagination-list{color:black;}
     #latestPosts{
         background-color: white;
@@ -172,6 +182,8 @@
         text-align:center;
         border-radius: 25px;
     }
-
+    .btn-form:hover{
+        color:white;
+    }
 
 </style>

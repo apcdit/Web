@@ -8,7 +8,7 @@ $dbname     = "apchine2_apdebate";
 // $username   = "apcn";
 // $password   = "abc123456";
 // $dbname     = "apchinese";
-$start = microtime(true);
+
 /** 
  * Get header Authorization
  * */

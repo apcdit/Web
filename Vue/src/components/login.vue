@@ -11,7 +11,7 @@
             <a href='/#/resetpw'>忘记密码?</a>
         </div><!-- /form -->
         <div class="form-group">
-            <button class="btn btn-lg btn-primary btn-block btn-signin">登陆</button>
+            <button class="btn btn-lg btn-primary btn-block btn-signin">登录</button>
         </div>
 
     </form><!-- /card-container -->
