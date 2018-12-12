@@ -8,7 +8,7 @@ $dbname     = "apchine2_apdebate";
 // $username   = "apcn";
 // $password   = "abc123456";
 // $dbname     = "apchinese";
-
+$start = microtime(true);
 /** 
  * Get header Authorization
  * */
@@ -96,8 +96,10 @@ if(isset($post_data['token_mystery'])){
           'message' => "还未到报名时间!"
         ]);
       }else if($difference > 10800000000){ //after end time
+        $end = microtime(true);
+        $diff = $end-$start;
         response([
-          'message' => "报名已经结束了!"
+          'message' => "报名已经结束了!".$diff
         ]);
       }else{ //between the 3 hours interval
         // Get UniDetails 

@@ -274,7 +274,7 @@ class WarController extends Controller
 
         $region = auth()->user()->region;
 
-        //$array = [];
+        // $array = [];
 
         // $uniNameCNs = User::where('region',$region)->pluck('uniNameCN');
 
@@ -302,7 +302,8 @@ class WarController extends Controller
         $uniDetails = uniDetails::where('region',$region)->get(['uniNameCN','offTimeDiff','qualified']);
         return response()->json([
             'data' => $uniDetails,
-            'region' => $region
+            'region' => $region,
+            'time' => microtime(true)-LARAVEL_START
         ]);
     }
 
