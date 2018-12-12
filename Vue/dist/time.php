@@ -97,9 +97,10 @@ if(isset($post_data['token_mystery'])){
         ]);
       }else if($difference > 10800000000){ //after end time
         $end = microtime(true);
+        date_default_timezone_set("Asia/Singapore");
         $diff = $end-$start;
         response([
-          'message' => "报名已经结束了!".$diff
+          'message' => "报名已经结束了!".$diff.date("d/m/Y H:i:s", $pressTime/1000000)." SGT"
         ]);
       }else{ //between the 3 hours interval
         // Get UniDetails 
