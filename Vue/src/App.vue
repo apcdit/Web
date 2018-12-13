@@ -26,7 +26,7 @@
 
                         <b-navbar-nav class="ml-auto">
                             <b-nav-item router-link to='/register' v-if="!isLoggedIn" style="font-size: 1.25em; font-weight:bold;">账号注册</b-nav-item>
-                            <b-nav-item router-link to='/login' style="font-size: 1.25em; font-weight:bold;" v-if="true">登录</b-nav-item>
+                            <b-nav-item router-link to='/login' style="font-size: 1.25em; font-weight:bold;" v-if="!isLoggedIn">登录</b-nav-item>
                             <b-nav-item-dropdown style="font-size: 1.25em; font-weight:bold;" text="大学资料"  v-if="isLoggedIn" >
                                 <b-dropdown-item to='user' v-if="!update">个人主页</b-dropdown-item>
                                 <b-dropdown-item to='user' v-else>{{update.uniNameCN}}</b-dropdown-item>
