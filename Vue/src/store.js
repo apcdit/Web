@@ -45,7 +45,7 @@ export default new Vuex.Store({
             const user = resp.data.user
             if(resp.data.status !== 200){
               alert("电子邮件或密码输入错误！")
-              router.push('login')
+              window.location.reload(false); 
             }else{
               const token = resp.data.token
               const user = resp.data.user

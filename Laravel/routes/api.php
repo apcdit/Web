@@ -84,6 +84,7 @@ Route::group([
     Route::post('create', 'PasswordResetController@create');
     Route::get('find/{token}', 'PasswordResetController@find');
     Route::post('reset', 'PasswordResetController@reset');
+    Route::post('change', 'PasswordResetController@change');
 });
 
 //view all the posts

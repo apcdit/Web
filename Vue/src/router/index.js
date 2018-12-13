@@ -68,12 +68,13 @@ export default new Router({
     {path:'/latestNews', name:'latestNews', component:latestNews},
     {path:'/home', name:'home', component:home},
     {
-      path:'/resetpw/token', 
+      path:'/resetpw', 
       name:'resetpw1', 
-      component:resetpw1
+      component:resetpw1,
+      beforeEnter: ifNotAuthenticated,
     },
     {
-      path:'/resetpw', 
+      path:'/resetpw/token', 
       name:'resetpw', 
       component:resetpw,
     },

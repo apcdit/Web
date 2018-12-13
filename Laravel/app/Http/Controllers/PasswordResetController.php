@@ -7,6 +7,8 @@ use App\Notifications\PasswordResetRequest;
 use App\Notifications\PasswordResetSuccess;
 use App\User;
 use App\PasswordReset;
+use Illuminate\Support\Facades\Hash;
+
 class PasswordResetController extends Controller
 {
     /**
@@ -108,9 +110,37 @@ class PasswordResetController extends Controller
         $user->password = bcrypt($request->password); //update the password 
         $user->save();
         $passwordReset->delete();
-        $user->notify(new PasswordResetSuccess($passwordReset));
+        //$user->notify(new PasswordResetSuccess($passwordReset));
         return response()->json([
             'message' => 'Password has been resetted!'
         ]);
+    }
+
+    public function change(Request $request){
+        $this->validate(request(),[
+            'email' => 'required|string|email',
+            'password' => 'required|string',
+            'old_password' => 'required|string'
+        ]);
+
+        $user = User::where('email', $request->email)->first();
+
+        if(!$user){
+            return response()->json([
+                'message' => '无法搜索到对应账号，请确认正确的邮件已被输入。'
+            ],404);
+        }
+
+        if(Hash::check($request->old_password, $user->password)){
+            $user->password = bcrypt($request->password);
+            $user->save();
+            return response()->json([
+                'message' => '密码成功更换!'
+            ],200);
+        }else{
+            return response()->json([
+                'message' => '输入了错误的旧密码!'
+            ],404);
+        }
     }
 }

@@ -11,9 +11,9 @@
             <a href='/#/resetpw'>忘记密码?</a>
         </div><!-- /form -->
         <div class="form-group">
-            <button class="btn btn-lg btn-primary btn-block btn-signin">登录</button>
+            <button class="btn btn-lg btn-primary btn-block btn-signin" v-if="!loading">登录</button>
+            <button class="btn btn-lg btn-primary btn-block btn-signin" v-else><cube-spin style="width:60%;height:60%"></cube-spin></button>
         </div>
-
     </form><!-- /card-container -->
 </div><!-- /container -->
 </template>
@@ -21,22 +21,32 @@
 
 <script>
 import axios from "axios"
+import CubeSpin from '../../node_modules/vue-loading-spinner/src/components/Circle.vue'
+
 export default{
   name:'login',
+  components:{
+      CubeSpin
+  },
+  computed:{
+      loading: function(){
+          return this.logging;
+      },
+  },
   data(){
     return {
       email: "",
       password: "",
-      loading: false,
+      logging: false,
     }
   },
   methods:{
 
     login: function () {
-        let email = this.email
-        let password = this.password
+        let email = this.email;
+        let password = this.password;
+        this.logging = true;
         this.$store.dispatch('login', { email, password })
-        this.loading = true
         //.then(this.$router.push('/'))
       },
   }

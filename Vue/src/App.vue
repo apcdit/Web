@@ -43,7 +43,6 @@
         <transition name="fade"><router-view style="margin-top:2%;" ></router-view></transition>
 
          <div class="row" style="padding:5%;width:100%">
-
             <!-- <div class="col-md-8">
                 <h6 style="text-align: center" > NTU APICDT All Rights Reserved &copy 2018 </h6>
             </div> -->
@@ -84,12 +83,13 @@
     import post from './components/post.vue'
     import home from './components/home.vue'
     import resetpw1 from './components/resetpw1.vue'
+    import CubeSpin from '../node_modules/vue-loading-spinner/src/components/Circle8.vue'
 
     export default {
         name: 'App',
         components: {admin,about,pastyear,rules,contact,
                     navigation,videohub,login,register,register1,lottery,
-                    simlottery,result,user,resetpw,notifysuccess,latestNews,post,home,resetpw1,},
+                    simlottery,result,user,resetpw,notifysuccess,latestNews,post,home,resetpw1,CubeSpin},
         data(){
             return{
                 logged : false,
