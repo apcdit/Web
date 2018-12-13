@@ -64,6 +64,7 @@ Route::middleware('auth:api')->group(function () {
     });
 
 
+    Route::post('logout', 'AuthController@logout');
     Route::put('editUser', 'UserController@updateDetails');
     //Route::get('time/simulation/get/{uniNameCN}', 'WarController@getSimTimeDiff')
     //Route::get('time/simulation/getDraw', 'WarController@getDraw');
@@ -94,7 +95,6 @@ Route::get('post/{id}', 'PostsController@show');
 
 //login
 Route::post('login', 'AuthController@doLogin');
-Route::post('logout', 'AuthController@logout');
 
 Route::get('posts/latest','PostsController@showLatest');
 
