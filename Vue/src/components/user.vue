@@ -365,7 +365,4 @@
         background-color: rgb(116, 0, 0)
     }
 
-    .tab-title:hover{
-        
-    }
 </style>
