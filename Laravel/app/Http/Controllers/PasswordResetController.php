@@ -131,6 +131,11 @@ class PasswordResetController extends Controller
             ],404);
         }
 
+        if(Hash::check($request->password, $user->password)){
+            return response()->json([
+                'message' => '不能使用旧密码作为新密码！'
+            ],404);
+        }
         if(Hash::check($request->old_password, $user->password)){
             $user->password = bcrypt($request->password);
             $user->save();

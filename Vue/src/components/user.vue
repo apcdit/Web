@@ -1,9 +1,7 @@
 <template>
 
-    <div>
-        
+    <section id="user">
         <div class="container">
-            <div class="content">
                 <b-progress :max="max" striped :animated="animate" class="mb-2" height="3.5rem">
                 <b-progress-bar :value="value" variant="success"  animated >
                     <strong><span style="color:white;font-size: 18px;">注册成功</span></strong>
@@ -32,7 +30,8 @@
             </b-progress>
             <h6>*意愿书会在报名后24小时内批准</h6>
             <br>
-                <b-tabs card vertical>
+                <b-tabs pills horizontal class="tab-title nav-justified">
+                    <hr>
                     <b-tab title="大学资料" active>
                         <form>
                             <div class="row">
@@ -56,9 +55,9 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <button v-if="!isEditing" @click.prevent="isEditing = !isEditing"  class="btn btn-edit1"><strong>编辑</strong></button>
-                                <button @click.prevent="save" v-else-if="isEditing" class="btn btn-edit"><strong>保持更改</strong></button><span>&nbsp&nbsp</span>
-                                <button v-if="isEditing" @click.prevent="isEditing = false" class="btn btn-edit"><strong>取消更改</strong></button>
+                                <button v-if="!isEditing" @click.prevent="isEditing = !isEditing"  class="btn btn-edit1" id="btn-submit"><strong>编辑</strong></button>
+                                <button @click.prevent="save" v-else-if="isEditing" class="btn btn-edit" id="btn-submit"><strong>保持更改</strong></button><span>&nbsp&nbsp</span>
+                                <button v-if="isEditing" @click.prevent="isEditing = false" class="btn btn-edit" id="btn-submit"><strong>取消更改</strong></button>
                             </div>
                         </form>
                     </b-tab>
@@ -67,23 +66,59 @@
                         <br>
                         <input type="file" id="file" ref="file" v-on:change="handleFileUpload()" class="btn btn-default" required/>
                         <h6 class="mt-3">上传文件: {{file && file.name}}</h6><br>
-                        <b-button @click="uploadFile" class="btnRegister">上传文件</b-button>
+                        <b-button @click="uploadFile" class="btnRegister" id="btn-submit">上传文件</b-button>
+                    </b-tab>
+
+                    <b-tab title="更换密码">
+                        <div class="form-group">
+                            <span v-if="success||invalid" v-bind:class="notification">{{message}}</span>
+                        </div>
+                        <div>
+                            <div class="form-group">
+                                <h6>旧密码</h6>
+                                <input data-vv-as="旧密码" v-validate="'required'" name="oldpassword" class="form-control" placeholder="输入旧密码" type="password" v-model="old_password" required>
+                            </div>
+                            <div class="form-group">
+                                <span style="padding:0.5%;padding-right:2%;padding-left:2%;" v-show="errors.has('oldpassword')" class="alert alert-danger">{{errors.first('oldpassword')}}</span>
+                            </div>
+
+                            <div class="form-group">
+                                <h6>新密码</h6>
+                                <input data-vv-as="密码" ref="password" v-validate="'required|min:8'" name="password" class="form-control" placeholder="输入新密码" type="password" v-model="password" required>
+                            </div>
+                            <div class="form-group">
+                                <span style="padding:0.5%;padding-right:2%;padding-left:2%;" v-show="errors.has('password')" class="alert alert-danger">{{errors.first('password')}}</span>
+                            </div>
+                            <div class="form-group">
+                                <h6>确认新密码</h6>
+                                <input data-vv-as="确认密码" v-validate="'required|min:8|confirmed:password'" name="password_confirmation" class="form-control" placeholder="再次输入新密码" type="password" required>
+                            </div>
+                            <div class="form-group">
+                                <span style="padding:0.5%;padding-right:2%;padding-left:2%;" v-show="errors.has('password_confirmation')" class="alert alert-danger">{{errors.first('password_confirmation')}}</span>
+                            </div>
+
+                            <button id="btn-submit" class="btn" @click.prevent="changepw" v-if="!loading">更改密码</button>
+                            <button id="btn-submit" class="btn" v-else><cube-spin></cube-spin></button>
+                        </div>
                     </b-tab>
                 </b-tabs>
-            </div>
-
         </div>
-    </div>
+    </section>
 
 </template>
 
 <script>
 
     import axios from 'axios';
+    import CubeSpin from '../../node_modules/vue-loading-spinner/src/components/Circle.vue'
+
 
     export default
     {
         name:'user',
+        components:{
+            CubeSpin,
+        },
         data() {
             return {
                 uni_name_cn :'',
@@ -103,11 +138,23 @@
                 value:25,
                 drawn:'',
                 qualified:'',
-
+                loading: 0,
+                success: 0,
+                invalid: 0,
+                password: '',
+                old_password: '',
             }
         },
         created(){
             this.getDetails()
+        },
+        computed:{
+            notification: function(){
+                return this.success? 'alert alert-success': 'alert alert-danger';
+            },
+            loading:function(){
+                return this.loading? true: false;
+            }
         },
         methods:{
             handleFileUpload(){
@@ -185,7 +232,6 @@
                     })
             },
             save: function() {
-
                 this.uni_name_cn= this.$refs['uni_name_cn1'].value
                 this.uni_name_en= this.$refs['uni_name_en1'].value
                 this.phone= this.$refs['phone1'].value
@@ -212,11 +258,32 @@
                             Authorization: 'Bearer ' + localStorage.getItem('token')
                         }
                     })
-
-
+            },
+            changepw: function(){
+                this.$validator.validateAll().then(res=>{
+                    if(res){
+                        this.invalid = 0;
+                        this.success = 0;
+                        this.loading = true;
+                        const data ={'email': this.email, 'old_password':this.old_password, 'password':this.password}
+                        axios
+                            .post('api/password/change', data)
+                            .then(response=>{
+                                this.success = true;
+                                this.invalid = false;
+                                this.loading = false;
+                                this.message = response.data.message;
+                            })
+                            .catch(error=>{
+                                this.invalid = true;
+                                this.success = false;
+                                this.loading = false;
+                                this.message = error.response.data.message;
+                            })
+                    }
+                })
             }
         }
-
     }
 
 </script>
@@ -287,4 +354,18 @@
         box-sizing: border-box;         /* Opera/IE 8+ */
     }
 
+    #btn-submit{
+        background-color:darkred; 
+        border-color: 2px darkred;
+        color: white; 
+        border-radius: 15px
+    }
+
+    #btn-submit:hover{
+        background-color: rgb(116, 0, 0)
+    }
+
+    .tab-title:hover{
+        
+    }
 </style>

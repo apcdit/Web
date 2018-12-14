@@ -1,13 +1,19 @@
 <template>
-    <body>
+    <div>
         <div class="bg"><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br></div>
         
-    </body>
+        <footer><foot></foot></footer>
+
+    </div>
+    
 </template>
 
 <script>
+import foot from './foot.vue'
+
 export default {
     name: 'home',
+    components:{foot,},
     data(){
 
     }

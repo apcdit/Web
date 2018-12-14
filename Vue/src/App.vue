@@ -42,18 +42,7 @@
         </div>
         <transition name="fade"><router-view style="margin-top:2%;" ></router-view></transition>
 
-         <div class="row" style="padding:5%;width:100%">
-            <!-- <div class="col-md-8">
-                <h6 style="text-align: center" > NTU APICDT All Rights Reserved &copy 2018 </h6>
-            </div> -->
-            <!-- <div class="col-md-4">
-                <div><strong>联络我们</strong></div>
-                <a href="http://weibo.com/p/1005055398940329" target="_blank"><img style="position:relative" src="http://cdn.onlinewebfonts.com/svg/img_164924.png" width="11%" height="60%"></a>
-                <a href="https://www.instagram.com/apchinesedebate/" target="_blank"><img src="http://pluspng.com/img-png/instagram-png-instagram-png-file-512.png" width="12%" height="68%"></a>
-                <a href="https://www.facebook.com/NTUCSapchinesedebate/" target="_blank"><img src="https://i.imgur.com/0rBWRj7.png" width="11%" height="60%"></a>
-                </div> -->
-            </div>
-            </div>
+        </div>
 
     </div>
 
@@ -84,12 +73,13 @@
     import home from './components/home.vue'
     import resetpw1 from './components/resetpw1.vue'
     import CubeSpin from '../node_modules/vue-loading-spinner/src/components/Circle8.vue'
+    import foot from './components/foot.vue'
 
     export default {
         name: 'App',
         components: {admin,about,pastyear,rules,contact,
                     navigation,videohub,login,register,register1,lottery,
-                    simlottery,result,user,resetpw,notifysuccess,latestNews,post,home,resetpw1,CubeSpin},
+                    simlottery,result,user,resetpw,notifysuccess,latestNews,post,home,resetpw1,CubeSpin,foot,},
         data(){
             return{
                 logged : false,

@@ -20,6 +20,7 @@ import latestNews from '@/components/latestNews'
 import post from '@/components/post'
 import home from '@/components/home'
 import resetpw1 from '@/components/resetpw1'
+import foot from '@/components/foot'
 
 Vue.use(Router)
 
@@ -67,6 +68,7 @@ export default new Router({
     {path:'/navigation',name:'navigation',component:navigation},
     {path:'/latestNews', name:'latestNews', component:latestNews},
     {path:'/home', name:'home', component:home},
+    {path:'/foot', name:'foot', component:foot},
     {
       path:'/resetpw', 
       name:'resetpw1', 
@@ -128,10 +130,10 @@ export default new Router({
       path:'/user', 
       name:'user', 
       component:user, 
-      beforeEnter: ifAuthenticated,
-      meta:{
-        permission: 'user'
-      }
+      // beforeEnter: ifAuthenticated,
+      // meta:{
+      //   permission: 'user'
+      // }
     },
     {
       path:'/admin', 
