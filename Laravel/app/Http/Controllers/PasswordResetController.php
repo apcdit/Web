@@ -36,12 +36,13 @@ class PasswordResetController extends Controller
             [
                 'email' => $user->email,
                 'token' => str_random(6)
-             ]
+            ]
         );
-        // if ($user && $passwordReset)
-        //     $user->notify(
-        //         new PasswordResetRequest($passwordReset->token)
-        //     );
+        if ($user && $passwordReset)
+            $user->notify(
+                new PasswordResetRequest($passwordReset->token)
+            );
+
         return response()->json([
             'message' => 'We have e-mailed your password reset link!'
         ]);
