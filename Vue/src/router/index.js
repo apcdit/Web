@@ -130,10 +130,10 @@ export default new Router({
       path:'/user', 
       name:'user', 
       component:user, 
-      beforeEnter: ifAuthenticated,
-      meta:{
-        permission: 'user'
-      }
+      // beforeEnter: ifAuthenticated,
+      // meta:{
+      //   permission: 'user'
+      // }
     },
     {
       path:'/admin', 

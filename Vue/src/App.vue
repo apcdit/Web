@@ -3,7 +3,7 @@
         <div style="height:100px;">
             <div>
 
-                <b-navbar type="light" class="main-nav" variant="white" toggleable fixed="top" style="opacity:1">
+                <b-navbar type="light" class="main-nav" variant="white" toggleable fixed="top">
                     <b-navbar-brand href="/"><img src="http://i.imgur.com/90YSaaO.png"></b-navbar-brand>
                     <b-navbar-toggle target="nav_dropdown_collapse"></b-navbar-toggle>
                     <b-collapse is-nav id="nav_dropdown_collapse">
@@ -40,7 +40,7 @@
                 </b-navbar>
             </div>
         </div>
-        <transition name="fade"><router-view style="margin-top:2%;" ></router-view></transition>
+        <transition name="fade"><router-view></router-view></transition>
 
         </div>
 

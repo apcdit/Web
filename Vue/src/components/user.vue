@@ -30,9 +30,9 @@
             </b-progress>
             <h6>*意愿书会在报名后24小时内批准</h6>
             <br>
-                <b-tabs pills horizontal class="tab-title nav-justified">
+                <b-tabs pills horizontal class="mytabs nav-justified ">
                     <hr>
-                    <b-tab title="大学资料" active>
+                    <b-tab title="大学资料" active class="tab1">
                         <form>
                             <div class="row">
                                 <div class="col-sm-8">
@@ -365,4 +365,6 @@
         background-color: rgb(116, 0, 0)
     }
 
+
+    
 </style>
