@@ -43,10 +43,10 @@
               <button v-on:click="recordTime" :disabled="counter===1" class="btn btn-primary btn-block " id="register">报名</button>
             <br>
             <button @click="$router.push('user')" class="btn btn-lg">个人主页</button>
-            <br><br><br>
+            <br></center>
             <h3>条规</h3>
             <p style="color:red;">点击报名次数大于3，必须刷新网页。</p>
-          </center>
+          
         </div>
       </div>
     </div>
