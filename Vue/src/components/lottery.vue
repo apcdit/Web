@@ -67,6 +67,7 @@ export default
       counter:0,
       token_mystery: '',
       offTimeEnd: 0,
+        counter2:0,
     }
   },
   computed: {
@@ -95,7 +96,16 @@ export default
                         alert(resp.data.message);
                         this.$router.push('result');
                     }else{
-                        alert(resp.data.message);
+                        this.counter2++;
+                        console.log(this.counter2);
+                        if(this.counter2==3){
+                        this.counter2=0;
+                            var myWindow=window.open("","MsgWindow","width=200,height=100");
+                            myWindow.document.write("<p>时间还未到</p>");}
+                        else{
+                        alert(resp.data.message);}
+                        //var myWindow=window.open("","MsgWindow","width=200,height=100");
+                        //myWindow.document.write("<p>时间还未到。请重新刷新网页。</p>");
                     }
                 })
           
