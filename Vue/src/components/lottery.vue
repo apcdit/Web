@@ -39,13 +39,14 @@
           <center>
             <h3>请点击下方的按钮进行电子报名。</h3>
             <p>系统开放后，只需点击下方按钮即可完成电子报名程序。</p>
+            <p style="color:red;">点击报名次数大于3，必须刷新网页。</p>
             <br>
               <button v-on:click="recordTime" :disabled="counter===1" class="btn btn-primary btn-block " id="register">报名</button>
             <br>
             <button @click="$router.push('user')" class="btn btn-lg">个人主页</button>
             <br></center>
-            <h3>条规</h3>
-            <p style="color:red;">点击报名次数大于3，必须刷新网页。</p>
+            
+            
           
         </div>
       </div>
