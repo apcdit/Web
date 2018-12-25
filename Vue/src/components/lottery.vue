@@ -43,6 +43,9 @@
               <button v-on:click="recordTime" :disabled="counter===1" class="btn btn-primary btn-block " id="register">报名</button>
             <br>
             <button @click="$router.push('user')" class="btn btn-lg">个人主页</button>
+            <br><br><br>
+            <h3>条规</h3>
+            <p style="color:red;">点击报名次数大于3，必须刷新网页。</p>
           </center>
         </div>
       </div>
@@ -102,7 +105,7 @@ export default
                         
                             var myWindow=window.open("","MsgWindow","width=200,height=100");
                             alert("请刷新网页！");
-                            myWindow.document.write("<p>时间还未到</p>");}
+                            myWindow.document.write("<p>时间还未到<br/>请刷新网页！</p>");}
                         else{
                         alert(resp.data.message);}
                         //var myWindow=window.open("","MsgWindow","width=200,height=100");
