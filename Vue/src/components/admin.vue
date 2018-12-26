@@ -154,7 +154,7 @@ export default {
                 email:{
                     label: "电子邮件"
                 },
-                rememberToken:{
+                remember_token:{
                     label: "通过认证"
                 }
             },
