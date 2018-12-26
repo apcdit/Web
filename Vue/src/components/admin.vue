@@ -187,6 +187,9 @@ export default {
     computed:{
         user: function(){
             return JSON.parse(localStorage.getItem('user'));
+        },
+        loading:function(){
+                return this.loading? true: false;
         }
     },
     methods:{

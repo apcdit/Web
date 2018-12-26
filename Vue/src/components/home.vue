@@ -5,9 +5,10 @@
         <section class="bg">
             <div class="center text-center">
                     <!-- <div><img src="http://i.imgur.com/90YSaaO.png" /></div> -->
-                    <div style="text-align: center;">
-                        <div id="title"><strong>工行杯</strong></div>
-                        <div id="title"><strong>亚太大专辩论公开赛</strong></div>
+                    <div style="text-align: center;" class="col-xs-12">
+                        <div id="title"><strong>工行杯亚太大专辩论公开赛</strong></div>
+                        <!-- <div id="title"><strong></strong></div> -->
+                        <br>
                         <h5><i class="fa fa-calendar-o" aria-hidden="true"></i> 2019年7月10日至7月14日</h5>
                         <h5><i class="fa fa-map-marker" aria-hidden="true"></i> 新加坡南洋理工大学 </h5>
                         <h5><i class="fa fa-clock-o" aria-hidden="true"></i> 9:00am – 6:00pm </h5>
@@ -160,9 +161,10 @@ export default {
     }
 
     div #title{
-        font-size: 2.5rem;
+        font-size: 1.95rem;
         padding-top: 5%;
         font-family: "Microsoft YaHei","华文细黑";
+        font-weight: bold;
     }
 
 

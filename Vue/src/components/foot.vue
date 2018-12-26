@@ -12,7 +12,7 @@
                 <div class="col-xs-12 col-sm-4 col-md-4" id="getHere">
 					<h5>抵达这里</h5>
 					<br>
-					<div class="mapouter"><div class="gmap_canvas"><iframe width="300" height="250" id="gmap_canvas" src="https://maps.google.com/maps?q=nanyang%20technlogical%20university&t=&z=11&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe></div><style>.mapouter{text-align:right;height:299px;width:300px;}.gmap_canvas {overflow:hidden;background:none!important;height:299px;width:300px;}</style></div>				</div>
+					<div class="mapouter"><div class="gmap_canvas"><iframe width="300" height="250" id="gmap_canvas" src="https://maps.google.com/maps?q=nanyang%20technlogical%20university&t=&z=11&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe></div><style>.mapouter{text-align:right;height:299px;width:300px;}.gmap_canvas {overflow:hidden;background:none!important;height:299px;width:300px;}</style></div></div>
 				<div class="col-xs-12 col-sm-4 col-md-4">
 					<h5>链接</h5>
 					<ul class="list-unstyled quick-links">
@@ -35,7 +35,7 @@
 			</div>	
 			<div class="row">
 				<div class="col-xs-12 col-sm-12 col-md-12 mt-2 mt-sm-2 text-center text-white">
-					<p class="h6">&copy All right Reserved.<a class="text-green ml-2" href="apchinesedebate.com/#/" target="_blank">Asia-Pacific Intervarsity Chinese Debate Tournament</a></p>
+					<p class="h6">&copy All rights Reserved.<a class="text-green ml-2" href="apchinesedebate.com/#/" target="_blank">ICBC Presents - Asia-Pacific Intervarsity Chinese Debate Tournament</a></p>
 				</div>
 				<hr>
 			</div>	

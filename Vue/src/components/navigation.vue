@@ -8,12 +8,12 @@
       <b-navbar-toggle target="nav_dropdown_collapse"></b-navbar-toggle>
       <b-collapse is-nav id="nav_dropdown_collapse">
         <b-navbar-nav>
-            <b-nav-item style="color:black;font-size:20px;" href="/#">主页</b-nav-item>  
-            <b-nav-item style="color:black;font-size:20px;" href="#latestNews">最新消息</b-nav-item>   
-            <b-nav-item style="color:black;font-size:20px;" href="#getHere">抵达这里</b-nav-item>   
-            <b-nav-item style="color:black;font-size:20px;" href="#sponsor">赞助</b-nav-item>   
-            <b-nav-item style="color:black;font-size:20px;" v-b-modal.login v-if="!isLogged">登录</b-nav-item>
-            <b-nav-item style="color:black;font-size:20px;" @click="$router.push('user')" v-if="isLogged">个人主页</b-nav-item>   
+            <b-nav-item style="font-size:20px;" href="/#">主页</b-nav-item>  
+            <b-nav-item style="font-size:20px;" href="#latestNews">最新消息</b-nav-item>   
+            <b-nav-item style="font-size:20px;" href="#getHere">抵达这里</b-nav-item>   
+            <b-nav-item style="font-size:20px;" href="#sponsor">赞助</b-nav-item>   
+            <b-nav-item style="font-size:20px;" v-b-modal.login v-if="!isLogged">登录</b-nav-item>
+            <b-nav-item style="font-size:20px;" @click="$router.push('user')" v-if="isLogged">个人主页</b-nav-item>   
         </b-navbar-nav>
       </b-collapse>
     </nav>
@@ -55,6 +55,7 @@ export default
               return '';
             }else{
               nav.style.backgroundColor='rgb(46, 46, 46)';
+              nav.style.color='white';
               return '';
             } 
           };
