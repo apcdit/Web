@@ -102,12 +102,3 @@ Route::get('posts/latest','PostsController@showLatest');
 Route::post('register','AuthController@createUser');
 
 Route::post('uploadFile', 'AuthController@upload');
-
-Route::post('debugMail', function (Request $request){
-    \Illuminate\Support\Facades\Mail::send([], [], function ($message) {
-            $message->to('kimyong95@gmail.com')
-        ->subject('Test')
-        ->setBody('Hi, welcome user!');
-    });
-    return response()->json("email sent");
-});
