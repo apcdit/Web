@@ -1,5 +1,6 @@
 <template>
     <div>
+        <oldnav v-bind:isLogged="isLogged" v-bind:user="user"></oldnav>
         <div class="container">
             <div class="row">
                 <div class="col-md-4">
@@ -38,7 +39,7 @@
                         <h2 style="color:darkred; ">最新消息</h2>
                         <br>
                         <ul>
-                            <li v-for="post in posts">
+                            <li v-for="post in posts" v-bind:key="post.id">
                                 <div class="col-sm">
                                     <span class="" href="#" style="text-decoration: none;color:black;">
                                         <div class="row" style="width:100%">
@@ -75,14 +76,6 @@
         </div>
         <hr/>
 
-            <!-- <h1 style="text-align:center;color:#9A2A1F">报名队伍</h1>
-        <br/>
-        <div class="grid" >
-            <div class="cell" v-for="n in uni">{{n.uniNameCN}}</div>
-
-        </div> -->
-
-
         <hr/>
     </div>
 </template>
@@ -90,10 +83,16 @@
 <script>
 
     import axios from 'axios';
+    import oldnav from './oldnav.vue';
 
     export default
     {
         name:'homepage',
+        components:{oldnav,},
+        computed : {
+            isLogged : function(){ return this.$store.getters.isLoggedIn},
+            user: function(){ return JSON.parse(localStorage.getItem('user'))}
+        },
         data(){
             return{
                 videos:['https://www.youtube.com/embed/U4v2W_V9Fk0'],
@@ -112,18 +111,8 @@
                     .get('api/posts/latest')
                     .then(response=>{
                         this.posts = response.data;
-                        //console.log(localStorage.getItem('user'))
                     })
             },
-            // fetchUni(){
-            //     axios
-            //         .get('api/uniName/all')
-            //         .then(response=>{
-            //             this.uni=response.data;
-            //             console.log(this.uni);
-            //         })
-            // }
-
         }
 
     }

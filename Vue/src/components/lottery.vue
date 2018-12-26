@@ -1,5 +1,6 @@
 <template>
 <div class="container" style="background-color:white">
+  <oldnav v-bind:isLogged="isLogged" v-bind:user="user"></oldnav>
   <br>
   <h1 style="text-align:center">电子抽签系统</h1>
   <hr>
@@ -39,11 +40,15 @@
           <center>
             <h3>请点击下方的按钮进行电子报名。</h3>
             <p>系统开放后，只需点击下方按钮即可完成电子报名程序。</p>
+            <p style="color:red;">点击报名次数大于3，必须刷新网页。</p>
             <br>
               <button v-on:click="recordTime" :disabled="counter===1" class="btn btn-primary btn-block " id="register">报名</button>
             <br>
             <button @click="$router.push('user')" class="btn btn-lg">个人主页</button>
-          </center>
+            <br></center>
+            
+            
+          
         </div>
       </div>
     </div>
@@ -53,6 +58,8 @@
 </template>
 <script>
 import axios from 'axios';
+import oldnav from './oldnav.vue'
+
 
 export default
 {
@@ -61,16 +68,22 @@ export default
     return{
       pressed: 0,
       offTimeStart: 0,
-      user: {},
       uniDetails: {},
       drawn: 1,
       counter:0,
       token_mystery: '',
       offTimeEnd: 0,
+      counter2:0,
     }
   },
+  components:{
+    oldnav
+  },
   computed: {
-    authUser: function(){ if(this.$store.getters.authUser) return JSON.parse(this.$store.getters.authUser);},
+    isLogged : function(){ return this.$store.getters.isLoggedIn},
+    user: function(){
+            return JSON.parse(localStorage.getItem('user'));
+        }
   },
   created(){
     this.startTime();
@@ -80,7 +93,12 @@ export default
     recordTime:function(){
         try{
           const token_mystery = localStorage.getItem('token_mystery');
+          const drawn = JSON.parse(localStorage.getItem('user')).uni_details.drawn;
             const data = {'token_mystery': token_mystery} //pressed here is to notify backend that user pressed the button
+            if(drawn == 1){
+              alert("队伍已经成功报名！请等待成绩出炉！")
+              return true;
+            }
             
             axios
                 .put('/Vue/dist/time.php', data, { //api/time/official/store'
@@ -90,12 +108,25 @@ export default
                 })
                 .then(resp=>{
                     if(resp.data.status == 200){
-                        //console.log(resp.data)
+                        const user = JSON.parse(localStorage['user']);
+                        const uni = user.uni_details;
+                        uni.drawn = 1;
+                        localStorage['user'] = JSON.stringify(user);
                         ++this.counter;
                         alert(resp.data.message);
                         this.$router.push('result');
                     }else{
-                        alert(resp.data.message);
+                        this.counter2++;
+                        console.log(this.counter2);
+                        if(this.counter2>=3){
+                        
+                            var myWindow=window.open("","MsgWindow","width=200,height=100");
+                            alert("请刷新网页！");
+                            myWindow.document.write("<p>时间还未到<br/>请刷新网页！</p>");}
+                        else{
+                        alert(resp.data.message);}
+                        //var myWindow=window.open("","MsgWindow","width=200,height=100");
+                        //myWindow.document.write("<p>时间还未到</p>");
                     }
                 })
           
@@ -125,20 +156,15 @@ export default
         })
     },
     showUser: function(){
-              const token_mystery = localStorage.getItem('token_mystery');
-              const uniNameCN = JSON.parse(localStorage.getItem('user')).uniNameCN;
-            
+              
       axios
-          .get('/Vue/dist/user.php',{
-                params:{
-                    'token_mystery': token_mystery,
-                    'uniNameCN': uniNameCN
-                }
-            },{headers: { Authorization: "Bearer " + localStorage.getItem('token')}})
+          .get('api/user',  //'/Vue/dist/user.php'
+          {headers: { Authorization: "Bearer " + localStorage.getItem('token')}})
           .then(resp=>{
-          this.user = resp.data.user
-          this.drawn = this.user.drawn
-          this.uniDetails = resp.data.uniDetails
+          //reset the drawn everytime get into this page
+          const users = resp.data.user;
+          users['uni_details'] = resp.data.uniDetails;
+          localStorage['user'] = JSON.stringify(users);
           switch(this.user.region){
             case "Malaysia": this.user.region = "马来西亚"; break;
             case "Singapore": this.user.region = "新加坡"; break;

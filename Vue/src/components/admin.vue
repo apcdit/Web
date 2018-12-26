@@ -1,8 +1,7 @@
 <template>
     <div class="container">
+          <button class="btn btn-primary" @click="showaaa">aaa</button>
         <h1><strong>管理者</strong></h1>
-       
-        
         <hr>           
             <b-card>
                 <b-tabs pills card vertical>
@@ -154,6 +153,9 @@ export default {
                 },
                 email:{
                     label: "电子邮件"
+                },
+                rememberToken:{
+                    label: "通过认证"
                 }
             },
             fieldsQ:{
@@ -179,7 +181,15 @@ export default {
     // mounted(){
     //     this.getTime();
     // },
+    computed:{
+        user: function(){
+            return JSON.parse(localStorage.getItem('user'));
+        }
+    },
     methods:{
+        showaaa(){
+            console.log(this.user);
+        },
         setTime(){
             const data = {
                 'region' : this.selected,

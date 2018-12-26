@@ -6,10 +6,8 @@ import router from './router'
 import Vuex from 'vuex'
 import store from '../src/store.js'
 import axios from 'axios'
-
 import 'bootstrap/dist/css/bootstrap.min.css'
 import zh_CN from 'vee-validate/dist/locale/zh_CN'
-import 'jquery'
 import BootstrapVue from 'bootstrap-vue'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import VeeValidate, { Validator } from 'vee-validate';

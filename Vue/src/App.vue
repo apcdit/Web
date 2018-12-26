@@ -1,49 +1,6 @@
 <template>
     <div id="app">
-        <div style="height:100px;">
-            <div>
-
-                <b-navbar type="light" class="main-nav" variant="white" toggleable fixed="top">
-                    <b-navbar-brand href="/"><img src="http://i.imgur.com/90YSaaO.png"></b-navbar-brand>
-                    <b-navbar-toggle target="nav_dropdown_collapse"></b-navbar-toggle>
-                    <b-collapse is-nav id="nav_dropdown_collapse">
-                        <b-navbar-nav>
-                            <b-nav-item-dropdown style="font-size: 1.25em; font-weight:bold;" text="关于我们" right >
-                                <b-dropdown-item router-link to='/about'>赛会简介</b-dropdown-item>
-                                <b-dropdown-item router-link to='/rules' v-if="false">参赛事宜</b-dropdown-item>
-                                <b-dropdown-item router-link to='/pastyear'>历届赛况</b-dropdown-item>
-                                <b-dropdown-item href="/#">筹委介绍</b-dropdown-item>
-                            </b-nav-item-dropdown>
-                            <b-nav-item-dropdown style="font-size: 1.25em; font-weight:bold;" text="活动详情" right >
-                                <b-dropdown-item href="#/latestNews">最新消息</b-dropdown-item>
-                                <b-dropdown-item href="#">最新赛况</b-dropdown-item>
-                                <b-dropdown-item href="#">赛程</b-dropdown-item>
-                            </b-nav-item-dropdown>
-
-                            <b-nav-item style="font-size: 1.25em; font-weight:bold;" router-link to='/videohub'>视频库</b-nav-item>
-                            <b-nav-item router-link to='/contact' style="font-size: 1.25em; font-weight:bold;">联络我们</b-nav-item>
-                        </b-navbar-nav>
-
-                        <b-navbar-nav class="ml-auto">
-                            <b-nav-item router-link to='/register' v-if="!isLoggedIn" style="font-size: 1.25em; font-weight:bold;">账号注册</b-nav-item>
-                            <b-nav-item router-link to='/login' style="font-size: 1.25em; font-weight:bold;" v-if="!isLoggedIn">登录</b-nav-item>
-                            <b-nav-item-dropdown style="font-size: 1.25em; font-weight:bold;" text="大学资料"  v-if="isLoggedIn" >
-                                <b-dropdown-item to='user' v-if="!update">个人主页</b-dropdown-item>
-                                <b-dropdown-item to='user' v-else>{{update.uniNameCN}}</b-dropdown-item>
-                                <b-dropdown-item to='admin' v-if="update.admin">Admin Dashboard</b-dropdown-item>
-                                <b-dropdown-item to='lottery' v-if="false">电子抽签</b-dropdown-item>
-                                <b-dropdown-item to='result' v-if="drawn==1">电子抽签结果</b-dropdown-item>
-                                <b-dropdown-item @click="logout()"> 登出 </b-dropdown-item>
-                            </b-nav-item-dropdown>
-                        </b-navbar-nav>
-                    </b-collapse>
-                </b-navbar>
-            </div>
-        </div>
-        <transition name="fade"><router-view></router-view></transition>
-
-        </div>
-
+        <transition name="fade"><router-view style="margin-top:105px"></router-view></transition>
     </div>
 
 
@@ -74,25 +31,22 @@
     import resetpw1 from './components/resetpw1.vue'
     import CubeSpin from '../node_modules/vue-loading-spinner/src/components/Circle8.vue'
     import foot from './components/foot.vue'
+    import navibar from './components/navigation.vue'
+    import oldnav from './components/oldnav.vue'
+    import homepage from './components/homepage.vue'
 
     export default {
         name: 'App',
         components: {admin,about,pastyear,rules,contact,
                     navigation,videohub,login,register,register1,lottery,
-                    simlottery,result,user,resetpw,notifysuccess,latestNews,post,home,resetpw1,CubeSpin,foot,},
+                    simlottery,result,user,resetpw,notifysuccess,latestNews,post,home,resetpw1,CubeSpin,foot,navibar,
+                    oldnav,homepage},
         data(){
             return{
-                logged : false,
-                user: JSON.parse(localStorage.getItem('user')),
-                uniDetails: {},
                 drawn: false,
                 admin: false,
                 region: '',
             }
-        },
-        computed : {
-            isLoggedIn : function(){ this.logged=this.$store.getters.isLoggedIn; return this.$store.getters.isLoggedIn},
-            update: function(){ return JSON.parse(localStorage.getItem('user'))}
         },
         created() {
             this.showUser();
@@ -101,28 +55,14 @@
         //     this.getDrawn();
         // },
         methods: {
-            logout: function () {
-                this.$store.dispatch('logout')
-                    .then(() => {
-                        this.$router.push('login')
-                    })
-            },
-
             showUser: function(){
                 //api/user
-                const token_mystery = localStorage.getItem('token_mystery');
-                const uniNameCN = JSON.parse(localStorage.getItem('user')).uniNameCN;
-    
-                axios
-                    .get('/Vue/dist/user.php',{
-                        params:{
-                            'token_mystery': token_mystery,
-                            'uniNameCN': uniNameCN
-                        }
-                    }
-                        ,{headers: { Authorization: "Bearer " + localStorage.getItem('token')}})
+                        axios
+                    .get('api/user',{headers: { Authorization: "Bearer " + localStorage.getItem('token')}})
                     .then(resp=>{
                         this.user = resp.data.user
+                        this.user['uni_details'] = resp.data.uniDetails;
+                        localStorage['user'] = JSON.stringify(this.user);
                         this.uniNameCN = resp.data.user.uniNameCN
                         this.uniDetails = resp.data.uniDetails
                         this.admin = this.user.admin
@@ -141,7 +81,6 @@
                     })
                     .then(resp=>{
                         this.drawn = resp.data.drawn
-                        //console.log(this.drawn);
                     })       
                 },
 
@@ -149,7 +88,7 @@
     }
 </script>
 
-<style>
+<style scoped>
 
     @import url('https://fonts.googleapis.com/css?family=Noto+Sans+SC');
 
@@ -164,6 +103,7 @@
 
     .main-nav{
         border-bottom:0.03px solid lightgray;
+        color:black;
     }
     .fade-enter, .fade-leave-active {
         opacity: 0
@@ -187,6 +127,7 @@
     background-repeat: no-repeat;
     background-size: 100% 100%;
     font-family: 'Noto Sans SC', sans-serif;
+    /* background-color: #fafafa; */
     /* background-image: url("https://i.imgur.com/7MJgWRy.jpg") */
     ;}
 

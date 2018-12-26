@@ -1,31 +1,32 @@
 <template>
 
     <section id="user">
-        <div class="container">
-                <b-progress :max="max" striped :animated="animate" class="mb-2" height="3.5rem">
-                <b-progress-bar :value="value" variant="success"  animated >
-                    <strong><span style="color:white;font-size: 18px;">注册成功</span></strong>
+        <oldnav v-bind:isLogged="isLogged" v-bind:user="user"></oldnav>
+        <div class="containers container">
+                <b-progress :max="max" :animated="animate" class="mb-2" height="3.5rem">
+                <b-progress-bar :value="value" variant="success">
+                    <strong><span style="color:white;font-size: 14px;">注册成功</span></strong>
                 </b-progress-bar>
 
-                <b-progress-bar :value="value" variant="secondary" animated v-if="book==0">
-                    <strong><span style="color:white;font-size: 18px;">意愿书</span></strong>
+                <b-progress-bar :value="value" variant="secondary" v-if="book==0">
+                    <strong><span style="color:white;font-size: 14px;">意愿书</span></strong>
                 </b-progress-bar>
-                <b-progress-bar :value="value" variant="success" animated v-if="book==1" >
-                    <strong><span style="color:white;font-size: 18px;">意愿书</span></strong>
-                </b-progress-bar>
-
-                <b-progress-bar :value="value" animated  variant="secondary" v-if="drawn==0">
-                    <strong> <span style="color:white;font-size: 18px;">电子抽签</span></strong>
-                </b-progress-bar>
-                <b-progress-bar :value="value" animated  variant="success" v-if="drawn==1">
-                    <strong> <span style="color:white;font-size: 18px;">电子抽签</span></strong>
+                <b-progress-bar :value="value" variant="success" v-if="book==1" >
+                    <strong><span style="color:white;font-size: 14px;">意愿书</span></strong>
                 </b-progress-bar>
 
-                <b-progress-bar :value="value"  animated variant="secondary" v-if="qualified==0">
-                    <strong><span style="color:white;font-size: 18px;">报名成功</span></strong>
+                <b-progress-bar :value="value"   variant="secondary" v-if="drawn==0">
+                    <strong> <span style="color:white;font-size: 14px;">电子抽签</span></strong>
                 </b-progress-bar>
-                <b-progress-bar :value="value"  animated variant="success" v-if="qualified==1">
-                    <strong><span style="color:white;font-size: 18px;">报名成功</span></strong>
+                <b-progress-bar :value="value"   variant="success" v-if="drawn==1">
+                    <strong> <span style="color:white;font-size: 14px;">电子抽签</span></strong>
+                </b-progress-bar>
+
+                <b-progress-bar :value="value"   variant="secondary" v-if="qualified==0">
+                    <strong><span style="color:white;font-size: 14px;">报名成功</span></strong>
+                </b-progress-bar>
+                <b-progress-bar :value="value"   variant="success" v-if="qualified==1">
+                    <strong><span style="color:white;font-size: 14px;">报名成功</span></strong>
                 </b-progress-bar>
             </b-progress>
             <h6>*意愿书会在报名后24小时内批准</h6>
@@ -98,7 +99,7 @@
                             </div>
 
                             <button id="btn-submit" class="btn" @click.prevent="changepw" v-if="!loading">更改密码</button>
-                            <button id="btn-submit" class="btn" v-else><cube-spin></cube-spin></button>
+                            <button id="btn-submits" class="btn" v-else><cube-spin></cube-spin></button>
                         </div>
                     </b-tab>
                 </b-tabs>
@@ -111,13 +112,13 @@
 
     import axios from 'axios';
     import CubeSpin from '../../node_modules/vue-loading-spinner/src/components/Circle.vue'
-
+    import oldnav from './oldnav.vue'
 
     export default
     {
         name:'user',
         components:{
-            CubeSpin,
+            CubeSpin,oldnav
         },
         data() {
             return {
@@ -154,7 +155,9 @@
             },
             loading:function(){
                 return this.loading? true: false;
-            }
+            },
+            isLogged : function(){ return this.$store.getters.isLoggedIn},
+            user: function(){ return JSON.parse(localStorage['user'])}
         },
         methods:{
             handleFileUpload(){
@@ -288,8 +291,8 @@
 
 </script>
 
-<style scoped>
-    .container{margin-top:1%;background-color: #F7F7F7;
+<style>
+    .containers{margin-top:1%;background-color: #F7F7F7;
         padding: 20px 25px 30px;
         margin: 0 auto 25px;
         margin-top: 50px;
@@ -354,17 +357,26 @@
         box-sizing: border-box;         /* Opera/IE 8+ */
     }
 
-    #btn-submit{
+    #btn-submits{
         background-color:darkred; 
         border-color: 2px darkred;
         color: white; 
         border-radius: 15px
     }
 
-    #btn-submit:hover{
+    #btn-submits:hover{
         background-color: rgb(116, 0, 0)
     }
-
-
+    #__BVID__29___BV_tab_button__.nav-link,#__BVID__25___BV_tab_button__.nav-link,#__BVID__27___BV_tab_button__.nav-link{
+        color: black;
+    }
+    #__BVID__29___BV_tab_button__.nav-link.active,#__BVID__27___BV_tab_button__.nav-link.active{
+        color: #fff;
+        background-color: darkred;
+    }
+    #__BVID__25___BV_tab_button__.nav-link.active{
+        color: #fff;
+        background-color: darkred;
+    }
     
 </style>

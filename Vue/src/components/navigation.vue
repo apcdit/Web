@@ -1,58 +1,68 @@
 <template>
-
-  <div>
-
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <div class="collapse navbar-collapse" id="navbarNavDropdown">
-        <ul class="navbar-nav">
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-              关于我们
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <a class="dropdown-item" href="/">赛会简介</a>
-              <a class="dropdown-item" href="/pastyear">历届赛况</a>
-              <a class="dropdown-item" href="#">筹委介绍</a>
-            </div>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              活动详情
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <a class="dropdown-item" href="#">最新消息</a>
-              <a class="dropdown-item" href="#">最新赛况</a>
-              <a class="dropdown-item" href="#">赛程</a>
-              <a class="dropdown-item" href="/rules">参赛事宜</a>
-            </div>
-          </li>
-          <li class="nav-item">
-            <a href='/nav'><img src="http://i.imgur.com/zRtdcqV.png"></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">视频库</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">联络我们</a>
-          </li>
-
-          <li class="nav-item"><a class="nav-link" href="#" v-if="!show"> 登录/注册 </a></li> <!--gt problem here why false can be showed  -->
-
-        </ul>
-      </div>
+    <section id="navibar">
+      <nav class="nav navbar navbar-expand-lg navbar-light fixed-top" v-bind:style="scrolling">
+      <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button> -->
+      <b-navbar-brand href="/"><img src="http://i.imgur.com/90YSaaO.png"></b-navbar-brand>
+      <b-navbar-toggle target="nav_dropdown_collapse"></b-navbar-toggle>
+      <b-collapse is-nav id="nav_dropdown_collapse">
+        <b-navbar-nav>
+            <b-nav-item style="color:black;font-size:20px;" href="/#">主页</b-nav-item>  
+            <b-nav-item style="color:black;font-size:20px;" href="#latestNews">最新消息</b-nav-item>   
+            <b-nav-item style="color:black;font-size:20px;" href="#getHere">抵达这里</b-nav-item>   
+            <b-nav-item style="color:black;font-size:20px;" href="#sponsor">赞助</b-nav-item>   
+            <b-nav-item style="color:black;font-size:20px;" v-b-modal.login v-if="!isLogged">登录</b-nav-item>
+            <b-nav-item style="color:black;font-size:20px;" @click="$router.push('user')" v-if="isLogged">个人主页</b-nav-item>   
+        </b-navbar-nav>
+      </b-collapse>
     </nav>
 
-  </div>
+    </section>
 
 </template>
 
 
 <script>
-  export default
+
+import login from './login.vue'
+
+export default
   {
     name:'navigation',
-    data (){return
-    show: true}
+    components:{login},
+    props:{
+      isLogged: Boolean,
+    },
+    data(){
+      return{
+        isLogged: false,
+      }
+    },
+    computed:{
+        scrolling:function(){
+          window.onscroll = () => {
+            const nav = document.querySelector('.navbar');
+            const bg = document.querySelector('.bg');
+            const foot = document.querySelector('#footbar');
+            const news = document.querySelector('#latestNews');
+            const btm = bg.clientHeight+news.clientHeight;
+            if(scrollY <= bg.clientHeight-nav.clientHeight) {
+              nav.style.backgroundColor='';
+              return ''; 
+            }else if((bg.clientHeight-nav.clientHeight) < scrollY  && (scrollY)<= (btm-nav.clientHeight)){
+              nav.style.backgroundColor='white';
+              return '';
+            }else{
+              nav.style.backgroundColor='rgb(46, 46, 46)';
+              return '';
+            } 
+          };
+        }
+    },
   }
 </script>
-<style></style>
+
+<style scoped>
+  
+</style>

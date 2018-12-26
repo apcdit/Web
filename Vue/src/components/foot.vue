@@ -9,8 +9,11 @@
                     <br>
                     <a href="/#"><img src="http://i.imgur.com/90YSaaO.png"></a>
 				</div>
-                <div class="col-xs-12 col-sm-3 col-md-3"></div>
-				<div class="col-xs-12 col-sm-5 col-md-5">
+                <div class="col-xs-12 col-sm-4 col-md-4" id="getHere">
+					<h5>抵达这里</h5>
+					<br>
+					<div class="mapouter"><div class="gmap_canvas"><iframe width="300" height="250" id="gmap_canvas" src="https://maps.google.com/maps?q=nanyang%20technlogical%20university&t=&z=11&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe></div><style>.mapouter{text-align:right;height:299px;width:300px;}.gmap_canvas {overflow:hidden;background:none!important;height:299px;width:300px;}</style></div>				</div>
+				<div class="col-xs-12 col-sm-4 col-md-4">
 					<h5>链接</h5>
 					<ul class="list-unstyled quick-links">
 						<li><a href="/#"><i class="fa fa-angle-double-right"></i>主页</a></li>

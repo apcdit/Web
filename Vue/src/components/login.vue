@@ -1,21 +1,18 @@
 <template>
-  <div class="container">
-    <form class="card card-container" v-on:submit.prevent="login()">
-        <!-- <img class="profile-img-card" src="//lh3.googleusercontent.com/-6V8xOA6M7BA/AAAAAAAAAAI/AAAAAAAAAAA/rzlHcD0KYwo/photo.jpg?sz=120" alt="" /> -->
+    <b-modal id="login" busy="true" title="登录账号">
         <img id="profile-img" class="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" />
         <p id="profile-name" class="profile-name-card"></p>
         <div class="form-signin">
-            <span id="reauth-email" class="reauth-email"></span>
-            <input type="email" id="inputEmail" v-model="email" class="form-control" placeholder="电子邮件" required autofocus>
-            <input type="password" id="inputPassword" v-model="password" class="form-control" placeholder="输入密码" required>
+            <i class="fa fa-user" aria-hidden="true"></i><input type="email" id="inputEmail" v-model="email" class="form-control" placeholder="电子邮件" required autofocus>
+            <i class="fa fa-key" aria-hidden="true"></i><input type="password" id="inputPassword" v-model="password" class="form-control" placeholder="输入密码" required>
             <a href='/#/resetpw'>忘记密码?</a>
-        </div><!-- /form -->
-        <div class="form-group">
-            <button class="btn btn-lg btn-primary btn-block btn-signin" v-if="!loading">登录</button>
-            <button class="btn btn-lg btn-primary btn-block btn-signin" v-else><cube-spin style="width:60%;height:60%"></cube-spin></button>
         </div>
-    </form><!-- /card-container -->
-</div><!-- /container -->
+        <div slot="modal-footer" class="w-100">
+         <button class="btn btn-lg btn-primary btn-block btn-signin" @click="login" v-if="!loading">登录</button>
+         <button class="btn btn-lg btn-primary btn-block btn-signin" v-else><cube-spin style="width:60%;height:60%"></cube-spin></button>
+       </div>
+    </b-modal>
+  
 </template>
 
 
@@ -53,6 +50,7 @@ export default{
 }
 </script>
 <style scoped>
+@import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
   .card-container.card {
       max-width: 350px;
       padding: 40px 40px;
@@ -152,7 +150,7 @@ export default{
 
   .btn.btn-signin {
       /*background-color: #4d90fe; */
-      background-color: rgb(104, 145, 162);
+      background-color: darkred;
       /* background-color: linear-gradient(rgb(104, 145, 162), rgb(12, 97, 33));*/
       padding: 0px;
       font-weight: 700;
@@ -171,7 +169,7 @@ export default{
   .btn.btn-signin:hover,
   .btn.btn-signin:active,
   .btn.btn-signin:focus {
-      background-color: rgb(12, 97, 33);
+      background-color: red;
   }
 
   .forgot-password {

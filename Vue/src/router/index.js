@@ -20,7 +20,6 @@ import latestNews from '@/components/latestNews'
 import post from '@/components/post'
 import home from '@/components/home'
 import resetpw1 from '@/components/resetpw1'
-import foot from '@/components/foot'
 
 Vue.use(Router)
 
@@ -48,7 +47,7 @@ const ifAuthenticated = (to, from, next) => {
           break;
     }
   }else{
-    next('/login')
+    next('/')
   }
 }
 
@@ -67,8 +66,7 @@ export default new Router({
     {path:'/videohub',name:'videohub',component:videohub},
     {path:'/navigation',name:'navigation',component:navigation},
     {path:'/latestNews', name:'latestNews', component:latestNews},
-    {path:'/home', name:'home', component:home},
-    {path:'/foot', name:'foot', component:foot},
+    {path:'/', name:'home', component:home},
     {
       path:'/resetpw', 
       name:'resetpw1', 
@@ -88,8 +86,7 @@ export default new Router({
     {
       path:'/notifysuccess', 
       name:'notifysuccess', 
-      component:notifysuccess
-      
+      component:notifysuccess   
     },
     {
       path:'/login',
@@ -104,7 +101,7 @@ export default new Router({
       beforeEnter: ifNotAuthenticated
     },
     {
-      path:'/',
+      path:'/home',
       name:'homepage',
       component:homepage
     },
