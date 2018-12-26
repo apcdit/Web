@@ -54,6 +54,7 @@
                             <option>Macau</option>
                             <option>Taiwan</option>
                             <option>Australia</option>
+                            <option>Others</option>
                             <option>Admin</option>
                         </select>
                         <br>
