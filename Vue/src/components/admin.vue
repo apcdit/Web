@@ -18,6 +18,7 @@
                             <option>Taiwan</option>
                             <option>Australia</option>
                             <option>Admin</option>
+                            <option>Others</option>
                         </select>
                         <br>
                         <div>
@@ -84,6 +85,7 @@
                                 <option>Taiwan</option>
                                 <option>Australia</option>
                                 <option>Admin</option>
+                                <option>Others</option>
                             </select>
                             <br>
                             <button @click="getUsers" v-on:click="pressed=true, pressed1=false" class="btn btn-primary">显示该地区大学</button>
