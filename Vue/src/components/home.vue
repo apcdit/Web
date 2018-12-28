@@ -121,6 +121,7 @@ export default {
         border-bottom:solid;
         border-bottom-width: 0.01rem;
         border-bottom-color: lightgrey;
+        background-attachment: fixed;
         margin-top: -105.05px;
     }
 
