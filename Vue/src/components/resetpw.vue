@@ -2,7 +2,7 @@
     <div class="container col-xs-6 col-lg-4">
         <div class="form-group" v-if="notFound||found">
                 <span v-if="notFound" class="alert alert-danger">此邮件并不存在！</span>
-                <span v-if="found" class="alert alert-success">请到邮箱里寻找验证码！</span>    
+                <span v-if="found" class="alert alert-success">验证码已发到邮箱里！</span>    
         </div>
         <div>
             <h2><strong>寻找你的账号</strong></h2>

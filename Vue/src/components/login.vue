@@ -1,5 +1,6 @@
 <template>
     <b-modal id="login" busy="true" title="登录账号">
+        <!-- login -->
         <img id="profile-img" class="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" />
         <p id="profile-name" class="profile-name-card"></p>
         <div class="form-signin">

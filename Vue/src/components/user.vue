@@ -291,7 +291,7 @@
 
 </script>
 
-<style>
+<style scoped>
     .containers{margin-top:1%;background-color: #F7F7F7;
         padding: 20px 25px 30px;
         margin: 0 auto 25px;

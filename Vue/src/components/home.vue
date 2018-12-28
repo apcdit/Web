@@ -15,7 +15,8 @@
                     </div>
                     <br>
                 <div class="form-group col-xs-6">
-                    <button class="btn btn-reg" target="blank" @click="$router.push('register')">点击报名</button>
+                    <a class="btn btn-reg" target="blank" href='/#/register'>点击报名</a>
+                    <!-- <button class="btn btn-reg" target="blank" v-if="true" :disabled="true">报名已截止</button> -->
                 </div>
                 <div class="row">
                     <div class="col-xs-6 ml-1">

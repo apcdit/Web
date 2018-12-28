@@ -1,6 +1,9 @@
 <template>
-<div style="margin-top:1%">
-<div class="container animated fadeIn content">
+    <div style="margin-top:1%">
+    <div class="container animated fadeIn content">
+        <nav>
+            <a style="float:right;" class="btn" href="/#/"><i class="fa fa-times" aria-hidden="true"></i></a>
+        </nav>
         <div class="row">
             <div class="col-md-12">
                 <h1 class="title">亚太辩视频库📹</h1>
@@ -87,5 +90,8 @@
         border: none;
         padding: 0;
         background: none;
+    }
+    nav>a{
+        color: darkred;
     }
 </style>
