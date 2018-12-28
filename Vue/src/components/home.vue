@@ -2,7 +2,7 @@
     <div>
         <navibar v-bind:isLogged="isLogged"></navibar>
         <login></login>
-        <section class="bg">
+        <section class="bg parallax">
             <div class="center text-center">
                     <!-- <div><img src="http://i.imgur.com/90YSaaO.png" /></div> -->
                     <div style="text-align: center;" class="col-xs-12">
@@ -125,6 +125,11 @@ export default {
         margin-top: -105.05px;
     }
 
+    @media only screen and (max-device-width:1366px){
+        .parallax{
+            background-attachment: scroll;
+        }
+    }
     .btn-form{
         font-family: "Microsoft YaHei", "华文细黑";
         background-color: #9A2A1F;
