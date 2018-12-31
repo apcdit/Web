@@ -1,52 +1,72 @@
 <template>
-    <div class="container">
-          <button class="btn btn-primary" @click="showaaa">aaa</button>
-        <h1><strong>管理者</strong></h1>
-        <hr>           
+    <div>
+        <oldnav v-bind:isLogged="isLogged" v-bind:user="user"></oldnav>
+        <!-- control area -->
+        <div class="container">
+            <h1><strong>管理员页面</strong></h1>
+            <hr>
             <b-card>
-                <b-tabs pills card vertical>
-                    <b-tab title="设置时间" active>
-                    <div class="container">
-                    <label>区域</label>
-                        <select v-model="selected">
-                            <option disabled value="">Region</option>
-                            <option>Singapore</option>
-                            <option>Malaysia</option>
-                            <option>China</option>
-                            <option>Hong Kong</option>
-                            <option>Macau</option>
-                            <option>Taiwan</option>
-                            <option>Australia</option>
-                            <option>Admin</option>
-                            <option>Others</option>
-                        </select>
-                        <br>
-                        <div>
-                            <div>
-                            <h4>开始时间 (2018-10-21 10:55:00 24 HOURS FORMAT)</h4>
-                            <input v-model="offTimeStart" placeholder="输入开始时间">
+                <b-tabs pills horizontal class="nav-justified ">
+                    <hr>
+                    <b-tab title="设置显示时间" active>
+                        <div class="row">
+                            <div class="col-md">
+                                    <label>区域:</label>
+                                    <select v-model="selected">
+                                        <option disabled value="">Region</option>
+                                        <option>Singapore</option>
+                                        <option>Malaysia</option>
+                                        <option>China</option>
+                                        <option>Hong Kong</option>
+                                        <option>Macau</option>
+                                        <option>Taiwan</option>
+                                        <option>Australia</option>
+                                        <option>Admin</option>
+                                        <option>Others</option>
+                                    </select>
+                                    <div class="form-group">
+                                        <label>开始时间:</label>
+                                        <input v-model="offTimeStart" class="form-control" placeholder="输入开始时间">
+                                        <label>结束时间:</label>
+                                        <input v-model="offTimeEnd" class="form-control" placeholder="输入结束时间">
+                                    </div>
                             </div>
-                            <div>
-                            <h4>截止时间</h4>
-                            <input v-model="offTimeEnd" placeholder="输入截止时间">
-                            <br>
+                            <div class="col-md">
+                                <h6 class="alert alert-danger">**(2018-10-21 10:55:00 24 HOURS FORMAT)</h6>
+                                <button @click="setTime" class="btn btn-primary btn-block">设置显示时间</button>
+                                <!-- <button @click="getTime" class="btn btn-primary btn-block">get time</button> -->
+                                <button @click="cache" class="btn btn-primary btn-block">Cache</button>
+                                <button @click="optimize" class="btn btn-primary btn-block">Optimze</button>
                             </div>
-                            <button @click="setTime" class="btn btn-primary">设置时间</button>
-                            <button @click="getTime" class="btn btn-primary">get time</button>
-                            <button @click="cache" class="btn btn-primary">cache</button>
-                            <button @click="optimize" class="btn btn-primary">optimize</button>
-                             <!-- <ul >
-                                <li v-for="index in 8" :key="index">{{times[index][0]}}</li>
-                            </ul> -->
                         </div>
+                        <hr>
+                        <div class="container">
+                            <h3><strong>各区域显示时间</strong></h3>
+                            <br>
+                            <table class="table table-hover">
+                            <thead class="thead-dark">
+                                <tr>
+                                <th scope="col">区域</th>
+                                <th scope="col">开始时间</th>
+                                <th scope="col">结束时间</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-for="time in times" v-bind:key="time[0]">
+                                <th scope="row">{{time[0]}}</th>
+                                <td>{{time[1]}}</td>
+                                <td>{{time[2]}}</td>
+                                </tr>
+                            </tbody>
+                            </table>
                         </div>
                     </b-tab>
 
                     <b-tab title="重置时间">
                         <div class="container text-center">
                         <h3 style="color:red"><strong>请勿随意点击此按钮</strong></h3>
-                        <label>区域</label>
-                        <select v-model="selected">
+                        <label>区域:</label>
+                        <select v-model="selected1">
                             <option disabled value="">Region</option>
                             <option>Singapore</option>
                             <option>Malaysia</option>
@@ -74,8 +94,8 @@
 
                     <b-tab title="查询大学">
                         <div class="text-center">
-                            <label>区域</label>
-                            <select v-model="selected">
+                            <label>区域:</label>
+                            <select v-model="selected2">
                                 <option disabled value="">Region</option>
                                 <option>Singapore</option>
                                 <option>Malaysia</option>
@@ -88,44 +108,53 @@
                                 <option>Others</option>
                             </select>
                             <br>
-                            <button @click="getUsers" v-on:click="pressed=true, pressed1=false" class="btn btn-primary">显示该地区大学</button>
+                            <button @click="getUsers" v-on:click="pressed=true" class="btn btn-primary btn-block">显示该地区大学</button>
+                        </div>
+                        <div class="container">
+                            <div v-if="pressed && numParticipants !== 0">
+                                <br>
+                                <h3>报名队伍数量: {{numParticipants}} </h3>
+                                <b-table hover :items="users" :fields="fields"></b-table>
+                            </div>
+                            <div v-if="numParticipants === 0">
+                                <br>
+                                <h3>次区域暂时没有报名队伍</h3>
+                            </div>
                         </div>
                     </b-tab>
 
                     <b-tab title="查询辩题">
-                        <button @click="getQuestions" v-on:click="pressed1=true, pressed=false" class="btn btn-primary">显示所有辩题</button>
+                        <!-- <button @click="getQuestions" v-on:click="pressed1=true, pressed=false" class="btn btn-primary">显示所有辩题</button> -->
+                        <div class="container">
+                            <h3>辩题</h3>
+                            <b-table hover stacked :items="questions" :fields="fieldsQ"></b-table> 
+                        </div>
                     </b-tab>
                 </b-tabs>
             </b-card>
+        </div>    
+            
             <br>
-            <div v-if="pressed1 || pressed" class="container" style="margin:auto;border-radius: 2px;box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);background:white;padding:0.1% 5% 3% 5%;border-radius: 25px;background-color: #F7F7F7;">
-                <div v-if="pressed1">
-                    <br>
-                    <h3>辩题</h3>
-                    <b-table hover stacked :items="questions" :fields="fieldsQ"></b-table> 
-                </div>
+            <!-- <div v-if="pressed1 || pressed" class="container" style="margin:auto;border-radius: 2px;box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);background:white;padding:0.1% 5% 3% 5%;border-radius: 25px;background-color: #F7F7F7;">
+                
                 <div>
-                    <div v-if="pressed && numParticipants !== 0">
-                        <br>
-                        <h3>报名队伍数量: {{numParticipants}} </h3>
-                        <b-table hover :items="users" :fields="fields"></b-table>
-                    </div>
-                    <div v-if="numParticipants === 0">
-                        <br>
-                        <h3>次区域暂时没有报名队伍</h3>
-                    </div>
+                    
                 </div>
-            </div>
+            </div> -->
     </div>    
 </template>
 
 <script>
 import axios from 'axios';
+import oldnav from './oldnav.vue';
 export default {
     name: 'admin',
+    components:{oldnav},
     data(){
         return {
             selected:'',
+            selected1:'',
+            selected2:'',
             offTimeStart:'',
             offTimeEnd:'',
             users: '',
@@ -146,16 +175,16 @@ export default {
                     label: "大学（英）"
                 },
                 nameEn:{
-                    label: "联络人姓名（英）"
+                    label: "联络人（英）"
                 },
                 nameCn:{
-                    label: "联络人姓名（中）"
+                    label: "联络人（中）"
                 },
                 contactNumber:{
                     label: "联络号码"
                 },
                 email:{
-                    label: "电子邮件"
+                    label: "邮件"
                 },
                 remember_token:{
                     label: "通过认证"
@@ -181,21 +210,20 @@ export default {
                 },       
         }
     },
-    // mounted(){
-    //     this.getTime();
-    // },
+    created(){
+        this.getTime();
+        this.getQuestions();
+    },
     computed:{
         user: function(){
-            return JSON.parse(localStorage.getItem('user'));
+            return JSON.parse(localStorage['user']);
         },
         loading:function(){
                 return this.loading? true: false;
-        }
+        },
+        isLogged : function(){ return this.$store.getters.isLoggedIn},
     },
     methods:{
-        showaaa(){
-            console.log(this.user);
-        },
         setTime(){
             const data = {
                 'region' : this.selected,
@@ -203,7 +231,10 @@ export default {
                 'offTimeEnd': this.offTimeEnd,
             }
             if(this.selected === ''){
-                alert("Region is not selected");
+                alert("请选择区域！");
+                return true;
+            }else if(this.offTimeStart=== '' || this.offTimeEnd ===''){
+                alert("时间请勿留空！");
                 return true;
             }
 
@@ -215,15 +246,16 @@ export default {
                 })
                 .then(response=>{
                     alert(response.data.message);
+                    this.getTime();
                 })
         },
         reset(){
-            if(this.selected === ''){
-                alert("Region is not selected");
+            if(this.selected1 === ''){
+                alert("请选择区域！");
                 return true;
             }
             const data={
-                'region': this.selected
+                'region': this.selected1
             }
             axios
                 .put('api/time/official/reset', data,{
@@ -236,8 +268,8 @@ export default {
                 })
         },
         getUsers(){
-            if(this.selected === ''){
-                alert("Region is not selected");
+            if(this.selected2 === ''){
+                alert("请选择区域！");
                 return true;
             }
             // const data={
@@ -246,7 +278,7 @@ export default {
             axios
                 .get('api/user/all',{
                     params:{
-                        region: this.selected
+                        region: this.selected2
                     },
                     headers:{
                         Authorization: 'Bearer ' + localStorage.getItem('token')
@@ -259,7 +291,6 @@ export default {
                 })
         },
         getTime(){
-
             axios
                 .get('api/time/all',{
                     headers:{
@@ -268,6 +299,7 @@ export default {
                 })
                 .then(response=>{
                     this.times = response.data;
+                    console.log(this.times);
                 })
         },
         getQuestions(){
@@ -306,3 +338,12 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+    button{
+        background:darkred;
+    }
+    button:hover{
+        background: rgb(100, 0, 0)
+    }
+</style>
