@@ -113,7 +113,7 @@ export default
               alert("队伍已经成功报名！请等待成绩出炉！")
               return true;
             }
-            if(this.counter2>3){
+            if(this.counter2>=3){
                         
                             var myWindow=window.open("","MsgWindow","width=200,height=100");
                             alert("请刷新网页！");
