@@ -40,12 +40,25 @@
           <center>
             <h3>请点击下方的按钮进行电子报名。</h3>
             <p>系统开放后，只需点击下方按钮即可完成电子报名程序。</p>
-            <p style="color:red;">点击报名次数大于3，必须刷新网页。</p>
+            <p style="color:red;">点击报名次数大于3，必须<b><span style="font-size:18px">刷新网页</span></b>。</p>
             <br>
               <button v-on:click="recordTime" :disabled="counter===1" class="btn btn-primary btn-block " id="register">报名</button>
-            <br>
-            <button @click="$router.push('user')" class="btn btn-lg">个人主页</button>
-            <br></center>
+              <br>
+           </center>
+           <h1>规则与条例</h1>
+            <p>i) 成功位于排行榜的前N位 (根据地区分配名额) 将获得参赛资格 </br>
+ii） 如发现任何不恰当行为，本方有权取消参赛资格</br>
+iii） 当时间还未到时，点击报名后将会显示 “时间还未未到”， 每当点击报名超过<b><span style="font-size:18px">三</span></b>次，将会跳出新页面， 并提醒用户时间还未到达和<b><span style="font-size:18px">刷新页面</span></b>。</br>
+iv) 当时间到且成功在有效时间段内点击报名,用户将会跳转去排行榜页面</br>
+v）排行榜将会依据用户的点击报名时间与系统开放时间之差进行排列， 时间差最小的N位 (根据地区分配名额) 将获得参赛资格</br>
+
+<h1>浏览器设置：</h1>
+
+i)如果本地时间和当地时间无法显示， 请在浏览器右上方点击 “Load Unsafe Script”。</br>
+ii)请确保 enable 浏览器的pop out选项。 </br>
+iii)如有任何问题，请电邮我们：chinesedebate.it@gmail.com</br></p>
+
+
             
             
           
@@ -118,13 +131,13 @@ export default
                     }else{
                         this.counter2++;
                         console.log(this.counter2);
-                        if(this.counter2>=3){
+                        if(this.counter2>3){
                         
                             var myWindow=window.open("","MsgWindow","width=200,height=100");
                             alert("请刷新网页！");
                             myWindow.document.write("<p>时间还未到<br/>请刷新网页！</p>");}
                         else{
-                        alert(resp.data.message);}
+                        alert("<p>时间还未到。请耐心等待！</p>");}
                         //var myWindow=window.open("","MsgWindow","width=200,height=100");
                         //myWindow.document.write("<p>时间还未到</p>");
                     }
