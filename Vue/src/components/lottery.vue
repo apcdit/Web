@@ -119,6 +119,7 @@ export default
                             alert("请刷新网页！");
                             myWindow.document.write("时间还未到<br/>请刷新网页！");}
             else{
+              this.counter2++;
             
             axios
                 .put('/Vue/dist/time.php', data, { //api/time/official/store'
@@ -136,7 +137,7 @@ export default
                         alert(resp.data.message);
                         this.$router.push('result');
                     }else{
-                      this.counter2++;
+                      
                           alert("时间还未到。请耐心等待！");                        
                     }
                 })
