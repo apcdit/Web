@@ -136,6 +136,7 @@ export default
                         alert(resp.data.message);
                         this.$router.push('result');
                     }else{
+                      this.counter2++;
                           alert("时间还未到。请耐心等待！");                        
                     }
                 })
