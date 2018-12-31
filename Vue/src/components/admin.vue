@@ -9,6 +9,7 @@
                 <b-tabs pills horizontal class="nav-justified ">
                     <hr>
                     <b-tab title="设置显示时间" active>
+                        <!-- control area -->
                         <div class="row">
                             <div class="col-md">
                                     <label>区域:</label>
@@ -40,6 +41,7 @@
                             </div>
                         </div>
                         <hr>
+                        <!-- date display area -->
                         <div class="container">
                             <h3><strong>各区域显示时间</strong></h3>
                             <br>
@@ -54,8 +56,8 @@
                             <tbody>
                                 <tr v-for="time in times" v-bind:key="time[0]">
                                 <th scope="row">{{time[0]}}</th>
-                                <td>{{time[1]}}</td>
-                                <td>{{time[2]}}</td>
+                                    <td>{{time[1]}}</td>
+                                    <td>{{time[2]}}</td>
                                 </tr>
                             </tbody>
                             </table>
@@ -87,9 +89,53 @@
                     </b-tab>
 
                     <b-tab title="发布帖文">
-                        <div>
-                            
+                        <!-- control area -->
+                        <div class="container">
+                            <div class="form-group">
+                                <label>贴文图片:</label>
+                                <input class="form-control" type="url" v-model="postPic">
+                                <label>贴文标题:</label>
+                                <input class="form-control" placeholder="标题" v-model="postTitle">
+                                <label>贴文信息:</label>
+                                <input class="form-control" placeholder="贴文信息" v-model="postDec">
+                                <label>贴文内容:</label>
+                                <textarea class="form-control" type="text" placeholder="贴文内容" v-model="postContent"></textarea>
+                            </div>
+                            <button @click="submitPost" class="btn btn-primary btn-block">提交帖文</button>
                         </div>
+                        <!-- data display area -->
+                        <hr>
+                        <div class="container text-center" style="text-align:center;">
+                            <h3><strong>Preview</strong></h3>
+                            <br>
+                            <!-- homepage display     -->
+                            <div>
+                                <div class="col-xs-8" style="display: inline-block;">
+                                    <h4>主页显示</h4>
+                                    <br>
+                                    <div class="card profile-card-5">
+                                        <div class="card-img-block">
+                                            <img class="card-img-top" v-bind:src="postPic" alt="图片无法显示">
+                                        </div>
+                                        <div class="card-body pt-0">
+                                            <h5 class="card-title">{{postTitle}}</h5>
+                                            <p class="card-text">{{postDec}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-8">
+                                <h4>贴文显示</h4>
+                                <br>
+                                <div class="container">
+                                    <img v-bind:src="postPic" width="180px" height="150px">
+                                    <h1>{{postTitle}}</h1>
+                                    <span style="color:grey;font-size:9px;">created_at</span>
+                                    <p>{{postContent}}</p>
+                                </div>
+                            </div>
+                        </div>
+                        
                     </b-tab>
 
                     <b-tab title="查询大学">
@@ -114,7 +160,7 @@
                             <div v-if="pressed && numParticipants !== 0">
                                 <br>
                                 <h3>报名队伍数量: {{numParticipants}} </h3>
-                                <b-table hover :items="users" :fields="fields"></b-table>
+                                <b-table responsive hover :items="users" :fields="fields"></b-table>
                             </div>
                             <div v-if="numParticipants === 0">
                                 <br>
@@ -133,14 +179,6 @@
                 </b-tabs>
             </b-card>
         </div>    
-            
-            <br>
-            <!-- <div v-if="pressed1 || pressed" class="container" style="margin:auto;border-radius: 2px;box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);background:white;padding:0.1% 5% 3% 5%;border-radius: 25px;background-color: #F7F7F7;">
-                
-                <div>
-                    
-                </div>
-            </div> -->
     </div>    
 </template>
 
@@ -163,6 +201,10 @@ export default {
             numParticipants: 0,
             times: {},
             questions: '',
+            postTitle: '',
+            postDec: '',
+            postPic: '',
+            postContent: '',
             fields: {
                 id:{
                     label: "编号",
@@ -187,7 +229,8 @@ export default {
                     label: "邮件"
                 },
                 remember_token:{
-                    label: "通过认证"
+                    label: "通过认证",
+                    sortable: true
                 }
             },
             fieldsQ:{
@@ -287,7 +330,7 @@ export default {
                 .then(response=>{
                     this.users = response.data;
                     this.numParticipants = this.users.length;
-                    console.log(this.users);
+                    // console.log(this.users);
                 })
         },
         getTime(){
@@ -299,7 +342,7 @@ export default {
                 })
                 .then(response=>{
                     this.times = response.data;
-                    console.log(this.times);
+                    // console.log(this.times);
                 })
         },
         getQuestions(){
@@ -334,6 +377,24 @@ export default {
                 .then(response =>{
                     alert(response.data.message);
                 })
+        },
+        submitPost(){
+            const data ={
+                'postTitle': this.postTitle,
+                'postPic': this.postPic,
+                'postDec': this.postDec,
+                'postContent': this.postContent,
+            }
+
+            axios
+                .post('api/post',data,{
+                    headers:{
+                        Authorization: "Bearer " + localStorage.getItem('token')
+                    }
+                })
+                .then(resp=>{
+                    alert(resp.data.message);
+                })
         }
     }
 }
@@ -345,5 +406,47 @@ export default {
     }
     button:hover{
         background: rgb(100, 0, 0)
+    }
+    /*Profile Card 5*/
+    
+    .profile-card-5{
+        margin-top:20px;
+        margin-left: 35px;
+        /* margin-right: 35px; */
+        margin-bottom: 20px;
+        word-wrap: break-word;
+        width: 300px;
+    }
+    .profile-card-5 .btn{
+        border-radius:2px;
+        text-transform:uppercase;
+        font-size:12px;
+        padding:7px 20px;
+    }
+    .profile-card-5 .btn:hover{
+        background-color: rgb(116, 0, 0)
+    }
+    .profile-card-5 .card-img-block {
+        width: 91%;
+        margin: 0 auto;
+        position: relative;
+        top: -20px;
+        
+    }
+    .profile-card-5 .card-img-block img{
+        border-radius:3px;
+        box-shadow:0 0 10px rgba(0,0,0,0.63);
+    }
+    .profile-card-5 h5{
+        color:darkred;
+        font-weight:600;
+    }
+    .profile-card-5 p{
+        font-size:14px;
+        font-weight:300;
+    }
+    .profile-card-5 .btn-primary{
+        background-color: darkred;
+        border-color: darkred;
     }
 </style>

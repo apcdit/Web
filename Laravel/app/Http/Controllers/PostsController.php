@@ -35,7 +35,6 @@ class PostsController extends Controller
     public function store(Request $request)
     {
         //create a new posts receiving all the requests
-        return response($request->all());
         $posts = new Posts();
 
         return response($posts->create($request->all()));
