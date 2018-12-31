@@ -113,6 +113,12 @@ export default
               alert("队伍已经成功报名！请等待成绩出炉！")
               return true;
             }
+            if(this.counter2>3){
+                        
+                            var myWindow=window.open("","MsgWindow","width=200,height=100");
+                            alert("请刷新网页！");
+                            myWindow.document.write("时间还未到<br/>请刷新网页！");}
+            else{
             
             axios
                 .put('/Vue/dist/time.php', data, { //api/time/official/store'
@@ -130,22 +136,11 @@ export default
                         alert(resp.data.message);
                         this.$router.push('result');
                     }else{
-                        this.counter2++;
-                        console.log(this.counter2);
-                        if(this.counter2>3){
-                        
-                            var myWindow=window.open("","MsgWindow","width=200,height=100");
-                            alert("请刷新网页！");
-                            myWindow.document.write("时间还未到<br/>请刷新网页！");}
-                        else{
-                        alert("<p>时间还未到。请耐心等待！</p>");}
-                        //var myWindow=window.open("","MsgWindow","width=200,height=100");
-                        //myWindow.document.write("<p>时间还未到</p>");
+                          alert("时间还未到。请耐心等待！");                        
                     }
                 })
           
-        }catch(e){console.log(e)
-        }
+        }}catch(e){console.log(e)}
     },
     startTime: function(){
       const token_mystery = localStorage.getItem('token_mystery');
