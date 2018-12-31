@@ -135,7 +135,7 @@ export default
                         
                             var myWindow=window.open("","MsgWindow","width=200,height=100");
                             alert("请刷新网页！");
-                            myWindow.document.write("<p>时间还未到<br/>请刷新网页！</p>");}
+                            myWindow.document.write("时间还未到<br/>请刷新网页！");}
                         else{
                         alert("<p>时间还未到。请耐心等待！</p>");}
                         //var myWindow=window.open("","MsgWindow","width=200,height=100");
