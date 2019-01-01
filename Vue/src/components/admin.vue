@@ -41,7 +41,7 @@
                             </div>
                         </div>
                         <hr>
-                        <!-- date display area -->
+                        <!-- data display area -->
                         <div class="container">
                             <h3><strong>各区域显示时间</strong></h3>
                             <br>
@@ -64,27 +64,72 @@
                         </div>
                     </b-tab>
 
-                    <b-tab title="重置时间">
-                        <div class="container text-center">
-                        <h3 style="color:red"><strong>请勿随意点击此按钮</strong></h3>
-                        <label>区域:</label>
-                        <select v-model="selected1">
-                            <option disabled value="">Region</option>
-                            <option>Singapore</option>
-                            <option>Malaysia</option>
-                            <option>China</option>
-                            <option>Hong Kong</option>
-                            <option>Macau</option>
-                            <option>Taiwan</option>
-                            <option>Australia</option>
-                            <option>Others</option>
-                            <option>Admin</option>
-                        </select>
-                        <br>
-                        <div>
-                            <h4>重置所有时间</h4>
-                            <button @click="reset" class="btn btn-danger"><h3>Reset</h3></button>
+                    <b-tab title="重置/查询报名时间">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md">
+                                    <h5 style="color:darkred"><strong>**请勿随意点击此按钮</strong></h5>
+                                    <label>区域:</label>
+                                    <select v-model="selected1">
+                                        <option disabled value="">Region</option>
+                                        <option>Singapore</option>
+                                        <option>Malaysia</option>
+                                        <option>China</option>
+                                        <option>Hong Kong</option>
+                                        <option>Macau</option>
+                                        <option>Taiwan</option>
+                                        <option>Australia</option>
+                                        <option>Others</option>
+                                        <option>Admin</option>
+                                    </select>
+                                </div>
+                                <div class="col-md">
+                                    <button @click="reset" class="btn btn-block">重置时间差</button>
+                                </div>
+                            </div>
                         </div>
+                        <hr>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md form-group">
+                                    <label>区域:</label>
+                                    <select v-model="selected3">
+                                        <option disabled value="">Region</option>
+                                        <option>Singapore</option>
+                                        <option>Malaysia</option>
+                                        <option>China</option>
+                                        <option>Hong Kong</option>
+                                        <option>Macau</option>
+                                        <option>Taiwan</option>
+                                        <option>Australia</option>
+                                        <option>Others</option>
+                                        <option>Admin</option>
+                                    </select>
+                                </div>
+                                <div class="col-md">
+                                    <button class="btn btn-block" @click="getDiff">查看时间差</button>
+                                </div>    
+                            </div> 
+                        </div>
+                        <!-- data display area -->
+                        <div class="container">
+                            <h3><strong>区域: {{selected3}}</strong></h3>
+                            <h3>该地区参赛队伍数量:</h3>
+                            <br>
+                            <table class="table table-hover">
+                            <thead class="thead-dark">
+                                <tr>
+                                <th scope="col">大学</th>
+                                <th scope="col">时间差(秒)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-for="timeDiff in timeDiffs" v-bind:key="timeDiff.uniNameCN">
+                                <th scope="row">{{timeDiff.uniNameCN}}</th>
+                                    <td>{{timeDiff.offTimeDiff}}</td>
+                                </tr>
+                            </tbody>
+                            </table>
                         </div>
                     </b-tab>
 
@@ -176,6 +221,7 @@
                             <b-table hover stacked :items="questions" :fields="fieldsQ"></b-table> 
                         </div>
                     </b-tab>
+
                 </b-tabs>
             </b-card>
         </div>    
@@ -193,6 +239,7 @@ export default {
             selected:'',
             selected1:'',
             selected2:'',
+            selected3:'',
             offTimeStart:'',
             offTimeEnd:'',
             users: '',
@@ -205,6 +252,7 @@ export default {
             postDec: '',
             postPic: '',
             postContent: '',
+            timeDiffs: '',
             fields: {
                 id:{
                     label: "编号",
@@ -300,15 +348,22 @@ export default {
             const data={
                 'region': this.selected1
             }
-            axios
-                .put('api/time/official/reset', data,{
-                    headers:{
-                        Authorization: 'Bearer ' + localStorage.getItem('token')
-                    }
-                })
-                .then(response=>{
-                    alert("Reset successfully!");
-                })
+            var answer = prompt("请输入“我想要重置时间”", "");
+
+            if (answer !== "我想要重置时间") {
+                alert("重置失败!")
+                return true;
+            } else {            
+                axios
+                    .put('api/time/official/reset', data,{
+                        headers:{
+                            Authorization: 'Bearer ' + localStorage.getItem('token')
+                        }
+                    })
+                    .then(response=>{
+                        alert("Reset successfully!");
+                    })
+            }
         },
         getUsers(){
             if(this.selected2 === ''){
@@ -379,6 +434,9 @@ export default {
                 })
         },
         submitPost(){
+            if(this.postTitle === '' || this.postPic === '' || this.postDec === '' || this.postContent === ''){
+                alert("请勿留空！")
+            }
             const data ={
                 'postTitle': this.postTitle,
                 'postPic': this.postPic,
@@ -395,6 +453,31 @@ export default {
                 .then(resp=>{
                     alert(resp.data.message);
                 })
+        },
+        getDiff(){
+            if(this.selected3 === ''){
+                alert("请选择区域!");
+                return true;
+            }
+            axios
+                .get('api/time/get',{ //api/time/official/start
+                    params:{'region': this.selected3},
+                    headers:{
+                        Authorization: "Bearer " + localStorage['token']
+                    }
+                })
+                .then(resp=>{
+                    this.timeDiffs = resp.data.data;
+                    for(var i = 0; i < this.timeDiffs.length; i++){
+                        if(this.timeDiffs[i].offTimeDiff == 1000000000000000000){
+                            this.timeDiffs[i].offTimeDiff = "还未报名";
+                        }else if(this.results[i].offTimeDiff == 0){
+                            this.timeDiffs[i].offTimeDiff = "种子队"
+                        }else{
+                            this.timeDiffs[i].offTimeDiff = this.timeDiffs[i].offTimeDiff/1000000 //show time in second from micro
+                        }
+                    }
+                })
         }
     }
 }
@@ -403,6 +486,7 @@ export default {
 <style scoped>
     button{
         background:darkred;
+        color: white;
     }
     button:hover{
         background: rgb(100, 0, 0)

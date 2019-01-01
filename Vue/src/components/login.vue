@@ -9,7 +9,7 @@
             <a href='/#/resetpw/token' target="blank">忘记密码?</a>
         </div>
         <div slot="modal-footer" class="w-100">
-         <button class="btn btn-lg btn-primary btn-block btn-signin" @click="login" v-if="!loading">登录</button>
+         <button class="btn btn-lg btn-primary btn-block btn-signin" @click="login" @keypress="login" v-if="!loading">登录</button>
          <button class="btn btn-lg btn-primary btn-block btn-signin" v-else><cube-spin style="width:60%;height:60%"></cube-spin></button>
        </div>
     </b-modal>

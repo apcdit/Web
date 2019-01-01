@@ -6,15 +6,15 @@
   <hr>
   <div class="row">
     <div class="col-md-12" style="text-align:center; color:darkred;"><h2>{{user.uniNameCN}}</h2></div>
-    <div class="col-md-4" style="text-align:center;padding:1em 0;">
+    <div class="col-md-3" style="text-align:center;padding:1em 0;">
         <h3><a style="text-decoration:none;">新加坡</a><span style="color:gray;"><br />本地时间</span></h3>
         <iframe src="http://free.timeanddate.com/clock/i5h4olht/n236/tlcn8/fn6/fs16/tt0/tm3/th1/ta1/tb4" frameborder="0" width="144" height="45"></iframe>
     </div>
 
-    <div class="col-md-4" style="text-align:center;padding:1em 0;">
+    <div class="col-md-3" style="text-align:center;padding:1em 0;">
       <h3>
         <a style="text-decoration:none;">当地时间</a>
-        <span style="color:gray;"><br/>地区：{{user.region}}</span>
+        <span style="color:darkred;"><br/>地区：{{user.region}}</span>
         <br>
         <span v-if="user.region == '马来西亚'"><iframe src="http://free.timeanddate.com/clock/i5h4olht/n122/tlcn8/fn6/fs16/tt0/tm3/th1/ta1/tb4" frameborder="0" width="144" height="45"></iframe></span>
         <span v-else-if="user.region == '新加坡'"><iframe src="http://free.timeanddate.com/clock/i5h4olht/n236/tlcn8/fn6/fs16/tt0/tm3/th1/ta1/tb4" frameborder="0" width="144" height="45"></iframe></span>
@@ -25,13 +25,18 @@
         <span v-else-if="user.region == '澳门'"><iframe src="http://free.timeanddate.com/clock/i5h4olht/n33/tlcn8/fn6/fs16/tt0/tm3/th1/ta1/tb4" frameborder="0" width="144" height="45"></iframe></span>
         <span v-else><iframe src="http://free.timeanddate.com/clock/i5h4olht/n236/tlcn8/fn6/fs16/tt0/tm3/th1/ta1/tb4" frameborder="0" width="144" height="45"></iframe></span>
       </h3>
+      <div v-if="user.region=='Admin'">*显示时间为新加坡当地时间</div>
     </div>
 
-    <div class="col-md-4" style="text-align:center;padding:1em 0;">
+    <div class="col-md-3" style="text-align:center;padding:1em 0;">
       <h3><a style="text-decoration:none;color:darkred">系统开放时间</a><span style="color:gray;"><br />(新加坡时间)</span></h3>
-      <h6>{{offTimeStart}} ~ {{offTimeEnd}}</h6>
+      <h6>{{offTimeStart}}</h6>
     </div>
 
+    <div class="col-md-3" style="text-align:center;padding:1em 0;">
+      <h3><a style="text-decoration:none;color:darkred">系统关闭时间</a><span style="color:gray;"><br />(新加坡时间)</span></h3>
+      <h6>{{offTimeEnd}}</h6>
+    </div>
     <br>
 
     <div class="panel panel-default" id="registerBody">
@@ -42,11 +47,23 @@
             <p>系统开放后，只需点击下方按钮即可完成电子报名程序。</p>
             <p style="color:red;">点击报名次数大于3，必须刷新网页。</p>
             <br>
-              <button v-on:click="recordTime" :disabled="counter===1" class="btn btn-primary btn-block " id="register">报名</button>
+              <button v-on:click="recordTime" class="btn btn-primary btn-block " id="register">报名</button>
             <br>
-            <button @click="$router.push('user')" class="btn btn-lg">个人主页</button>
+            <!-- <button @click="$router.push('user')" class="btn btn-lg">个人主页</button> -->
             <br></center>
-            
+            <h1>规则与条例</h1>
+            <p>i) 成功位于排行榜的前N位 (根据地区分配名额) 将获得参赛资格 </br>
+ii） 如发现任何不恰当行为，本方有权取消参赛资格</br>
+iii） 当时间还未到时，点击报名后将会显示 “时间还未到”， 每当点击报名超过<b><span style="font-size:18px">三</span></b>次，将会跳出新页面， 并提醒用户时间还未到达和<b><span style="font-size:18px">刷新页面</span></b>。</br>
+iv) 当时间到且成功在有效时间段内点击报名,用户将会跳转去排行榜页面</br>
+v）排行榜将会依据用户的点击报名时间与系统开放时间之差进行排列， 时间差最小的N位 (根据地区分配名额) 将获得参赛资格</br>
+vi) 本章程的最终解释权属于第九届亚太组委会，主办当局保留增删之权力。
+
+<h1>浏览器设置：</h1>
+
+i)如果本地时间和当地时间无法显示， 请在浏览器右上方点击 “Load Unsafe Script”。</br>
+ii)请确保 enable 浏览器的pop out选项。 </br>
+iii)如有任何问题，请电邮我们：chinesedebate.it@gmail.com</br></p>
             
           
         </div>
@@ -188,10 +205,17 @@ export default
 }
 </script>
 <style scoped>
-  .register{
-    background-color: darkred
+  #register{
+    background-color: darkred;
   }
-
+  #register:hover{
+    background-color: rgb(199, 0, 0);
+  }
+  #register.active {
+    background-color: rgb(199,0,0);
+    box-shadow: 0 5px rgb(199,0,0);
+    transform: translateY(5px);
+  }
   #registerBody{
     margin: 0 auto;
     position: relative;
