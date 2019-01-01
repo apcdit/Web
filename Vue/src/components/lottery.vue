@@ -94,44 +94,39 @@ export default
         try{
           const token_mystery = localStorage.getItem('token_mystery');
           const drawn = JSON.parse(localStorage.getItem('user')).uni_details.drawn;
-            const data = {'token_mystery': token_mystery} //pressed here is to notify backend that user pressed the button
+          const data = {'token_mystery': token_mystery} //pressed here is to notify backend that user pressed the button
             if(drawn == 1){
               alert("队伍已经成功报名！请等待成绩出炉！")
               return true;
             }
-            
-            axios
-                .put('/Vue/dist/time.php', data, { //api/time/official/store'
-                  headers:{
-                      Authorization: "Bearer " + localStorage.getItem('token')
-                  }
-                })
-                .then(resp=>{
-                    if(resp.data.status == 200){
-                        const user = JSON.parse(localStorage['user']);
-                        const uni = user.uni_details;
-                        uni.drawn = 1;
-                        localStorage['user'] = JSON.stringify(user);
-                        ++this.counter;
-                        alert(resp.data.message);
-                        this.$router.push('result');
-                    }else{
-                        this.counter2++;
-                        console.log(this.counter2);
-                        if(this.counter2>=3){
-                        
-                            var myWindow=window.open("","MsgWindow","width=200,height=100");
-                            alert("请刷新网页！");
-                            myWindow.document.write("<p>时间还未到<br/>请刷新网页！</p>");}
-                        else{
-                        alert(resp.data.message);}
-                        //var myWindow=window.open("","MsgWindow","width=200,height=100");
-                        //myWindow.document.write("<p>时间还未到</p>");
+            if(this.counter2>=3){
+              var myWindow=window.open("","MsgWindow","width=200,height=100");
+              alert("请刷新网页！");
+              myWindow.document.write("时间还未到<br/>请刷新网页！");}
+            else{
+              this.counter2++;
+              axios
+                  .put('/Vue/dist/time.php', data, { //api/time/official/store'
+                    headers:{
+                        Authorization: "Bearer " + localStorage.getItem('token')
                     }
-                })
+                  })
+                  .then(resp=>{
+                      if(resp.data.status == 200){
+                          const user = JSON.parse(localStorage['user']);
+                          const uni = user.uni_details;
+                          uni.drawn = 1;
+                          localStorage['user'] = JSON.stringify(user);
+                          ++this.counter;
+                          alert(resp.data.message);
+                          this.$router.push('result');
+                      }else{
+                        
+                            alert("时间还未到。请耐心等待！");                        
+                      }
+                  })
           
-        }catch(e){console.log(e)
-        }
+        }}catch(e){console.log(e)}
     },
     startTime: function(){
       const token_mystery = localStorage.getItem('token_mystery');
