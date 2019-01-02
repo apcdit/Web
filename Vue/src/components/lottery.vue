@@ -14,18 +14,18 @@
     <div class="col-md-3" style="text-align:center;padding:1em 0;">
       <h3>
         <a style="text-decoration:none;">当地时间</a>
-        <span style="color:darkred;"><br/>地区：{{user.region}}</span>
+        <span style="color:darkred;"><br/>地区：{{region}}</span>
         <br>
-        <span v-if="user.region == '马来西亚'"><iframe src="http://free.timeanddate.com/clock/i5h4olht/n122/tlcn8/fn6/fs16/tt0/tm3/th1/ta1/tb4" frameborder="0" width="144" height="45"></iframe></span>
-        <span v-else-if="user.region == '新加坡'"><iframe src="http://free.timeanddate.com/clock/i5h4olht/n236/tlcn8/fn6/fs16/tt0/tm3/th1/ta1/tb4" frameborder="0" width="144" height="45"></iframe></span>
-        <span v-else-if="user.region == '澳大利亚'"><iframe src="http://free.timeanddate.com/clock/i5h4olht/n240/tlcn8/fn6/fs16/tt0/tm3/th1/ta1/tb4" frameborder="0" width="144" height="45"></iframe></span>
-        <span v-else-if="user.region == '中国大陆'"><iframe src="http://free.timeanddate.com/clock/i5h4olht/n33/tlcn8/fn6/fs16/tt0/tm3/th1/ta1/tb4" frameborder="0" width="144" height="45"></iframe></span>
-        <span v-else-if="user.region == '香港'"><iframe src="http://free.timeanddate.com/clock/i5h4olht/n102/tlcn8/fn6/fs16/tt0/tm3/th1/ta1/tb4" frameborder="0" width="144" height="45"></iframe></span>
-        <span v-else-if="user.region == '台湾'"><iframe src="http://free.timeanddate.com/clock/i5h4olht/n241/tlcn8/fn6/fs16/tt0/tm3/th1/ta1/tb4" frameborder="0" width="144" height="45"></iframe></span>
-        <span v-else-if="user.region == '澳门'"><iframe src="http://free.timeanddate.com/clock/i5h4olht/n33/tlcn8/fn6/fs16/tt0/tm3/th1/ta1/tb4" frameborder="0" width="144" height="45"></iframe></span>
+        <span v-if="region == '马来西亚'"><iframe src="http://free.timeanddate.com/clock/i5h4olht/n122/tlcn8/fn6/fs16/tt0/tm3/th1/ta1/tb4" frameborder="0" width="144" height="45"></iframe></span>
+        <span v-else-if="region == '新加坡'"><iframe src="http://free.timeanddate.com/clock/i5h4olht/n236/tlcn8/fn6/fs16/tt0/tm3/th1/ta1/tb4" frameborder="0" width="144" height="45"></iframe></span>
+        <span v-else-if="region == '澳大利亚'"><iframe src="http://free.timeanddate.com/clock/i5h4olht/n240/tlcn8/fn6/fs16/tt0/tm3/th1/ta1/tb4" frameborder="0" width="144" height="45"></iframe></span>
+        <span v-else-if="region == '中国大陆'"><iframe src="http://free.timeanddate.com/clock/i5h4olht/n33/tlcn8/fn6/fs16/tt0/tm3/th1/ta1/tb4" frameborder="0" width="144" height="45"></iframe></span>
+        <span v-else-if="region == '香港'"><iframe src="http://free.timeanddate.com/clock/i5h4olht/n102/tlcn8/fn6/fs16/tt0/tm3/th1/ta1/tb4" frameborder="0" width="144" height="45"></iframe></span>
+        <span v-else-if="region == '台湾'"><iframe src="http://free.timeanddate.com/clock/i5h4olht/n241/tlcn8/fn6/fs16/tt0/tm3/th1/ta1/tb4" frameborder="0" width="144" height="45"></iframe></span>
+        <span v-else-if="region == '澳门'"><iframe src="http://free.timeanddate.com/clock/i5h4olht/n33/tlcn8/fn6/fs16/tt0/tm3/th1/ta1/tb4" frameborder="0" width="144" height="45"></iframe></span>
         <span v-else><iframe src="http://free.timeanddate.com/clock/i5h4olht/n236/tlcn8/fn6/fs16/tt0/tm3/th1/ta1/tb4" frameborder="0" width="144" height="45"></iframe></span>
       </h3>
-      <div v-if="user.region=='Admin'">*显示时间为新加坡当地时间</div>
+      <div v-if="this.region=='Others'">*显示时间为新加坡当地时间</div>
     </div>
 
     <div class="col-md-3" style="text-align:center;padding:1em 0;">
@@ -91,6 +91,7 @@ export default
       token_mystery: '',
       offTimeEnd: 0,
       counter2:0,
+      region: '',
     }
   },
   components:{
@@ -178,14 +179,14 @@ export default
           users['uni_details'] = resp.data.uniDetails;
           localStorage['user'] = JSON.stringify(users);
           switch(this.user.region){
-            case "Malaysia": this.user.region = "马来西亚"; break;
-            case "Singapore": this.user.region = "新加坡"; break;
-            case "China": this.user.region = "中国大陆"; break;
-            case "Hong Kong": this.user.region = "香港"; break;
-            case "Macau": this.user.region = "澳门"; break;
-            case "Taiwan": this.user.region = "台湾"; break;
-            case "Australia": this.user.region = "澳大利亚"; break;
-            default: break;
+            case "Malaysia": this.region = "马来西亚"; break;
+            case "Singapore": this.region = "新加坡"; break;
+            case "China": this.region = "中国大陆"; break;
+            case "Hong Kong": this.region = "香港"; break;
+            case "Macau": this.region = "澳门"; break;
+            case "Taiwan": this.region = "台湾"; break;
+            case "Australia": this.region = "澳大利亚"; break;
+            default: this.region = this.user.region; break;
           }
 
         })

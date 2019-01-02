@@ -49,7 +49,7 @@
             }
         },
         created() {
-            this.showUser();
+            //this.showUser();
         },
         // mounted() {
         //     this.getDrawn();
