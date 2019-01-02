@@ -113,13 +113,18 @@ export default
           const drawn = JSON.parse(localStorage.getItem('user')).uni_details.drawn;
           const data = {'token_mystery': token_mystery} //pressed here is to notify backend that user pressed the button
             if(drawn == 1){
-              alert("队伍已经成功报名！请等待成绩出炉！")
+              var x = window.open('');
+              x.document.write('<script>alert("队伍已成功报名！请等待成绩出炉！")</script>');
+              x.close();
               return true;
             }
             if(this.counter2>=3){
-              var myWindow=window.open("","MsgWindow","width=200,height=100");
-              alert("请刷新网页！");
-              myWindow.document.write("时间还未到<br/>请刷新网页！");}
+              var x = window.open('');
+              x.document.write('<script>alert("页面已过期！请刷新网页!")</script>');
+              x.close();
+              // var myWindow=window.open("","MsgWindow","width=200,height=100");
+              // alert("请刷新网页！");
+              // myWindow.document.write("时间还未到<br/>请刷新网页！");}
             else{
               this.counter2++;
               axios
@@ -135,11 +140,15 @@ export default
                           uni.drawn = 1;
                           localStorage['user'] = JSON.stringify(user);
                           ++this.counter;
-                          alert(resp.data.message);
+                          var msg = resp.data.message;
+                          var x = window.open('');
+                          x.document.write('<script>alert(`${msg}`)</script>');
+                          x.close();
                           this.$router.push('result');
-                      }else{
-                        
-                            alert("时间还未到。请耐心等待！");                        
+                      }else{     
+                        var x = window.open('');
+                        x.document.write('<script>alert(`时间还未到。请耐心等待！`)</script>');
+                        x.close(); 
                       }
                   })
           
