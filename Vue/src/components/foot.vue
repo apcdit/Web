@@ -26,6 +26,7 @@
 						<li><a href="/#"><i class="fa fa-angle-double-right"></i>关于我们</a></li>
 						<li><a href="/#/contact"><i class="fa fa-angle-double-right"></i>联络我们</a></li>
 						<li><a href="/#/videohub"><i class="fa fa-angle-double-right"></i>视频库</a></li>
+						<li><a href="/#/latestNews"><i class="fa fa-angle-double-right"></i>最新消息</a></li>
 					</ul>
 				</div>
 			</div>

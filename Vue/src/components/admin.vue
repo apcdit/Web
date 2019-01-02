@@ -144,9 +144,11 @@
                                 <label>贴文信息:</label>
                                 <input class="form-control" placeholder="贴文信息" v-model="postDec">
                                 <label>贴文内容:</label>
-                                <textarea class="form-control" type="text" placeholder="贴文内容" v-model="postContent"></textarea>
+                                <br>
+                                <!-- <textarea class="form-control" type="text" placeholder="贴文内容" v-model="postContent"></textarea> -->
+                                <editor api-key="svizvnfcy500algmkerh5qk3afyq1az24jantx1k50dhquva" v-model="postContent" :init="{plugins: 'wordcount'}"></editor>
                             </div>
-                            <button @click="submitPost" class="btn btn-primary btn-block">提交帖文</button>
+                            <button @click="submitPost" class="btn btn-primary btn-block">发布帖文</button>
                         </div>
                         <!-- data display area -->
                         <hr>
@@ -173,11 +175,14 @@
                                 <h4>贴文显示</h4>
                                 <br>
                                 <div class="container">
-                                    <img v-bind:src="postPic" width="180px" height="150px">
-                                    <h1>{{postTitle}}</h1>
-                                    <span style="color:grey;font-size:9px;">created_at</span>
-                                    <p>{{postContent}}</p>
+                                    <h1 style="color:darkred;"><strong>{{postTitle}}</strong></h1>
+                                    <hr>
+                                    <img v-bind:src="postPic">
+                                    <h6 style="color:grey;font-size:14px;padding-top:5px;">发布于:created_at</h6>
+                                    <hr style="background:darkred;">
+                                    <p v-html="postContent">{{postContent}}</p>
                                 </div>
+                                
                             </div>
                         </div>
                         
@@ -231,9 +236,11 @@
 <script>
 import axios from 'axios';
 import oldnav from './oldnav.vue';
+import Editor from '@tinymce/tinymce-vue';
+
 export default {
     name: 'admin',
-    components:{oldnav},
+    components:{oldnav,Editor},
     data(){
         return {
             selected:'',
@@ -451,7 +458,7 @@ export default {
                     }
                 })
                 .then(resp=>{
-                    alert(resp.data.message);
+                    alert("成功发布！");
                 })
         },
         getDiff(){

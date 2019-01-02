@@ -1,5 +1,4 @@
 <template>
-    <section id="navibar">
       <nav class="nav navbar navbar-expand-lg navbar-light fixed-top" v-bind:style="scrolling">
       <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -9,16 +8,15 @@
       <b-collapse is-nav id="nav_dropdown_collapse">
         <b-navbar-nav>
             <b-nav-item style="font-size:20px;" href="/#">主页</b-nav-item>  
-            <b-nav-item style="font-size:20px;" href="#latestNews">最新消息</b-nav-item>   
+            <b-nav-item style="font-size:20px;" href="/#/latestNews">最新消息</b-nav-item>   
             <b-nav-item style="font-size:20px;" href="#getHere">抵达这里</b-nav-item>   
             <b-nav-item style="font-size:20px;" href="#sponsor">赞助</b-nav-item>   
             <b-nav-item style="font-size:20px;" v-b-modal.login v-if="!isLogged">登录</b-nav-item>
-            <b-nav-item style="font-size:20px;" @click="$router.push('user')" v-if="isLogged">个人主页</b-nav-item>
+            <b-nav-item style="font-size:20px;" href="/#/user" v-if="isLogged">个人主页</b-nav-item>
         </b-navbar-nav>
       </b-collapse>
     </nav>
 
-    </section>
 
 </template>
 
