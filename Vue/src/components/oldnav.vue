@@ -33,8 +33,8 @@
                     </b-nav-item-dropdown> -->
                     <b-nav-item to='user'>{{user.uniNameCN}}</b-nav-item>
                     <b-nav-item to='admin' v-if="user.admin">管理页面</b-nav-item>
-                    <b-nav-item to='lottery' target="blank" v-if="false">电子抽签</b-nav-item>
-                    <b-nav-item to='result' target="blank" v-if="false">电子抽签结果</b-nav-item>
+                    <b-nav-item to='lottery' target="blank">电子抽签</b-nav-item>
+                    <b-nav-item to='result' target="blank">电子抽签结果</b-nav-item>
                     <b-nav-item @click="logout()"> 登出 </b-nav-item>
                 </b-navbar-nav>
             </b-collapse>
