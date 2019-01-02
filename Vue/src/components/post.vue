@@ -13,6 +13,7 @@
                 </div>
                 <div class="col-sm-4 list-group-flush">
                     <h3><strong>更多消息</strong></h3>
+
                     <hr style="background:darkred; height:5px;">
                     <!-- <ol class="list-group list-group-flush" >
                         <li class="list-group-item" v-for="other in others" v-bind:key="other.id">
@@ -20,13 +21,15 @@
                             <hr style="width:2px;">
                         </li>
                     </ol> -->
-                    <router-link :to="{ name: 'post', params: { id: other.id}}" v-for="other in others" v-bind:key="other.id" class="list-group-item list-group-item-action flex-column align-items-start">
+                    <div v-for="other in others" v-bind:key="other.id">
+                    <router-link  :to="{ name: 'post', params: { id: other.id}}"   class="list-group-item list-group-item-action flex-column align-items-start">
                         <div class="d-flex w-100 justify-content-between">
-                        <h5 class="mb-1" style="color:darkred;"><strong>{{other.postTitle}}</strong></h5>
-                        <small>{{other.created_at}}</small>
+                            <h5 class="mb-1" style="color:darkred;"><strong>{{other.postTitle}}</strong></h5>
+                            <small>{{other.created_at}}</small>
                         </div>
                         <small>{{other.postDec}}</small>
                     </router-link>
+                    </div>
                 </div>
             </div>
         </div>
@@ -37,7 +40,7 @@
     import axios from 'axios';
     import navibar from './navigation.vue';
     import foot from './foot.vue';
-    export default{ 
+    export default{
         name:'post',
         components:{navibar, foot},
         data () {
@@ -69,13 +72,14 @@
                     this.id = routerParams;
                 }
             },
+
             getPost(){
 
                 axios
                     .get('api/post/'+this.id)
                     .then(response=>{
                         this.posts = response.data;
-                })
+                    })
             },
             fetchPosts(){
                 axios
@@ -90,7 +94,12 @@
         },
         watch: {
             // 监测路由变化,只要变化了就调用获取路由参数方法将数据存储本组件即可
-            '$route': 'getParams'},
+            '$route': 'getParams',
+            //when the url is changed, it will refresh 
+            '$route' (to, from) {
+                this.$router.go(0);
+            }
+        },
         mounted() {
 
 
