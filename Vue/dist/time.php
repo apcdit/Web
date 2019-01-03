@@ -70,23 +70,23 @@ if(isset($post_data['token_mystery'])){
     if($uniDetails['drawn'] == 0){
       
       // Set some variables
-      switch($user['region']){
-        case "Singapore": $offTimeStart = 1544434200000000; $offTimeEnd = 1544445000000000; break;
-        case "Malaysia": $offTimeStart = 1544345460000000; $offTimeEnd = 1544345520000000; break;
-        case "Australia": $offTimeStart = 1544345460000000; $offTimeEnd = 1544345520000000; break;
-        case "China": $offTimeStart = 1544345460000000; $offTimeEnd = 1544345520000000; break;
-        case "Hong Kong": $offTimeStart = 1544345460000000; $offTimeEnd = 1544345520000000; break;
-        case "Taiwan": $offTimeStart = 1544345460000000; $offTimeEnd = 1544345520000000; break;
-        case "Macau": $offTimeStart = 1544345460000000; $offTimeEnd = 1544345520000000; break;
-        case "Others": $offTimeStart = 1544345460000000; $offTimeEnd = 1544345520000000; break;
-        case "Admin": $offTimeStart = 1546515000000000; $offTimeEnd = 1546525800000000; break;
-        default: $offTimeStart = 1544345460000000; $offTimeEnd = 1544345520000000; break;
-      };
+      // switch($user['region']){
+      //   case "Singapore": $offTimeStart = 1544434200000000; $offTimeEnd = 1544445000000000; break;
+      //   case "Malaysia": $offTimeStart = 1544345460000000; $offTimeEnd = 1544345520000000; break;
+      //   case "Australia": $offTimeStart = 1544345460000000; $offTimeEnd = 1544345520000000; break;
+      //   case "China": $offTimeStart = 1544345460000000; $offTimeEnd = 1544345520000000; break;
+      //   case "Hong Kong": $offTimeStart = 1544345460000000; $offTimeEnd = 1544345520000000; break;
+      //   case "Taiwan": $offTimeStart = 1544345460000000; $offTimeEnd = 1544345520000000; break;
+      //   case "Macau": $offTimeStart = 1544345460000000; $offTimeEnd = 1544345520000000; break;
+      //   case "Others": $offTimeStart = 1544345460000000; $offTimeEnd = 1544345520000000; break;
+      //   case "Admin": $offTimeStart = 1546515000000000; $offTimeEnd = 1546525800000000; break;
+      //   default: $offTimeStart = 1544345460000000; $offTimeEnd = 1544345520000000; break;
+      // };
 
       
-      // $offTimeStart = $uniDetails['offTimeStart']; 
-      // $offTimeEnd = $uniDetails['offTimeEnd'];
-      // $pressedTime = $uniDetails['offTimePress'];
+       $offTimeStart = $uniDetails['offTimeStart']; 
+       $offTimeEnd = $uniDetails['offTimeEnd'];
+       $pressedTime = $uniDetails['offTimePress'];
       $pressTime = microtime(true)*1000000; //microsecond
       
       $difference = $pressTime - $offTimeStart;
@@ -95,12 +95,12 @@ if(isset($post_data['token_mystery'])){
         response([
           'message' => "还未到报名时间!"
         ]);
-      }else if($difference > 10800000000){ //after end time
+      }else if($difference > ($offTimeEnd-$offTimeStart)){//10800000000){ //after end time
         $end = microtime(true);
         date_default_timezone_set("Asia/Singapore");
         $diff = $end-$start;
         response([
-          'message' => "报名已经结束了!".$diff.date("d/m/Y H:i:s", $pressTime/1000000)." SGT"
+          'message' => "报名已经结束了!"//.$diff.date("d/m/Y H:i:s", $pressTime/1000000)." SGT"
         ]);
       }else{ //between the 3 hours interval
         // Get UniDetails 

@@ -220,8 +220,10 @@
                         this.debateQues1=resp.data.uniDetails.debateQues1
                         this.debateQues2=resp.data.uniDetails.debateQues2
                         this.debateQues3=resp.data.uniDetails.debateQues3
-
                     })
+                    // .catch(error=>{
+                    //     localStorage.clear();
+                    // })
             },
             editDetails: function(){
                 let data = {

@@ -11,6 +11,11 @@ import zh_CN from 'vee-validate/dist/locale/zh_CN'
 import BootstrapVue from 'bootstrap-vue'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import VeeValidate, { Validator } from 'vee-validate';
+// importing the helper
+import interceptorsSetup from '../src/interceptors.js'
+
+// and running it somewhere here
+interceptorsSetup()
 
 Vue.use(VeeValidate);
 Validator.localize('zh_CN',zh_CN);

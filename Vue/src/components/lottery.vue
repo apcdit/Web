@@ -118,9 +118,10 @@ export default
               return true;
             }
             if(this.counter2>=3){
-              var myWindow=window.open("","MsgWindow","width=200,height=100");
-              alert("请刷新网页！");
-              myWindow.document.write("时间还未到<br/>请刷新网页！");}
+              //var myWindow=window.open("","MsgWindow","width=200,height=100");
+              alert("网页已过期！请刷新网页！");
+              //myWindow.document.write("时间还未到<br/>请刷新网页！");
+              }
             else{
               this.counter2++;
               axios
