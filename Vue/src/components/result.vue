@@ -50,9 +50,8 @@
                         }
                     })
                     .then(resp=>{
-                        console.log(resp.data);
-
-                        switch(resp.data.region){
+                        
+                        switch(user.region){
                             case 'Singapore': this.number = 3; break;
                             case 'Malaysia': this.number = 4; break;
                             case 'Hong Kong': this.number = 1; break;
@@ -63,7 +62,10 @@
                             case 'Others': this.number=1; break;
                             default:this.number=5; break;
                         }
+                        console.log(this.number);
+
                         this.results = resp.data.data.slice(0,this.number);
+                        console.log(this.results);
                         for(var i = 0; i < this.results.length; i++){
                             if(this.results[i].offTimeDiff == 1000000000000000000){
                                 this.results[i].offTimeDiff = "还未报名";
