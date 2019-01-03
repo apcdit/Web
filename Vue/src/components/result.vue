@@ -51,7 +51,7 @@
                     })
                     .then(resp=>{
                         
-                        switch(user.region){
+                        switch(resp.data.region){
                             case 'Singapore': this.number = 3; break;
                             case 'Malaysia': this.number = 4; break;
                             case 'Hong Kong': this.number = 1; break;
@@ -77,7 +77,7 @@
                         }
                         
                         this.region = resp.data.region;
-                        switch(user.region){
+                        switch(this.region){
                             case 'Singapore': this.region = "新加坡"; break;
                             case 'Malaysia': this.region = "马来西亚"; break;
                             case 'Hong Kong': this.region = "香港"; break;
