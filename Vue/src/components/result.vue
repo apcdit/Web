@@ -51,16 +51,17 @@
                     })
                     .then(resp=>{
                         
-                        switch(resp.region){
-                            case 'Singapore': this.number = 3; break;
-                            case 'Malaysia': this.number = 4; break;
-                            case 'Hong Kong': this.number = 1; break;
-                            case 'Macau': this.number= 1; break;
-                            case 'China': this.number = 8; break;
-                            case 'Australia': this.number = 4; break;
-                            case 'Taiwan': this.number= 1; break;
-                            case 'Others': this.number=1; break;
-                            default:this.number=5; break;
+                       
+                            if (resp.region='Singapore') {this.number = 32}; 
+                            if (resp.region='Malaysia') {this.number = 4};
+                            if (resp.region='Hong Kong') {this.number = 1};
+                            if (resp.region='Taiwan') {this.number = 1};
+                            if (resp.region='Macau') {this.number = 1};
+                            if (resp.region='Australia') {this.number = 4};
+                            if (resp.region='Admin') {this.number = 5};
+                            if (resp.region='China') {this.number = 8};
+                            if (resp.region='Others') {this.number = 1};
+                        
                         }
                         console.log(this.number);
 
