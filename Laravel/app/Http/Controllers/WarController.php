@@ -19,7 +19,7 @@ class WarController extends Controller
         $offTimeStart = doubleval(strtotime(request('offTimeStart').' '.'Asia/Singapore'))*1000000;
         $offTimeEnd = doubleval(strtotime(request('offTimeEnd').' '.'Asia/Singapore'))*1000000;
 
-        
+
         if(count($users) > 0){ //check if there's user in the region
             for($i = 0; $i < count($users); $i++){ //if yes set all the user in that region to same time
                 //$uniDetails = $users[$i]->uniDetails;
@@ -77,10 +77,10 @@ class WarController extends Controller
     //for simulation
     public function setSimTime(){
 
-        
+
         //$users = User::where('region', request('region'))->get(); //get the collection that has the same region
         $user = auth()->user();
-        //strtotime normally converts to epoch in UTC timezone, by using 'Asia/Singapore' it converts it to GMT+8 
+        //strtotime normally converts to epoch in UTC timezone, by using 'Asia/Singapore' it converts it to GMT+8
         $simTimeStart = strtotime(request('simTimeStart').' '.'Asia/Singapore');
         $simTimeEnd = strtotime(request('simTimeEnd').' '.'Asia/Singapore');
 
@@ -192,9 +192,9 @@ class WarController extends Controller
                 case "Others": $offTimeStart = 1544345460000000; $offTimeEnd = 1544345520000000; break;
                 case "Admin": $offTimeStart = 1544345460000000; $offTimeEnd = 1544345520000000; break;
                 default: $offTimeStart = 1544345460000000; $offTimeEnd = 1544345520000000; break;
-              };
+            };
             $pressTime = microtime(true)*1000000;
-            $timeDiff = $pressTime - $offTimeStart;  
+            $timeDiff = $pressTime - $offTimeStart;
             if($timeDiff < 0){ //haven't started
                 return response()->json([
                     'message' => "系统还未开放！"
@@ -298,21 +298,12 @@ class WarController extends Controller
         //     $timeDiff = $array[$k]["offTimeDiff"];
         //     $array[$k]["offTimeDiff"] = $timeDiff; //get the time in microsecond// /1000; //to get the time in second
         // }
-
-        $uniDetails = uniDetails::where('region',$region)->get(['uniNameCN','offTimeDiff','qualified']);
+        //get the offTimeDiff by ascending order
+        $uniDetails = uniDetails::where('region',$region)->orderBy('offTimeDiff','asc')->get(['uniNameCN','offTimeDiff','qualified','region']);
         return response()->json([
             'data' => $uniDetails,
             'region' => $region,
             'time' => microtime(true)-LARAVEL_START
-        ]);
-    }
-
-    public function getTimeDiff(){
-        $region = request('region');
-        $uniDetails = uniDetails::where('region',$region)->get(['uniNameCN','offTimeDiff','qualified']);
-        return response()->json([
-            'data' => $uniDetails,
-            'region' => $region,
         ]);
     }
 
@@ -322,7 +313,7 @@ class WarController extends Controller
 
         //check with yanjin how many teams are there for each region
         switch($region){
-            case "Singapore":    
+            case "Singapore":
             case "Hong Kong":
             case "Malaysia":
             case "China":
