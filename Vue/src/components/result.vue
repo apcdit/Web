@@ -51,16 +51,17 @@
                     })
                     .then(resp=>{
                         
-                        if (resp.region='Singapore') {this.number = 32}; 
-                            if (resp.region='Malaysia') {this.number = 4};
-                            if (resp.region='Hong Kong') {this.number = 1};
-                            if (resp.region='Taiwan') {this.number = 1};
-                            if (resp.region='Macau') {this.number = 1};
-                            if (resp.region='Australia') {this.number = 4};
-                            if (resp.region='Admin') {this.number = 5};
-                            if (resp.region='China') {this.number = 8};
-                            if (resp.region='Others') {this.number = 1};
-                        console.log(this.number);
+                        if (resp.region=='Singapore') {this.number = 2;}
+                            if (resp.region=='Malaysia') {this.number = 4;}
+                            if (resp.region=='Hong Kong') {this.number = 1;}
+                            if (resp.region=='Taiwan') {this.number = 1;}
+                            if (resp.region=='Macau') {this.number = 1;}
+                            if (resp.region=='Australia') {this.number = 4;}
+                            if (resp.region=='Admin') {this.number = 5;}
+                            if (resp.region=='China') {this.number = 8;}
+                            if (resp.region=='Others') {this.number = 1;}
+                        //console.log(this.number);
+                        //console.log(resp.region);
 
                         this.results = resp.data.data.slice(0,this.number);
                         console.log(this.results);
