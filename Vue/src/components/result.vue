@@ -60,10 +60,10 @@
                             if (resp.region=='Admin') {this.number = 5;}
                             if (resp.region=='China') {this.number = 8;}
                             if (resp.region=='Others') {this.number = 1;}
-                        //console.log(this.number);
-                        //console.log(resp.region);
+                        console.log(this.number);
+                        console.log(resp.region);
 
-                        this.results = resp.data.data.slice(0,this.number);
+                        this.results = resp.data.slice(0,this.number);
                         console.log(this.results);
                         for(var i = 0; i < this.results.length; i++){
                             if(this.results[i].offTimeDiff == 1000000000000000000){
