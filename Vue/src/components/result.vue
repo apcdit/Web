@@ -5,7 +5,7 @@
         <h1 style="text-align:center">电子抽签成绩</h1>
         <hr>
         <h3 style="color:darkred;text-align: center;">地区: <strong>{{user.region}}</strong></h3>
-        
+
         <b-table hover :items="results" :fields="fields"></b-table>
     </div>
 </template>
@@ -50,16 +50,16 @@
                         }
                     })
                     .then(resp=>{
-                        
+
                         if (resp.data.region=='Singapore') {this.number = 2;}
-                            if (resp.data.region=='Malaysia') {this.number = 4;}
-                            if (resp.data.region=='Hong Kong') {this.number = 1;}
-                            if (resp.data.region=='Taiwan') {this.number = 1;}
-                            if (resp.data.region=='Macau') {this.number = 1;}
-                            if (resp.data.region=='Australia') {this.number = 4;}
-                            if (resp.data.region=='Admin') {this.number = 5;}
-                            if (resp.data.region=='China') {this.number = 8;}
-                            if (resp.data.region=='Others') {this.number = 1;}
+                        if (resp.data.region=='Malaysia') {this.number = 4;}
+                        if (resp.data.region=='Hong Kong') {this.number = 5;}
+                        if (resp.data.region=='Taiwan') {this.number = 5;}
+                        if (resp.data.region=='Macau') {this.number = 1;}
+                        if (resp.data.region=='Australia') {this.number = 3;}
+                        if (resp.data.region=='Admin') {this.number = 5;}
+                        if (resp.data.region=='China') {this.number = 8;}
+                        if (resp.data.region=='Others') {this.number = 1;}
                         console.log(this.number);
                         console.log(resp.data.region);
 
@@ -74,8 +74,8 @@
                                 this.results[i].offTimeDiff = this.results[i].offTimeDiff/1000000 //show time in second from micro
                             }
                         }
-                        
-                        
+
+
                         switch(resp.data.region){
                             case 'Singapore': this.region = "新加坡"; break;
                             case 'Malaysia': this.region = "马来西亚"; break;
@@ -91,5 +91,5 @@
             }
         }
     }
-    
+
 </script>
