@@ -274,37 +274,19 @@ class WarController extends Controller
 
         $region = auth()->user()->region;
 
-        // $array = [];
-
-        // $uniNameCNs = User::where('region',$region)->pluck('uniNameCN');
-
-        // //get all the uni details with only the 3 details
-        // $filteredDetails = uniDetails::get()->map(function($b){
-        //     return collect($b->toArray())
-        //         ->only(['uniNameCN', 'offTimeDiff', 'qualified'])
-        //         ->all();
-        // });
-
-        // //filter with the region i want
-        // for($i = 0; $i < count($uniNameCNs); $i++){
-        //     for($j = 0; $j < count($filteredDetails); $j++){
-        //         if($uniNameCNs[$i] === $filteredDetails[$j]["uniNameCN"]){
-        //             array_push($array, $filteredDetails[$j]);
-        //         }
-        //     }
-        // }
-
-        // for($k = 0 ; $k < count($array); $k++){
-        //     $timeDiff = $array[$k]["offTimeDiff"];
-        //     $array[$k]["offTimeDiff"] = $timeDiff; //get the time in microsecond// /1000; //to get the time in second
-        // }
-        //get the offTimeDiff by ascending order
-        $uniDetails = uniDetails::where('region',$region)->orderBy('offTimeDiff','asc')->get(['uniNameCN','offTimeDiff','qualified','region']);
+        if($region=='Taiwan' or $region=='Hong Kong'){
+        $uniDetails = uniDetails::where('region','Taiwan')->orwhere('region','Hong Kong')->orderBy('offTimeDiff','asc')->get(['uniNameCN','offTimeDiff','qualified','region']);
         return response()->json([
             'data' => $uniDetails,
             'region' => $region,
             'time' => microtime(true)-LARAVEL_START
-        ]);
+        ]);}
+        else{$uniDetails = uniDetails::where('region',$region)->orderBy('offTimeDiff','asc')->get(['uniNameCN','offTimeDiff','qualified','region']);
+            return response()->json([
+                'data' => $uniDetails,
+                'region' => $region,
+                'time' => microtime(true)-LARAVEL_START
+            ]);}
     }
 
     public function decideQualified(){ //decide who wins
