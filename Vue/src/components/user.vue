@@ -205,7 +205,10 @@
                         this.drawn=resp.data.uniDetails.drawn
                         this.qualified=resp.data.uniDetails.qualified
 
-
+                        const users = resp.data.user;
+                        users['uni_details'] = resp.data.uniDetails;
+                        localStorage['user'] = JSON.stringify(users);
+                        
                         switch(this.user.region){
                             case "Malaysia": this.region = "马来西亚"; break;
                             case "Singapore": this.region = "新加坡"; break;
