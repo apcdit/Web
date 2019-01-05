@@ -289,6 +289,15 @@ class WarController extends Controller
             ]);}
     }
 
+    public function getTimeDiff(){
+        $region = request('region');
+        $uniDetails = uniDetails::where('region',$region)->orderBy('offTimeDiff','asc')->get(['uniNameCN','offTimeDiff','qualified']);
+        return response()->json([
+            'data' => $uniDetails,
+            'region' => $region,
+        ]);
+    }
+
     public function decideQualified(){ //decide who wins
 
         $region = request('region');

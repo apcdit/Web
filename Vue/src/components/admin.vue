@@ -114,7 +114,7 @@
                         <!-- data display area -->
                         <div class="container">
                             <h3><strong>区域: {{selected3}}</strong></h3>
-                            <h3>该地区参赛队伍数量:</h3>
+                            <h3>该地区入围队伍数量: {{number}}</h3>
                             <br>
                             <table class="table table-hover">
                             <thead class="thead-dark">
@@ -124,7 +124,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr v-for="timeDiff in timeDiffs" v-bind:key="timeDiff.uniNameCN">
+                                <tr v-for="timeDiff in timeDiffs" v-bind:key="timeDiff.uniNameCN" v-bind:class="{green:timeDiff.qualified==1}">
                                 <th scope="row">{{timeDiff.uniNameCN}}</th>
                                     <td>{{timeDiff.offTimeDiff}}</td>
                                 </tr>
@@ -260,6 +260,7 @@ export default {
             postPic: '',
             postContent: '',
             timeDiffs: '',
+            number: 0,
             fields: {
                 id:{
                     label: "编号",
@@ -466,6 +467,7 @@ export default {
                 alert("请选择区域!");
                 return true;
             }
+
             axios
                 .get('api/time/get',{ //api/time/official/start
                     params:{'region': this.selected3},
@@ -475,12 +477,25 @@ export default {
                 })
                 .then(resp=>{
                     this.timeDiffs = resp.data.data;
+                    if (resp.data.region=='Singapore') {this.number = 2;}
+                    else if (resp.data.region=='Malaysia') {this.number = 4;}
+                    else if (resp.data.region=='Hong Kong') {this.number = 5;}
+                    else if (resp.data.region=='Taiwan') {this.number = 5;}
+                    else if (resp.data.region=='Macau') {this.number = 1;}
+                    else if (resp.data.region=='Australia') {this.number = 3;}
+                    else if (resp.data.region=='Admin') {this.number = 5;}
+                    else if (resp.data.region=='China') {this.number = 8;}
+                    else if (resp.data.region=='Others') {this.number = 1;}
                     for(var i = 0; i < this.timeDiffs.length; i++){
                         if(this.timeDiffs[i].offTimeDiff == 1000000000000000000){
                             this.timeDiffs[i].offTimeDiff = "还未报名";
-                        }else if(this.results[i].offTimeDiff == 0){
-                            this.timeDiffs[i].offTimeDiff = "种子队"
+                        }else if(this.timeDiffs[i].offTimeDiff == 0){
+                            this.timeDiffs[i].offTimeDiff = "种子队";
+                            this.timeDiffs[i].qualified = 1;
                         }else{
+                            if(i < this.number){
+                                this.timeDiffs[i].qualified = 1;
+                            }
                             this.timeDiffs[i].offTimeDiff = this.timeDiffs[i].offTimeDiff/1000000 //show time in second from micro
                         }
                     }
@@ -539,5 +554,12 @@ export default {
     .profile-card-5 .btn-primary{
         background-color: darkred;
         border-color: darkred;
+    }
+    .green{
+        background: rgb(74, 187, 74);
+        color: rgb(243, 241, 241);
+    }
+    .green:hover{
+        color: black;
     }
 </style>
