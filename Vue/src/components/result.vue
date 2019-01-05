@@ -2,7 +2,7 @@
     <div class="container">
         <oldnav v-bind:isLogged="isLogged" v-bind:user="user"></oldnav>
         <br>
-        <h1 style="text-align:center">电子抽签成绩</h1>
+        <h1 style="text-align:center">电子报名成绩</h1>
         <hr>
         <h3 style="color:darkred;text-align: center;">地区: <strong>{{region}}</strong></h3>
 
