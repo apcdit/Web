@@ -106,7 +106,7 @@
                             case 'Australia': this.region = "澳大利亚"; break;
                             case 'Taiwan': this.region = "台湾"; break;
                             case 'Others': this.region="其他"; break;
-                            default: break;
+                            default: this.region = resp.data.region; break;
                         }
                     })
             }
