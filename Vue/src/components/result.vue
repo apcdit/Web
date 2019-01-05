@@ -100,11 +100,11 @@
                         switch(resp.data.region){
                             case 'Singapore': this.region = "新加坡"; break;
                             case 'Malaysia': this.region = "马来西亚"; break;
-                            case 'Hong Kong': this.region = "香港"; break;
+                            case 'Hong Kong': this.region = "港台"; break;
                             case 'Macau': this.region = "澳门"; break;
                             case 'China': this.region = "中国"; break;
                             case 'Australia': this.region = "澳大利亚"; break;
-                            case 'Taiwan': this.region = "台湾"; break;
+                            case 'Taiwan': this.region = "港台"; break;
                             case 'Others': this.region="其他"; break;
                             default: this.region = resp.data.region; break;
                         }

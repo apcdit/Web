@@ -291,11 +291,20 @@ class WarController extends Controller
 
     public function getTimeDiff(){
         $region = request('region');
-        $uniDetails = uniDetails::where('region',$region)->orderBy('offTimeDiff','asc')->get(['uniNameCN','offTimeDiff','qualified']);
-        return response()->json([
-            'data' => $uniDetails,
-            'region' => $region,
-        ]);
+        if($region=='Taiwan' or $region=='Hong Kong'){
+            $uniDetails = uniDetails::where('region','Taiwan')->orwhere('region','Hong Kong')->orderBy('offTimeDiff','asc')->get(['uniNameCN','offTimePress','offTimeDiff','qualified','region']);
+            return response()->json([
+                'data' => $uniDetails,
+                'region' => $region,
+                'time' => microtime(true)-LARAVEL_START
+            ]);
+        }else{
+            $uniDetails = uniDetails::where('region',$region)->orderBy('offTimeDiff','asc')->get(['uniNameCN','offTimeDiff','qualified']);
+            return response()->json([
+                'data' => $uniDetails,
+                'region' => $region,
+            ]);
+        }
     }
 
     public function decideQualified(){ //decide who wins
