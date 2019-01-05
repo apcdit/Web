@@ -5,6 +5,7 @@
             <div class="row">
                 <div class="col-sm-8">
                     <h1 style="color:darkred;"><strong>{{posts.postTitle}}</strong></h1>
+                    <h6 v-if="user.admin == 1">编辑</h6>
                     <hr>
                     <img v-bind:src="posts.postPic">
                     <h6 style="color:grey;font-size:14px;padding-top:5px;">发布于:{{posts.created_at}}</h6>

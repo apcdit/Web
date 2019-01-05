@@ -90,6 +90,9 @@
         created(){
             this.fetchPosts()
         },
+        computed:{
+            isLogged : function(){return this.$store.getters.isLoggedIn},
+        },
         methods:{
             fetchPosts(){
                 axios

@@ -63,7 +63,6 @@
                 <h3>冠名赞助</h3>
             </div>
         </div>
-
         <!-- footer -->
         <footer id="footbar"><foot></foot></footer>
 

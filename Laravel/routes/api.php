@@ -103,3 +103,7 @@ Route::get('posts/latest','PostsController@showLatest');
 Route::post('register','AuthController@createUser');
 
 Route::post('uploadFile', 'AuthController@upload');
+
+Route::get('downloadFile', function(){
+    return response()->download(storage_path("app/public/{$filename}"));
+});
