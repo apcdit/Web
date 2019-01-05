@@ -79,7 +79,7 @@ if(isset($post_data['token_mystery'])){
       //   case "Taiwan": $offTimeStart = 1544345460000000; $offTimeEnd = 1544345520000000; break;
       //   case "Macau": $offTimeStart = 1544345460000000; $offTimeEnd = 1544345520000000; break;
       //   case "Others": $offTimeStart = 1544345460000000; $offTimeEnd = 1544345520000000; break;
-      //   case "Admin": $offTimeStart = 1546659180000000; $offTimeEnd = 1546662780000000; break;
+      //   case "Admin": $offTimeStart = 1546659600000000; $offTimeEnd = 1546663200000000; break;
       //   default: $offTimeStart = 1544345460000000; $offTimeEnd = 1544345520000000; break;
       // };
 
