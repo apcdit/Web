@@ -5,7 +5,7 @@
             <div class="row">
                 <div class="col-sm-8">
                     <h1 style="color:darkred;"><strong>{{posts.postTitle}}</strong></h1>
-                    <h6 v-if="user.admin == 1">编辑</h6>
+                    <h6 v-if="admin == 1">编辑</h6>
                     <hr>
                     <img v-bind:src="posts.postPic">
                     <h6 style="color:grey;font-size:14px;padding-top:5px;">发布于:{{posts.created_at}}</h6>
@@ -49,10 +49,15 @@
                 id:'',
                 posts:[],
                 others: '',
+                admin: 0,
             }
         },
         computed:{
-            user: function(){ if(typeof localStorage['user'] !== 'undefined') return JSON.parse(localStorage['user'])},
+            user: function(){ if(typeof localStorage['user'] !== 'undefined') {
+                this.admin = JSON.parse(localStorage['user'].admin);
+                return JSON.parse(localStorage['user'])
+            }
+                },
             isLogged : function(){ return this.$store.getters.isLoggedIn},
         },
         created(){
