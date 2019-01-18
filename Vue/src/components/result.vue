@@ -21,7 +21,7 @@
             </tr>
         </tbody>
         <caption>*绿色为入围队伍。</caption>
-        <caption>此页面仅显示前8名的大学。</caption>
+        <caption>此页面仅显示前{{numResults}}名的大学。</caption>
         </table>
     </div>
 </template>
@@ -48,6 +48,7 @@
                 results:'',
                 region: '',
                 number:3,
+                numResults: 8,
             }
         },
         mounted(){
@@ -76,11 +77,14 @@
                         else if (resp.data.region=='Admin') {this.number = 5;}
                         else if (resp.data.region=='China') {this.number = 8;}
                         else if (resp.data.region=='Others') {this.number = 1;}
-                        // console.log(this.number);
-                        // console.log(resp.data.region);
-                        //console.log(resp.data);
+                        
                         this.results = resp.data.data.slice(0,8); //this will slice 8 teams always
-                        //console.log(this.results);
+                        
+                        if(resp.data.region=='China'){
+                            this.results = resp.data.data.slice(0,10);
+                            this.numResults = 10;
+                        }
+
                         for(var i = 0; i < this.results.length; i++){
                             if(this.results[i].offTimeDiff == 1000000000000000000){
                                 this.results[i].offTimeDiff = "还未报名";
