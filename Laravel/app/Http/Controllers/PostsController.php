@@ -72,11 +72,8 @@ class PostsController extends Controller
 
     public function showLatest(){
         
-        Cache::remember('latestPosts', 60, function () {
-            $posts = Posts::orderBy('created_at','desc')->take(3)->get();
-            return $posts;
-        });
-        return response(Cache::get('latestPosts'));
+        $posts = Posts::orderBy('created_at','desc')->take(3)->get();
+        return $posts;
     }
 
     /**
