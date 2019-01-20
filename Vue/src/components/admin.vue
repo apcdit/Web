@@ -146,7 +146,11 @@
                                 <label>贴文内容:</label>
                                 <br>
                                 <!-- <textarea class="form-control" type="text" placeholder="贴文内容" v-model="postContent"></textarea> -->
-                                <editor api-key="svizvnfcy500algmkerh5qk3afyq1az24jantx1k50dhquva" v-model="postContent" :init="{plugins: 'wordcount'}"></editor>
+                                <editor api-key="svizvnfcy500algmkerh5qk3afyq1az24jantx1k50dhquva" v-model="postContent" 
+                                :init="{toolbar1:'image | formatselect | bold italic strikethrough forecolor backcolor | link | alignleft aligncenter alignright alignjustify | numlist bullist outdent indent | removeformat',
+                                plugins: ['advlist autolink lists link image charmap print preview hr anchor pagebreak', 'searchreplace wordcount visualblocks visualchars code fullscreen', 'insertdatetime media nonbreaking save table contextmenu directionality','template paste textcolor colorpicker textpattern imagetools toc help emoticons hr codesample']
+                                }">
+                                </editor>
                             </div>
                             <button @click="submitPost" class="btn btn-primary btn-block">发布帖文</button>
                         </div>
