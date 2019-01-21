@@ -77,6 +77,7 @@
                         else if (resp.data.region=='Admin') {this.number = 5;}
                         else if (resp.data.region=='China') {this.number = 8;}
                         else if (resp.data.region=='Others') {this.number = 1;}
+                        else if (resp.data.region=='Seed') {this.number = 4;}
                         
                         this.results = resp.data.data.slice(0,8); //this will slice 8 teams always
                         
