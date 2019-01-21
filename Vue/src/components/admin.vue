@@ -80,6 +80,7 @@
                                         <option>Taiwan</option>
                                         <option>Australia</option>
                                         <option>Others</option>
+                                        <option>Seed</option>
                                         <option>Admin</option>
                                     </select>
                                 </div>
@@ -103,11 +104,12 @@
                                         <option>Taiwan</option>
                                         <option>Australia</option>
                                         <option>Others</option>
+                                        <option>Seed</option>
                                         <option>Admin</option>
                                     </select>
                                 </div>
                                 <div class="col-md">
-                                    <button class="btn btn-block" @click="getDiff">查看时间差</button>
+                                    <button class="btn btn-block" @click="getDiff">查看成绩</button>
                                 </div>    
                             </div> 
                         </div>
@@ -207,6 +209,7 @@
                                 <option>Taiwan</option>
                                 <option>Australia</option>
                                 <option>Admin</option>
+                                <option>Seed</option>
                                 <option>Others</option>
                             </select>
                             <br>
@@ -492,6 +495,7 @@ export default {
                     else if (resp.data.region=='Admin') {this.number = 5;}
                     else if (resp.data.region=='China') {this.number = 8;}
                     else if (resp.data.region=='Others') {this.number = 1;}
+                    else if (resp.data.region=='Seed') {this.number = 4;}
                     for(var i = 0; i < this.timeDiffs.length; i++){
                         if(this.timeDiffs[i].offTimeDiff == 1000000000000000000){
                             this.timeDiffs[i].offTimeDiff = "还未报名";
