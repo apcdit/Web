@@ -23,6 +23,7 @@
                                         <option>Taiwan</option>
                                         <option>Australia</option>
                                         <option>Admin</option>
+                                        <option>Seed</option>
                                         <option>Others</option>
                                     </select>
                                     <div class="form-group">
