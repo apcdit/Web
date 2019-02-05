@@ -20,6 +20,7 @@ import latestNews from '@/components/latestNews'
 import post from '@/components/post'
 import home from '@/components/home'
 import resetpw1 from '@/components/resetpw1'
+import people from '@/components/people'
 
 Vue.use(Router)
 
@@ -67,6 +68,7 @@ export default new Router({
     {path:'/navigation',name:'navigation',component:navigation},
     {path:'/latestNews', name:'latestNews', component:latestNews},
     {path:'/', name:'home', component:home},
+    {path:'/people', name:'people', component:people},
     {
       path:'/resetpw', 
       name:'resetpw1', 
@@ -141,5 +143,12 @@ export default new Router({
         permission: 'admin'
       }
     }
+    ,
+      {
+          path:'/people',
+          name:'people',
+          component:people,
+
+      }
   ]
 })
