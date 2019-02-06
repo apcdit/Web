@@ -222,7 +222,7 @@ class WarController extends Controller
     }
 
     public function getAllTime(){
-        $region = ['Malaysia', 'Singapore', 'Australia', 'China', 'Taiwan', 'Hong Kong', 'Macau', 'Others','Admin'];
+        $region = ['Malaysia', 'Singapore', 'Australia', 'China', 'Taiwan', 'Hong Kong', 'Macau', 'Others','Admin','Seed'];
         $times = [];
         for($i = 0 ; $i < count($region); $i++){
             $array = $this->getStartTime($region[$i]);
