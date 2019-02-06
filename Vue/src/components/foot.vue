@@ -8,6 +8,14 @@
 					<h6 style="color:white;">由新加坡南洋理工大学举办，为亚太地区高等学府辩论队提供一个交流的平台.</h6>
                     <br>
                     <a href="/#"><img src="http://i.imgur.com/90YSaaO.png"></a>
+					<hr style="color:white">
+
+						<h5>冠名赞助:中国工商银行</h5>
+                        <br>
+                    <div style="margin-left:-80px;margin-top:-60px">
+						<img src="https://i.imgur.com/TAvUm1U.png" width="350px" ></div>
+
+
 				</div>
                 <div class="col-xs-12 col-sm-4 col-md-4" id="getHere">
 					<h5>抵达这里</h5>

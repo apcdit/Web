@@ -2,81 +2,82 @@
     <div>
         <navibar v-bind:isLogged="isLogged"></navibar>
         <login></login>
-        <div>
-
-                <b-carousel id="carousel1"
-                            style="text-shadow: 1px 1px 2px #333;"
-                            controls
-                            indicators
-                            background="#ababab"
-                            :interval="2000"
-                            img-width="1024"
-                            img-height="480"
-                            v-model="slide"
-                            @sliding-start="onSlideStart"
-                            @sliding-end="onSlideEnd"
-                >
-
-                    <!-- Text slides with image -->
-                    <b-carousel-slide img-src="https://i.imgur.com/yAUVSM7.jpg">
-
-                    </b-carousel-slide>
-
-                    <!-- Slides with custom text -->
-                    <b-carousel-slide img-src="https://i.imgur.com/1inhJVc.jpg">
-
-                    </b-carousel-slide>
-
-
-            <!--<div class="center text-center">-->
-                    <!--&lt;!&ndash; <div><img src="http://i.imgur.com/90YSaaO.png" /></div> &ndash;&gt;-->
-                    <!--<div style="text-align: center;" class="col-xs-12">-->
-                        <!--<div id="title"><strong>工行杯亚太大专辩论公开赛</strong></div>-->
-                        <!--&lt;!&ndash; <div id="title"><strong></strong></div> &ndash;&gt;-->
-                        <!--<br>-->
-                        <!--<h5><i class="fa fa-calendar-o" aria-hidden="true"></i> 2019年7月10日至7月14日</h5>-->
-                        <!--<h5><i class="fa fa-map-marker" aria-hidden="true"></i> 新加坡南洋理工大学 </h5>-->
-                        <!--<h5><i class="fa fa-clock-o" aria-hidden="true"></i> 9:00am – 6:00pm </h5>-->
-                    <!--</div>-->
-                    <!--<br>-->
-                <!--<div class="form-group col-xs-6">-->
-                    <!--<a class="btn btn-reg" target="blank" href='/#/register' v-if="false">点击报名</a>-->
-                     <!--<button class="btn btn-reg" target="blank" v-if="true" :disabled="true">报名已截止</button>-->
-                <!--</div>-->
-                <!--<div class="row">-->
+        <section class="bg parallax">
+            <div class="center text-center">
+                <!-- <div><img src="http://i.imgur.com/90YSaaO.png" /></div> -->
+                <div style="text-align: center;" class="col-xs-12">
+                    <div id="title"><strong>工行杯亚太大专辩论公开赛</strong></div>
+                    <!-- <div id="title"><strong></strong></div> -->
+                    <br>
+                    <h5><i class="fa fa-calendar-o" aria-hidden="true"></i> 2019年7月10日至7月14日</h5>
+                    <h5><i class="fa fa-map-marker" aria-hidden="true"></i> 新加坡南洋理工大学 </h5>
+                    <h5><i class="fa fa-clock-o" aria-hidden="true"></i> 9:00am – 6:00pm </h5>
+                </div>
+                <br>
+                <div class="form-group col-xs-6">
+                    <a class="btn btn-reg" target="blank" href='/#/register' v-if="false">点击报名</a>
+                    <button class="btn btn-reg" target="blank" v-if="true" :disabled="true">报名已截止</button>
+                </div>
+                <div class="row">
                     <!--<div class="col-xs-6 ml-1">-->
                         <!--<h4 style="color:#9A2A1F;">参赛意愿书</h4>-->
                         <!--<a  class="btn btn-form" href="https://entuedu-my.sharepoint.com/:f:/g/personal/e180063_e_ntu_edu_sg/EjMVXaF8Om9GrD-KbTNiChYBb3fbYe8jeJJe9fClj857sg?e=BicxIo" target="_blank">OneDrive</a>-->
                         <!--<a class="btn btn-form" href="https://pan.baidu.com/s/1x6gQf8Md9lzU4xJiiAnjUQ" target="_blank">百度云盘</a>-->
                     <!--</div>-->
                     <!--<br>-->
-                    <!--<div class="col-xs-6 ml-1">-->
-                        <!--<h4 style="color:#9A2A1F;">比赛章程</h4>-->
-                        <!--<a class="btn btn-form" href="https://entuedu-my.sharepoint.com/:f:/g/personal/tanj0238_e_ntu_edu_sg/EqNFd_nY03NNsQheQR2nqcUBMfH-4KYYJwlGmdHvboFD-A?e=apQnZQ" target="_blank">OneDrive</a>-->
-                        <!--<a class="btn btn-form" href="https://pan.baidu.com/s/1nbNdHc9fY2xOFeRrQJxBLw" target="_blank">百度云盘</a>-->
-                    <!--</div>-->
-                <!--</div>-->
-            <!--</div>-->
-        </div>
-        
-        <!-- 最新消息 -->
-        <div class="container text-center" id="latestNews">
-            <div id="title"><strong>最新消息</strong></div>
-            <br>
-            <div class="row">
-                <div class="col-xs-4" v-for="post in posts" v-bind:key="post.id">
-                    <div class="card profile-card-5">
-                        <div class="card-img-block">
-                            <img class="card-img-top" v-bind:src="post.postPic" alt="图片无法显示">
-                        </div>
-                        <div class="card-body pt-0">
-                            <h5 class="card-title">{{post.postTitle}}</h5>
-                            <p class="card-text">{{post.postDec}}</p>
-                            <router-link :to="{ name: 'post', params: { id: post.id}}" class="btn btn-primary">查看贴文</router-link>
+                    <div class="col">
+                        <h4 style="color:#9A2A1F;">比赛章程</h4>
+                        <a class="btn btn-form" href="https://entuedu-my.sharepoint.com/:f:/g/personal/tanj0238_e_ntu_edu_sg/EqNFd_nY03NNsQheQR2nqcUBMfH-4KYYJwlGmdHvboFD-A?e=apQnZQ" target="_blank">OneDrive</a>
+                        <a class="btn btn-form" href="https://pan.baidu.com/s/1nbNdHc9fY2xOFeRrQJxBLw" target="_blank">百度云盘</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!------------------ Hover Effect Style : Demo - 16 --------------->
+        <div class="container mt-40" style="margin-top: 30px;">
+            <h3 class="text-center">最新消息</h3>
+            <div class="row mt-30">
+                <div class="col-md-4 col-sm-6"  v-for="post in posts" v-bind:key="post.id">
+                    <div class="box16">
+                        <img v-bind:src="post.postPic" alt="图片无法显示">
+                        <div class="box-content">
+                            <h3 class="title">{{post.postTitle}}</h3>
+
+                            <ul class="social">
+                                <li><span class="post">{{post.postDec}}</span></li>
+                                <li><a style="text-decoration:none;"><router-link :to="{ name: 'post', params: { id: post.id}}" class="btn btn-primary">查看贴文</router-link></a></li>
+                            </ul>
                         </div>
                     </div>
-    		    </div>
+                </div>
+            </div>
+        </div>
 
+
+
+
+        <div class="mobileSide">
+            <div style="margin:0px auto;">
+                <h3 style="text-align:center;"><strong>更多消息</strong></h3>
+
+                <hr style="background:darkred; height:5px;">
+                <!-- <ol class="list-group list-group-flush" >
+                    <li class="list-group-item" v-for="other in others" v-bind:key="other.id">
+                        <a href="#">{{other.postTitle}}</a>
+                        <hr style="width:2px;">
+                    </li>
+                </ol> -->
+                <div v-for="post in posts" v-bind:key="post.id">
+                    <router-link  :to="{ name: 'post', params: { id: post.id}}"   class="list-group-item list-group-item-action flex-column align-items-start">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h5 class="mb-1" style="color:darkred;"><strong>{{post.postTitle}}</strong></h5>
+                            <small>{{post.created_at}}</small>
+                        </div>
+                        <small>{{post.postDec}}</small>
+                    </router-link>
+                </div>
             </div>
 
         </div>
@@ -91,6 +92,7 @@
             </div>
         </div>
 
+<<<<<<< HEAD
         <!--视频库-->
         <div class="container text-center" id="videohub">
             <div class="container animated fadeIn content">
@@ -145,13 +147,17 @@
         </div>
 
         <!-- footer -->
+=======
+
+>>>>>>> cbde6f72c8e2a0696ade574ad3b0169fa9c2987f
         <footer id="footbar"><foot></foot></footer>
 
     </div>
-    
+
 </template>
 
 <script>
+<<<<<<< HEAD
 import foot from './foot.vue'
 import login from './login.vue'
 import navibar from './navigation.vue'
@@ -208,22 +214,52 @@ export default {
             if(this.expandedA == 1){
                 this.expandedA = 0
             }
+=======
+    import foot from './foot.vue'
+    import login from './login.vue'
+    import navibar from './navigation.vue'
+    import axios from 'axios'
+
+    export default {
+        name: 'home',
+        components:{foot,navibar,login},
+        data(){
+            return{
+                posts: '',
+                others:'',
+                id:'',
+            }
+        },
+        computed : {
+            isLogged : function(){return this.$store.getters.isLoggedIn},
+        },
+        created() {
+            this.fetchPosts()
+        },
+        methods:{
+            fetchPosts(){
+                axios
+                    .get('api/posts/latest')
+                    .then(response=>{
+                        this.posts = response.data;
+                    })
+            },
+>>>>>>> cbde6f72c8e2a0696ade574ad3b0169fa9c2987f
         }
     }
-}
 </script>
 
 <style scoped>
 
     html {
-        scroll-behavior: smooth; 
+        scroll-behavior: smooth;
     }
-    
+
     .bg{
         /*background-image: url("https://i.imgur.com/7MJgWRy.jpg");*/
         /* Full height */
         height: 100vh;
-        min-height: 100vh; 
+        min-height: 100vh;
         /* Center and scale the image nicely */
         /*background-position: center;*/
         /*background-repeat: no-repeat;*/
@@ -234,12 +270,19 @@ export default {
         /*background-attachment: fixed;*/
         margin-top: -105.05px;
     }
+    .mobileSide{display:none;}
 
-    @media only screen and (max-device-width:1366px){
+    @media only screen and (max-device-width:1000px){
+        .mobileSide{display:block;margin-top: 30px ;}
+        .container{display:none;}
         .parallax{
             background-attachment: scroll;
         }
     }
+
+    /*@media only screen and (max-device-width:1366px){*/
+        /**/
+    /*}*/
     .btn-form{
         font-family: "Microsoft YaHei", "华文细黑";
         background-color: #9A2A1F;
@@ -277,16 +320,16 @@ export default {
         height: 100%;
     }
 
-    div #title{
-        font-size: 1.95rem;
-        padding-top: 5%;
-        font-family: "Microsoft YaHei","华文细黑";
-        font-weight: bold;
-    }
+    /*div #title{*/
+        /*font-size: 1.95rem;*/
+        /*padding-top: 5%;*/
+        /*font-family: "Microsoft YaHei","华文细黑";*/
+        /*font-weight: bold;*/
+    /*}*/
 
 
     /*Profile Card 5*/
-    
+
     .profile-card-5{
         margin-top:20px;
         margin-left: 35px;
@@ -327,10 +370,36 @@ export default {
         background-color: darkred;
         border-color: darkred;
     }
+<<<<<<< HEAD
     .expandB1{
         border: none;
         padding: 0;
         background: none;
+=======
+
+
+    /*********************** Demo - 16 *******************/
+    .box16{text-align:center;color:#fff;position:relative}
+    .box16 .box-content,.box16:after{width:100%;position:absolute;left:0}
+    .box16:after{content:"";height:100%;background:linear-gradient(to bottom,rgba(0,0,0,0) 0,rgba(0,0,0,.08) 69%,rgba(0,0,0,.76) 100%);top:0;transition:all .5s ease 0s}
+    .box16 .post,.box16 .title{transform:translateY(145px);transition:all .4s cubic-bezier(.13,.62,.81,.91) 0s}
+    .box16:hover:after{background:linear-gradient(to bottom,rgba(0,0,0,.01) 0,rgba(0,0,0,.09) 11%,rgba(0,0,0,.12) 13%,rgba(0,0,0,.19) 20%,rgba(0,0,0,.29) 28%,rgba(0,0,0,.29) 29%,rgba(0,0,0,.42) 38%,rgba(0,0,0,.46) 43%,rgba(0,0,0,.53) 47%,rgba(0,0,0,.75) 69%,rgba(0,0,0,.87) 84%,rgba(0,0,0,.98) 99%,rgba(0,0,0,.94) 100%)}
+    .box16 img{width:100%;height:auto}
+    .box16 .box-content{padding:20px;margin-bottom:20px;bottom:0;z-index:1}
+    .box16 .title{font-size:22px;font-weight:700;text-transform:uppercase;margin:0 0 10px;color:white;}
+    .box16 .post{display:block;padding:8px 0;font-size:15px;color:white;}
+    .box16 .social li a,.box17 .icon li a{font-size:20px;color:#fff}
+    .box16:hover .post,.box16:hover .title{transform:translateY(0)}
+    .box16 .social{list-style:none;padding:0 0 5px;margin:40px 0 25px;opacity:0;position:relative;transform:perspective(500px) rotateX(-90deg) rotateY(0) rotateZ(0);transition:all .6s cubic-bezier(0,0,.58,1) 0s}
+    .box16:hover .social{opacity:1;transform:perspective(500px) rotateX(0) rotateY(0) rotateZ(0)}
+    .box16 .social:before{content:"";width:50px;height:2px;background:#fff;margin:0 auto;position:absolute;top:-23px;left:0;right:0}
+    .box16 .social li{display:inline-block}
+    .box16 .social li a{display:block;height:40px;background-color: #9A2A1F;line-height:40px;margin-right:10px;transition:all .3s ease 0s; text-decoration:none;}
+    .box17 .icon li,.box17 .icon li a{display:inline-block}
+    .box16 .social li a:hover{background-color: rgb(107, 1, 1); text-decoration:none;}
+    .box16 .social li:last-child a{margin-right:0}
+    @media only screen and (max-width:990px){.box16{margin-bottom:30px}
+>>>>>>> cbde6f72c8e2a0696ade574ad3b0169fa9c2987f
     }
 
 </style>
