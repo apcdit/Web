@@ -12,8 +12,8 @@
 
 						<h5>冠名赞助:中国工商银行</h5>
                         <br>
-                    <div style="margin-left:-80px;margin-top:-60px">
-						<img src="https://i.imgur.com/TAvUm1U.png" width="350px" ></div>
+                    <div style="margin-left:-10px;margin-top:-30px">
+						<img src="https://i.imgur.com/jFeU5Ja.png" width="80%" height="80%" ></div>
 
 
 				</div>

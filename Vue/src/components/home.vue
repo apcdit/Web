@@ -92,64 +92,6 @@
             </div>
         </div>
 
-<<<<<<< HEAD
-        <!--视频库-->
-        <div class="container text-center" id="videohub">
-            <div class="container animated fadeIn content">
-
-                <div class="row">
-                    <div class="col-md-12">
-                        <h1 class="title">亚太辩视频库📹</h1>
-                        <hr>
-                    </div>
-                </div>
-
-                <br>
-                <a v-b-toggle.collapseA class="expandB1" @click = "expandA" v-if="!expandedA"><h2>+  第七届亚太辩</h2></a>
-                <a v-b-toggle.collapseA class="expandB1" @click = "collapseA" v-else><h2>-  第七届亚太辩</h2></a>
-                <!-- elements to collapse -->
-                <b-collapse id="collapseA" class="mt-2">
-                    <b-card>
-                        <div class="row">
-                            <div class="col">
-                                <iframe width="320" height="180" src="https://www.youtube.com/embed/videoseries?list=PLvfHyF5nLEMpPN8oZaxs20T2kU-aSkqaC" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                            </div>
-
-                            <div class="col">
-                                <iframe height="180" width="320" src='https://player.youku.com/embed/XMTI4MDU3OTkwNA==' frameborder=0 ></iframe>
-                            </div>
-                        </div>
-                    </b-card>
-                </b-collapse>
-
-                <hr>
-
-                <a v-b-toggle.collapseB @click = "expand" class="expandB1" v-if="!expanded"><h2>+  第六届亚太辩</h2></a>
-                <a v-b-toggle.collapseB @click = "collapse" class="expandB1" v-else><h2>-  第六届亚太辩</h2></a>
-                <!-- elements to collapse -->
-                <b-collapse id="collapseB" class="mt-2">
-                    <b-card>
-                        <div class="row">
-                            <div class="col">
-                                <iframe width="320" height="180" src="https://www.youtube.com/embed/videoseries?list=PLvfHyF5nLEMqcgsNu9Jptj0JWHOZtqNCh" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                            </div>
-
-                            <div class="col">
-                                <iframe height="180" width="320" src='https://player.youku.com/embed/XNTU5NDgxMjA4==' frameborder=0 ></iframe>
-                            </div>
-                        </div>
-                    </b-card>
-                </b-collapse>
-                <hr>
-
-            </div>
-
-        </div>
-
-        <!-- footer -->
-=======
-
->>>>>>> cbde6f72c8e2a0696ade574ad3b0169fa9c2987f
         <footer id="footbar"><foot></foot></footer>
 
     </div>
@@ -157,64 +99,6 @@
 </template>
 
 <script>
-<<<<<<< HEAD
-import foot from './foot.vue'
-import login from './login.vue'
-import navibar from './navigation.vue'
-import axios from 'axios'
-
-export default {
-    name: 'home',
-    components:{foot,navibar,login},
-    data(){
-        return{
-            posts: '',
-            slide: 0,
-            sliding: null,
-            expanded:0,
-            expandedA:0
-        }
-    },
-    computed : {
-        isLogged : function(){return this.$store.getters.isLoggedIn},
-    },
-    created() {
-        this.fetchPosts()
-    },
-    methods:{
-        fetchPosts(){
-            axios
-                .get('api/posts/latest')
-                .then(response=>{
-                    this.posts = response.data;
-                })
-        },
-        onSlideStart (slide) {
-            this.sliding = true
-        },
-        onSlideEnd (slide) {
-            this.sliding = false
-        },
-        expand: function(){
-            if(this.expanded == 0){
-                this.expanded = 1;
-            }
-        },
-        collapse: function(){
-            if(this.expanded == 1){
-                this.expanded = 0;
-            }
-        },
-        expandA: function(){
-            if(this.expandedA == 0){
-                this.expandedA = 1;
-            }
-        },
-        collapseA: function(){
-            if(this.expandedA == 1){
-                this.expandedA = 0
-            }
-=======
     import foot from './foot.vue'
     import login from './login.vue'
     import navibar from './navigation.vue'
@@ -244,7 +128,6 @@ export default {
                         this.posts = response.data;
                     })
             },
->>>>>>> cbde6f72c8e2a0696ade574ad3b0169fa9c2987f
         }
     }
 </script>
@@ -370,12 +253,6 @@ export default {
         background-color: darkred;
         border-color: darkred;
     }
-<<<<<<< HEAD
-    .expandB1{
-        border: none;
-        padding: 0;
-        background: none;
-=======
 
 
     /*********************** Demo - 16 *******************/
@@ -399,7 +276,6 @@ export default {
     .box16 .social li a:hover{background-color: rgb(107, 1, 1); text-decoration:none;}
     .box16 .social li:last-child a{margin-right:0}
     @media only screen and (max-width:990px){.box16{margin-bottom:30px}
->>>>>>> cbde6f72c8e2a0696ade574ad3b0169fa9c2987f
     }
 
 </style>
