@@ -84,12 +84,7 @@
         <hr>
 
         <!-- 赞助 -->
-        <div v-if="false" class="container text-center" id="sponsors">
-            <div id=title><strong>赞助</strong></div>
-            <br>
-            <div id="top-sponsor">
-                <h3>冠名赞助</h3>
-            </div>
+        <div id="sponsor" >
         </div>
 
         <footer id="footbar"><foot></foot></footer>
@@ -276,6 +271,13 @@
     .box16 .social li a:hover{background-color: rgb(107, 1, 1); text-decoration:none;}
     .box16 .social li:last-child a{margin-right:0}
     @media only screen and (max-width:990px){.box16{margin-bottom:30px}
+    }
+
+    #sponsor{
+      background-size: cover;
+      background-image: url('https://i.imgur.com/fiDTIP1.jpg');
+      width: 100vw;
+      height:100vh;
     }
 
 </style>
