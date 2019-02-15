@@ -274,10 +274,10 @@
     }
 
     #sponsor{
-      background-size: cover;
+      background-size:auto;
       background-image: url('https://i.imgur.com/fiDTIP1.jpg');
       width: 100vw;
-      height:100vh;
+      height:10vh;
     }
 
 </style>

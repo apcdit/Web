@@ -56,6 +56,12 @@
                 <hr>
             </div>
             </div>
+        <div class="container" >
+
+            <div style="padding:10px;">
+                <img src="https://i.imgur.com/UHeT8gn.jpg" width="100%" >
+            </div>
+        </div>
         </div>
         <nav aria-label="Page navigation example">
             <ul class="pagination justify-content-center">
