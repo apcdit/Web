@@ -139,18 +139,18 @@
     }
 
     .bg{
-        /*background-image: url("https://i.imgur.com/7MJgWRy.jpg");*/
+        background-image: url("https://i.imgur.com/7MJgWRy.jpg");
         /* Full height */
         height: 100vh;
         min-height: 100vh;
         /* Center and scale the image nicely */
-        /*background-position: center;*/
-        /*background-repeat: no-repeat;*/
-        /*background-size: cover;*/
-        /*border-bottom:solid;*/
-        /*border-bottom-width: 0.01rem;*/
-        /*border-bottom-color: lightgrey;*/
-        /*background-attachment: fixed;*/
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        border-bottom:solid;
+        border-bottom-width: 0.01rem;
+        border-bottom-color: lightgrey;
+        background-attachment: fixed;
         margin-top: -105.05px;
     }
     .mobileSide{display:none;}
@@ -203,12 +203,12 @@
         height: 100%;
     }
 
-    /*div #title{*/
-        /*font-size: 1.95rem;*/
-        /*padding-top: 5%;*/
-        /*font-family: "Microsoft YaHei","华文细黑";*/
-        /*font-weight: bold;*/
-    /*}*/
+    div #title{
+        font-size: 1.95rem;
+        padding-top: 5%;
+        font-family: "Microsoft YaHei","华文细黑";
+        font-weight: bold;
+    }
 
 
     /*Profile Card 5*/
