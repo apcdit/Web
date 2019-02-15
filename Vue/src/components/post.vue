@@ -22,15 +22,24 @@
                             <hr style="width:2px;">
                         </li>
                     </ol> -->
+                    <img src="https://i.imgur.com/wIteG8a.jpg" width="100%" >
                     <div v-for="other in others" v-bind:key="other.id">
                     <router-link  :to="{ name: 'post', params: { id: other.id}}"   class="list-group-item list-group-item-action flex-column align-items-start">
                         <div class="d-flex w-100 justify-content-between">
                             <h5 class="mb-1" style="color:darkred;"><strong>{{other.postTitle}}</strong></h5>
                             <small>{{other.created_at}}</small>
                         </div>
+
                         <small>{{other.postDec}}</small>
                     </router-link>
+
                     </div>
+
+                            <img src="https://i.imgur.com/UHeT8gn.jpg" width="100%" >
+
+
+
+
                 </div>
             </div>
         </div>

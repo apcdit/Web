@@ -14,10 +14,7 @@
                     <h5><i class="fa fa-clock-o" aria-hidden="true"></i> 9:00am – 6:00pm </h5>
                 </div>
                 <br>
-                <div class="form-group col-xs-6">
-                    <a class="btn btn-reg" target="blank" href='/#/register' v-if="false">点击报名</a>
-                    <button class="btn btn-reg" target="blank" v-if="true" :disabled="true">报名已截止</button>
-                </div>
+
                 <div class="row">
                     <!--<div class="col-xs-6 ml-1">-->
                         <!--<h4 style="color:#9A2A1F;">参赛意愿书</h4>-->
@@ -36,7 +33,7 @@
 
 
         <!------------------ Hover Effect Style : Demo - 16 --------------->
-        <div class="container mt-40" style="margin-top: 30px;">
+        <div class="container mt-40" style="margin-top: 30px;" id="news">
             <h3 class="text-center">最新消息</h3>
             <div class="row mt-30">
                 <div class="col-md-4 col-sm-6"  v-for="post in posts" v-bind:key="post.id">
@@ -79,18 +76,19 @@
                     </router-link>
                 </div>
             </div>
-
         </div>
         <hr>
 
         <!-- 赞助 -->
-        <div v-if="false" class="container text-center" id="sponsors">
-            <div id=title><strong>赞助</strong></div>
-            <br>
-            <div id="top-sponsor">
-                <h3>冠名赞助</h3>
-            </div>
-        </div>
+
+            <div class="container" width="100%" height="100%">
+                <h3 style="text-align:center;"><strong>广告</strong></h3>
+                <div style="padding:10px;">
+            <img src="https://i.imgur.com/UHeT8gn.jpg" width="100%" >
+                    <br><br>
+                    <img src="https://i.imgur.com/wIteG8a.jpg" width="100%" >
+                </div>
+             </div>
 
         <footer id="footbar"><foot></foot></footer>
 
@@ -139,25 +137,25 @@
     }
 
     .bg{
-        /*background-image: url("https://i.imgur.com/7MJgWRy.jpg");*/
+        background-image: url("https://i.imgur.com/7MJgWRy.jpg");
         /* Full height */
         height: 100vh;
         min-height: 100vh;
         /* Center and scale the image nicely */
-        /*background-position: center;*/
-        /*background-repeat: no-repeat;*/
-        /*background-size: cover;*/
-        /*border-bottom:solid;*/
-        /*border-bottom-width: 0.01rem;*/
-        /*border-bottom-color: lightgrey;*/
-        /*background-attachment: fixed;*/
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        border-bottom:solid;
+        border-bottom-width: 0.01rem;
+        border-bottom-color: lightgrey;
+        background-attachment: fixed;
         margin-top: -105.05px;
     }
     .mobileSide{display:none;}
 
     @media only screen and (max-device-width:1000px){
         .mobileSide{display:block;margin-top: 30px ;}
-        .container{display:none;}
+        #news{display:none;}
         .parallax{
             background-attachment: scroll;
         }
@@ -203,12 +201,12 @@
         height: 100%;
     }
 
-    /*div #title{*/
-        /*font-size: 1.95rem;*/
-        /*padding-top: 5%;*/
-        /*font-family: "Microsoft YaHei","华文细黑";*/
-        /*font-weight: bold;*/
-    /*}*/
+    div #title{
+        font-size: 1.95rem;
+        padding-top: 5%;
+        font-family: "Microsoft YaHei","华文细黑";
+        font-weight: bold;
+    }
 
 
     /*Profile Card 5*/
