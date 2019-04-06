@@ -10,7 +10,7 @@
                     <a href="/#"><img src="http://i.imgur.com/90YSaaO.png"></a>
 					<hr style="color:white">
 
-						<h5>冠名赞助:中国工商银行</h5>
+						<h5>合作伙伴:中国工商银行</h5>
                         <br>
                     <div style="margin-left:-10px;margin-top:-30px; margin-bottom:20px;">
 						<img src="https://i.imgur.com/jFeU5Ja.png" width="80%" height="80%" ></div>
@@ -50,7 +50,7 @@
 			</div>
 			<div class="row">
 				<div class="col-xs-12 col-sm-12 col-md-12 mt-2 mt-sm-2 text-center text-white">
-					<p class="h6">&copy All rights Reserved.<a class="text-green ml-2" href="apchinesedebate.com/#/" target="_blank">ICBC Presents - Asia-Pacific Intervarsity Chinese Debate Tournament</a></p>
+					<p class="h6">&copy All rights Reserved.<a class="text-green ml-2" href="apchinesedebate.com/#/" target="_blank">ICBC Cup - Asia-Pacific Intervarsity Chinese Debate Tournament</a></p>
 				</div>
 				<hr>
 			</div>
