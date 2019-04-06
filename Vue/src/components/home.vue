@@ -14,10 +14,7 @@
                     <h5><i class="fa fa-clock-o" aria-hidden="true"></i> 9:00am – 6:00pm </h5>
                 </div>
                 <br>
-                <div class="form-group col-xs-6">
-                    <a class="btn btn-reg" target="blank" href='/#/register' v-if="false">点击报名</a>
-                    <button class="btn btn-reg" target="blank" v-if="true" :disabled="true">报名已截止</button>
-                </div>
+
                 <div class="row">
                     <!--<div class="col-xs-6 ml-1">-->
                         <!--<h4 style="color:#9A2A1F;">参赛意愿书</h4>-->
@@ -36,7 +33,7 @@
 
 
         <!------------------ Hover Effect Style : Demo - 16 --------------->
-        <div class="container mt-40" style="margin-top: 30px;">
+        <div class="container mt-40" style="margin-top: 30px;" id="news">
             <h3 class="text-center">最新消息</h3>
             <div class="row mt-30">
                 <div class="col-md-4 col-sm-6"  v-for="post in posts" v-bind:key="post.id">
@@ -79,13 +76,19 @@
                     </router-link>
                 </div>
             </div>
-
         </div>
         <hr>
 
         <!-- 赞助 -->
-        <div id="sponsor" >
-        </div>
+
+            <div class="container" width="100%" height="100%">
+                <h3 style="text-align:center;"><strong>广告</strong></h3>
+                <div style="padding:10px;">
+            <img src="https://i.imgur.com/UHeT8gn.jpg" width="100%" >
+                    <br><br>
+                    <img src="https://i.imgur.com/wIteG8a.jpg" width="100%" >
+                </div>
+             </div>
 
         <footer id="footbar"><foot></foot></footer>
 
@@ -152,7 +155,7 @@
 
     @media only screen and (max-device-width:1000px){
         .mobileSide{display:block;margin-top: 30px ;}
-        .container{display:none;}
+        #news{display:none;}
         .parallax{
             background-attachment: scroll;
         }
@@ -271,13 +274,6 @@
     .box16 .social li a:hover{background-color: rgb(107, 1, 1); text-decoration:none;}
     .box16 .social li:last-child a{margin-right:0}
     @media only screen and (max-width:990px){.box16{margin-bottom:30px}
-    }
-
-    #sponsor{
-      background-size:auto;
-      background-image: url('https://i.imgur.com/fiDTIP1.jpg');
-      width: 100vw;
-      height:10vh;
     }
 
 </style>
