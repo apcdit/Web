@@ -94,6 +94,7 @@
             }
         },
         created(){
+            location.reload();
             this.fetchPosts()
         },
         computed:{
@@ -105,7 +106,7 @@
                     .get('api/posts')
                     .then(response=>{
                         this.posts = response.data;
-                        console.log(this.posts);
+                        // console.log(this.posts);
                         this.posts=this.posts.reverse();
                         this.length=this.posts.length;
                         this.news=this.posts.slice(0,this.rowsperpage);
