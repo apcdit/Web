@@ -93,9 +93,6 @@
                 page:1,
             }
         },
-        beforeCreate(){
-            location.reload();
-        },
         created(){
             this.fetchPosts()
         },
