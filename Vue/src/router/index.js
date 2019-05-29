@@ -21,6 +21,7 @@ import post from '@/components/post'
 import home from '@/components/home'
 import resetpw1 from '@/components/resetpw1'
 import people from '@/components/people'
+import sponsor from '@/components/sponsor'
 
 Vue.use(Router)
 
@@ -69,6 +70,7 @@ export default new Router({
     {path:'/latestNews', name:'latestNews', component:latestNews},
     {path:'/', name:'home', component:home},
     {path:'/people', name:'people', component:people},
+    {path:'/sponsor', name:'sponsor', component:sponsor},
     {
       path:'/resetpw', 
       name:'resetpw1', 

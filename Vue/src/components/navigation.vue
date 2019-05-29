@@ -7,10 +7,10 @@
         <b-navbar-toggle target="nav_dropdown_collapse"></b-navbar-toggle>
         <b-collapse is-nav id="nav_dropdown_collapse">
             <b-navbar-nav>
-                <b-nav-item style="font-size:20px;" href="/#">主页</b-nav-item>
+                <b-nav-item style="font-size:20px;" href="apchinesedebate.com">主页</b-nav-item>
                 <b-nav-item style="font-size:20px;" href="/#/latestNews">最新消息</b-nav-item>
                 <b-nav-item style="font-size:20px;" href="/#/people">筹委介绍</b-nav-item>
-                <b-nav-item style="font-size:20px;" href="#sponsor">赞助</b-nav-item>
+                <b-nav-item style="font-size:20px;" href="/#/sponsor">赞助</b-nav-item>
                 <b-nav-item style="font-size:20px;" v-b-modal.login v-if="!isLogged">登录</b-nav-item>
                 <b-nav-item style="font-size:20px;" href="/#/user" v-if="isLogged">个人主页</b-nav-item>
             </b-navbar-nav>
@@ -40,22 +40,22 @@
         computed:{
             scrolling:function(){
                 window.onscroll = () => {
-                    const nav = document.querySelector('.navbar');
-                    const bg = document.querySelector('.bg');
-                    const foot = document.querySelector('#footbar');
-                    const news = document.querySelector('#latestNews');
-                    const btm = bg.clientHeight+news.clientHeight;
-                    if(scrollY <= bg.clientHeight-nav.clientHeight) {
-                        nav.style.backgroundColor='';
-                        return '';
-                    }else if((bg.clientHeight-nav.clientHeight) < scrollY  && (scrollY)<= (btm-nav.clientHeight)){
-                        nav.style.backgroundColor='white';
-                        return '';
-                    }else{
-                        nav.style.backgroundColor='rgb(46, 46, 46)';
-                        nav.style.color='white';
-                        return '';
-                    }
+                    // const nav = document.querySelector('.navbar');
+                    // const bg = document.querySelector('.bg');
+                    // const foot = document.querySelector('#footbar');
+                    // const news = document.querySelector('#latestNews');
+                    // const btm = bg.clientHeight+news.clientHeight;
+                    // if(scrollY <= bg.clientHeight-nav.clientHeight) {
+                    //     nav.style.backgroundColor='';
+                    //     return '';
+                    // }else if((bg.clientHeight-nav.clientHeight) < scrollY  && (scrollY)<= (btm-nav.clientHeight)){
+                    //     nav.style.backgroundColor='white';
+                    //     return '';
+                    // }else{
+                    //     nav.style.backgroundColor='rgb(46, 46, 46)';
+                    //     nav.style.color='white';
+                    //     return '';
+                    // }
                 };
             }
         },

@@ -80,7 +80,13 @@
         <hr>
 
         <!-- 赞助 -->
-
+            <div class="container" id="sponsor" width="100%" height="100%">
+                <h3 style="text-align:center;padding-bottom:1.5%;"><strong>赞助商</strong></h3>
+                <a href="http://singapore.icbc.com.cn"><img src="https://i.imgur.com/jFeU5Ja.png" width="80%" height="80%" ></a>
+                <img src="../assets/CLCF.jpg" width="45%" height="auto">
+                <img src="../assets/NYC---YCM-logo-lockup light background.png" width="50%" height="auto">
+             </div>
+            <hr>
             <div class="container" width="100%" height="100%">
                 <h3 style="text-align:center;"><strong>广告</strong></h3>
                 <div style="padding:10px;">
@@ -132,9 +138,20 @@
 </script>
 
 <style scoped>
-
+    #sponsor>img{
+        display: inline-block;
+        padding: 5%;
+        margin: 0 auto;
+    }
+    #sponsor{
+        text-align:center;
+    }
     html {
         scroll-behavior: smooth;
+    }
+
+    h3{
+        font-size: 3.55vw;
     }
 
     .bg{

@@ -35,10 +35,11 @@
     import oldnav from './components/oldnav.vue'
     import homepage from './components/homepage.vue'
     import people from './components/people.vue'
+    import sponsor from './components/sponsor.vue'
 
     export default {
         name: 'App',
-        components: {admin,about,pastyear,rules,contact,
+        components: {admin,about,pastyear,rules,contact, sponsor,
                     navigation,videohub,login,register,register1,lottery,
                     simlottery,result,user,resetpw,notifysuccess,latestNews,post,home,resetpw1,CubeSpin,foot,navibar,
                     oldnav,homepage,people},
