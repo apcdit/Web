@@ -75,6 +75,7 @@
 </template>
 
 <script>
+    location.reload();
 
     import axios from 'axios';
     import foot from './foot.vue';
@@ -94,7 +95,6 @@
             }
         },
         created(){
-            location.reload();
             this.fetchPosts()
         },
         computed:{

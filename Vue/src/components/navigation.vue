@@ -7,7 +7,7 @@
         <b-navbar-toggle target="nav_dropdown_collapse"></b-navbar-toggle>
         <b-collapse is-nav id="nav_dropdown_collapse">
             <b-navbar-nav>
-                <b-nav-item style="font-size:20px;" href="apchinesedebate.com">主页</b-nav-item>
+                <b-nav-item style="font-size:20px;" href="http://www.apchinesedebate.com">主页</b-nav-item>
                 <b-nav-item style="font-size:20px;" href="/#/latestNews">最新消息</b-nav-item>
                 <b-nav-item style="font-size:20px;" href="/#/people">筹委介绍</b-nav-item>
                 <b-nav-item style="font-size:20px;" href="/#/sponsor">赞助</b-nav-item>
