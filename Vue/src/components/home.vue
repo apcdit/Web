@@ -151,7 +151,7 @@
     }
 
     h3{
-        font-size: 3.55vw;
+        font-size: 250%;
     }
 
     .bg{
