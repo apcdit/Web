@@ -5,7 +5,7 @@
     
     <div class="container" style="padding-bottom:10%">
         <div id="guanming">
-            <h1 style="padding-bottom:10%;">冠名赞助</h1>
+            <h1 style="padding-bottom:10%;">合作伙伴</h1>
             <a href="http://singapore.icbc.com.cn"><img class="img-responsive" src="https://i.imgur.com/jFeU5Ja.png" width="80%" height="auto" ></a>
             
             <i><h3 style="color:darkred;margin:3%;">"新加坡首选人民币银行"</h3></i>
