@@ -84,8 +84,8 @@
                 <h3 style="text-align:center;padding-bottom:1.5%;"><strong>合作伙伴</strong></h3>
                 <a href="http://singapore.icbc.com.cn"><img src="https://i.imgur.com/jFeU5Ja.png" width="80%" height="80%" ></a>
                 <h3 style="text-align:center;padding-top:1.5%;"><strong>赞助商</strong></h3>
-                <img src="../assets/CLCF.jpg" width="45%" height="auto">
-                <img src="../assets/NYC---YCM-logo-lockup light background.png" width="50%" height="auto">
+                <a href="https://www.sfcca.sg/en/funding/clcf"><img src="../assets/CLCF.jpg" width="45%" height="auto"></a>
+                <a href="https://www.nyc.gov.sg/en/initiatives/programmes/young-changemakers/"><img src="../assets/NYC---YCM-logo-lockup light background.png" width="50%" height="auto"></a>
              </div>
             <hr>
             <div class="container" width="100%" height="100%">

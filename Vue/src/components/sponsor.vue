@@ -14,8 +14,8 @@
 
         <div id="others">
         <h1 style="padding-bottom:10%;">其他赞助</h1>
-        <img src="../assets/CLCF.jpg" width="45%" height="auto">
-        <img src="../assets/NYC---YCM-logo-lockup light background.png" width="50%" height="auto">
+        <a href="https://www.sfcca.sg/en/funding/clcf"><img src="../assets/CLCF.jpg" width="45%" height="auto"></a>
+        <a href="https://www.nyc.gov.sg/en/initiatives/programmes/young-changemakers/"><img src="../assets/NYC---YCM-logo-lockup light background.png" width="50%" height="auto"></a>
         </div>
     </div>
     <footer><foot></foot></footer>
