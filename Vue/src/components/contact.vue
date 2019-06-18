@@ -1,7 +1,7 @@
 <template>
     <div class="container animated fadeIn content">
         <nav>
-            <a style="float:right;" class="btn" href="/"><i class="fa fa-times" aria-hidden="true"></i></a>
+            <a style="float:right;" class="btn" href="/#/"><i class="fa fa-times" aria-hidden="true"></i></a>
         </nav>
         <div class="row ">
             <div class="col-md-12 ">

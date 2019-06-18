@@ -8,11 +8,11 @@
         <b-collapse is-nav id="nav_dropdown_collapse">
             <b-navbar-nav>
                 <b-nav-item style="font-size:20px;" href="http://www.apchinesedebate.com">主页</b-nav-item>
-                <b-nav-item style="font-size:20px;" href="/latestNews">最新消息</b-nav-item>
-                <b-nav-item style="font-size:20px;" href="/people">筹委介绍</b-nav-item>
-                <b-nav-item style="font-size:20px;" href="/sponsor">合作赞助</b-nav-item>
+                <b-nav-item style="font-size:20px;" href="/#/latestNews">最新消息</b-nav-item>
+                <b-nav-item style="font-size:20px;" href="/#/people">筹委介绍</b-nav-item>
+                <b-nav-item style="font-size:20px;" href="/#/sponsor">合作赞助</b-nav-item>
                 <b-nav-item style="font-size:20px;" v-b-modal.login v-if="!isLogged">登录</b-nav-item>
-                <b-nav-item style="font-size:20px;" href="/user" v-if="isLogged">个人主页</b-nav-item>
+                <b-nav-item style="font-size:20px;" href="/#/user" v-if="isLogged">个人主页</b-nav-item>
             </b-navbar-nav>
         </b-collapse>
     </nav>

@@ -6,7 +6,7 @@
         <div class="form-signin">
             <i class="fa fa-user" aria-hidden="true"></i><input type="email" id="inputEmail" v-model="email" class="form-control" placeholder="电子邮件" required autofocus>
             <i class="fa fa-key" aria-hidden="true"></i><input type="password" id="inputPassword" v-model="password" class="form-control" placeholder="输入密码" required>
-            <a href='/resetpw/token' target="blank">忘记密码?</a>
+            <a href='/#/resetpw/token' target="blank">忘记密码?</a>
         </div>
         <div slot="modal-footer" class="w-100">
          <button class="btn btn-lg btn-primary btn-block btn-signin" @click="login" @keypress="login" v-if="!loading">登录</button>

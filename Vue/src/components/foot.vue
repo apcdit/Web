@@ -30,11 +30,11 @@
 				<div class="col-xs-12 col-sm-4 col-md-4">
 					<h5>链接</h5>
 					<ul class="list-unstyled quick-links">
-						<li><a href="/"><i class="fa fa-angle-double-right"></i>主页</a></li>
-						<li><a href="/"><i class="fa fa-angle-double-right"></i>关于我们</a></li>
-						<li><a href="/contact"><i class="fa fa-angle-double-right"></i>联络我们</a></li>
-						<li><a href="/videohub"><i class="fa fa-angle-double-right"></i>视频库</a></li>
-						<li><a href="/latestNews"><i class="fa fa-angle-double-right"></i>最新消息</a></li>
+						<li><a href="/#"><i class="fa fa-angle-double-right"></i>主页</a></li>
+						<li><a href="/#"><i class="fa fa-angle-double-right"></i>关于我们</a></li>
+						<li><a href="/#/contact"><i class="fa fa-angle-double-right"></i>联络我们</a></li>
+						<li><a href="/#/videohub"><i class="fa fa-angle-double-right"></i>视频库</a></li>
+						<li><a href="/#/latestNews"><i class="fa fa-angle-double-right"></i>最新消息</a></li>
 					</ul>
 				</div>
 			</div>
@@ -50,7 +50,7 @@
 			</div>
 			<div class="row">
 				<div class="col-xs-12 col-sm-12 col-md-12 mt-2 mt-sm-2 text-center text-white">
-					<p class="h6">&copy All rights Reserved.<a class="text-green ml-2" href="apchinesedebate.com" target="_blank">ICBC Cup - Asia-Pacific Intervarsity Chinese Debate Tournament</a></p>
+					<p class="h6">&copy All rights Reserved.<a class="text-green ml-2" href="apchinesedebate.com/#/" target="_blank">ICBC Cup - Asia-Pacific Intervarsity Chinese Debate Tournament</a></p>
 				</div>
 				<hr>
 			</div>
