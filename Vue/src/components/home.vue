@@ -32,11 +32,7 @@
         </section>
 
         <section id="matches">
-        icbc oaisjdfoiajsdfoijaseiofjioajefiojaeisfjaioesjfioawejfoiawejfiowjeiofajwefi
-        asidofjasiodfj
-        aesiofjaiosdjf
-        jasiofjaiosdjf
-        jadsoifjaisdo
+        
         </section>
         <!------------------ Hover Effect Style : Demo - 16 --------------->
         <div class="container mt-40" style="margin-top: 30px;" id="news">

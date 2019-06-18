@@ -60,6 +60,8 @@ and next being the method we use to navigate to the next route
 
 
 export default new Router({
+  mode: 'history',
+  hash: false,
   routes: [
     {path:'/about',name: 'about',component:about},
     {path:'/contact',name:'contact',component:contact},
@@ -151,6 +153,10 @@ export default new Router({
           name:'people',
           component:people,
 
+      },
+      {
+        path: '*',
+        redirect: '/',
       }
   ]
 })
