@@ -31,9 +31,6 @@
             </div>
         </section>
 
-        <section id="matches">
-        
-        </section>
         <!------------------ Hover Effect Style : Demo - 16 --------------->
         <div class="container mt-40" style="margin-top: 30px;" id="news">
             <h3 class="text-center">最新消息</h3>
@@ -90,7 +87,7 @@
                 <a href="https://www.nyc.gov.sg/en/initiatives/programmes/young-changemakers/"><img src="../assets/NYC---YCM-logo-lockup light background.png" width="50%" height="auto"></a>
              </div>
             <hr>
-            <div id="ads" class="container" width="100%" height="100%">
+            <div class="container" width="100%" height="100%">
                 <h3 style="text-align:center;"><strong>广告</strong></h3>
                 <div style="padding:10px;">
                 <img src="https://i.imgur.com/wIteG8a.jpg" width="100%" >
