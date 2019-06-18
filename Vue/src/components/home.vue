@@ -1,6 +1,6 @@
 <template>
     <div>
-        <navibar v-bind:isLogged="isLogged"></navibar>
+        <navibar id="navibar" v-bind:isLogged="isLogged"></navibar>
         <login></login>
         <section class="bg parallax">
             <div class="center text-center">
@@ -135,9 +135,27 @@
             },
         }
     }
+
+
+    window.addEventListener('scroll', () => {
+        var myNav = document.getElementById("navibar");
+        var testDiv = document.getElementById("news").offsetTop;
+        // console.log(document.body.scrollTop);
+        // console.log(document.documentElement.scrollTop);
+        // console.log(testDiv);
+        if(testDiv == 0) testDiv = 843;
+        if (document.body.scrollTop >= testDiv || document.documentElement.scrollTop >= testDiv) {
+            myNav.classList.add("scroll");
+        } else {
+            myNav.classList.remove("scroll");
+        }
+    });
 </script>
 
 <style scoped>
+    .scroll{
+        background-color: white;
+    }
     #sponsor>img{
         display: inline-block;
         padding: 5%;
