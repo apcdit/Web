@@ -7,11 +7,12 @@
         <b-navbar-toggle target="nav_dropdown_collapse"></b-navbar-toggle>
         <b-collapse is-nav id="nav_dropdown_collapse">
             <b-navbar-nav>
-                <b-nav-item style="font-size:20px;" href="http://www.apchinesedebate.com">主页</b-nav-item>
+                <b-nav-item style="font-size:20px;" class="nav-item" href="/">主页</b-nav-item>
                 <b-nav-item style="font-size:20px;" href="/#/latestNews">最新消息</b-nav-item>
                 <b-nav-item style="font-size:20px;" href="/#/people">筹委介绍</b-nav-item>
                 <b-nav-item style="font-size:20px;" href="/#/sponsor">合作赞助</b-nav-item>
-                <b-nav-item style="font-size:20px;" v-b-modal.login v-if="!isLogged">登录</b-nav-item>
+                <b-nav-item style="font-size:20px;" href="/#/matches">对垒表</b-nav-item>
+                <!-- <b-nav-item style="font-size:20px;" v-b-modal.login v-if="!isLogged">登录</b-nav-item> -->
                 <b-nav-item style="font-size:20px;" href="/#/user" v-if="isLogged">个人主页</b-nav-item>
             </b-navbar-nav>
         </b-collapse>
@@ -63,5 +64,9 @@
 </script>
 
 <style scoped>
-
+    .nav-item:hover{
+        background: white;
+        opacity:50%;
+        border-radius: 5px;
+    }
 </style>

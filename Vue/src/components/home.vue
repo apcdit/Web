@@ -125,19 +125,8 @@
         created() {
             this.fetchPosts()
         },
-        methods:{
-            fetchPosts(){
-                axios
-                    .get('api/posts/latest')
-                    .then(response=>{
-                        this.posts = response.data;
-                    })
-            },
-        }
-    }
-
-
-    window.addEventListener('scroll', () => {
+        mounted(){
+            window.addEventListener('scroll', () => {
         var myNav = document.getElementById("navibar");
         var testDiv = document.getElementById("news").offsetTop;
         // console.log(document.body.scrollTop);
@@ -150,6 +139,20 @@
             myNav.classList.remove("scroll");
         }
     });
+        },
+        methods:{
+            fetchPosts(){
+                axios
+                    .get('api/posts/latest')
+                    .then(response=>{
+                        this.posts = response.data;
+                    })
+            },
+        }
+    }
+
+
+    
 </script>
 
 <style scoped>
@@ -197,6 +200,13 @@
         }
     }
 
+    a{
+        text-decoration: none;
+    }
+
+    button{
+        text-decoration: none;
+    }
     /*@media only screen and (max-device-width:1366px){*/
         /**/
     /*}*/

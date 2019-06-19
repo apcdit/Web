@@ -22,6 +22,7 @@ import home from '@/components/home'
 import resetpw1 from '@/components/resetpw1'
 import people from '@/components/people'
 import sponsor from '@/components/sponsor'
+import matches from '@/components/matches'
 
 Vue.use(Router)
 
@@ -61,6 +62,7 @@ and next being the method we use to navigate to the next route
 
 export default new Router({
   routes: [
+    {path:'/matches', name:'matches', component: matches},
     {path:'/about',name: 'about',component:about},
     {path:'/contact',name:'contact',component:contact},
     {path:'/pastyear',name:'pastyear',component:pastyear},

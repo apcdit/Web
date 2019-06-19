@@ -111,12 +111,14 @@
                         this.news=this.posts.slice(0,this.rowsperpage);
                         this.length=Math.ceil(this.length/this.rowsperpage);
                     })
+                    window.scrollTo(0,0);
             },
             slice1(n){ this.page=n;this.news=this.posts.slice((n-1)*this.rowsperpage,n*this.rowsperpage);},
 
 
 
         }}
+
 </script>
 
 <style scoped>

@@ -444,9 +444,12 @@
     export default{
         name:'people',
         components:{foot,navibar},
+        mounted(){
+            window.scrollTo(0,0);
+        }
     }
 
-
+    
 </script>
 <style scoped>
 
