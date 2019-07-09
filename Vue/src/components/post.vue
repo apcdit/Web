@@ -12,7 +12,7 @@
                     <hr style="background:darkred;">
                     <p v-html="posts.postContent">{{posts.postContent}}</p>
                 </div>
-                <div class="col-sm-4 list-group-flush">
+                <div class="col-sm-4 list-group-flush" id="moreNews">
                     <h3><strong>更多消息</strong></h3>
 
                     <hr style="background:darkred; height:5px;">

@@ -23,9 +23,8 @@
                     <!--</div>-->
                     <!--<br>-->
                     <div class="col">
-                        <h4 style="color:#9A2A1F;">比赛章程</h4>
-                        <a class="btn btn-form" href="https://entuedu-my.sharepoint.com/:f:/g/personal/tanj0238_e_ntu_edu_sg/EqNFd_nY03NNsQheQR2nqcUBMfH-4KYYJwlGmdHvboFD-A?e=apQnZQ" target="_blank">OneDrive</a>
-                        <a class="btn btn-form" href="https://pan.baidu.com/s/1nbNdHc9fY2xOFeRrQJxBLw" target="_blank">百度云盘</a>
+                        <h4 style="color:#9A2A1F;">亚太辩小册子</h4>
+                        <a class="btn btn-form" href="https://ebook.ntu.edu.sg/the-9th-asia-pacific-intervarsity-chinese-debate-tournament.html" target="_blank">查看小册子</a>
                     </div>
                 </div>
             </div>
