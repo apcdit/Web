@@ -5,7 +5,7 @@
         
         <div style="text-align:center;" id="container">
             <h2 style="padding-bottom:15px;">最新赛况</h2>
-            <img src="https://imgur.com/AiQ5ixJ.jpg" alt="对垒表" class="responsive" id="myImg" v-on:click="imgOpen">
+            <img src="../assets/duileibiao.jpg" alt="对垒表" class="responsive" id="myImg" v-on:click="imgOpen">
             <p style="font-color:gray">点击图片放大</p>
         </div>
 
