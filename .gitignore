@@ -3,3 +3,4 @@ Laravel/storage/.DS_Store
 Laravel/.DS_Store
 Laravel/vendor
 .DS_Store
+**/node_modules
